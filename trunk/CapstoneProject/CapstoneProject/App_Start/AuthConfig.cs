@@ -22,9 +22,9 @@ namespace CapstoneProject
             //    consumerKey: "",
             //    consumerSecret: "");
 
-            //OAuthWebSecurity.RegisterFacebookClient(
-            //    appId: "",
-            //    appSecret: "");
+            OAuthWebSecurity.RegisterFacebookClient(
+                appId: "541295582548776",
+                appSecret: "bd4ee84ce81e70abe259401a7357392a");
 
             //OAuthWebSecurity.RegisterGoogleClient();
         }
