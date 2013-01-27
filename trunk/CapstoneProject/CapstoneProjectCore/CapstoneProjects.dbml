@@ -1,0 +1,652 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SocialBuy" Class="CapstoneProjectsDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=Chip-PC;Initial Catalog=SocialBuy;Integrated Security=True" SettingsObjectName="CapstoneProjectCore.Properties.Settings" SettingsPropertyName="SocialBuyConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Account" Member="Accounts">
+    <Type Name="Account" Id="ID1">
+      <Column Name="AccountID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="AccountType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LoginTwitter" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="LoginFacebook" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Store_Account" Member="Store" ThisKey="AccountID" OtherKey="StoreID" Type="Store" IsForeignKey="true" />
+      <Association Name="User_Account" Member="User" ThisKey="AccountID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserType" Member="UserTypes">
+    <Type Name="UserType" Id="ID13">
+      <Column Name="UserTypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserTypeName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IsDelete" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="UserType_User" Member="Users" ThisKey="UserTypeID" OtherKey="UserTypeID" Type="User" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Categories" Member="Categories">
+    <Type Name="Category" Id="ID2">
+      <Column Name="CategoriesID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CategoriesName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="IsDelete" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="TeamplateDetailJson" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Category_Product" Member="Products" ThisKey="CategoriesID" OtherKey="CategoriesID" Type="Product" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Follow" Member="Follows">
+    <Type Name="Follow" Id="ID3">
+      <Column Name="FollowIDFrom" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FollowIDTo" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FollowType" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Ganeral" Member="Ganerals">
+    <Type Name="Ganeral">
+      <Column Name="EMailContact" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Image" Member="Images">
+    <Type Name="Image" Id="ID5">
+      <Column Name="ImageID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ImageName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Path" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="IsDelete" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Image_Product_Image" Member="Product_Images" ThisKey="ImageID" OtherKey="ImageID" Type="Product_Image" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Order]" Member="Orders">
+    <Type Name="Order" Id="ID6">
+      <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RecipientName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="RecipientAddress" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="RecipientTel" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="EMail" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TransportFee" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalMonney" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="StoreID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Order_OrderDetail" Member="OrderDetails" ThisKey="OrderID" OtherKey="OrderID" Type="OrderDetail" />
+      <Association Name="StatusOrder_Order" Member="StatusOrder" ThisKey="StatusID" OtherKey="StatusID" Type="StatusOrder" IsForeignKey="true" />
+      <Association Name="Store_Order" Member="Store" ThisKey="StoreID" OtherKey="StoreID" Type="Store" IsForeignKey="true" />
+      <Association Name="User_Order" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OrderDetail" Member="OrderDetails">
+    <Type Name="OrderDetail" Id="ID7">
+      <Column Name="OrderDetailID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProductID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PriceCurrent" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="OrderID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsDelete" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Order_OrderDetail" Member="Order" ThisKey="OrderID" OtherKey="OrderID" Type="Order" IsForeignKey="true" />
+      <Association Name="Product_OrderDetail" Member="Product" ThisKey="ProductID" OtherKey="ProductID" Type="Product" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Product" Member="Products">
+    <Type Name="Product" Id="ID8">
+      <Column Name="ProductID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ProductName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PriceCurrent" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="CategoriesID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StoreID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalLike" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalComment" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ImageID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MoreDetailJson" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TotalBuy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Product_OrderDetail" Member="OrderDetails" ThisKey="ProductID" OtherKey="ProductID" Type="OrderDetail" />
+      <Association Name="Product_Product_Image" Member="Product_Images" ThisKey="ProductID" OtherKey="ProductID" Type="Product_Image" />
+      <Association Name="Product_Product_Like" Member="Product_Likes" ThisKey="ProductID" OtherKey="ProductID" Type="Product_Like" />
+      <Association Name="Product_CommentProduct" Member="CommentProducts" ThisKey="ProductID" OtherKey="ProductID" Type="CommentProduct" />
+      <Association Name="Category_Product" Member="Category" ThisKey="CategoriesID" OtherKey="CategoriesID" Type="Category" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Product_Image" Member="Product_Images">
+    <Type Name="Product_Image">
+      <Column Name="ProductID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ImageID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Image_Product_Image" Member="Image" ThisKey="ImageID" OtherKey="ImageID" Type="Image" IsForeignKey="true" />
+      <Association Name="Product_Product_Image" Member="Product" ThisKey="ProductID" OtherKey="ProductID" Type="Product" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Product_Likes" Member="Product_Likes">
+    <Type Name="Product_Like">
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ProductID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Product_Product_Like" Member="Product" ThisKey="ProductID" OtherKey="ProductID" Type="Product" IsForeignKey="true" />
+      <Association Name="User_Product_Like" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.StatusOrder" Member="StatusOrders">
+    <Type Name="StatusOrder" Id="ID10">
+      <Column Name="StatusID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StatusName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="IsDelete" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="StatusOrder_Order" Member="Orders" ThisKey="StatusID" OtherKey="StatusID" Type="Order" />
+    </Type>
+  </Table>
+  <Table Name="dbo.StatusProduct" Member="StatusProducts">
+    <Type Name="StatusProduct" Id="ID11">
+      <Column Name="StatusID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StatusName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IsDelete" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.StatusStore" Member="StatusStores">
+    <Type Name="StatusStore" Id="ID12">
+      <Column Name="StatusID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StatusName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IsDelete" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="StatusStore_Store" Member="Stores" ThisKey="StatusID" OtherKey="StatusID" Type="Store" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Store" Member="Stores">
+    <Type Name="Store" Id="ID14">
+      <Column Name="StoreID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StoreName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Slogan" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ImageProfileID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ImageCoverID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ShipFee" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="TotalFllowers" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalFllowing" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Tel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Store_Account" Member="Account" ThisKey="StoreID" OtherKey="AccountID" Type="Account" Cardinality="One" />
+      <Association Name="Store_Order" Member="Orders" ThisKey="StoreID" OtherKey="StoreID" Type="Order" />
+      <Association Name="StatusStore_Store" Member="StatusStore" ThisKey="StatusID" OtherKey="StatusID" Type="StatusStore" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[User]" Member="Users">
+    <Type Name="User" Id="ID9">
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="About" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="ImageAvartarID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="UserTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Isdelete" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="TotalFllowers" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalFllowing" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalLikes" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="User_Account" Member="Account" ThisKey="UserID" OtherKey="AccountID" Type="Account" Cardinality="One" />
+      <Association Name="User_Order" Member="Orders" ThisKey="UserID" OtherKey="UserID" Type="Order" />
+      <Association Name="User_Product_Like" Member="Product_Likes" ThisKey="UserID" OtherKey="UserID" Type="Product_Like" />
+      <Association Name="User_CommentProduct" Member="CommentProducts" ThisKey="UserID" OtherKey="UserID" Type="CommentProduct" />
+      <Association Name="UserType_User" Member="UserType" ThisKey="UserTypeID" OtherKey="UserTypeID" Type="UserType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CommentProduct" Member="CommentProducts">
+    <Type Name="CommentProduct" Id="ID4">
+      <Column Name="CommentID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CommentContent" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ProductID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="User_CommentProduct" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+      <Association Name="Product_CommentProduct" Member="Product" ThisKey="ProductID" OtherKey="ProductID" Type="Product" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.Account_Delete" Method="Account_Delete">
+    <Parameter Name="AccountId" Parameter="accountId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Account_Update" Method="Account_Update">
+    <Parameter Name="AccountId" Parameter="accountId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Password" Parameter="password" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="AccountType" Parameter="accountType" Type="System.Int32" DbType="Int" />
+    <Parameter Name="LoginTwitter" Parameter="loginTwitter" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="LoginFacebook" Parameter="loginFacebook" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Account_Insert" Method="Account_Insert">
+    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Password" Parameter="password" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="AccountType" Parameter="accountType" Type="System.Int32" DbType="Int" />
+    <Parameter Name="LoginTwitter" Parameter="loginTwitter" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="LoginFacebook" Parameter="loginFacebook" Type="System.Boolean" DbType="Bit" />
+    <ElementType IdRef="ID1" />
+  </Function>
+  <Function Name="dbo.Categories_Delete" Method="Categories_Delete">
+    <Parameter Name="CategoriesId" Parameter="categoriesId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Categories_Get_List" Method="Categories_Get_List">
+    <ElementType IdRef="ID2" />
+  </Function>
+  <Function Name="dbo.Categories_GetByCategoriesId" Method="Categories_GetByCategoriesId">
+    <Parameter Name="CategoriesId" Parameter="categoriesId" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID2" />
+  </Function>
+  <Function Name="dbo.Categories_Insert" Method="Categories_Insert">
+    <Parameter Name="CategoriesName" Parameter="categoriesName" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="NVarChar(500)" />
+    <Parameter Name="IsDelete" Parameter="isDelete" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="TeamplateDetailJson" Parameter="teamplateDetailJson" Type="System.String" DbType="NText" />
+    <ElementType IdRef="ID2" />
+  </Function>
+  <Function Name="dbo.Categories_Update" Method="Categories_Update">
+    <Parameter Name="CategoriesId" Parameter="categoriesId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CategoriesName" Parameter="categoriesName" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="NVarChar(500)" />
+    <Parameter Name="IsDelete" Parameter="isDelete" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="TeamplateDetailJson" Parameter="teamplateDetailJson" Type="System.String" DbType="NText" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Follow_Delete" Method="Follow_Delete">
+    <Parameter Name="FollowIdFrom" Parameter="followIdFrom" Type="System.Int32" DbType="Int" />
+    <Parameter Name="FollowIdTo" Parameter="followIdTo" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Follow_Get_List_Follower" Method="Follow_Get_List_Follower">
+    <Parameter Name="FollowID" Parameter="followID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="FollowType" Parameter="followType" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID3" />
+  </Function>
+  <Function Name="dbo.Follow_Get_List_Following" Method="Follow_Get_List_Following">
+    <Parameter Name="FollowID" Parameter="followID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="FollowType" Parameter="followType" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID3" />
+  </Function>
+  <Function Name="dbo.Follow_Insert" Method="Follow_Insert">
+    <Parameter Name="FollowIdFrom" Parameter="followIdFrom" Type="System.Int32" DbType="Int" />
+    <Parameter Name="FollowIdTo" Parameter="followIdTo" Type="System.Int32" DbType="Int" />
+    <Parameter Name="FollowType" Parameter="followType" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CommentProduct_Delete" Method="CommentProduct_Delete">
+    <Parameter Name="CommentID" Parameter="commentID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CommentProduct_Get_List" Method="CommentProduct_Get_List">
+    <ElementType IdRef="ID4" />
+  </Function>
+  <Function Name="dbo.CommentProduct_GetListByProductID" Method="CommentProduct_GetListByProductID">
+    <Parameter Name="ProductID" Parameter="productID" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID4" />
+  </Function>
+  <Function Name="dbo.CommentProduct_Insert" Method="CommentProduct_Insert">
+    <Parameter Name="CommentContent" Parameter="commentContent" Type="System.String" DbType="NText" />
+    <Parameter Name="CreateDate" Parameter="createDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="UserID" Parameter="userID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ProductID" Parameter="productID" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID4" />
+  </Function>
+  <Function Name="dbo.Image_Delete" Method="Image_Delete">
+    <Parameter Name="ImageId" Parameter="imageId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Image_GetByImageId" Method="Image_GetByImageId">
+    <Parameter Name="ImageId" Parameter="imageId" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID5" />
+  </Function>
+  <Function Name="dbo.Image_Update" Method="Image_Update">
+    <Parameter Name="ImageId" Parameter="imageId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ImageName" Parameter="imageName" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="NText" />
+    <Parameter Name="Path" Parameter="path" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="IsDelete" Parameter="isDelete" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Image_Insert" Method="Image_Insert">
+    <Parameter Name="ImageName" Parameter="imageName" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="NText" />
+    <Parameter Name="Path" Parameter="path" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="IsDelete" Parameter="isDelete" Type="System.Boolean" DbType="Bit" />
+    <ElementType IdRef="ID5" />
+  </Function>
+  <Function Name="dbo.Order_Delete" Method="Order_Delete">
+    <Parameter Name="OrderId" Parameter="orderId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Order_Get_ListByStore" Method="Order_Get_ListByStore">
+    <Parameter Name="StoreID" Parameter="storeID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="StatusID" Parameter="statusID" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID6" />
+  </Function>
+  <Function Name="dbo.Order_Get_ListByUser" Method="Order_Get_ListByUser">
+    <Parameter Name="UserID" Parameter="userID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="StatusID" Parameter="statusID" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID6" />
+  </Function>
+  <Function Name="dbo.Order_GetByOrderId" Method="Order_GetByOrderId">
+    <Parameter Name="OrderId" Parameter="orderId" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID6" />
+  </Function>
+  <Function Name="dbo.Order_Insert" Method="Order_Insert">
+    <Parameter Name="StatusId" Parameter="statusId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CreateDate" Parameter="createDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="UserId" Parameter="userId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="RecipientName" Parameter="recipientName" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="RecipientAddress" Parameter="recipientAddress" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="RecipientTel" Parameter="recipientTel" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="NText" />
+    <Parameter Name="TransportFee" Parameter="transportFee" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TotalMonney" Parameter="totalMonney" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="StoreId" Parameter="storeId" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID6" />
+  </Function>
+  <Function Name="dbo.Order_Update" Method="Order_Update">
+    <Parameter Name="OrderId" Parameter="orderId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="StatusId" Parameter="statusId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CreateDate" Parameter="createDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="UserId" Parameter="userId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="RecipientName" Parameter="recipientName" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="RecipientAddress" Parameter="recipientAddress" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="RecipientTel" Parameter="recipientTel" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="NText" />
+    <Parameter Name="TransportFee" Parameter="transportFee" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TotalMonney" Parameter="totalMonney" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="StoreId" Parameter="storeId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.OrderDetail_Update" Method="OrderDetail_Update">
+    <Parameter Name="OrderDetailId" Parameter="orderDetailId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ProductId" Parameter="productId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Amount" Parameter="amount" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PriceCurrent" Parameter="priceCurrent" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="OrderId" Parameter="orderId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IsDelete" Parameter="isDelete" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.OrderDetail_Insert" Method="OrderDetail_Insert">
+    <Parameter Name="ProductId" Parameter="productId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Amount" Parameter="amount" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PriceCurrent" Parameter="priceCurrent" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="OrderId" Parameter="orderId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IsDelete" Parameter="isDelete" Type="System.Boolean" DbType="Bit" />
+    <ElementType IdRef="ID7" />
+  </Function>
+  <Function Name="dbo.OrderDetail_GetByProductId" Method="OrderDetail_GetByProductId">
+    <Parameter Name="ProductId" Parameter="productId" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID7" />
+  </Function>
+  <Function Name="dbo.OrderDetail_GetByOrderId" Method="OrderDetail_GetByOrderId">
+    <Parameter Name="OrderId" Parameter="orderId" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID7" />
+  </Function>
+  <Function Name="dbo.OrderDetail_GetByOrderDetailId" Method="OrderDetail_GetByOrderDetailId">
+    <Parameter Name="OrderDetailId" Parameter="orderDetailId" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID7" />
+  </Function>
+  <Function Name="dbo.OrderDetail_Delete" Method="OrderDetail_Delete">
+    <Parameter Name="OrderDetailId" Parameter="orderDetailId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Product_Delete" Method="Product_Delete">
+    <Parameter Name="ProductId" Parameter="productId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Product_Get_List" Method="Product_Get_List">
+    <ElementType IdRef="ID8" />
+  </Function>
+  <Function Name="dbo.Product_GetByCategoriesId" Method="Product_GetByCategoriesId">
+    <Parameter Name="CategoriesId" Parameter="categoriesId" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID8" />
+  </Function>
+  <Function Name="dbo.Product_GetByProductId" Method="Product_GetByProductId">
+    <Parameter Name="ProductId" Parameter="productId" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID8" />
+  </Function>
+  <Function Name="dbo.Product_Insert" Method="Product_Insert">
+    <Parameter Name="ProductName" Parameter="productName" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="NText" />
+    <Parameter Name="PriceCurrent" Parameter="priceCurrent" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="CategoriesId" Parameter="categoriesId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="StoreId" Parameter="storeId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TotalLike" Parameter="totalLike" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TotalComment" Parameter="totalComment" Type="System.Int32" DbType="Int" />
+    <Parameter Name="StatusId" Parameter="statusId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ImageId" Parameter="imageId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="MoreDetailJson" Parameter="moreDetailJson" Type="System.String" DbType="NText" />
+    <Parameter Name="TotalBuy" Parameter="totalBuy" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID8" />
+  </Function>
+  <Function Name="dbo.Product_Update" Method="Product_Update">
+    <Parameter Name="ProductId" Parameter="productId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ProductName" Parameter="productName" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="NText" />
+    <Parameter Name="PriceCurrent" Parameter="priceCurrent" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="CategoriesId" Parameter="categoriesId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="StoreId" Parameter="storeId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TotalLike" Parameter="totalLike" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TotalComment" Parameter="totalComment" Type="System.Int32" DbType="Int" />
+    <Parameter Name="StatusId" Parameter="statusId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ImageId" Parameter="imageId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="MoreDetailJson" Parameter="moreDetailJson" Type="System.String" DbType="NText" />
+    <Parameter Name="TotalBuy" Parameter="totalBuy" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Product_Likes_Delete" Method="Product_Likes_Delete">
+    <Parameter Name="UserId" Parameter="userId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ProductId" Parameter="productId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Product_Likes_GetByProductId" Method="Product_Likes_GetByProductId">
+    <Parameter Name="ProductId" Parameter="productId" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID9" />
+  </Function>
+  <Function Name="dbo.Product_Likes_GetByUserIdProductId" Method="Product_Likes_GetByUserIdProductId">
+    <Parameter Name="UserId" Parameter="userId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ProductId" Parameter="productId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="Product_Likes_GetByUserIdProductIdResult">
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ProductID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Product_Likes_Insert" Method="Product_Likes_Insert">
+    <Parameter Name="UserId" Parameter="userId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ProductId" Parameter="productId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Product_Likes_GetByUserId" Method="Product_Likes_GetByUserId">
+    <Parameter Name="UserId" Parameter="userId" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID8" />
+  </Function>
+  <Function Name="dbo.StatusOrder_Delete" Method="StatusOrder_Delete">
+    <Parameter Name="StatusId" Parameter="statusId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.StatusOrder_Get_List" Method="StatusOrder_Get_List">
+    <ElementType IdRef="ID10" />
+  </Function>
+  <Function Name="dbo.StatusOrder_GetByStatusId" Method="StatusOrder_GetByStatusId">
+    <Parameter Name="StatusId" Parameter="statusId" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID10" />
+  </Function>
+  <Function Name="dbo.StatusOrder_Insert" Method="StatusOrder_Insert">
+    <Parameter Name="StatusName" Parameter="statusName" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="IsDelete" Parameter="isDelete" Type="System.Boolean" DbType="Bit" />
+    <ElementType IdRef="ID10" />
+  </Function>
+  <Function Name="dbo.StatusOrder_Update" Method="StatusOrder_Update">
+    <Parameter Name="StatusId" Parameter="statusId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="StatusName" Parameter="statusName" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="IsDelete" Parameter="isDelete" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.StatusProduct_Delete" Method="StatusProduct_Delete">
+    <Parameter Name="StatusId" Parameter="statusId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.StatusProduct_Get_List" Method="StatusProduct_Get_List">
+    <ElementType IdRef="ID11" />
+  </Function>
+  <Function Name="dbo.StatusProduct_GetByStatusId" Method="StatusProduct_GetByStatusId">
+    <Parameter Name="StatusId" Parameter="statusId" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID11" />
+  </Function>
+  <Function Name="dbo.StatusProduct_Insert" Method="StatusProduct_Insert">
+    <Parameter Name="StatusName" Parameter="statusName" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="NText" />
+    <Parameter Name="IsDelete" Parameter="isDelete" Type="System.Boolean" DbType="Bit" />
+    <ElementType IdRef="ID11" />
+  </Function>
+  <Function Name="dbo.StatusProduct_Update" Method="StatusProduct_Update">
+    <Parameter Name="StatusId" Parameter="statusId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="StatusName" Parameter="statusName" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="NText" />
+    <Parameter Name="IsDelete" Parameter="isDelete" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.StatusStore_Update" Method="StatusStore_Update">
+    <Parameter Name="StatusId" Parameter="statusId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="StatusName" Parameter="statusName" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="NText" />
+    <Parameter Name="IsDelete" Parameter="isDelete" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.StatusStore_GetByStatusId" Method="StatusStore_GetByStatusId">
+    <Parameter Name="StatusId" Parameter="statusId" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID12" />
+  </Function>
+  <Function Name="dbo.StatusStore_Get_List" Method="StatusStore_Get_List">
+    <ElementType IdRef="ID12" />
+  </Function>
+  <Function Name="dbo.StatusStore_Delete" Method="StatusStore_Delete">
+    <Parameter Name="StatusId" Parameter="statusId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.StatusStore_Insert" Method="StatusStore_Insert">
+    <Parameter Name="StatusName" Parameter="statusName" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="NText" />
+    <Parameter Name="IsDelete" Parameter="isDelete" Type="System.Boolean" DbType="Bit" />
+    <ElementType IdRef="ID12" />
+  </Function>
+  <Function Name="dbo.UserType_Delete" Method="UserType_Delete">
+    <Parameter Name="UserTypeId" Parameter="userTypeId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UserType_Get_List" Method="UserType_Get_List">
+    <ElementType IdRef="ID13" />
+  </Function>
+  <Function Name="dbo.UserType_GetByUserTypeId" Method="UserType_GetByUserTypeId">
+    <Parameter Name="UserTypeId" Parameter="userTypeId" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID13" />
+  </Function>
+  <Function Name="dbo.UserType_Update" Method="UserType_Update">
+    <Parameter Name="UserTypeId" Parameter="userTypeId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="UserTypeName" Parameter="userTypeName" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="NText" />
+    <Parameter Name="IsDelete" Parameter="isDelete" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UserType_Insert" Method="UserType_Insert">
+    <Parameter Name="UserTypeName" Parameter="userTypeName" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="NText" />
+    <Parameter Name="IsDelete" Parameter="isDelete" Type="System.Boolean" DbType="Bit" />
+    <ElementType IdRef="ID13" />
+  </Function>
+  <Function Name="dbo.Account_Login" Method="Account_Login">
+    <Parameter Name="EMail" Parameter="eMail" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Password" Parameter="password" Type="System.String" DbType="NVarChar(100)" />
+    <ElementType IdRef="ID1" />
+  </Function>
+  <Function Name="dbo.User_Delete" Method="User_Delete">
+    <Parameter Name="UserId" Parameter="userId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.User_Insert" Method="User_Insert">
+    <Parameter Name="UserId" Parameter="userId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="FirstName" Parameter="firstName" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="LastName" Parameter="lastName" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="About" Parameter="about" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="ImageAvartarId" Parameter="imageAvartarId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Address" Parameter="address" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="UserTypeId" Parameter="userTypeId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Isdelete" Parameter="isdelete" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="TotalFllowers" Parameter="totalFllowers" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TotalFllowing" Parameter="totalFllowing" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TotalLikes" Parameter="totalLikes" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.User_Get_List" Method="User_Get_List">
+    <ElementType IdRef="ID9" />
+  </Function>
+  <Function Name="dbo.User_GetByUserId" Method="User_GetByUserId">
+    <Parameter Name="UserId" Parameter="userId" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID9" />
+  </Function>
+  <Function Name="dbo.User_GetByUserTypeId" Method="User_GetByUserTypeId">
+    <Parameter Name="UserTypeId" Parameter="userTypeId" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID9" />
+  </Function>
+  <Function Name="dbo.User_Update" Method="User_Update">
+    <Parameter Name="UserId" Parameter="userId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="FirstName" Parameter="firstName" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="LastName" Parameter="lastName" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="About" Parameter="about" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="ImageAvartarId" Parameter="imageAvartarId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Address" Parameter="address" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="UserTypeId" Parameter="userTypeId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Isdelete" Parameter="isdelete" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="TotalFllowers" Parameter="totalFllowers" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TotalFllowing" Parameter="totalFllowing" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TotalLikes" Parameter="totalLikes" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Store_Delete" Method="Store_Delete">
+    <Parameter Name="StoreId" Parameter="storeId" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Store_Get_List" Method="Store_Get_List">
+    <ElementType IdRef="ID14" />
+  </Function>
+  <Function Name="dbo.Store_GetByStatusId" Method="Store_GetByStatusId">
+    <Parameter Name="StatusId" Parameter="statusId" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID14" />
+  </Function>
+  <Function Name="dbo.Store_GetByStoreId" Method="Store_GetByStoreId">
+    <Parameter Name="StoreId" Parameter="storeId" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID14" />
+  </Function>
+  <Function Name="dbo.Store_Insert" Method="Store_Insert">
+    <Parameter Name="StoreId" Parameter="storeId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="StoreName" Parameter="storeName" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Address" Parameter="address" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="NText" />
+    <Parameter Name="CreateDate" Parameter="createDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="StatusId" Parameter="statusId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Slogan" Parameter="slogan" Type="System.String" DbType="NText" />
+    <Parameter Name="ImageProfileId" Parameter="imageProfileId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ImageCoverId" Parameter="imageCoverId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ShipFee" Parameter="shipFee" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="TotalFllowers" Parameter="totalFllowers" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TotalFllowing" Parameter="totalFllowing" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Tel" Parameter="tel" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Store_Update" Method="Store_Update">
+    <Parameter Name="StoreId" Parameter="storeId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="StoreName" Parameter="storeName" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Address" Parameter="address" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="NText" />
+    <Parameter Name="CreateDate" Parameter="createDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="StatusId" Parameter="statusId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Slogan" Parameter="slogan" Type="System.String" DbType="NText" />
+    <Parameter Name="ImageProfileId" Parameter="imageProfileId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ImageCoverId" Parameter="imageCoverId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ShipFee" Parameter="shipFee" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="TotalFllowers" Parameter="totalFllowers" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TotalFllowing" Parameter="totalFllowing" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Tel" Parameter="tel" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>
