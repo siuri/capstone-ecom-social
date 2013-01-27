@@ -20,6 +20,8 @@ namespace CapstoneProject.Models
     }
 
     [Table("UserProfile")]
+
+
     public class UserProfile
     {
         [Key]
@@ -27,6 +29,7 @@ namespace CapstoneProject.Models
         public int UserId { get; set; }
         public string UserName { get; set; }
     }
+
 
     public class RegisterExternalLoginModel
     {
@@ -36,6 +39,8 @@ namespace CapstoneProject.Models
 
         public string ExternalLoginData { get; set; }
     }
+
+
 
     public class LocalPasswordModel
     {
