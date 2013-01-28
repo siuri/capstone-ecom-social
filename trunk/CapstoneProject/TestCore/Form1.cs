@@ -19,8 +19,7 @@ namespace TestCore
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = StatusProductBUS.SelectListAll();
-            
+            dataGridView1.DataSource = StatusProductBUS.SelectListAll();            
         }
     }
 }
