@@ -1,0 +1,23 @@
+/*---------------------------------------------------
+    LESS Elements 0.9
+  ---------------------------------------------------
+    A set of useful LESS mixins
+    More info at: http://lesselements.com
+  ---------------------------------------------------*/
+.abs {
+  position: absolute;
+}
+.rel {
+  position: relative;
+}
+.fl-left {
+  float: left;
+}
+.fl-right {
+  float: right;
+}
+.btn.add-new {
+  position: absolute;
+  top: 40px;
+  left: 811px;
+}

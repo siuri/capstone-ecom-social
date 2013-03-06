@@ -1,0 +1,99 @@
+/*---------------------------------------------------
+    LESS Elements 0.9
+  ---------------------------------------------------
+    A set of useful LESS mixins
+    More info at: http://lesselements.com
+  ---------------------------------------------------*/
+.abs {
+  position: absolute;
+}
+.rel {
+  position: relative;
+}
+.fl-left {
+  float: left;
+}
+.fl-right {
+  float: right;
+}
+.statistic-content-header > .btn-group {
+  position: absolute;
+  left: 190px;
+  top: 42px;
+}
+.statistic-content-header > .btn-group .btn {
+  padding: 5px 30px;
+}
+.statistic-content-body .order-container {
+  overflow: auto;
+  height: 490px;
+}
+.statistic-content-body .order-container a .order {
+  -ms-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0 30px;
+  height: 67px;
+}
+.statistic-content-body .order-container a .order .order-title {
+  font-family: Century;
+  font-size: 16px;
+  height: 32px;
+  line-height: 30px;
+  color: #D06A4D;
+}
+.statistic-content-body .order-container a .order .order-title .order-status {
+  float: right;
+  font-family: Aria;
+  font-size: 12px;
+}
+.statistic-content-body .order-container a .order .order-title .order-status .shipped {
+  color: #008C00;
+}
+.statistic-content-body .order-container a .order .order-title .order-status .on-hold {
+  color: #D9A300;
+}
+.statistic-content-body .order-container a .order .order-info .order-num-item {
+  float: left;
+  width: 90px;
+}
+.statistic-content-body .order-container a .order .order-info .order-price {
+  float: left;
+  width: 80px;
+}
+.statistic-content-body .order-container a .order .order-info .order-date {
+  float: left;
+}
+.statistic-content-body .order-container a:hover .order {
+  background: rgba(206, 108, 73, 0.08);
+}
+.statistic-content-body .order-detail {
+  height: 490px;
+}
+.statistic-content-body .order-detail .order-title {
+  font-family: Century;
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #D06A4E;
+}
+.statistic-content-body .order-detail .order-title .order-date {
+  float: right;
+  font-size: 13px;
+  color: #000000;
+}
+.statistic-content-body .order-detail h2 {
+  font-weight: normal;
+  font-family: Century;
+  font-size: 16px;
+  color: #D06A4E;
+  padding: 0;
+  height: 40px;
+  margin: 5px 0;
+}
+.statistic-content-body .order-detail table thead {
+  font-weight: bold;
+}
+.statistic-content-body .order-detail table tfoot {
+  font-weight: bold;
+}

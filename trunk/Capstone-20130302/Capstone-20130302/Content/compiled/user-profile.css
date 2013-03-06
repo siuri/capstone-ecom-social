@@ -1,0 +1,168 @@
+/*---------------------------------------------------
+    LESS Elements 0.9
+  ---------------------------------------------------
+    A set of useful LESS mixins
+    More info at: http://lesselements.com
+  ---------------------------------------------------*/
+.abs {
+  position: absolute;
+}
+.rel {
+  position: relative;
+}
+.fl-left {
+  float: left;
+}
+.fl-right {
+  float: right;
+}
+/*---------------------------------------------------
+    LESS Elements 0.9
+  ---------------------------------------------------
+    A set of useful LESS mixins
+    More info at: http://lesselements.com
+  ---------------------------------------------------*/
+.abs {
+  position: absolute;
+}
+.rel {
+  position: relative;
+}
+.fl-left {
+  float: left;
+}
+.fl-right {
+  float: right;
+}
+nav .navbar {
+  margin-bottom: 0;
+}
+#page > section {
+  margin-top: 0px;
+}
+#page > section .highlight-header {
+  height: 361px;
+  position: relative;
+  background: white;
+}
+#page > section .highlight-header .brand-area {
+  height: 133px;
+  width: 700px;
+  float: left;
+  position: relative;
+}
+#page > section .highlight-header .brand-area .shop-avatar {
+  position: absolute;
+  left: 25px;
+  top: 30px;
+  width: 127px;
+  height: 127px;
+  border: 1px solid #ddd;
+  background: white;
+}
+#page > section .highlight-header .brand-area .shop-avatar img {
+  margin: 1px;
+}
+#page > section .highlight-header .brand-area h1 {
+  height: 38px;
+  line-height: 38px;
+  font-size: 29px;
+  font-weight: lighter;
+  color: black;
+  position: absolute;
+  left: 170px;
+  top: 25px;
+  width: 500px;
+  font-family: "Century", Arial;
+}
+#page > section .highlight-header .brand-area h2 {
+  height: 25px;
+  font-size: 17px;
+  line-height: 25px;
+  color: #D26852;
+  position: absolute;
+  left: 170px;
+  top: 60px;
+  width: 400px;
+  font-family: "Century", Arial;
+  font-weight: lighter;
+}
+#page > section .highlight-header .social-area {
+  float: right;
+  height: 75px;
+  width: 200px;
+  margin-top: 20px;
+  color: #525261;
+  margin-right: 24px;
+}
+#page > section .highlight-header .social-area .follow-num {
+  font-size: 17px;
+  font-family: "Century", Arial;
+  color: #CA6E63;
+}
+#page > section .highlight-header .social-area .btn.follow {
+  float: right;
+}
+#page > section .highlight-header .social-area .follow-lists > a {
+  float: left;
+  margin-right: 1px;
+  display: block;
+}
+#page > section .highlight-header .image img {
+  -webkit-box-shadow: inset 0 -5px 2px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: inset 0 -5px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 -5px 2px rgba(0, 0, 0, 0.5);
+}
+#page.user-profile > section {
+  margin-top: 65px;
+}
+#page.user-profile > section .highlight-header {
+  -webkit-box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);
+  -moz-box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);
+  border: 1px solid #ddd;
+}
+#page.user-profile > section .highlight-header .brand-area h2 {
+  height: 25px;
+  font-size: 13px;
+  line-height: 25px;
+  color: #525260;
+  position: absolute;
+  left: 170px;
+  top: 60px;
+  width: 400px;
+  font-family: "Arial", Arial;
+  font-weight: lighter;
+}
+#page.user-profile > section .highlight-header .social-area.follow {
+  top: 0px;
+  right: 230px;
+  position: absolute;
+}
+#page.user-profile > section .highlight-header .cat-follow {
+  position: absolute;
+  right: 0;
+  width: 451px;
+  top: 123px;
+}
+#page.user-profile > section .highlight-header .cat-follow h3 {
+  padding: 0;
+  margin: 0;
+  font-weight: normal;
+  font-size: 17px;
+  font-family: "Century", Arial;
+  color: #CA6E63;
+  height: 40px;
+}
+#page.user-profile > section .highlight-header .cat-follow ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#page.user-profile > section .highlight-header .cat-follow ul li {
+  float: left;
+  padding: 5px 10px;
+}
+#page.user-profile > section .highlight-header .cat-follow ul li:first-child {
+  padding-left: 0;
+}

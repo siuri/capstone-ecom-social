@@ -1,0 +1,84 @@
+@import "elements.less";
+@import "store.less";
+#page {
+    &.user-profile {
+        & > section {
+            margin-top:65px;
+
+            .highlight-header {
+                .inner-shadow(0,0,0,0);
+                border:1px solid #ddd;
+                .brand-area {
+
+                    .shop-avatar {
+
+                        img {
+
+                        }
+                    }
+                    h1 {
+
+                    }
+                    h2 {
+                        height: 25px;
+                        font-size: 13px;
+                        line-height: 25px;
+                        color: #525260;
+                        .abs;
+                        left: 170px;
+                        top: 60px;
+                        width: 400px;
+                        font-family: "Arial", Arial;
+                        font-weight: lighter;
+                    }
+                }
+                .social-area.follow {
+                    top: 0px;
+                    right: 230px;
+                    position: absolute;
+                    .follow-num {
+
+                    }
+                    .btn.follow {
+
+                    }
+                    .follow-lists {
+                        & > a {
+
+                            & > img {
+
+                            }
+                        }
+                    }
+                }
+                .cat-follow{
+                    position: absolute;
+                    right: 0;
+                    width:451px;
+                    top:123px;
+                    h3{
+                        padding: 0;
+                        margin: 0;
+                        font-weight: normal;
+                        font-size: 17px;
+                        font-family: "Century",Arial;
+                        color: #CA6E63;
+                        height: 40px;
+                    }
+                    ul{
+                        list-style: none;
+                        padding: 0;
+                        margin: 0;
+                        li{
+                            float:left;
+                            padding: 5px 10px;
+                            &:first-child{
+                                padding-left: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

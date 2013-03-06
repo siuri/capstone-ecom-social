@@ -1,0 +1,92 @@
+@import "elements.less";
+
+nav{
+
+    .navbar{
+        margin-bottom: 0;
+    }
+}
+#page{
+    > section{
+        margin-top: 0px;
+        .highlight-header{
+            height: 361px;
+            position: relative;
+            background: white;
+        //            border: 1px solid #ddd;
+            .brand-area{
+                height: 133px;
+                width:700px;
+                float:left;
+                position: relative;
+                .shop-avatar{
+                    .abs;
+                    left: 25px;
+                    top:30px;
+                    width: 127px;
+                    height: 127px;
+                    border: 1px solid #ddd;
+                    background:white;
+                    img{
+                        margin: 1px;
+                    }
+                }
+                h1{
+                    height: 38px;
+                    line-height: 38px;
+                    font-size: 29px;
+                    font-weight: lighter;
+                    color: black;
+                    .abs;
+                    left: 170px;
+                    top:25px;
+                    width:500px;
+                    font-family: "Century",Arial;
+                }
+                h2{
+                    height: 25px;
+                    font-size: 17px;
+                    line-height: 25px;
+                    color: #D26852;
+                    .abs;
+                    left: 170px;
+                    top:60px;
+                    width: 400px;
+                    font-family: "Century",Arial;
+                    font-weight: lighter;
+                }
+            }
+            .social-area{
+                float:right;
+                height: 75px;
+                width:200px;
+                margin-top: 20px;
+                color: #525261;
+                margin-right: 24px;
+                .follow-num{
+                    font-size: 17px;
+                    font-family: "Century",Arial;
+                    color: #CA6E63;
+                }
+                .btn.follow{
+                    float:right;
+                }
+                .follow-lists{
+                    & > a{
+                        .fl-left;
+                        margin-right: 1px;
+                        display:block;
+                        & > img {
+
+                        }
+                    }
+                }
+            }
+            .image{
+                img{
+                    .inner-shadow(0,-5px,2px,0.5);
+                }
+            }
+        }
+    }
+}

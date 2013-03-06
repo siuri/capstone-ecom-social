@@ -1,0 +1,385 @@
+/*---------------------------------------------------
+    LESS Elements 0.9
+  ---------------------------------------------------
+    A set of useful LESS mixins
+    More info at: http://lesselements.com
+  ---------------------------------------------------*/
+.abs {
+  position: absolute;
+}
+.rel {
+  position: relative;
+}
+.fl-left {
+  float: left;
+}
+.fl-right {
+  float: right;
+}
+body {
+  background: url(../../images/header_bg.jpg) repeat-x #f7f6f5;
+  width: 100%;
+  height: 100%;
+}
+#page {
+  width: 960px;
+  margin: 0 auto;
+  line-height: 25px;
+}
+#page > header {
+  height: 60px;
+  width: 100%;
+}
+#page > header > .inner {
+  margin-top: 9px;
+  position: relative;
+}
+#page > header > .inner .search-box,
+#page > header > .inner #logo {
+  position: absolute;
+}
+#page > header > .inner .search-box {
+  left: 0;
+  top: 10px;
+}
+#page > header > .inner #logo {
+  left: 400px;
+  background: url(../../images/logo_small_gray.png) no-repeat;
+  width: 160px;
+  height: 50px;
+  top: 0px;
+}
+#page > header > .inner #header-menu {
+  float: right;
+  height: 50px;
+  width: auto;
+}
+#page > header > .inner #header-menu ul.noti5s {
+  float: left;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#page > header > .inner #header-menu ul.noti5s li {
+  float: left;
+  height: 60px;
+  width: 69px;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #7e7e8a), color-stop(1, #ffffff));
+  background: -ms-linear-gradient(bottom, #7e7e8a, #ffffff);
+  background: -moz-linear-gradient(center bottom, #7e7e8a 0%, #ffffff 100%);
+  background: -o-linear-gradient(#ffffff, #7e7e8a);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#7e7e8a', GradientType=0);
+  background: #535362;
+  /* Old browsers */
+
+  background: -moz-linear-gradient(top, #535362 0%, #7e7e8a 100%);
+  /* FF3.6+ */
+
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #535362), color-stop(100%, #7e7e8a));
+  /* Chrome,Safari4+ */
+
+  background: -webkit-linear-gradient(top, #535362 0%, #7e7e8a 100%);
+  /* Chrome10+,Safari5.1+ */
+
+  background: -o-linear-gradient(top, #535362 0%, #7e7e8a 100%);
+  /* Opera 11.10+ */
+
+  background: -ms-linear-gradient(top, #535362 0%, #7e7e8a 100%);
+  /* IE10+ */
+
+  background: linear-gradient(to bottom, #535362 0%, #7e7e8a 100%);
+  /* W3C */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@from', endColorstr='@to', GradientType=0);
+  /* IE6-9 */
+
+  box-shadow: inset 0 0 8px #444;
+  display: block;
+}
+#page > header > .inner #header-menu ul.noti5s #cart > a {
+  height: 60px;
+  width: 69px;
+  display: block;
+  position: absolute;
+}
+#page > header > .inner #header-menu ul.noti5s #cart > a img {
+  position: absolute;
+  left: 20px;
+  top: 18px;
+  border: none;
+}
+#page > header > .inner #header-menu ul.noti5s #cart > a .badge {
+  position: absolute;
+  display: block;
+  left: 32px;
+  top: 12px;
+}
+#page > header > .inner #header-menu .user-menu {
+  height: 60px;
+  float: left;
+}
+#page > header > .inner #header-menu .user-menu .btn-group {
+  margin-top: 10px;
+  background: none;
+  border: none;
+}
+#page > header > .inner #header-menu .user-menu .btn-group .btn {
+  background: none;
+  border: none;
+  border-radius: 0;
+  text-shadow: none;
+  box-shadow: none;
+}
+#page > header > .inner #header-menu .user-menu .btn-group .btn .avatar {
+  border-radius: 5px;
+  float: left;
+  height: 32px;
+  display: block;
+  width: 32px;
+  margin-top: -3px;
+  margin-right: 5px;
+  background: #bbb;
+}
+#page > header > .inner #header-menu .user-menu .btn-group .btn .user-name {
+  color: #bbb;
+  float: left;
+  display: block;
+}
+#page > header > .inner #header-menu .user-menu .btn-group .caret {
+  border-top: 6px solid #bbb;
+  border-right: 6px solid transparent;
+  border-left: 6px solid transparent;
+}
+#page > nav .navbar-inner {
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+#page > section {
+  margin-top: 65px;
+}
+#page > section .highlight-header {
+  height: 361px;
+  background: white;
+  border: 1px solid #ddd;
+}
+#page > section .highlight-header .brand-area {
+  height: 112px;
+  width: 700px;
+  float: left;
+  position: relative;
+}
+#page > section .highlight-header .brand-area .shop-avatar {
+  position: absolute;
+  left: 25px;
+  top: 30px;
+  width: 127px;
+  height: 127px;
+  border: 1px solid #ddd;
+  background: white;
+}
+#page > section .highlight-header .brand-area .shop-avatar img {
+  margin: 1px;
+}
+#page > section .highlight-header .brand-area h1 {
+  height: 38px;
+  line-height: 38px;
+  font-size: 29px;
+  font-weight: lighter;
+  color: black;
+  position: absolute;
+  left: 170px;
+  top: 25px;
+  width: 500px;
+  font-family: "Century", Arial;
+}
+#page > section .highlight-header .brand-area h2 {
+  height: 25px;
+  font-size: 17px;
+  line-height: 25px;
+  color: #D26852;
+  position: absolute;
+  left: 170px;
+  top: 60px;
+  width: 400px;
+  font-family: "Century", Arial;
+  font-weight: lighter;
+}
+#page > section .highlight-header .social-area {
+  float: right;
+  height: 75px;
+  width: 200px;
+  margin-top: 20px;
+  color: #525261;
+  margin-right: 24px;
+}
+#page > section .highlight-header .social-area .follow-num {
+  font-size: 17px;
+  font-family: "Century", Arial;
+  color: #CA6E63;
+}
+#page > section .highlight-header .social-area .btn.follow {
+  float: right;
+}
+#page > section .highlight-header .social-area .follow-lists > a {
+  float: left;
+  margin-right: 1px;
+  display: block;
+}
+#page > section .product-area {
+  margin-top: 50px;
+}
+#page > section .product-area > .title {
+  color: #31313F;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+#page > section .product-area > .product-grid {
+  min-height: 500px;
+  width: 960px;
+}
+#page > section .product-area > .product-grid > .product {
+  -ms-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #868695;
+  width: 227px;
+  border: 1px solid #D7D3D4;
+  padding: 12px;
+  background: white;
+}
+#page > section .product-area > .product-grid > .product .image {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+#page > section .product-area > .product-grid > .product .image img {
+  width: 100%;
+}
+#page > section .product-area > .product-grid > .product .image > a {
+  display: block;
+}
+#page > section .product-area > .product-grid > .product .image .detail {
+  position: absolute;
+  -ms-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  padding: 5px;
+  padding-left: 10px;
+  height: 39px;
+  width: 100%;
+  bottom: 0;
+  bottom: -39px;
+  left: 0;
+  background-color: rgba(49, 49, 64, 0.9);
+  color: white;
+  font-family: Century;
+  font-size: 19px;
+}
+#page > section .product-area > .product-grid > .product .image .detail .price {
+  float: left;
+}
+#page > section .product-area > .product-grid > .product .image .detail a {
+  font-size: 12px;
+  float: right;
+  color: white;
+  font-family: Arial;
+  font-weight: bolder;
+  padding-top: 1px;
+}
+#page > section .product-area > .product-grid > .product .image:hover .detail {
+  bottom: 0;
+}
+#page > section .product-area > .product-grid > .product .description {
+  padding: 6px 0;
+  font-size: 13px;
+  line-height: 20px;
+}
+#page > section .product-area > .product-grid > .product hr {
+  margin: 3px 0;
+}
+#page > section .product-area > .product-grid > .product .misc a {
+  margin-right: 5px;
+  color: #868695;
+}
+#page > section .product-area > .product-grid > .product .misc a img {
+  margin: 0 2px;
+}
+.modal {
+  background-color: #F7F6F5;
+}
+.modal .modal-body {
+  max-height: 600px;
+  margin: 5px 10px;
+}
+.modal .modal-body > header {
+  margin-bottom: 20px;
+}
+.modal .modal-body > header h1 {
+  font-family: "Century", "Times New Roman";
+  font-size: 27px;
+  line-height: 30px;
+  height: 30px;
+  font-weight: lighter;
+  text-align: center;
+  width: 300px;
+  background: #F7F6F5;
+  display: block;
+  margin: 0 auto;
+  z-index: 5;
+}
+.modal .modal-body > header hr {
+  margin-bottom: -15px;
+  z-index: 4;
+}
+.modal .modal-body > section .control-group {
+  margin-bottom: 15px;
+}
+.modal .modal-body .help-inline {
+  font-size: 12px;
+}
+.modal .btn {
+  margin-left: 0px;
+}
+#loginModal {
+  width: 717px;
+  height: 410px;
+}
+#registerModal {
+  width: 717px;
+  height: 564px;
+}
+#registerModal .input-prepend {
+  margin: 5px;
+}
+#registerModal .form {
+  position: relative;
+}
+#registerModal .form .avatar-container {
+  position: absolute;
+  top: 5px;
+  left: -120px;
+  border: 1px solid #bbb;
+  box-shadow: 0px 0px 15px -2px #888888;
+  width: 100px;
+  height: 100px;
+}
+#registerModal .form .avatar-container .avatar {
+  display: block;
+  margin: 3px;
+}
+.tooltip hr {
+  color: #1F1F2E;
+  border-bottom: 1px solid white;
+  margin: 10px;
+}
+.add-on {
+  font-size: 19px;
+  font-weight: bolder;
+}
