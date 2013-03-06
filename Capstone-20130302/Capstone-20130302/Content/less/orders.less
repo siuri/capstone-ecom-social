@@ -1,0 +1,93 @@
+@import "elements.less";
+.statistic-content-header{
+    > .btn-group{
+        position: absolute;
+        left: 190px;
+        top:42px;
+        .btn{
+            padding: 5px 30px;
+        }
+    }
+}
+.statistic-content-body{
+    .order-container{
+        overflow: auto;
+//        height:268px;
+        height:490px;
+        a{
+            .order{
+                .box-sizing;
+                padding: 0 30px;
+                height:67px;
+                .order-title{
+                    font-family: Century;
+                    font-size: 16px;
+                    height: 32px;
+                    line-height: 30px;
+                    color:#D06A4D;
+                    .order-status{
+                        float: right;
+                        font-family: Aria;
+                        font-size: 12px;
+                        .shipped{
+                            color: #008C00;
+                        }
+                        .on-hold{
+                            color: #D9A300;
+                        }
+                    }
+                }
+                .order-info{
+                    .order-num-item{
+                        float: left;
+                        width: 90px;
+                    }
+                    .order-price{
+                        float: left;
+                        width: 80px;
+                    }
+                    .order-date{
+                        float: left;
+                    }
+                }
+
+            }
+            &:hover{
+                .order{
+                    background: rgba(206,108,73,0.08);
+                }
+            }
+        }
+    }
+    .order-detail{
+        height:490px;
+        .order-title{
+            font-family: Century;
+            font-size: 22px;
+            margin-bottom: 20px;
+            color:#D06A4E;
+            .order-date{
+                float:right;
+                font-size: 13px;
+                color: #000000;
+            }
+        }
+        h2{
+            font-weight: normal;
+            font-family: Century;
+            font-size: 16px;
+            color:#D06A4E;
+            padding: 0;
+            height: 40px;
+            margin: 5px 0;
+        }
+        table{
+            thead{
+                font-weight: bold;
+            }
+            tfoot{
+                font-weight: bold;
+            }
+        }
+    }
+}
