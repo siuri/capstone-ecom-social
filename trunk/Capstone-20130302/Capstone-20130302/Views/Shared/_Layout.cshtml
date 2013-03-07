@@ -1,48 +1,109 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
-    </head>
-    <body>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div id="content-header">
         <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
+            <div class="inner">
+                <div class="search-box">
+                    <form>
+                        <div class="input-append">
+                            <input type="text" class="span3 input-small">
+                            <button type="button" class="btn btn-default"><i class="icon-search"></i></button>
+                        </div>
+                    </form>
                 </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        </ul>
-                    </nav>
+                <div id="logo"></div>
+                <div id="header-menu">
+                    <div class="user-menu">
+                        <div class="btn-group">
+                            <button class="btn">
+                                <span class="avatar">
+                                    <img src=""></span><span class="user-name">Caleido</span></button>
+                            <button data-toggle="dropdown" class="btn dropdown-toggle"><span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Test</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <ul class="noti5s">
+                        <li id="cart"><a href="#">
+                            <img src="images/icon-cart.png"><span class="badge badge-inverse">3</span></a><div class="cart-container" style="display: none;">
+                                <div class="store"><a href="#" class="store-title">KLIA Outlet Store</a><a href="#" class="check-out">CHECK OUT</a></div>
+                                <div class="product">
+                                    <img src="images/product-icon.jpg"><div class="info">
+                                        <div class="title"><a href="#">KLIA Double Bed</a></div>
+                                        <div class="price-quantity">$19.35 x&nbsp;<span class="badge">3</span></div>
+                                        <div class="action"><a href="#">Remove</a></div>
+                                    </div>
+                                </div>
+                                <div class="product">
+                                    <img src="images/product-icon.jpg"><div class="info">
+                                        <div class="title"><a href="#">KLIA Double Bed</a></div>
+                                        <div class="price-quantity">$19.35 x&nbsp;<span class="badge">3</span></div>
+                                        <div class="action"><a href="#">Remove</a></div>
+                                    </div>
+                                </div>
+                                <div class="store"><a href="#" class="store-title">KLIA Outlet Store</a><a href="#" class="check-out">CHECK OUT</a></div>
+                                <div class="product">
+                                    <img src="images/product-icon.jpg"><div class="info">
+                                        <div class="title"><a href="#">KLIA Double Bed</a></div>
+                                        <div class="price-quantity">$19.35 x&nbsp;<span class="badge">3</span></div>
+                                        <div class="action"><a href="#">Remove</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </header>
-        <div id="body">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
-            </section>
-        </div>
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+        <nav>
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <ul class="nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#">Link</a></li>
+                        <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Link<b class="caret"></b></a><ul class="dropdown-menu">
+                            <li><a href="#">Sub menu1</a></li>
+                            <li><a href="#">Sub menu1</a></li>
+                        </ul>
+                        </li>
+                        <li><a href="#loginModal" role="button" data-toggle="modal">Login</a></li>
+                        <li><a href="#registerModal" role="button" data-toggle="modal">Register</a></li>
+                    </ul>
                 </div>
             </div>
-        </footer>
+        </nav>
+    </div>
+    <div id="page" class="orders">
+        <div class="statistic-content-header">
+            <div class="page-title">@ViewBag.Title</div>
+            <a href="#choose-templ" data-toggle="modal" class="btn add-new">ADD NEW</a></div>
+        <div class="statistic-content-body">
+            @RenderBody()
+        </div>
+    </div>
+    @*RenderSection("featured", required: false)*@
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+            </div>
+        </div>
+    </footer>
 
-        @Scripts.Render("~/bundles/jquery")
-        @RenderSection("scripts", required: false)
-    </body>
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
 </html>
