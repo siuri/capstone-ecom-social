@@ -193,12 +193,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\compile\default.css" />
-    <Content Include="Content\compile\elements.css" />
-    <Content Include="Content\compile\orders.css" />
-    <Content Include="Content\compile\product.css" />
-    <Content Include="Content\compile\store.css" />
-    <Content Include="Content\compile\user-profile.css" />
+    <Content Include="Content\Bootstrap\css\bootstrap.css" />
+    <Content Include="Content\Bootstrap\img\glyphicons-halflings-white.png" />
+    <Content Include="Content\Bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="Content\compiled\default.css" />
+    <Content Include="Content\compiled\elements.css" />
+    <Content Include="Content\compiled\orders.css" />
+    <Content Include="Content\compiled\product.css" />
+    <Content Include="Content\compiled\store.css" />
+    <Content Include="Content\compiled\user-profile.css" />
     <Content Include="Content\default.css" />
     <Content Include="Content\flexcrollstyles.css" />
     <Content Include="Content\select2.css" />
@@ -261,6 +264,12 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Content\less\default.less" />
+    <Content Include="Content\less\elements.less" />
+    <Content Include="Content\less\orders.less" />
+    <Content Include="Content\less\product.less" />
+    <Content Include="Content\less\store.less" />
+    <Content Include="Content\less\user-profile.less" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Images\avatar-social.jpg" />
     <Content Include="Images\avatar_default.jpg" />

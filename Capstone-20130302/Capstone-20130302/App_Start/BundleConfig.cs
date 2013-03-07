@@ -23,9 +23,12 @@ namespace Capstone_20130302
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+                        "~/Scripts/modernizr-*"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/bootstrap.css",
-                "~/Content/default.css",
+                "~/Content/Bootstrap/css/bootstrap.css",
+                "~/Content/compiled/default.css",
                 "~/Content/select2.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
