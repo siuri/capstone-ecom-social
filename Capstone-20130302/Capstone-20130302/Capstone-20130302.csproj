@@ -193,6 +193,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\compile\default.css" />
+    <Content Include="Content\compile\elements.css" />
+    <Content Include="Content\compile\orders.css" />
+    <Content Include="Content\compile\product.css" />
+    <Content Include="Content\compile\store.css" />
+    <Content Include="Content\compile\user-profile.css" />
     <Content Include="Content\default.css" />
     <Content Include="Content\flexcrollstyles.css" />
     <Content Include="Content\select2.css" />

@@ -21,7 +21,7 @@ namespace Capstone_20130302.Models
 
         public virtual ProductStatus Status { get; set; }
         public virtual Category Category { get; set; }
-        public virtual Image ProductImage { get; set; }
+        public virtual ICollection<Image> ProductImages { get; set; }
         public virtual Store Store { get; set; }
         public virtual ICollection<UserProfile> Likers { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
