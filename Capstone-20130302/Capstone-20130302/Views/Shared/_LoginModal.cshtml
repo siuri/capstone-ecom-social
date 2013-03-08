@@ -1,0 +1,40 @@
+﻿@model Capstone_20130302.Models.LoginModel
+
+
+<!-- Modal -->
+<div id="login-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-logo"></div>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Hi, welcome back</h3>
+        
+    </div>
+    <div class="modal-body">
+        <section id="loginForm">
+            <form id="login-modal-form" class="form-inline" action="/Account/Login" method="post" novalidate="novalidate">
+                <input name="__RequestVerificationToken" type="hidden" value="uFFOMQVHWBowFCMqgdvACqduSh_emkxWY5S_YjCJvE7YWsnp042yh4U7rXic5SKeJ34bHI3u8sQ_DXTAjgTjKb9_1FT0LVYlZnMHqLFLyFI1">
+                <span class="field-validation-valid" data-valmsg-for="UserName" data-valmsg-replace="true"></span>
+                <br />  
+                <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                <ul>
+                    <li>
+                        <input placeholder="User name" data-val="true" data-val-required="The User name field is required." id="UserName" name="UserName" type="text" value="">
+                    </li>
+                    <li>
+                        <input placeholder="Password" data-val="true" data-val-required="The Password field is required." id="Password" name="Password" type="password">
+                    </li>
+                    <li>
+                         <input type="submit" class="btn" value="Log in">
+                    </li>
+                </ul>
+            </form>
+        </section>
+    </div>
+    <div class="modal-footer">
+        Login in with Facebook account @Html.Action("ExternalLoginsList", "Account", new { ReturnUrl = ViewBag.ReturnUrl })
+    </div>
+    @Scripts.Render("~/bundles/jqueryval")
+    </form>
+</div>
+
+

@@ -7,6 +7,11 @@
     <meta name="viewport" content="width=device-width" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    <script src="/Scripts/bootstrap.min.js"></script>
+    @Scripts.Render("~/bundles/default")
+
 </head>
 <body>
     <div id="content-header">
@@ -23,15 +28,7 @@
                 <div id="logo"></div>
                 <div id="header-menu">
                     <div class="user-menu">
-                        <div class="btn-group">
-                            <button class="btn">
-                                <span class="avatar">
-                                    <img src=""></span><span class="user-name">Caleido</span></button>
-                            <button data-toggle="dropdown" class="btn dropdown-toggle"><span class="caret"></span></button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Test</a></li>
-                            </ul>
-                        </div>
+                        @Html.Partial("_LoginPartial")
                     </div>
                     <ul class="noti5s">
                         <li id="cart"><a href="#">
@@ -69,17 +66,16 @@
             <div class="navbar">
                 <div class="navbar-inner">
                     <ul class="nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
                         <li>@Html.ActionLink("About", "About", "Home")</li>
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        <li class="active"><a href="#">Home</a></li>
                         <li><a href="#">Link</a></li>
                         <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Link<b class="caret"></b></a><ul class="dropdown-menu">
                             <li><a href="#">Sub menu1</a></li>
                             <li><a href="#">Sub menu1</a></li>
                         </ul>
                         </li>
-                        <li><a href="#loginModal" role="button" data-toggle="modal">Login</a></li>
+                        <li><a href="#login-modal" role="button" class="btn" data-toggle="modal">Launch demo modal</a></li>
                         <li><a href="#registerModal" role="button" data-toggle="modal">Register</a></li>
                     </ul>
                 </div>
@@ -89,12 +85,13 @@
     <div id="page" class="orders">
         <div class="statistic-content-header">
             <div class="page-title">@ViewBag.Title</div>
-            <a href="#choose-templ" data-toggle="modal" class="btn add-new">ADD NEW</a></div>
-        <div class="statistic-content-body">
-            @RenderBody()
+            <div class="statistic-content-body">
+                @RenderBody()
+            </div>
         </div>
+        @RenderSection("featured", required: false)
     </div>
-    @*RenderSection("featured", required: false)*@
+    <!-- Footer -->
     <footer>
         <div class="content-wrapper">
             <div class="float-left">
