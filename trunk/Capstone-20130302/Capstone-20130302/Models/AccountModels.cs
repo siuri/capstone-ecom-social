@@ -16,17 +16,12 @@ namespace Capstone_20130302.Models
         public int UserId { get; set; }
         public string UserName { get; set; }
         public virtual ICollection<Product> LikedProducts { get; set; }
+        public virtual ICollection<Role> Roles { get; set; }
     }
 
     [Table("webpages_Membership")]
     public class Membership
     {
-        public Membership()
-        {
-            Roles = new List<Role>();
-            OAuthMemberships = new List<OAuthMembership>();
-        }
-
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int UserId { get; set; }
         public DateTime? CreateDate { get; set; }
@@ -43,11 +38,6 @@ namespace Capstone_20130302.Models
         [StringLength(128)]
         public string PasswordVerificationToken { get; set; }
         public DateTime? PasswordVerificationTokenExpirationDate { get; set; }
-
-        public ICollection<Role> Roles { get; set; }
-
-        [ForeignKey("UserId")]
-        public ICollection<OAuthMembership> OAuthMemberships { get; set; }
     }
 
     [Table("webpages_OAuthMembership")]
@@ -60,25 +50,17 @@ namespace Capstone_20130302.Models
         public string ProviderUserId { get; set; }
 
         public int UserId { get; set; }
-
-        [Column("UserId"), InverseProperty("OAuthMemberships")]
-        public Membership User { get; set; }
     }
 
     [Table("webpages_Roles")]
     public class Role
     {
-        public Role()
-        {
-            Members = new List<Membership>();
-        }
-
         [Key]
         public int RoleId { get; set; }
         [StringLength(256)]
         public string RoleName { get; set; }
 
-        public ICollection<Membership> Members { get; set; }
+        public ICollection<UserProfile> UserProfiles { get; set; }
     }
 
     public class RegisterExternalLoginModel

@@ -37,15 +37,15 @@ namespace Capstone_20130302.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Membership>()
-              .HasMany<Role>(r => r.Roles)
-              .WithMany(u => u.Members)
-              .Map(m =>
-              {
-                  m.ToTable("webpages_UsersInRoles");
-                  m.MapLeftKey("UserId");
-                  m.MapRightKey("RoleId");
-              });
+            modelBuilder.Entity<UserProfile>()
+                .HasMany<Role>(r => r.Roles)
+                .WithMany(u => u.UserProfiles)
+                .Map(m =>
+                {
+                    m.ToTable("webpages_UsersInRoles");
+                    m.MapLeftKey("UserId");
+                    m.MapRightKey("RoleId");
+                });
         }
     }
 }

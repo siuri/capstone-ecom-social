@@ -11,6 +11,10 @@ namespace Capstone_20130302
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/default").Include(
+                        "~/Scripts/bootstrap.min.js",
+                        "~/Scripts/default.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
 
@@ -23,12 +27,10 @@ namespace Capstone_20130302
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
-
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/Bootstrap/css/bootstrap.css",
                 "~/Content/compiled/default.css",
+                "~/Content/override.css",
                 "~/Content/select2.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
