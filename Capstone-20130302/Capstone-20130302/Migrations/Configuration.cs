@@ -55,6 +55,17 @@ namespace Capstone_20130302.Migrations
                 new StoreStatus { Name = "Inactive", Description = "The store is currently inactive." },
                 new StoreStatus { Name = "Rejected", Description = "The store is rejected and need modification." },
                 new StoreStatus { Name = "Banned", Description = "The store is banned due to violation." });
+            context.Images.AddOrUpdate(
+                new Image { ImageId = 0, Path = "no_img.jpg" },
+                new Image { ImageId = 1, Path = "mens.jpg" },
+                new Image { ImageId = 2, Path = "womens.jpg" },
+                new Image { ImageId = 3, Path = "men_shoes.jpg"}
+            );
+            context.Categories.AddOrUpdate(
+                new Category { CategoryId = 0, Name = "Root", CoverImage = context.Images.Find(0) },
+                new Category { CategoryId = 1, Name = "Men's", CoverImage = context.Images.Find(1), Parent = context.Categories.Find(0) },
+                new Category { CategoryId = 2, Name = "Women's", CoverImage = context.Images.Find(2), Parent = context.Categories.Find(0) },
+                new Category { CategoryId = 3, Name = "Shoes", CoverImage = context.Images.Find(3), Parent = context.Categories.Find(1)});
             context.SaveChanges();
         }
     }

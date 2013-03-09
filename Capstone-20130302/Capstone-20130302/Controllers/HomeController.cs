@@ -28,5 +28,11 @@ namespace Capstone_20130302.Controllers
 
             return View();
         }
+
+        public ActionResult Step2()
+        {
+            ViewBag.Message = "Step 2: Complete your profile";
+            return View();
+        }
     }
 }
