@@ -1,60 +1,52 @@
 ﻿@model Capstone_20130302.Models.Profile
 
 @{
-    ViewBag.Title = "<span class='step'>Step 3</span>Share with us";
+    ViewBag.Title = "Step 3 of 3";
+    //Layout = "~/Views/Shared/_SimpleLayout.cshtml";
 }
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
-    <section id="avatar">
+    <div>
+        <div>
+            Avatar
+        </div>
+        <div id="profile">
+            
+            <div class="validation-summary-errors">
+                <ul>
+                    <li>@Html.ValidationMessageFor(model => model.DisplayName)</li>
+                    <li>@Html.ValidationMessageFor(model => model.DateOfBirth)</li>
+                    <li>@Html.ValidationMessageFor(model => model.Email)</li>
+                    <li>@Html.ValidationMessageFor(model => model.ContactNumber)</li>
+                    <li>@Html.ValidationMessageFor(model => model.Addresses.ElementAt(0).Number)</li>
+                    <li>@Html.ValidationMessageFor(model => model.Addresses.ElementAt(0).Street)</li>
+                    <li>@Html.ValidationMessageFor(model => model.Addresses.ElementAt(0).City)</li>
+                    <li>@Html.ValidationMessageFor(model => model.Addresses.ElementAt(0).State)</li>
+                </ul>
+            </div>
 
-    </section>
-    <section id="profile">
-        <p class="guide">Let us know more about you to server you better. Please complete the profile or skip this step, you can come back at any time to complete it by going to Setting > Profile</p>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DisplayName)
+            <div class="controls controls-row">
+                @Html.TextBoxFor(model => model.DisplayName, new { placeholder = "Display Name", title = "Display Name", @class="span4" })
+                @Html.EditorFor(model => model.DateOfBirth, new { placeholder = "Date of Birth", title = "Date of Birth", @class="span2" })
+            </div>
+            <div class="controls controls-row">
+                @Html.TextBoxFor(model => model.ContactNumber, new { placeholder = "Contact Number", title = "Contact Number", @class="span3" })
+                @Html.TextBoxFor(model => model.Email, new { placeholder = "Email", title = "Email", @class="span3" })
+            </div>
+            <div class="controls controls-row">
+                @Html.TextBoxFor(model => model.Addresses.ElementAt(0).Number, new { placeholder = "Number", title = "Number", @class="span2" })
+                @Html.TextBoxFor(model => model.Addresses.ElementAt(0).Street, new { placeholder = "Street", title = "Street", @class="span4" })
+            </div>
+            <div class="controls controls-row">
+                @Html.TextBoxFor(model => model.Addresses.ElementAt(0).City, new { placeholder = "City", title = "City", @class="span3" })
+                @Html.TextBoxFor(model => model.Addresses.ElementAt(0).State, new { placeholder = "State", title = "State", @class="span3" })
+            </div>
+            <p>
+                <input type="submit" value="Create" />
+            </p>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DisplayName)
-            @Html.ValidationMessageFor(model => model.DisplayName)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DateOfBirth)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DateOfBirth)
-            @Html.ValidationMessageFor(model => model.DateOfBirth)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Email)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Email)
-            @Html.ValidationMessageFor(model => model.Email)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ContactNumber)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ContactNumber)
-            @Html.ValidationMessageFor(model => model.ContactNumber)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Website)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Website)
-            @Html.ValidationMessageFor(model => model.Website)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </section>
+    </div>
 }
 
 <div>

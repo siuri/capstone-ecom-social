@@ -17,7 +17,10 @@ namespace Capstone_20130302.Models
         public string DisplayName { get; set; }
 
         [DisplayName("Date of Birth")]
-        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [Range(typeof(DateTime), "1/1/1900", "1/1/2010",
+        ErrorMessage = "Value for {0} must be between {1} and {2}")]
         public DateTime DateOfBirth { get; set; }
 
         [EmailAddress]
@@ -27,10 +30,6 @@ namespace Capstone_20130302.Models
         [Phone]
         [DisplayName("Contact Number")]
         public string ContactNumber { get; set; }
-
-        [Url]
-        [DisplayName("Website")]
-        public string Website { get; set; }
 
         [ScaffoldColumn(false)]
         public int TotalFollowers { get; set; }

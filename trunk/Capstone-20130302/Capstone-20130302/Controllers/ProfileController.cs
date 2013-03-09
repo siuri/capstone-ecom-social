@@ -39,17 +39,23 @@ namespace Capstone_20130302.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            var profile = new Profile();
+            var address = new Address();
+            profile.Addresses = new List<Address>();
+            profile.Addresses.Add(address);
+            return View(profile);
         }
 
         //
         // POST: /Profile/Create
 
         [HttpPost]
-        public ActionResult Create(Profile profile)
+        public ActionResult Create(Profile profile, Address address)
         {
+            
             if (ModelState.IsValid)
             {
+                profile.Addresses.Add(address);
                 db.Profiles.Add(profile);
                 db.SaveChanges();
                 return RedirectToAction("Index");
