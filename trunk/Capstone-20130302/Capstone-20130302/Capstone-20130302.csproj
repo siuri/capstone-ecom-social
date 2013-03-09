@@ -165,16 +165,32 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\FileController.cs" />
+    <Compile Include="Controllers\FollowController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Migrations\201303081039422_Init.cs" />
     <Compile Include="Migrations\201303081039422_Init.Designer.cs">
       <DependentUpon>201303081039422_Init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201303090238168_UpdateBuyerToProfile.cs" />
+    <Compile Include="Migrations\201303090238168_UpdateBuyerToProfile.Designer.cs">
+      <DependentUpon>201303090238168_UpdateBuyerToProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201303090307187_GenderEnum.cs" />
+    <Compile Include="Migrations\201303090307187_GenderEnum.Designer.cs">
+      <DependentUpon>201303090307187_GenderEnum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201303090321278_DeleteGender.cs" />
+    <Compile Include="Migrations\201303090321278_DeleteGender.Designer.cs">
+      <DependentUpon>201303090321278_DeleteGender.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
-    <Compile Include="Models\Buyer.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Follow.cs" />
@@ -186,6 +202,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Image.cs" />
+    <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\Store.cs" />
     <Compile Include="Models\SocialBuyContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -358,6 +375,23 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\_LoginModal.cshtml" />
     <Content Include="Views\Shared\_RegisterModal.cshtml" />
+    <Content Include="Views\Store\Index.cshtml" />
+    <Content Include="Views\Store\Details.cshtml" />
+    <Content Include="Views\Store\Create.cshtml" />
+    <Content Include="Views\Store\Edit.cshtml" />
+    <Content Include="Views\Store\Delete.cshtml" />
+    <Content Include="Views\Shared\_SimpleLayout.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Profile\Details.cshtml" />
+    <Content Include="Views\Profile\Create.cshtml" />
+    <Content Include="Views\Profile\Edit.cshtml" />
+    <Content Include="Views\Profile\Delete.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Category\Details.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\Delete.cshtml" />
+    <Content Include="Views\Follow\FollowCategories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -368,6 +402,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201303081039422_Init.resx">
       <DependentUpon>201303081039422_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201303090238168_UpdateBuyerToProfile.resx">
+      <DependentUpon>201303090238168_UpdateBuyerToProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201303090307187_GenderEnum.resx">
+      <DependentUpon>201303090307187_GenderEnum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201303090321278_DeleteGender.resx">
+      <DependentUpon>201303090321278_DeleteGender.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

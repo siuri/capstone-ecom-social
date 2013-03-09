@@ -1,0 +1,53 @@
+﻿@model Capstone_20130302.Models.Store
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Store</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.StoreName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StoreName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ContactNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ContactNumber)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Slogan)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Slogan)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ShipFee)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ShipFee)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

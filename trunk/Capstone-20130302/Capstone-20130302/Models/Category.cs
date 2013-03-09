@@ -15,7 +15,6 @@ namespace Capstone_20130302.Models
         [Display(Name = "Category Name")]
         [MaxLength(50)]
         public string Name { get; set; }
-
         public virtual Category Parent { get; set; }
 
 

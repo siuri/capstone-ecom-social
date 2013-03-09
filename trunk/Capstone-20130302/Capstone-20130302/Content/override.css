@@ -1,57 +1,67 @@
-﻿body {
-    
+﻿body
+{
 }
 
-#content-header {
-    z-index:auto;
+#content-header
+{
+    z-index: auto;
 }
 
-.modal {
+.modal
+{
     background-color: #fff;
 }
 
-.modal-header {
+.modal-header
+{
     padding: 9px 15px;
     border-bottom: 1px solid #EEE;
     background: -webkit-linear-gradient(top, #E2E2E2, white);
     border-radius: 6px 5px 0 0;
 }
 
-.modal-header h3 {
-    font-size: 26px;
-    font-family: Century;
-    color: #646464;
-    text-shadow: 3px 3px 6px white;
-    height: 40px;
-    text-align: center;
-    margin: 30px 0 0 0;
-    font-weight: normal;
-}
+    .modal-header h3
+    {
+        font-size: 26px;
+        font-family: Century;
+        color: #646464;
+        text-shadow: 3px 3px 6px white;
+        height: 40px;
+        text-align: center;
+        margin: 30px 0 0 0;
+        font-weight: normal;
+    }
 
 #loginForm ul,
-#registerForm ul {
-    list-style:none;
-    margin-left:0;
+#registerForm ul
+{
+    list-style: none;
+    margin-left: 0;
 }
 
-#login-modal ul li,
-#registerForm ul li {
-}
+    #login-modal ul li,
+    #registerForm ul li
+    {
+    }
 
-.cart-container {
+.cart-container
+{
     z-index: 100;
 }
 
-.modal-backdrop, .modal-backdrop.fade.in {
+.modal-backdrop, .modal-backdrop.fade.in
+{
     opacity: 0.98;
     background: #1A1A31;
 }
 
-.modal-body {
+.modal-body
+{
     text-align: center;
 }
 
-.modal-logo {
+.modal-logo
+{
     position: absolute;
     left: 50%;
     top: -66px;
@@ -62,13 +72,15 @@
 }
 
 #login-modal input,
-#register-modal input {
+#register-modal input
+{
     width: 220px;
     margin-bottom: 8px;
 }
 
 input[type=text]:focus,
-input[type=password]:focus {
+input[type=password]:focus
+{
     border-color: #FFABA1;
     outline: 0;
     outline: thin dotted 9;
@@ -76,33 +88,105 @@ input[type=password]:focus {
 }
 
 #login-modal input.btn,
-#register-modal input.btn {
+#register-modal input.btn
+{
     width: 234px;
     text-transform: uppercase;
 }
 
-#register-modal ul {
+#register-modal ul
+{
     margin-bottom: 0;
 }
 
 .field-validation-error,
-.validation-summary-errors {
+.validation-summary-errors
+{
     color: #C9463E;
 }
 
 #login-modal .modal-footer,
-#register-modal .modal-footer {
-    text-align:center;
+#register-modal .modal-footer
+{
+    text-align: center;
     background-color: #212130;
     color: rgba(255, 255, 255, 0.62);
     border-radius: 0 0 3px 3px;
 }
 
-.btn-fb-login {
+.btn-fb-login
+{
     background: url(../../images/btn-fb-login.png) no-repeat;
     width: 234px;
     height: 40px;
     border: none;
     text-indent: -999px;
     margin-top: 5px;
+}
+
+.simple-layout
+{
+    background: #212130;
+}
+
+.logo-white
+{
+    background: url(../../images/logo_small_gray.png) no-repeat;
+    width: 160px;
+    height: 50px;
+}
+
+body.simple-layout
+{
+    padding-top: 0;
+}
+
+.page .statistic-content-header .page-title
+{
+    font-size: 36px;
+    font-family: Century;
+    color: #B8B8C6;
+    background-color: #565656;
+    color: transparent;
+    text-shadow: 0px 2px 3px rgba(255, 255, 255, 0.5);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    padding: 40px 0 26px 0;
+    line-height: 30px;
+    width: 860px;
+    margin: 0 auto 25px auto;
+    border-bottom: solid 1px #ccc;
+}
+
+.page
+{
+    width: 960px;
+    margin: 0 auto;
+    line-height: 25px;
+}
+
+    .page .statistic-content-header
+    {
+        -ms-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 0 10px;
+        margin-top: 55px;
+        width: 980px;
+        margin-left: -10px;
+        background: url(../../images/statistic-content-header.png) no-repeat;
+    }
+
+        .page .statistic-content-header .step
+        {
+            color: rgb(221, 87, 62);
+            margin-right: 30px;
+        }
+
+.statistic-content-body
+{
+    width: 860px;
+    margin: 0 auto;
 }

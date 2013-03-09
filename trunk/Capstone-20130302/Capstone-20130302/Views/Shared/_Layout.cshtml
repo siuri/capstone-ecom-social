@@ -19,10 +19,7 @@
             <div class="inner">
                 <div class="search-box">
                     <form>
-                        <div class="input-append">
-                            <input type="text" class="span3 input-small">
-                            <button type="button" class="btn btn-default"><i class="icon-search"></i></button>
-                        </div>
+                        <input type="text" class="span4" placeholder="Search for Stores, Products, and People">
                     </form>
                 </div>
                 <div id="logo"></div>
@@ -75,30 +72,20 @@
                             <li><a href="#">Sub menu1</a></li>
                         </ul>
                         </li>
-                        <li><a href="#login-modal" role="button" class="btn" data-toggle="modal">Launch demo modal</a></li>
-                        <li><a href="#registerModal" role="button" data-toggle="modal">Register</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
     </div>
-    <div id="page" class="orders">
+    <div class="page">
         <div class="statistic-content-header">
-            <div class="page-title">@ViewBag.Title</div>
+            <div class="page-title">@Html.Raw(ViewBag.Title)</div>
             <div class="statistic-content-body">
                 @RenderBody()
             </div>
         </div>
         @RenderSection("featured", required: false)
     </div>
-    <!-- Footer -->
-    <footer>
-        <div class="content-wrapper">
-            <div class="float-left">
-                <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
-            </div>
-        </div>
-    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)

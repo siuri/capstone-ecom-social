@@ -24,17 +24,25 @@ namespace Capstone_20130302.Controllers
 
         public ActionResult Details(int id)
         {
-            string root = Server.MapPath("~/App_Data/");
+            string root = Server.MapPath("~/App_Data/Images/");
             Image image = db.Images.Find(id);
-            try
+            if (image != null)
             {
-                return new FileStreamResult(new FileStream(root + image.Path, FileMode.Open), "image/jpeg");
+                try
+                {
+                    return new FileStreamResult(new FileStream(root + image.Path, FileMode.Open), "image/jpeg");
+                }
+                catch (FileNotFoundException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return RedirectToAction("Error");
+                }
             }
-            catch (FileNotFoundException e)
+            else
             {
-                Console.WriteLine(e.Message);
                 return RedirectToAction("Error");
             }
+            
         }
 
         //

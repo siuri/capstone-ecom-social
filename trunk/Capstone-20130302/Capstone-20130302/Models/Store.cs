@@ -12,16 +12,14 @@ namespace Capstone_20130302.Models
         public int StoreId { get; set; }
 
         [Required]
-        [Display(Name = "Store Name")]
         [MaxLength(50)]
         public string StoreName { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         [Required]
-        [Display(Name = "Contact Number")]
         [MaxLength(25)]
         public string ContactNumber { get; set; }
 
@@ -32,7 +30,6 @@ namespace Capstone_20130302.Models
         [MaxLength(150)]
         public string Slogan { get; set; }
 
-        [Display(Name = "Ship Fee")]
         public float ShipFee { get; set; }
 
         [ScaffoldColumn(false)]
