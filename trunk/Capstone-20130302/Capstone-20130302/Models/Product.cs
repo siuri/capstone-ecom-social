@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -8,13 +9,44 @@ namespace Capstone_20130302.Models
 {
     public class Product
     {
+        public Product()
+        {
+            Name = "Untitled Product";
+            Description = "Describe your Product here.";
+            SpecsInJson = "";
+            Status = new ProductStatus();
+            Category = new Category();
+            ProductImages = new List<Image>();
+            ProductImages.Add(new Image());
+            ProductImages.Add(new Image());
+            ProductImages.Add(new Image());
+            CreateDate = DateTime.Now;
+        }
         public int ProductId { get; set; }
+        
+        [DisplayName("Product Name")]
+        [Required]
         public string Name { get; set; }
+
+        
+        [DisplayName("Description")]
+        [Required]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
+
+        [Required]
+        [DataType(DataType.Currency)]
         public float Price { get; set; }
+
+        [ScaffoldColumn(false)]
         public int TotalLikes { get; set; }
+        
+        [ScaffoldColumn(false)]
         public int TotalComments { get; set; }
+
+        [ScaffoldColumn(false)]
         public int TotalBuy { get; set; }
+
         public string SpecsInJson { get; set; }
         
         public DateTime CreateDate { get; set; }

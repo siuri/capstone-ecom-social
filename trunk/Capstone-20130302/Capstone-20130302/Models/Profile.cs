@@ -9,6 +9,12 @@ namespace Capstone_20130302.Models
 {
     public class Profile
     {
+        public Profile()
+        {
+            ProfileImage = new Image();
+            Addresses = new List<Address>();
+            Addresses.Add(new Address());
+        }
         public int ProfileId { get; set; }
 
         [Required]
@@ -35,7 +41,9 @@ namespace Capstone_20130302.Models
         public int TotalFollowers { get; set; }
         [ScaffoldColumn(false)]
         public int TotalFollowings { get; set; }
+        
         public virtual Image ProfileImage { get; set; }
+
         public virtual ICollection<Address> Addresses { get; set; }
     }
 }

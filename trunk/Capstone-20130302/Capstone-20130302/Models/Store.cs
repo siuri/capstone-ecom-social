@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -9,10 +10,23 @@ namespace Capstone_20130302.Models
 {
     public class Store
     {
+        public Store()
+        {
+            StoreName = "Untitled Store Name";
+            Description = "Describe your Store here.";
+            CreateDate = DateTime.Now;
+            Slogan = "Describe your Slogan here.";
+            Status = new StoreStatus();
+            CoverImage = new Image();
+            ProfileImage = new Image();
+            Addresses = new List<Address>();
+            Addresses.Add(new Address());
+        }
         public int StoreId { get; set; }
 
         [Required]
         [MaxLength(50)]
+        [DisplayName("Store Name")]
         public string StoreName { get; set; }
 
         [Required]
@@ -20,16 +34,20 @@ namespace Capstone_20130302.Models
         public string Description { get; set; }
 
         [Required]
-        [MaxLength(25)]
+        [Phone]
+        [DisplayName("Contact Number")]
         public string ContactNumber { get; set; }
 
         [ScaffoldColumn(false)]
         [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
+        [DisplayName("Create Date")]
         public DateTime CreateDate { get; set; }
 
         [MaxLength(150)]
         public string Slogan { get; set; }
 
+        [DisplayName("Ship Fee")]
+        [DataType(DataType.Currency)]
         public float ShipFee { get; set; }
 
         [ScaffoldColumn(false)]
@@ -40,10 +58,17 @@ namespace Capstone_20130302.Models
 
         public virtual UserProfile Owner { get; set; }
         public virtual StoreStatus Status { get; set; }
+
+        [DisplayName("Cover Image")]
         public virtual Image CoverImage { get; set; }
+
+        [DisplayName("Profile Image")]
         public virtual Image ProfileImage { get; set; }
+
         public virtual ICollection<Address> Addresses { get; set; }
+
         public virtual ICollection<Product> Products { get; set; }
+
         public virtual ICollection<Follow> Follows { get; set; }
     }
 

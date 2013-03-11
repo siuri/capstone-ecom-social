@@ -7,6 +7,10 @@ namespace Capstone_20130302.Models
 {
     public class Comment
     {
+        public Comment()
+        {
+            CreateDate = DateTime.Now;
+        }
         public int CommentId { get; set; }
         public string CommentContent { get; set; }
         public DateTime CreateDate { get; set; }

@@ -36,25 +36,24 @@ namespace Capstone_20130302.Migrations
 
             if (!Roles.GetRolesForUser("admin001").Contains("admin"))
                 Roles.AddUsersToRoles(new[] { "admin001" }, new[] { "admin" });
-
             context.OrderStatuses.AddOrUpdate(
-                new OrderStatus { Name = "Pending", Description = "The order is waiting for process." },
-                new OrderStatus { Name = "Ready", Description = "The order is ready for shipping." },
-                new OrderStatus { Name = "Shipped", Description = "The order is shipped." },
-                new OrderStatus { Name = "Cancelled", Description = "The order is cancelled." },
-                new OrderStatus { Name = "Hold", Description = "The order is on hold." });
+                new OrderStatus { StatusId = 0, Name = "Pending", Description = "The order is waiting for process." },
+                new OrderStatus { StatusId = 1, Name = "Ready", Description = "The order is ready for shipping." },
+                new OrderStatus { StatusId = 2, Name = "Shipped", Description = "The order is shipped." },
+                new OrderStatus { StatusId = 3, Name = "Cancelled", Description = "The order is cancelled." },
+                new OrderStatus { StatusId = 4, Name = "Hold", Description = "The order is on hold." });
             context.ProductStatuses.AddOrUpdate(
-                new ProductStatus { Name = "Pending", Description = "The product is waiting for administrator's approval." },
-                new ProductStatus { Name = "Active", Description = "The product is currently active and public." },
-                new ProductStatus { Name = "Inactive", Description = "The product is currently inactive." },
-                new ProductStatus { Name = "Rejected", Description = "The product is rejected and need modification." },
-                new ProductStatus { Name = "Banned", Description = "The product is banned due to violation." });
+                new ProductStatus { StatusId = 0, Name = "Pending", Description = "The product is waiting for administrator's approval." },
+                new ProductStatus { StatusId = 1, Name = "Active", Description = "The product is currently active and public." },
+                new ProductStatus { StatusId = 2, Name = "Inactive", Description = "The product is currently inactive." },
+                new ProductStatus { StatusId = 3, Name = "Rejected", Description = "The product is rejected and need modification." },
+                new ProductStatus { StatusId = 4, Name = "Banned", Description = "The product is banned due to violation." });
             context.StoreStatuses.AddOrUpdate(
-                new StoreStatus { Name = "Pending", Description = "The store is waiting for administrator's approval." },
-                new StoreStatus { Name = "Active", Description = "The store is currently active and public." },
-                new StoreStatus { Name = "Inactive", Description = "The store is currently inactive." },
-                new StoreStatus { Name = "Rejected", Description = "The store is rejected and need modification." },
-                new StoreStatus { Name = "Banned", Description = "The store is banned due to violation." });
+                new StoreStatus { StatusId = 0, Name = "Pending", Description = "The store is waiting for administrator's approval." },
+                new StoreStatus { StatusId = 1, Name = "Active", Description = "The store is currently active and public." },
+                new StoreStatus { StatusId = 2, Name = "Inactive", Description = "The store is currently inactive." },
+                new StoreStatus { StatusId = 3, Name = "Rejected", Description = "The store is rejected and need modification." },
+                new StoreStatus { StatusId = 4, Name = "Banned", Description = "The store is banned due to violation." });
             context.Images.AddOrUpdate(
                 new Image { ImageId = 0, Path = "no_img.jpg" },
                 new Image { ImageId = 1, Path = "mens.jpg" },

@@ -8,8 +8,13 @@ namespace Capstone_20130302.Models
 {
     public class Category
     {
+        public Category()
+        {
+            Templates = new List<Template>();
+            Templates.Add(new Template());
+            CoverImage = new Image();
+        }
         public int CategoryId { get; set; }
-
 
         [Required]
         [Display(Name = "Category Name")]

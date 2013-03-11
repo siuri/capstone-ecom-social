@@ -1,0 +1,71 @@
+﻿@model Capstone_20130302.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Product</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Price)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Price)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TotalLikes)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TotalLikes)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TotalComments)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TotalComments)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TotalBuy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TotalBuy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SpecsInJson)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SpecsInJson)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateDate)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ProductId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

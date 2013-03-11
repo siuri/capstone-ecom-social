@@ -350,7 +350,7 @@ input[type=password]:focus
         display: block;
     }
 
-    /*-------------------------
+/*-------------------------
 	Progress Bars
 --------------------------*/
 
@@ -388,3 +388,4 @@ input[type=password]:focus
     margin-left: 20px;
     width: 126px;
 }
+
