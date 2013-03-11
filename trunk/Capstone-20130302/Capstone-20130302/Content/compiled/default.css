@@ -385,7 +385,7 @@ body {
   font-weight: bolder;
   padding-top: 1px;
 }
-.product-grid > .product .image:hover .detail {
+.product-grid > .product:hover .detail {
   bottom: 0;
 }
 .product-grid > .product .description {
