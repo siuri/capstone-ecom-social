@@ -18,7 +18,7 @@ namespace Capstone_20130302.Controllers
 
         public ActionResult Index()
         {
-            return View(db.Store.ToList());
+            return View(db.Stores.ToList());
         }
 
         //
@@ -26,7 +26,7 @@ namespace Capstone_20130302.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Store store = db.Store.Find(id);
+            Store store = db.Stores.Find(id);
             if (store == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace Capstone_20130302.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Store.Add(store);
+                db.Stores.Add(store);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -63,7 +63,7 @@ namespace Capstone_20130302.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            Store store = db.Store.Find(id);
+            Store store = db.Stores.Find(id);
             if (store == null)
             {
                 return HttpNotFound();
@@ -91,7 +91,7 @@ namespace Capstone_20130302.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            Store store = db.Store.Find(id);
+            Store store = db.Stores.Find(id);
             if (store == null)
             {
                 return HttpNotFound();
@@ -105,8 +105,8 @@ namespace Capstone_20130302.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Store store = db.Store.Find(id);
-            db.Store.Remove(store);
+            Store store = db.Stores.Find(id);
+            db.Stores.Remove(store);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

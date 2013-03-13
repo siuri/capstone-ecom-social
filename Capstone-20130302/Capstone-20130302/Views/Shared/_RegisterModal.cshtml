@@ -11,11 +11,11 @@
     <div class="modal-body">
         <section id="registerForm">
             <form action="/Account/Register" method="post" novalidate="novalidate">
-                <input name="__RequestVerificationToken" type="hidden" value="KeYLVJhM6-FjNx-pPfm2fPATIKb0pt21961oDDbQIAjvx0GnBBbFAQSTWq91CrufMNT7lugAIe23AELndtUyKDVxlK2XZEv7IVGj0U6VmCc1"><div class="validation-summary-errors" data-valmsg-summary="true">
-                    <ul>
-                        <li style="display:none"></li>
-                    </ul>
-                </div>
+                @Html.AntiForgeryToken()
+
+                <ul>
+                    <li style="display:none"></li>
+                </ul>
                 <ul>
                     <li>
                         <input placeholder="User name" data-val="true" data-val-required="The User name field is required." id="UserName" name="UserName" type="text">
@@ -35,7 +35,6 @@
         Register with Facebook account @Html.Action("ExternalLoginsList", "Account", new { ReturnUrl = ViewBag.ReturnUrl })
     </div>
     @Scripts.Render("~/bundles/jqueryval")
-    </form>
 </div>
 
 

@@ -12,7 +12,7 @@
     <div class="modal-body">
         <section id="loginForm">
             <form id="login-modal-form" class="form-inline" action="/Account/Login" method="post" novalidate="novalidate">
-                <input name="__RequestVerificationToken" type="hidden" value="uFFOMQVHWBowFCMqgdvACqduSh_emkxWY5S_YjCJvE7YWsnp042yh4U7rXic5SKeJ34bHI3u8sQ_DXTAjgTjKb9_1FT0LVYlZnMHqLFLyFI1">
+                @Html.AntiForgeryToken()
                 <span class="field-validation-valid" data-valmsg-for="UserName" data-valmsg-replace="true"></span>
                 <br />  
                 <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
