@@ -30,7 +30,7 @@ namespace Capstone_20130302.Models
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderStatus> OrderStatuses { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
-        public DbSet<Store> Store { get; set; }
+        public DbSet<Store> Stores { get; set; }
         public DbSet<StoreStatus> StoreStatuses { get; set; }
 
 
