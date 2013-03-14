@@ -4,75 +4,14 @@
     ViewBag.Title = "Step 2 of 3";
     Layout = "~/Views/Shared/_SimpleLayout.cshtml";
 }
-<style>
-    .image-upload .image {
-        width: 150px;
-        height: 150px;
-        border: solid 5px white;
-        box-shadow: 0 0 5px gray;
-        cursor: pointer;
-        border-radius: 500px;
-        text-align: center;
-        background: url(../Images/avatar_default.jpg) no-repeat;
-        background-size: 100%;
-    }
-
-        .image-upload .image img {
-            width: 100%;
-            height: 100%;
-            border-radius: 500px;
-        }
-
-    #file-select {
-        display: none;
-    }
-
-    .avatar-wrapper {
-        margin: 50px auto 20px;
-        width: 160px;
-    }
-
-    #profile {
-        margin: 0 auto 50px;
-        width: 460px;
-    }
-    .simple-wrapper {
-        width: 700px;
-    }
-</style>
-<script>
-    $(function () {
-        $(".image-upload .image").click(function () {
-            $("#file-select").trigger("click");
-        })
-
-        $("#file-select").change(function () {
-            var f = $("#file-select")[0].files[0]
-            if (!f.type.match(/image.*/)) {
-                alert("Please select image");
-
-                return
-            }
-            var reader = new FileReader();
-            reader.onload = (function (theFile) {
-                return function (e) {
-                    $(".image-upload .image").html("<img src='" + e.target.result + "' width='100%' height='100%'/>");
-                }
-            })(f);
-
-            reader.readAsDataURL(f);
-        })
-    })
-</script>
 <div id="profile-body">
-
     <div class="clearfix">
+        <h3>Let people know you</h3>
         <div class="avatar-wrapper">
             <form id="image-form" action="~/api/File/PostImage" enctype="multipart/form-data" method="POST">
                 <div class="image-upload">
-                    
+
                     <div class="image" data-toggle="tooltip" title="Upload your avatar">
-                        
                     </div>
                 </div>
             </form>
@@ -118,13 +57,80 @@
                 </div>
                 <div class="controls controls-row">
                     <br />
-                    @Html.ActionLink("Skip to Home", "Home", null, new { @class = "btn btn-default" })
-                    <button type="submit" class="btn" style="margin-left:0">Continue</button>
+                    <p>By clicking Continue, you agree to SocialBuy's <a href="/">Terms of Use</a>.</p>
+                </div>
+                <div style="width: 372px; margin: 0 auto; height: 40px;">
+                    <a href="/" class="btn btn-default span2">Skip to Home</a>
+                    <button type="submit" class="btn span2">Continue</button>
                 </div>
             }
         </div>
     </div>
 </div>
+
+
+<style>
+    .image-upload .image {
+        width: 140px;
+        height: 140px;
+        border: solid 5px white;
+        box-shadow: 0 0 5px gray;
+        cursor: pointer;
+        border-radius: 500px;
+        text-align: center;
+        background: url(../Images/avatar_default.jpg) no-repeat;
+        background-size: 100%;
+    }
+
+        .image-upload .image img {
+            width: 100%;
+            height: 100%;
+            border-radius: 500px;
+        }
+
+    #file-select {
+        display: none;
+    }
+
+    .avatar-wrapper {
+        margin: 25px auto 20px;
+        width: 140px;
+    }
+
+    #profile {
+        margin: 0 auto 50px;
+        width: 460px;
+    }
+
+    .simple-wrapper {
+        width: 700px;
+    }
+</style>
+<script>
+    $(function () {
+        $(".image-upload .image").click(function () {
+            $("#file-select").trigger("click");
+        })
+
+        $("#file-select").change(function () {
+            var f = $("#file-select")[0].files[0]
+            if (!f.type.match(/image.*/)) {
+                alert("Please select image");
+
+                return
+            }
+            var reader = new FileReader();
+            reader.onload = (function (theFile) {
+                return function (e) {
+                    $(".image-upload .image").html("<img src='" + e.target.result + "' width='100%' height='100%'/>");
+                }
+            })(f);
+
+            reader.readAsDataURL(f);
+        })
+    })
+</script>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -137,6 +143,6 @@
             minDate: "-100y", maxDate: "-5y", changeMonth: true,
             changeYear: true, yearRange: '1900:2010'
         });
-       
+
     });
 </script>
