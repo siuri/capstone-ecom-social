@@ -207,7 +207,7 @@ textarea {
 body {
   margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 25px;
   color: #333333;
   background-color: #f7f6f5;
@@ -637,7 +637,7 @@ h4 {
   font-size: 17.5px;
 }
 h5 {
-  font-size: 14px;
+  font-size: 13px;
 }
 h6 {
   font-size: 11.9px;
@@ -649,10 +649,10 @@ h2 small {
   font-size: 17.5px;
 }
 h3 small {
-  font-size: 14px;
+  font-size: 13px;
 }
 h4 small {
-  font-size: 14px;
+  font-size: 13px;
 }
 .page-header {
   padding-bottom: 11.5px;
@@ -866,7 +866,7 @@ input,
 button,
 select,
 textarea {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: normal;
   line-height: 25px;
 }
@@ -899,9 +899,9 @@ input[type="color"],
 .uneditable-input {
   display: inline-block;
   height: 25px;
-  padding: 4px 6px;
+  padding: 2px 6px;
   margin-bottom: 12.5px;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 25px;
   color: #555555;
   -webkit-border-radius: 4px;
@@ -1388,7 +1388,7 @@ select:focus:invalid:focus {
 .input-prepend .uneditable-input,
 .input-append .dropdown-menu,
 .input-prepend .dropdown-menu {
-  font-size: 14px;
+  font-size: 13px;
 }
 .input-append input,
 .input-prepend input,
@@ -2619,7 +2619,7 @@ button.close {
   *zoom: 1;
   padding: 4px 12px;
   margin-bottom: 0;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 25px;
   text-align: center;
   vertical-align: middle;
@@ -3100,7 +3100,7 @@ input[type="submit"].btn.btn-mini {
 .btn-group > .btn,
 .btn-group > .dropdown-menu,
 .btn-group > .popover {
-  font-size: 14px;
+  font-size: 13px;
 }
 .btn-group > .btn-mini {
   font-size: 10.5px;
@@ -4574,7 +4574,7 @@ input[type="submit"].btn.btn-mini {
 .popover-title {
   margin: 0;
   padding: 8px 14px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: normal;
   line-height: 18px;
   background-color: #f7f7f7;

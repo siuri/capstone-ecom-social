@@ -1,4 +1,17 @@
-﻿body
+﻿* {
+    -webkit-transition: all .05s ease-in;
+    transition: all .05s ease-in;
+}
+
+.btn {
+    text-shadow: none;
+}
+
+h3 {
+    color: #F7867A;
+}
+
+body
 {
     font-family: 'Avenir';
 }

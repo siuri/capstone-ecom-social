@@ -6,12 +6,48 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Capstone_20130302.Models;
+using WebMatrix.WebData;
 
 namespace Capstone_20130302.Controllers
 {
     public class CategoryController : Controller
     {
         private SocialBuyContext db = new SocialBuyContext();
+
+        //
+        // GET: /Category/Follow
+        // Load Follow page
+
+        public ActionResult Follow()
+        {
+            // Get all parent categories
+            List<Category> parentCategories = db.Categories.ToList(); // TODO
+            return View();
+        }
+
+        //
+        // GET: /Category/Follow
+        // Submit Follow page
+
+        [HttpPost]
+        public ActionResult Follow(List<Category> categories) // TODO: Pass a collection of Category from user's selection to controller
+        {
+            if (ModelState.IsValid)
+            {
+                // TODO: Get current user
+                UserProfile user = db.UserProfiles.Find(WebSecurity.CurrentUserId);
+                // TODO: Iterate Category list and add to User
+                Follow follow = null;
+                foreach (var category in categories)
+                {
+                    follow = new Follow { User = user, Category = category };
+                    db.Follows.Add(follow);
+                }
+                db.SaveChanges();
+                return RedirectToAction("Index"); // TODO: redirect to home
+            }
+            return View(categories);
+        }
 
         //
         // GET: /Category/

@@ -1,0 +1,139 @@
+﻿@model IEnumerable<Capstone_20130302.Models.Category>
+
+@{
+    ViewBag.Title = "Step 3 of 3";
+    Layout = "~/Views/Shared/_SimpleLayout.cshtml";
+}
+<div style="margin: 15px 0 40px;">
+    <h3>Follow your Favorites</h3>
+    <div class="chooser-wrapper clearfix">
+        <ul>
+            <li>
+                <div class="cate-wrapper">
+                    <div class="cover">
+                        <img class="cate" src="/Image/1">
+                    </div>
+                    <div class="select-box"></div>
+                    <div class="caption">Bag</div>
+                </div>
+            </li>
+            <li>
+                <div class="cate-wrapper">
+                    <div class="cover">
+                        <img class="cate" src="/Image/2">
+                    </div>
+                    <div class="select-box"></div>
+                    <div class="caption">Men's</div>
+                </div>
+            </li>
+            <li>
+                <div class="cate-wrapper">
+                    <div class="cover">
+                        <img class="cate" src="/Image/3">
+                    </div>
+                    <div class="select-box"></div>
+                    <div class="caption">Men's</div>
+                </div>
+            </li>
+            <li>
+                <div class="cate-wrapper">
+                    <div class="cover">
+                        <img class="cate" src="/Image/2">
+                    </div>
+                    <div class="select-box"></div>
+                    <div class="caption">Men's</div>
+                </div>
+            </li>
+            <li>
+                <div class="cate-wrapper">
+                    <div class="cover">
+                        <img class="cate" src="/Image/1">
+                    </div>
+                    <div class="select-box"></div>
+                    <div class="caption">Men's</div>
+                </div>
+            </li>
+            <li>
+                <div class="cate-wrapper">
+                    <div class="cover">
+                        <img class="cate" src="/Image/3">
+                    </div>
+                    <div class="select-box"></div>
+                    <div class="caption">Men's</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div style="width: 372px; margin: 0 auto; height: 40px;">
+        <a href="/" class="btn btn-default span2">Skip to Home</a>
+        <a class="btn span2">Ready for Surprises</a>
+    </div>
+</div>
+
+<style type="text/css">
+    .chooser-wrapper {
+        text-align: center;
+    }
+
+        .chooser-wrapper ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+            .chooser-wrapper ul li {
+                padding: 24px;
+                display: inline-block;
+            }
+
+        .chooser-wrapper .cate-wrapper {
+            position: relative;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .chooser-wrapper .caption {
+            color: #747474;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .chooser-wrapper .select-box {
+            width: 16px;
+            height: 16px;
+            display: none;
+        }
+
+
+        .chooser-wrapper .selected .select-box {
+            display: inline-block;
+            background: url(/Images/check.png) center center no-repeat;
+            position: relative;
+            top: 3px;
+        }
+
+        .chooser-wrapper .cover img {
+            border-radius: 500px;
+            padding: 5px;
+            box-shadow: 0px 0px 3px #BBB;
+        }
+
+            .chooser-wrapper .cover img:active {
+                background: #E6B3A8;
+            }
+
+        .chooser-wrapper .selected .cover img {
+            background: #E6B3A8;
+        }
+
+    .simple-wrapper {
+        width: 670px;
+    }
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".cate-wrapper").click(function () {
+            $(this).toggleClass("selected");
+        });
+    });
+</script>
