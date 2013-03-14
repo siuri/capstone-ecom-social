@@ -13,16 +13,17 @@ namespace Capstone_20130302
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            
+
+            routes.MapRoute(
+                name: "ImageRoute",
+                url: "Image/{id}",
+                defaults: new { controller = "Image", action = "Details", id = UrlParameter.Optional }
+            );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
-
-            routes.MapRoute(
-                name: "Image",
-                url: "{controller}/{id}",
-                defaults: new { controller = "Image", action = "Details", id = UrlParameter.Optional }
             );
         }
     }

@@ -327,6 +327,7 @@
     <Content Include="Scripts\default.js" />
     <Content Include="Scripts\flexcroll-uncompressed.js" />
     <Content Include="Scripts\flexcroll.js" />
+    <Content Include="Scripts\countries.js" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -336,6 +337,7 @@
     <Content Include="Scripts\jquery-ui-1.10.1.min.js" />
     <Content Include="Scripts\jquery.filedrop.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.maskedinput.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -349,6 +351,9 @@
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\script.js" />
     <Content Include="Scripts\select2.min.js" />
+    <Content Include="Scripts\typeahead.css" />
+    <Content Include="Scripts\typeahead.min.css" />
+    <Content Include="Scripts\typeahead.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

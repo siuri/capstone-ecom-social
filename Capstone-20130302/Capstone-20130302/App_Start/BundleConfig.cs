@@ -13,7 +13,10 @@ namespace Capstone_20130302
 
             bundles.Add(new ScriptBundle("~/bundles/default").Include(
                         "~/Scripts/bootstrap.min.js",
-                        "~/Scripts/default.js"));
+                        "~/Scripts/default.js",
+                        "~/Scripts/jquery.maskedinput.min.js",
+                        "~/Scripts/typeahead.min.js"
+                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
@@ -31,7 +34,8 @@ namespace Capstone_20130302
                 "~/Content/Bootstrap/css/bootstrap.css",
                 "~/Content/compiled/default.css",
                 "~/Content/override.css",
-                "~/Content/select2.css"));
+                "~/Content/select2.css",
+                "~/Scripts/typeahead.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
