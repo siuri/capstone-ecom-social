@@ -22,6 +22,14 @@ namespace Capstone_20130302.Controllers
         }
 
         //
+        // GET:/ Product/Search
+        public ActionResult Search(string searchString)
+        {            
+            var products = db.Products.Where(p => p.Name.ToUpper().Contains(searchString.ToUpper()));
+            return View(products.ToList());
+        }
+
+        //
         // GET: /Product/Details/5
 
         public ActionResult Details(int id = 0)
