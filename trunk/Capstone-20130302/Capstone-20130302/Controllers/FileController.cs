@@ -31,18 +31,7 @@ namespace Capstone_20130302.Controllers
             try
             {
                 StringBuilder sb = new StringBuilder(); // Holds the response body
-
-                // Read the form data and return an async task.
                 await Request.Content.ReadAsMultipartAsync(provider);
-
-                //// This illustrates how to get the form data.
-                //foreach (var key in provider.FormData.AllKeys)
-                //{
-                //    foreach (var val in provider.FormData.GetValues(key))
-                //    {
-                //        sb.Append(string.Format("{0}: {1}\n", key, val));
-                //    }
-                //}
                 using (var ct = new SocialBuyContext())
                 {
 

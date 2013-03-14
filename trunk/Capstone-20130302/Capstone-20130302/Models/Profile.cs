@@ -25,16 +25,15 @@ namespace Capstone_20130302.Models
         [DisplayName("Date of Birth")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
-        [Range(typeof(DateTime), "1/1/1900", "1/1/2010",
-        ErrorMessage = "Value for {0} must be between {1} and {2}")]
         public DateTime DateOfBirth { get; set; }
 
         [EmailAddress]
+        [Required]
         [DisplayName("Email")]
         public string Email { get; set; }
 
         [Phone]
-        [DisplayName("Contact Number")]
+        [DisplayName("Phone Number")]
         public string ContactNumber { get; set; }
 
         [ScaffoldColumn(false)]

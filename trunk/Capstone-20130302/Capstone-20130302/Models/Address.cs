@@ -12,15 +12,12 @@ namespace Capstone_20130302.Models
         public int AddressId { get; set; }
 
         [DisplayName("Number")]
-        [Required]
         public string Number { get; set; }
 
         [DisplayName("Street")]
-        [Required]
         public string Street { get; set; }
 
         [DisplayName("City")]
-        [Required]
         public string City { get; set; }
 
         [DisplayName("State or Province")]
@@ -30,7 +27,6 @@ namespace Capstone_20130302.Models
         public string Zipcode { get; set; }
 
         [DisplayName("Country")]
-        [Required]
         public string Country { get; set; }
 
         [DisplayName("Is set as Default")]

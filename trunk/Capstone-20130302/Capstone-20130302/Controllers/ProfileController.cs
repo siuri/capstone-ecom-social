@@ -6,6 +6,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Capstone_20130302.Models;
+using System.Data.Entity.Validation;
+using System.Text;
+using System.IO;
 
 namespace Capstone_20130302.Controllers
 {
@@ -50,16 +53,30 @@ namespace Capstone_20130302.Controllers
         // POST: /Profile/Create
 
         [HttpPost]
-        public ActionResult Create(Profile profile, Address address)
+        public ActionResult Create(Profile profile, Address address, HttpPostedFileBase file)
         {
-            
-            if (ModelState.IsValid)
+            // Verify that the user selected a file
+            if (file != null && file.ContentLength > 0)
             {
-                profile.Addresses.Add(address);
-                db.Profiles.Add(profile);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                Guid guid = Guid.NewGuid();
+                // store the file inside ~/App_Data/uploads folder
+                var path = Path.Combine(Server.MapPath("~/App_Data/Images"), guid.ToString());
+                file.SaveAs(path);
+                Image image = new Image { Path = guid.ToString() };
+                db.Images.Add(image);
+
+                if (ModelState.IsValid)
+                {
+                    if (profile.Addresses.Count != 0)
+                        profile.Addresses.Clear();
+                    profile.Addresses.Add(address);
+                    profile.ProfileImage = image;
+                    db.Profiles.Add(profile);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
+            
 
             return View(profile);
         }

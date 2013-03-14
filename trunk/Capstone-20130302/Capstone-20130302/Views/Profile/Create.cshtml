@@ -1,34 +1,51 @@
 ﻿@model Capstone_20130302.Models.Profile
 
 @{
-    ViewBag.Title = "Step 3 of 3";
-    //Layout = "~/Views/Shared/_SimpleLayout.cshtml";
+    ViewBag.Title = "Step 2 of 3";
+    Layout = "~/Views/Shared/_SimpleLayout.cshtml";
 }
 <style>
-    .image-upload .image
-    {
-        width:150px;
-        height:165px;
-        border:1px solid #686868;
-        box-shadow: 0 0 5px #808080;
+    .image-upload .image {
+        width: 150px;
+        height: 150px;
+        border: solid 5px white;
+        box-shadow: 0 0 5px gray;
         cursor: pointer;
+        border-radius: 500px;
+        text-align: center;
+        background: url(../Images/avatar_default.jpg) no-repeat;
+        background-size: 100%;
     }
-        .image-upload .image img
-        {
-            width:100%;
-            height:100%;
+
+        .image-upload .image img {
+            width: 100%;
+            height: 100%;
+            border-radius: 500px;
         }
-    #file-select
-    {
-        display:none;
+
+    #file-select {
+        display: none;
+    }
+
+    .avatar-wrapper {
+        margin: 50px auto 20px;
+        width: 160px;
+    }
+
+    #profile {
+        margin: 0 auto 50px;
+        width: 460px;
+    }
+    .simple-wrapper {
+        width: 700px;
     }
 </style>
 <script>
-    $(function(){
-        $(".image-upload .image").click(function(){
+    $(function () {
+        $(".image-upload .image").click(function () {
             $("#file-select").trigger("click");
         })
-        
+
         $("#file-select").change(function () {
             var f = $("#file-select")[0].files[0]
             if (!f.type.match(/image.*/)) {
@@ -47,61 +64,79 @@
         })
     })
 </script>
-<div class="image-upload span3">
-    <input type="file" id="file-select"/>
-    <div class="image">
-        Upload
-    </div>
-</div>
-<div style="" class="span7">
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
-    <div>
-        <div>
-            Avatar
+<div id="profile-body">
+
+    <div class="clearfix">
+        <div class="avatar-wrapper">
+            <form id="image-form" action="~/api/File/PostImage" enctype="multipart/form-data" method="POST">
+                <div class="image-upload">
+                    
+                    <div class="image" data-toggle="tooltip" title="Upload your avatar">
+                        
+                    </div>
+                </div>
+            </form>
         </div>
         <div id="profile">
-            
-            <div class="validation-summary-errors">
-                <ul>
-                    <li>@Html.ValidationMessageFor(model => model.DisplayName)</li>
-                    <li>@Html.ValidationMessageFor(model => model.DateOfBirth)</li>
-                    <li>@Html.ValidationMessageFor(model => model.Email)</li>
-                    <li>@Html.ValidationMessageFor(model => model.ContactNumber)</li>
-                    <li>@Html.ValidationMessageFor(model => model.Addresses.ElementAt(0).Number)</li>
-                    <li>@Html.ValidationMessageFor(model => model.Addresses.ElementAt(0).Street)</li>
-                    <li>@Html.ValidationMessageFor(model => model.Addresses.ElementAt(0).City)</li>
-                    <li>@Html.ValidationMessageFor(model => model.Addresses.ElementAt(0).State)</li>
-                </ul>
-            </div>
-
-            <div class="controls controls-row">
-                @Html.TextBoxFor(model => model.DisplayName, new { placeholder = "Display Name", title = "Display Name", @class="span4" })
-                @Html.EditorFor(model => model.DateOfBirth, new { placeholder = "Date of Birth", title = "Date of Birth", @class="span2" })
-            </div>
-            <div class="controls controls-row">
-                @Html.TextBoxFor(model => model.ContactNumber, new { placeholder = "Contact Number", title = "Contact Number", @class="span3" })
-                @Html.TextBoxFor(model => model.Email, new { placeholder = "Email", title = "Email", @class="span3" })
-            </div>
-            <div class="controls controls-row">
-                @Html.TextBoxFor(model => model.Addresses.ElementAt(0).Number, new { placeholder = "Number", title = "Number", @class="span2" })
-                @Html.TextBoxFor(model => model.Addresses.ElementAt(0).Street, new { placeholder = "Street", title = "Street", @class="span4" })
-            </div>
-            <div class="controls controls-row">
-                @Html.TextBoxFor(model => model.Addresses.ElementAt(0).City, new { placeholder = "City", title = "City", @class="span3" })
-                @Html.TextBoxFor(model => model.Addresses.ElementAt(0).State, new { placeholder = "State", title = "State", @class="span3" })
-            </div>
-            <p>
-                <input type="submit" value="Create" />
-            </p>
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "profile-form", enctype = "multipart/form-data" }))
+            {
+                <input type="file" id="file-select" name="file" />
+                @Html.ValidationSummary(true)
+                <div class="validation-summary-errors">
+                    <ul>
+                        <li>@Html.ValidationMessageFor(model => model.DisplayName)</li>
+                        <li>@Html.ValidationMessageFor(model => model.DateOfBirth)</li>
+                        <li>@Html.ValidationMessageFor(model => model.Email)</li>
+                        <li>@Html.ValidationMessageFor(model => model.ContactNumber)</li>
+                        <li>@Html.ValidationMessageFor(model => model.Addresses.ElementAt(0).Number)</li>
+                        <li>@Html.ValidationMessageFor(model => model.Addresses.ElementAt(0).Street)</li>
+                        <li>@Html.ValidationMessageFor(model => model.Addresses.ElementAt(0).City)</li>
+                        <li>@Html.ValidationMessageFor(model => model.Addresses.ElementAt(0).State)</li>
+                    </ul>
+                </div>
+                <legend>Personal Information</legend>
+                <div class="controls controls-row">
+                    @Html.TextBoxFor(model => model.DisplayName, new { placeholder = "Display Name", title = "Display Name", @class = "span4" })
+                    @Html.TextBoxFor(model => model.DateOfBirth, new { placeholder = "Date of Birth", title = "Date of Birth", @class = "span2" })
+                </div>
+                <div class="controls controls-row">
+                    @Html.TextBoxFor(model => model.Email, new { placeholder = "Email", title = "Email", @class = "span4" })
+                    @Html.TextBoxFor(model => model.ContactNumber, new { placeholder = "Phone", title = "Phone", @class = "span2" })
+                </div>
+                <legend>Shipping Information</legend>
+                <div class="controls controls-row">
+                    @Html.TextBoxFor(model => model.Addresses.ElementAt(0).Number, new { placeholder = "Number", title = "Number", @class = "span2" })
+                    @Html.TextBoxFor(model => model.Addresses.ElementAt(0).Street, new { placeholder = "Street", title = "Street", @class = "span4" })
+                </div>
+                <div class="controls controls-row">
+                    @Html.TextBoxFor(model => model.Addresses.ElementAt(0).City, new { placeholder = "City", title = "City", @class = "span3" })
+                    @Html.TextBoxFor(model => model.Addresses.ElementAt(0).State, new { placeholder = "State", title = "State", @class = "span3" })
+                </div>
+                <div class="controls controls-row">
+                    @Html.TextBoxFor(model => model.Addresses.ElementAt(0).Zipcode, new { placeholder = "Zip Code", title = "Zip Code", @class = "span3" })
+                    @Html.TextBoxFor(model => model.Addresses.ElementAt(0).Country, new { placeholder = "Country", title = "Country", @class = "span3" })
+                </div>
+                <div class="controls controls-row">
+                    <br />
+                    @Html.ActionLink("Skip to Home", "Home", null, new { @class = "btn btn-default" })
+                    <button type="submit" class="btn" style="margin-left:0">Continue</button>
+                </div>
+            }
         </div>
     </div>
-}
-</div>
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+<script>
+    jQuery(function ($) {
+        $("#DateOfBirth").val("");
+        $("#ContactNumber").mask("(999) 999-9999*");
+        $("#DateOfBirth").datepicker({
+            minDate: "-100y", maxDate: "-5y", changeMonth: true,
+            changeYear: true, yearRange: '1900:2010'
+        });
+       
+    });
+</script>

@@ -15,13 +15,6 @@ namespace Capstone_20130302.Controllers
         public ActionResult Index()
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
-            if (Request.IsAuthenticated)
-            {
-                var stores = from s in db.Stores
-                             where s.Owner.UserId == WebSecurity.CurrentUserId
-                             select s;
-                ViewBag.Message = stores.ElementAt(0).Description;
-            }
             return View();
         }
 
