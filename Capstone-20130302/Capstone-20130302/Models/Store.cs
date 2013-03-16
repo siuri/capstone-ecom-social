@@ -70,6 +70,9 @@ namespace Capstone_20130302.Models
         public virtual ICollection<Product> Products { get; set; }
 
         public virtual ICollection<Follow> Follows { get; set; }
+
+        // Message from Admin for sending mail about status
+        public virtual ICollection<Message> Messages { get; set; }
     }
 
     public class StoreStatus

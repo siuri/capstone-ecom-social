@@ -3,6 +3,10 @@
     transition: all .05s ease-in;
 }
 
+[class*=logo], #logo {
+    cursor: pointer;
+}
+
 .btn {
     text-shadow: none;
 }
@@ -34,9 +38,6 @@ body
     src: url('avenir-heavy-webfont.ttf') format('truetype');
     font-weight: 900;
 }
-
-
-
 
 @font-face
 {
@@ -86,7 +87,7 @@ body
     .modal-header h3,
     .simple-header h3
     {
-        font-size: 26px;
+        font-size: 28px;
         color: #646464;
         text-shadow: 3px 3px 6px white;
         height: 40px;
