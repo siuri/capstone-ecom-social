@@ -19,6 +19,7 @@ namespace Capstone_20130302.Models
         public virtual ICollection<Store> Stores { get; set; }
         public virtual Profile Profile { get; set; }
         public virtual ICollection<Role> Roles { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
     }
 
     [Table("webpages_Membership")]

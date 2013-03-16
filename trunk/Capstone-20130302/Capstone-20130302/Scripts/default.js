@@ -12,5 +12,8 @@ $(function(){
     $(".cart-container,#cart > a").click(function (e) {
         e.preventDefault();
         return false;
-    })
+    });
+    $("[class*=logo], #logo").click(function () {
+        location.href = "/";
+    });
 })
