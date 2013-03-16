@@ -8,7 +8,8 @@ namespace Capstone_20130302.Models
 {
     public class SocialBuyContext : DbContext
     {
-        public SocialBuyContext() : base("DefaultConnection")
+        public SocialBuyContext()
+            : base("DefaultConnection")
         {
         }
 

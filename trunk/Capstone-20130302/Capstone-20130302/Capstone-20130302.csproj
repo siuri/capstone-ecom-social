@@ -175,21 +175,9 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
-    <Compile Include="Migrations\201303081039422_Init.cs" />
-    <Compile Include="Migrations\201303081039422_Init.Designer.cs">
-      <DependentUpon>201303081039422_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201303090238168_UpdateBuyerToProfile.cs" />
-    <Compile Include="Migrations\201303090238168_UpdateBuyerToProfile.Designer.cs">
-      <DependentUpon>201303090238168_UpdateBuyerToProfile.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201303090307187_GenderEnum.cs" />
-    <Compile Include="Migrations\201303090307187_GenderEnum.Designer.cs">
-      <DependentUpon>201303090307187_GenderEnum.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201303090321278_DeleteGender.cs" />
-    <Compile Include="Migrations\201303090321278_DeleteGender.Designer.cs">
-      <DependentUpon>201303090321278_DeleteGender.cs</DependentUpon>
+    <Compile Include="Migrations\201303160611518_Init.cs" />
+    <Compile Include="Migrations\201303160611518_Init.Designer.cs">
+      <DependentUpon>201303160611518_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
@@ -415,17 +403,8 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201303081039422_Init.resx">
-      <DependentUpon>201303081039422_Init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201303090238168_UpdateBuyerToProfile.resx">
-      <DependentUpon>201303090238168_UpdateBuyerToProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201303090307187_GenderEnum.resx">
-      <DependentUpon>201303090307187_GenderEnum.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201303090321278_DeleteGender.resx">
-      <DependentUpon>201303090321278_DeleteGender.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201303160611518_Init.resx">
+      <DependentUpon>201303160611518_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

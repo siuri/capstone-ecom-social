@@ -54,7 +54,10 @@ namespace Capstone_20130302.Controllers
 
         public ActionResult Index()
         {
-            return View(db.Categories.ToList());
+            var cates = from c in db.Categories
+                    where c.ParentId == 1
+                    select c;
+            return View(cates.ToList());
         }
 
         //

@@ -15,10 +15,10 @@ namespace Capstone_20130302.Controllers
 
         //
         // GET: /Store/
-
+        
         public ActionResult Index()
         {
-            return View(db.Stores.ToList());
+            return Json(db.Stores.Select(s => new { StoreName = s.StoreName, Owner = s.Owner.UserName }) , JsonRequestBehavior.AllowGet);
         }
 
         //
