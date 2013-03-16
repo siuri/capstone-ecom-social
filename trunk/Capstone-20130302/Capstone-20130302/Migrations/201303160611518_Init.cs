@@ -13,16 +13,19 @@ namespace Capstone_20130302.Migrations
                     {
                         UserId = c.Int(nullable: false, identity: true),
                         UserName = c.String(),
+                        Profile_ProfileId = c.Int(),
                     })
-                .PrimaryKey(t => t.UserId);
+                .PrimaryKey(t => t.UserId)
+                .ForeignKey("dbo.Profiles", t => t.Profile_ProfileId)
+                .Index(t => t.Profile_ProfileId);
             
             CreateTable(
                 "dbo.Products",
                 c => new
                     {
                         ProductId = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Description = c.String(),
+                        Name = c.String(nullable: false),
+                        Description = c.String(nullable: false),
                         Price = c.Single(nullable: false),
                         TotalLikes = c.Int(nullable: false),
                         TotalComments = c.Int(nullable: false),
@@ -57,13 +60,13 @@ namespace Capstone_20130302.Migrations
                     {
                         CategoryId = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false, maxLength: 50),
-                        Parent_CategoryId = c.Int(),
+                        ParentId = c.Int(),
                         CoverImage_ImageId = c.Int(),
                     })
                 .PrimaryKey(t => t.CategoryId)
-                .ForeignKey("dbo.Categories", t => t.Parent_CategoryId)
+                .ForeignKey("dbo.Categories", t => t.ParentId)
                 .ForeignKey("dbo.Images", t => t.CoverImage_ImageId)
-                .Index(t => t.Parent_CategoryId)
+                .Index(t => t.ParentId)
                 .Index(t => t.CoverImage_ImageId);
             
             CreateTable(
@@ -117,8 +120,8 @@ namespace Capstone_20130302.Migrations
                     {
                         StoreId = c.Int(nullable: false, identity: true),
                         StoreName = c.String(nullable: false, maxLength: 50),
-                        Description = c.String(nullable: false, maxLength: 50),
-                        ContactNumber = c.String(nullable: false, maxLength: 25),
+                        Description = c.String(nullable: false),
+                        ContactNumber = c.String(nullable: false),
                         CreateDate = c.DateTime(nullable: false),
                         Slogan = c.String(maxLength: 150),
                         ShipFee = c.Single(nullable: false),
@@ -158,16 +161,34 @@ namespace Capstone_20130302.Migrations
                         Street = c.String(),
                         City = c.String(),
                         State = c.String(),
-                        Zipcode = c.Int(nullable: false),
+                        Zipcode = c.String(),
+                        Country = c.String(),
                         IsSetAsDefault = c.Boolean(nullable: false),
                         Store_StoreId = c.Int(),
-                        Buyer_BuyerId = c.Int(),
+                        Profile_ProfileId = c.Int(),
                     })
                 .PrimaryKey(t => t.AddressId)
                 .ForeignKey("dbo.Stores", t => t.Store_StoreId)
-                .ForeignKey("dbo.Buyers", t => t.Buyer_BuyerId)
+                .ForeignKey("dbo.Profiles", t => t.Profile_ProfileId)
                 .Index(t => t.Store_StoreId)
-                .Index(t => t.Buyer_BuyerId);
+                .Index(t => t.Profile_ProfileId);
+            
+            CreateTable(
+                "dbo.Messages",
+                c => new
+                    {
+                        MessageId = c.Int(nullable: false, identity: true),
+                        Title = c.String(),
+                        Body = c.String(),
+                        CreateDate = c.DateTime(nullable: false),
+                        User_UserId = c.Int(),
+                        Store_StoreId = c.Int(),
+                    })
+                .PrimaryKey(t => t.MessageId)
+                .ForeignKey("dbo.UserProfile", t => t.User_UserId)
+                .ForeignKey("dbo.Stores", t => t.Store_StoreId)
+                .Index(t => t.User_UserId)
+                .Index(t => t.Store_StoreId);
             
             CreateTable(
                 "dbo.Comments",
@@ -208,17 +229,47 @@ namespace Capstone_20130302.Migrations
                         OrderId = c.Int(nullable: false, identity: true),
                         OrderDate = c.DateTime(nullable: false),
                         TotalPayment = c.Single(nullable: false),
-                        BillingAddress_AddressId = c.Int(),
+                        BillingName = c.String(nullable: false),
+                        IsUsedAsShipping = c.Boolean(nullable: false),
+                        ShippingName = c.String(),
+                        BillingAddress_AddressId = c.Int(nullable: false),
                         ShippingAddress_AddressId = c.Int(),
-                        OrderStatus_StatusId = c.Int(),
+                        Status_StatusId = c.Int(),
                     })
                 .PrimaryKey(t => t.OrderId)
-                .ForeignKey("dbo.Addresses", t => t.BillingAddress_AddressId)
+                .ForeignKey("dbo.Addresses", t => t.BillingAddress_AddressId, cascadeDelete: true)
                 .ForeignKey("dbo.Addresses", t => t.ShippingAddress_AddressId)
-                .ForeignKey("dbo.OrderStatus", t => t.OrderStatus_StatusId)
+                .ForeignKey("dbo.OrderStatus", t => t.Status_StatusId)
                 .Index(t => t.BillingAddress_AddressId)
                 .Index(t => t.ShippingAddress_AddressId)
-                .Index(t => t.OrderStatus_StatusId);
+                .Index(t => t.Status_StatusId);
+            
+            CreateTable(
+                "dbo.OrderStatus",
+                c => new
+                    {
+                        StatusId = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Description = c.String(),
+                    })
+                .PrimaryKey(t => t.StatusId);
+            
+            CreateTable(
+                "dbo.Profiles",
+                c => new
+                    {
+                        ProfileId = c.Int(nullable: false, identity: true),
+                        DisplayName = c.String(nullable: false, maxLength: 50),
+                        DateOfBirth = c.DateTime(nullable: false),
+                        Email = c.String(nullable: false),
+                        ContactNumber = c.String(),
+                        TotalFollowers = c.Int(nullable: false),
+                        TotalFollowings = c.Int(nullable: false),
+                        ProfileImage_ImageId = c.Int(),
+                    })
+                .PrimaryKey(t => t.ProfileId)
+                .ForeignKey("dbo.Images", t => t.ProfileImage_ImageId)
+                .Index(t => t.ProfileImage_ImageId);
             
             CreateTable(
                 "dbo.webpages_Roles",
@@ -258,36 +309,6 @@ namespace Capstone_20130302.Migrations
                 .PrimaryKey(t => new { t.Provider, t.ProviderUserId });
             
             CreateTable(
-                "dbo.Buyers",
-                c => new
-                    {
-                        BuyerId = c.Int(nullable: false, identity: true),
-                        DisplayName = c.String(),
-                        Gender = c.Boolean(nullable: false),
-                        DateOfBirth = c.DateTime(nullable: false),
-                        ContactNumber = c.String(),
-                        TotalFollowers = c.Int(nullable: false),
-                        TotalFollowings = c.Int(nullable: false),
-                        User_UserId = c.Int(),
-                        ProfileImage_ImageId = c.Int(),
-                    })
-                .PrimaryKey(t => t.BuyerId)
-                .ForeignKey("dbo.UserProfile", t => t.User_UserId)
-                .ForeignKey("dbo.Images", t => t.ProfileImage_ImageId)
-                .Index(t => t.User_UserId)
-                .Index(t => t.ProfileImage_ImageId);
-            
-            CreateTable(
-                "dbo.OrderStatus",
-                c => new
-                    {
-                        StatusId = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Description = c.String(),
-                    })
-                .PrimaryKey(t => t.StatusId);
-            
-            CreateTable(
                 "dbo.ProductUserProfiles",
                 c => new
                     {
@@ -321,16 +342,17 @@ namespace Capstone_20130302.Migrations
             DropIndex("dbo.webpages_UsersInRoles", new[] { "UserId" });
             DropIndex("dbo.ProductUserProfiles", new[] { "UserProfile_UserId" });
             DropIndex("dbo.ProductUserProfiles", new[] { "Product_ProductId" });
-            DropIndex("dbo.Buyers", new[] { "ProfileImage_ImageId" });
-            DropIndex("dbo.Buyers", new[] { "User_UserId" });
-            DropIndex("dbo.Orders", new[] { "OrderStatus_StatusId" });
+            DropIndex("dbo.Profiles", new[] { "ProfileImage_ImageId" });
+            DropIndex("dbo.Orders", new[] { "Status_StatusId" });
             DropIndex("dbo.Orders", new[] { "ShippingAddress_AddressId" });
             DropIndex("dbo.Orders", new[] { "BillingAddress_AddressId" });
             DropIndex("dbo.OrderDetails", new[] { "Order_OrderId" });
             DropIndex("dbo.OrderDetails", new[] { "Product_ProductId" });
             DropIndex("dbo.Comments", new[] { "Product_ProductId" });
             DropIndex("dbo.Comments", new[] { "User_UserId" });
-            DropIndex("dbo.Addresses", new[] { "Buyer_BuyerId" });
+            DropIndex("dbo.Messages", new[] { "Store_StoreId" });
+            DropIndex("dbo.Messages", new[] { "User_UserId" });
+            DropIndex("dbo.Addresses", new[] { "Profile_ProfileId" });
             DropIndex("dbo.Addresses", new[] { "Store_StoreId" });
             DropIndex("dbo.Stores", new[] { "ProfileImage_ImageId" });
             DropIndex("dbo.Stores", new[] { "CoverImage_ImageId" });
@@ -343,24 +365,26 @@ namespace Capstone_20130302.Migrations
             DropIndex("dbo.Templates", new[] { "Category_CategoryId" });
             DropIndex("dbo.Images", new[] { "Product_ProductId" });
             DropIndex("dbo.Categories", new[] { "CoverImage_ImageId" });
-            DropIndex("dbo.Categories", new[] { "Parent_CategoryId" });
+            DropIndex("dbo.Categories", new[] { "ParentId" });
             DropIndex("dbo.Products", new[] { "Category_CategoryId" });
             DropIndex("dbo.Products", new[] { "Store_StoreId" });
             DropIndex("dbo.Products", new[] { "Status_StatusId" });
+            DropIndex("dbo.UserProfile", new[] { "Profile_ProfileId" });
             DropForeignKey("dbo.webpages_UsersInRoles", "RoleId", "dbo.webpages_Roles");
             DropForeignKey("dbo.webpages_UsersInRoles", "UserId", "dbo.UserProfile");
             DropForeignKey("dbo.ProductUserProfiles", "UserProfile_UserId", "dbo.UserProfile");
             DropForeignKey("dbo.ProductUserProfiles", "Product_ProductId", "dbo.Products");
-            DropForeignKey("dbo.Buyers", "ProfileImage_ImageId", "dbo.Images");
-            DropForeignKey("dbo.Buyers", "User_UserId", "dbo.UserProfile");
-            DropForeignKey("dbo.Orders", "OrderStatus_StatusId", "dbo.OrderStatus");
+            DropForeignKey("dbo.Profiles", "ProfileImage_ImageId", "dbo.Images");
+            DropForeignKey("dbo.Orders", "Status_StatusId", "dbo.OrderStatus");
             DropForeignKey("dbo.Orders", "ShippingAddress_AddressId", "dbo.Addresses");
             DropForeignKey("dbo.Orders", "BillingAddress_AddressId", "dbo.Addresses");
             DropForeignKey("dbo.OrderDetails", "Order_OrderId", "dbo.Orders");
             DropForeignKey("dbo.OrderDetails", "Product_ProductId", "dbo.Products");
             DropForeignKey("dbo.Comments", "Product_ProductId", "dbo.Products");
             DropForeignKey("dbo.Comments", "User_UserId", "dbo.UserProfile");
-            DropForeignKey("dbo.Addresses", "Buyer_BuyerId", "dbo.Buyers");
+            DropForeignKey("dbo.Messages", "Store_StoreId", "dbo.Stores");
+            DropForeignKey("dbo.Messages", "User_UserId", "dbo.UserProfile");
+            DropForeignKey("dbo.Addresses", "Profile_ProfileId", "dbo.Profiles");
             DropForeignKey("dbo.Addresses", "Store_StoreId", "dbo.Stores");
             DropForeignKey("dbo.Stores", "ProfileImage_ImageId", "dbo.Images");
             DropForeignKey("dbo.Stores", "CoverImage_ImageId", "dbo.Images");
@@ -373,20 +397,22 @@ namespace Capstone_20130302.Migrations
             DropForeignKey("dbo.Templates", "Category_CategoryId", "dbo.Categories");
             DropForeignKey("dbo.Images", "Product_ProductId", "dbo.Products");
             DropForeignKey("dbo.Categories", "CoverImage_ImageId", "dbo.Images");
-            DropForeignKey("dbo.Categories", "Parent_CategoryId", "dbo.Categories");
+            DropForeignKey("dbo.Categories", "ParentId", "dbo.Categories");
             DropForeignKey("dbo.Products", "Category_CategoryId", "dbo.Categories");
             DropForeignKey("dbo.Products", "Store_StoreId", "dbo.Stores");
             DropForeignKey("dbo.Products", "Status_StatusId", "dbo.ProductStatus");
+            DropForeignKey("dbo.UserProfile", "Profile_ProfileId", "dbo.Profiles");
             DropTable("dbo.webpages_UsersInRoles");
             DropTable("dbo.ProductUserProfiles");
-            DropTable("dbo.OrderStatus");
-            DropTable("dbo.Buyers");
             DropTable("dbo.webpages_OAuthMembership");
             DropTable("dbo.webpages_Membership");
             DropTable("dbo.webpages_Roles");
+            DropTable("dbo.Profiles");
+            DropTable("dbo.OrderStatus");
             DropTable("dbo.Orders");
             DropTable("dbo.OrderDetails");
             DropTable("dbo.Comments");
+            DropTable("dbo.Messages");
             DropTable("dbo.Addresses");
             DropTable("dbo.StoreStatus");
             DropTable("dbo.Stores");
