@@ -6,6 +6,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Capstone_20130302.Models;
+using System.IO;
+using System.Data.Entity.Validation;
+using System.Text;
 
 namespace Capstone_20130302.Controllers
 {
@@ -47,7 +50,10 @@ namespace Capstone_20130302.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            Category cate = db.Categories.Find(4);
+            Product p = new Product();
+            p.SpecsInJson = cate.Templates.ElementAt(0).ContentInJson;
+            return View(p);
         }
 
         //
@@ -56,10 +62,50 @@ namespace Capstone_20130302.Controllers
         [HttpPost]
         public ActionResult Create(Product product)
         {
+            Guid guid = new Guid();
+            var path = "";
+            List<Image> images = new List<Image>();
+            foreach (string file in Request.Files)
+            {
+                HttpPostedFileBase hpf = Request.Files[file] as HttpPostedFileBase;
+                if (hpf != null && hpf.ContentLength > 0)
+                {
+                    guid = Guid.NewGuid();
+                    path = Path.Combine(Server.MapPath("~/App_Data/Images"), guid.ToString());
+                    hpf.SaveAs(path);
+                    Image image = new Image { Path = guid.ToString() };
+                    images.Add(image);
+                }
+            }
             if (ModelState.IsValid)
             {
+                product.Category = db.Categories.Find(4);
+                product.ProductImages = images;
                 db.Products.Add(product);
-                db.SaveChanges();
+                
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    StringBuilder sb = new StringBuilder();
+
+                    foreach (var failure in ex.EntityValidationErrors)
+                    {
+                        sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
+                        foreach (var error in failure.ValidationErrors)
+                        {
+                            sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
+                            sb.AppendLine();
+                        }
+                    }
+
+                    throw new DbEntityValidationException(
+                        "Entity Validation Failed - errors follow:\n" +
+                        sb.ToString(), ex
+                    ); // Add the original exception as the innerException
+                }
                 return RedirectToAction("Index");
             }
 

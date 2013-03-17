@@ -1,61 +1,78 @@
 ﻿@model Capstone_20130302.Models.Product
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "New Product";
 }
 
-<h2>Create</h2>
-
-@using (Html.BeginForm()) {
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "create", data_bind="submit: save", enctype = "multipart/form-data" }))
+{
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>Product</legend>
+    <div class="editor-label">
+        <label for="uploadFiles">Product Images</label>
+    </div>
+    <div class="editor-field">
+        <div class="upload-wrapper">
+            <div>
+                <img style="height: 140px; margin-bottom: 20px;" src="/Images/placeholder.png"><br>
+                <span>Choose up to 3 images for your product.</span>
+            </div>
+        </div>
+        <input id="uploadFiles" name="uploadFiles[]" style="display: none;" type="file" multiple="" accept="image/*"/>
+    </div>
+    <br>
+    <div class="row">
+        <div class="span6">
+            <div class="editor-field">
+                @Html.ValidationMessageFor(model => model.Name)
+                @Html.TextBoxFor(model => model.Name, new { @class = "span5", placeholder = @Html.DisplayNameFor(model => model.Name) })
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
+            <div class="editor-field">
+                @Html.ValidationMessageFor(model => model.Description)
+                @Html.TextAreaFor(model => model.Description, new { @class = "span5", placeholder = @Html.DisplayNameFor(model => model.Description), rows = "3" })
+            </div>
+
+            <div class="editor-field">
+                @Html.ValidationMessageFor(model => model.Price)
+                @Html.TextBoxFor(model => model.Price, new { @class="span5", placeholder = @Html.DisplayNameFor(model => model.Price)})
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
+        <div class="span5">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SpecsInJson)
+            </div>
+            <div class="editor-field">
+                @Html.HiddenFor(model => model.SpecsInJson)
+                <p>Total <span data-bind='text: specs().length'>&nbsp;</span> specification(s)</p>
+                <table data-bind='visible: specs().length > 0'>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Content</th>
+                            <th />
+                        </tr>
+                    </thead>
+                    <tbody data-bind='foreach: specs'>
+                        <tr>
+                            <td><input type="text" class='required' data-bind='value: name, uniqueName: true' /></td>
+                            <td><input type="text" class='required' data-bind='value: content, uniqueName: true' /></td>
+                            <td><a href='' data-bind='click: $root.removeSpec'>Remove</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+             
+                <button type="button" data-bind='click: addSpec'>Add Specification</button>
+            </div>
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Description)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Description)
-            @Html.ValidationMessageFor(model => model.Description)
-        </div>
+        
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Price)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Price)
-            @Html.ValidationMessageFor(model => model.Price)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.SpecsInJson)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.SpecsInJson)
-            @Html.ValidationMessageFor(model => model.SpecsInJson)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CreateDate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CreateDate)
-            @Html.ValidationMessageFor(model => model.CreateDate)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
+        
+    </div>
+    <p>
+        <input type="submit" value="Create" />
+    </p>
 }
 
 <div>
@@ -65,3 +82,113 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<style>
+    .field-validation-error {
+        display: block;
+    }
+    .upload-wrapper {
+        background: rgba(255, 255, 255, 0.43);
+        border: dashed 1px #CCC;
+        cursor: pointer;
+        border-radius: 6px;
+    }
+    .upload-wrapper:hover {
+        background: #FFECE5;
+    }
+    .upload-wrapper div {
+        margin: 40px auto;
+        display: block;
+        width: 300px;
+        text-align: center;
+    }
+    .upload-wrapper img.select {
+        height: 180px;
+        padding: 2px;
+        border: solid 1px #CCC;
+        margin: 16px 8px;
+        background: white;
+        box-shadow: 0px 0px 4px #CACACA;
+    }
+    .upload-wrapper img.select:first-child {
+        margin-left: 16px;
+    }
+
+</style>
+
+<script src="/Scripts/knockout-2.2.1.js"></script>
+<script>
+    $(function () {
+        var uploadWrapper = $(".upload-wrapper");
+        var inputFiles = $("#uploadFiles");
+
+        uploadWrapper.click(function () {
+            inputFiles.trigger("click");
+        });
+
+        inputFiles.change(function () {
+            var length = inputFiles[0].files.length;
+            console.log(length);
+            if (length > 3) {
+                alert("Please select only 3 images for your product.");
+                return;
+            }
+            for (var i = 0; i < length; i++) {
+                var f = inputFiles[0].files[i];
+                if (!f.type.match(/image.*/)) {
+                    alert("Please select image with correct format.");
+                    return;
+                }
+            };
+            uploadWrapper.html("");
+            readmultifiles(inputFiles[0].files);
+        });
+
+        function readmultifiles(files) {
+            var reader = new FileReader();  
+
+            function readFile(index) {
+                if( index >= files.length ) return;
+
+                var file = files[index];
+                reader.onload = function(e) {  
+                    // get file content
+                    uploadWrapper.append("<img class='select' src='" + e.target.result + "'/>");
+                    readFile(index+1);
+                }
+                reader.readAsDataURL(file);
+            }
+            readFile(0);
+        }
+
+        var specsJsonData = @Html.Raw(Model.SpecsInJson);
+
+        var SpecModel = function (specs) {
+            var self = this;
+            self.specs = ko.observableArray(specs);
+         
+            self.addSpec = function() {
+                self.specs.push({
+                    name: "",
+                    content: ""
+                });
+            };
+         
+            self.removeSpec = function(spec) {
+                self.specs.remove(spec);
+            };
+         
+            self.save = function (form) {
+                console.log(ko.utils.stringifyJson(self.specs));
+                $("#SpecsInJson").val(ko.utils.stringifyJson(self.specs));
+                return true;
+            };
+        };
+         
+        var viewModel = new SpecModel(specsJsonData);
+        ko.applyBindings(viewModel);
+         
+        // Activate jQuery Validation
+        $("form.create").validate({ submitHandler: function () { viewModel.save } });
+    })
+</script>

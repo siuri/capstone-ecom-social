@@ -17,7 +17,6 @@ namespace Capstone_20130302.Models
             BillingAddress = new Address();
             ShippingAddress = new Address();
             OrderDetails = new List<OrderDetail>();
-            OrderDetails.Add(new OrderDetail());
         }
         public int OrderId { get; set; }
 

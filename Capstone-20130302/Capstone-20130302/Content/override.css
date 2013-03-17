@@ -3,6 +3,10 @@
     transition: all .05s ease-in;
 }
 
+::-webkit-input-placeholder {
+    color: #555;
+}
+
 [class*=logo], #logo {
     cursor: pointer;
 }
@@ -300,7 +304,7 @@ input[type=password]:focus
 
 #dropbox
 {
-    background: url('../img/background_tile_3.jpg');
+    background: url('/Images/background_tile_3.jpg');
     border-radius: 3px;
     position: relative;
     margin: 80px auto 90px;
@@ -366,7 +370,7 @@ input[type=password]:focus
         left: 0;
         height: 100%;
         width: 100%;
-        background: url('../img/done.png') no-repeat center center rgba(255,255,255,0.5);
+        background: url('/Images/done.png') no-repeat center center rgba(255,255,255,0.5);
         display: none;
     }
 

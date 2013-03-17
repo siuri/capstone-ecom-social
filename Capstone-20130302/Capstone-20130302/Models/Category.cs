@@ -13,7 +13,6 @@ namespace Capstone_20130302.Models
         public Category()
         {
             Templates = new List<Template>();
-            Templates.Add(new Template());
             CoverImage = new Image();
         }
         [Key]

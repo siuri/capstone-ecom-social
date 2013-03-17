@@ -20,7 +20,6 @@ namespace Capstone_20130302.Models
             CoverImage = new Image();
             ProfileImage = new Image();
             Addresses = new List<Address>();
-            Addresses.Add(new Address());
         }
         public int StoreId { get; set; }
 

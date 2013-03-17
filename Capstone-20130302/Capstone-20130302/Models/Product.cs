@@ -11,15 +11,9 @@ namespace Capstone_20130302.Models
     {
         public Product()
         {
-            Name = "Untitled Product";
-            Description = "Describe your Product here.";
-            SpecsInJson = "";
             Status = new ProductStatus();
             Category = new Category();
             ProductImages = new List<Image>();
-            ProductImages.Add(new Image());
-            ProductImages.Add(new Image());
-            ProductImages.Add(new Image());
             CreateDate = DateTime.Now;
         }
         public int ProductId { get; set; }
@@ -30,8 +24,8 @@ namespace Capstone_20130302.Models
 
         
         [DisplayName("Description")]
-        [Required]
         [DataType(DataType.MultilineText)]
+        [Required]
         public string Description { get; set; }
 
         [Required]
@@ -49,6 +43,7 @@ namespace Capstone_20130302.Models
 
         public string SpecsInJson { get; set; }
         
+        [ScaffoldColumn(false)]
         public DateTime CreateDate { get; set; }
 
         public virtual ProductStatus Status { get; set; }
