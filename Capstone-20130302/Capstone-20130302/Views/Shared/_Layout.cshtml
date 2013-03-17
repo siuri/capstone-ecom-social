@@ -16,6 +16,7 @@
     <script src="/Scripts/jquery.maskedinput.min.js"></script>
     <script src="/Scripts/typeahead.min.js"></script>
     <script src="/Scripts/select2.min.js"></script>
+    <script src="/Scripts/search.js"></script>
     @Scripts.Render("~/bundles/default")
 
 </head>
@@ -24,8 +25,10 @@
         <header>
             <div class="inner">
                 <div class="search-box">
-                    <form>
-                        <input type="text" class="span4" placeholder="Search for Stores, Products, and People">
+                    <form action="Search" method="GET">
+                        <input type="text" class="span4" id="searchString" name="searchString" placeholder="Search for Stores, Products, and People" onkeyup="search()">
+                        <div id ="searchresult">                            
+                        </div>
                     </form>
                 </div>
                 <div id="logo"></div>
