@@ -35,25 +35,25 @@
                 </div>
                 <legend>Personal Information</legend>
                 <div class="controls controls-row">
-                    @Html.TextBoxFor(model => model.DisplayName, new { placeholder = "Display Name", title = "Display Name", @class = "span4" })
-                    @Html.TextBoxFor(model => model.DateOfBirth, new { placeholder = "Date of Birth", title = "Date of Birth", @class = "span2" })
+                    @Html.TextBoxFor(model => model.DisplayName, new { placeholder = @Html.DisplayNameFor(model => model.DisplayName), title = @Html.DisplayNameFor(model => model.DisplayName), @class = "span4" })
+                    @Html.TextBoxFor(model => model.DateOfBirth, new { placeholder = @Html.DisplayNameFor(model => model.DateOfBirth), title = @Html.DisplayNameFor(model => model.DateOfBirth), @class = "span2" })
                 </div>
                 <div class="controls controls-row">
-                    @Html.TextBoxFor(model => model.Email, new { placeholder = "Email", title = "Email", @class = "span4" })
-                    @Html.TextBoxFor(model => model.ContactNumber, new { placeholder = "Phone", title = "Phone", @class = "span2" })
+                    @Html.TextBoxFor(model => model.Email, new { placeholder = @Html.DisplayNameFor(model => model.Email), title = @Html.DisplayNameFor(model => model.Email), @class = "span4" })
+                    @Html.TextBoxFor(model => model.ContactNumber, new { placeholder = @Html.DisplayNameFor(model => model.ContactNumber), title = @Html.DisplayNameFor(model => model.ContactNumber), @class = "span2" })
                 </div>
                 <legend>Shipping Information</legend>
                 <div class="controls controls-row">
-                    @Html.TextBoxFor(model => model.Addresses.ElementAt(0).Number, new { placeholder = "Number", title = "Number", @class = "span2" })
-                    @Html.TextBoxFor(model => model.Addresses.ElementAt(0).Street, new { placeholder = "Street", title = "Street", @class = "span4" })
+                    @Html.TextBoxFor(model => model.Addresses.ElementAt(0).Number, new { placeholder = @Html.DisplayNameFor(model => model.Addresses.ElementAt(0).Number), title = @Html.DisplayNameFor(model => model.Addresses.ElementAt(0).Number), @class = "span2" })
+                    @Html.TextBoxFor(model => model.Addresses.ElementAt(0).Street, new { placeholder = @Html.DisplayNameFor(model => model.Addresses.ElementAt(0).Street), title = @Html.DisplayNameFor(model => model.Addresses.ElementAt(0).Street), @class = "span4" })
                 </div>
                 <div class="controls controls-row">
-                    @Html.TextBoxFor(model => model.Addresses.ElementAt(0).City, new { placeholder = "City", title = "City", @class = "span3" })
-                    @Html.TextBoxFor(model => model.Addresses.ElementAt(0).State, new { placeholder = "State", title = "State", @class = "span3" })
+                    @Html.TextBoxFor(model => model.Addresses.ElementAt(0).City, new { placeholder = @Html.DisplayNameFor(model => model.Addresses.ElementAt(0).City), title = @Html.DisplayNameFor(model => model.Addresses.ElementAt(0).City), @class = "span3" })
+                    @Html.TextBoxFor(model => model.Addresses.ElementAt(0).State, new { placeholder = @Html.DisplayNameFor(model => model.Addresses.ElementAt(0).State), title = @Html.DisplayNameFor(model => model.Addresses.ElementAt(0).State), @class = "span3" })
                 </div>
                 <div class="controls controls-row">
-                    @Html.TextBoxFor(model => model.Addresses.ElementAt(0).Zipcode, new { placeholder = "Zip Code", title = "Zip Code", @class = "span3" })
-                    @Html.TextBoxFor(model => model.Addresses.ElementAt(0).Country, new { placeholder = "Country", title = "Country", @class = "span3" })
+                    @Html.TextBoxFor(model => model.Addresses.ElementAt(0).Zipcode, new { placeholder = @Html.DisplayNameFor(model => model.Addresses.ElementAt(0).Zipcode), title = @Html.DisplayNameFor(model => model.Addresses.ElementAt(0).Zipcode), @class = "span3" })
+                    @Html.TextBoxFor(model => model.Addresses.ElementAt(0).Country, new { placeholder = @Html.DisplayNameFor(model => model.Addresses.ElementAt(0).Country), title = @Html.DisplayNameFor(model => model.Addresses.ElementAt(0).Country), @class = "span3" })
                 </div>
                 <div class="controls controls-row">
                     <br />

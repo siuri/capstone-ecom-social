@@ -64,6 +64,22 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.CreateDate)
     </div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Category)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Category.Name)
+    </div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ProductImages)
+    </div>
+    <div class="display-field">
+        @foreach (var image in Model.ProductImages)
+        {
+            <img src="/Image/@image.ImageId" />
+        }
+        
+    </div>
 </fieldset>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.ProductId }) |

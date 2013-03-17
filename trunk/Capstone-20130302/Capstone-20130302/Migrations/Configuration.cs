@@ -76,7 +76,15 @@ namespace Capstone_20130302.Migrations
                 new Category { CategoryId = 1, Name = "Root", CoverImage = context.Images.Find(1) },
                 new Category { CategoryId = 2, Name = "Men's", CoverImage = context.Images.Find(2), ParentId = 1, Parent = context.Categories.Find(1) },
                 new Category { CategoryId = 3, Name = "Women's", CoverImage = context.Images.Find(3), ParentId = 1, Parent = context.Categories.Find(1) },
-                new Category { CategoryId = 4, Name = "Shoes", CoverImage = context.Images.Find(4), ParentId = 2, Parent = context.Categories.Find(2) });
+                new Category
+                {
+                    CategoryId = 4,
+                    Name = "Shoes",
+                    CoverImage = context.Images.Find(4),
+                    ParentId = 2,
+                    Parent = context.Categories.Find(2),
+                    Templates = new List<Template> { new Template { TemplateId = 1, ContentInJson = "[{name: 'Color', content: 'Red'}, {name: 'Size', content: '42, 43'}]" } }
+                });
             context.Stores.AddOrUpdate(
                 new Store
                 {

@@ -175,9 +175,9 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
-    <Compile Include="Migrations\201303160611518_Init.cs" />
-    <Compile Include="Migrations\201303160611518_Init.Designer.cs">
-      <DependentUpon>201303160611518_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201303171735550_Init.cs" />
+    <Compile Include="Migrations\201303171735550_Init.Designer.cs">
+      <DependentUpon>201303171735550_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
@@ -403,8 +403,8 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201303160611518_Init.resx">
-      <DependentUpon>201303160611518_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201303171735550_Init.resx">
+      <DependentUpon>201303171735550_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
