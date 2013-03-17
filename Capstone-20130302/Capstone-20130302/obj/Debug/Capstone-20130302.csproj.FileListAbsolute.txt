@@ -226,3 +226,4 @@ C:\Users\Caleido\Dropbox\team\Source\Hong\Capstone-20130302\Capstone-20130302\ob
 C:\Users\Caleido\Dropbox\team\Source\Hong\Capstone-20130302\Capstone-20130302\obj\Debug\Capstone-20130302.pdb
 C:\Users\Caleido\Dropbox\team\Source\Hong\Capstone-20130302\Capstone-20130302\obj\Debug\Capstone_20130302.Migrations.Init.resources
 C:\Users\Caleido\Dropbox\team\Source\Hong\Capstone-20130302\Capstone-20130302\obj\Debug\Capstone-20130302.csproj.GenerateResource.Cache
+C:\Users\Caleido\Dropbox\team\Source\Hong\Capstone-20130302\Capstone-20130302\obj\Debug\Capstone-20130302.csprojResolveAssemblyReference.cache
