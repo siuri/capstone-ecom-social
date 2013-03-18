@@ -5,36 +5,50 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Text)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Value)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageUrl)
-        </th>       
-    </tr>
-
-@foreach (var item in Model) {
+<div><b>Product</b></div>
+<table id="productresult">
+@foreach (var item in Model.Where(i => i.Text == "Product"))
+{    
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Text)
+            <img src="@Html.DisplayFor(modelItem => item.ImageUrl)"/>
+        </td> 
+        <td>            
+            @Html.ActionLink(""+@Html.DisplayFor(modelItem => item.Value), "Product/"+@Html.DisplayFor(modelItem => item.ID))
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Value)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImageUrl)
-        </td>       
     </tr>
 }
-
 </table>
+
+<div><b>Store</b></div>
+<table id="storeresult">
+@foreach (var item in Model.Where(i => i.Text == "Store"))
+{
+    <tr>
+        <td>
+            <img src="@Html.DisplayFor(modelItem => item.ImageUrl)"/>
+        </td> 
+        <td>            
+            @Html.ActionLink(""+@Html.DisplayFor(modelItem => item.Value), "Store/"+@Html.DisplayFor(modelItem => item.ID))
+        </td>
+    </tr>
+}
+</table>
+
+<div><b>User</b></div>
+<table id="userresult">
+@foreach (var item in Model.Where(i => i.Text == "User"))
+{
+    <tr>
+        <td>
+            <img src="@Html.DisplayFor(modelItem => item.ImageUrl)"/>
+        </td> 
+        <td>            
+            @Html.ActionLink(""+@Html.DisplayFor(modelItem => item.Value), "User/"+@Html.DisplayFor(modelItem => item.ID))
+        </td>
+    </tr>
+}
+</table>
+
+
+
