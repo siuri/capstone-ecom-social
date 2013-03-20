@@ -81,7 +81,9 @@ namespace Capstone_20130302.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
+
+
+                    return RedirectToAction("Create", "Profile");
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -276,7 +278,7 @@ namespace Capstone_20130302.Controllers
                         OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
                         OAuthWebSecurity.Login(provider, providerUserId, createPersistentCookie: false);
 
-                        return RedirectToLocal(returnUrl);
+                        return RedirectToAction("Create","Profile");
                     }
                     else
                     {

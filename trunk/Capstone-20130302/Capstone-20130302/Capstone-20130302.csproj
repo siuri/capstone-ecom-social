@@ -175,6 +175,7 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
+    <Compile Include="Logic\Category_Logic.cs" />
     <Compile Include="Migrations\201303171735550_Init.cs" />
     <Compile Include="Migrations\201303171735550_Init.Designer.cs">
       <DependentUpon>201303171735550_Init.cs</DependentUpon>
@@ -397,7 +398,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Logic\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

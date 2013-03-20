@@ -12,7 +12,11 @@ namespace Capstone_20130302.Models
         public Profile()
         {
             ProfileImage = new Image();
+            Address address = new Address();
+
             Addresses = new List<Address>();
+            Addresses.Add(address);
+
         }
         public int ProfileId { get; set; }
 
