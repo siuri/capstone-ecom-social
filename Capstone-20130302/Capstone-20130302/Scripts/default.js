@@ -4,7 +4,7 @@ $(function(){
     });
     //$('[rel=tooltip]').tooltip();
     $("#cart > a").click(function(){
-        $("#cart > .cart-container").toggle(200);
+        $("#cart > .cart-container").toggle(300);
     })
     $(document).click(function(){
         $(".cart-container").hide(200);
