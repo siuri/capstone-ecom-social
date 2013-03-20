@@ -108,9 +108,6 @@ C:\Users\localadm\Dropbox\Capstone\Team\Source\Hong\Capstone-20130302\Capstone-2
 C:\Users\localadm\Dropbox\Capstone\Team\Source\Hong\Capstone-20130302\Capstone-20130302\bin\Mono.Math.xml
 C:\Users\localadm\Dropbox\Capstone\Team\Source\Hong\Capstone-20130302\Capstone-20130302\obj\Debug\Capstone-20130302.csprojResolveAssemblyReference.cache
 C:\Users\localadm\Dropbox\Capstone\Team\Source\Hong\Capstone-20130302\Capstone-20130302\obj\Debug\Capstone_20130302.Migrations.Init.resources
-C:\Users\localadm\Dropbox\Capstone\Team\Source\Hong\Capstone-20130302\Capstone-20130302\obj\Debug\Capstone_20130302.Migrations.UpdateBuyerToProfile.resources
-C:\Users\localadm\Dropbox\Capstone\Team\Source\Hong\Capstone-20130302\Capstone-20130302\obj\Debug\Capstone_20130302.Migrations.GenderEnum.resources
-C:\Users\localadm\Dropbox\Capstone\Team\Source\Hong\Capstone-20130302\Capstone-20130302\obj\Debug\Capstone_20130302.Migrations.DeleteGender.resources
 C:\Users\localadm\Dropbox\Capstone\Team\Source\Hong\Capstone-20130302\Capstone-20130302\obj\Debug\Capstone-20130302.csproj.GenerateResource.Cache
 C:\Users\localadm\Dropbox\Capstone\Team\Source\Hong\Capstone-20130302\Capstone-20130302\obj\Debug\Capstone-20130302.dll
 C:\Users\localadm\Dropbox\Capstone\Team\Source\Hong\Capstone-20130302\Capstone-20130302\obj\Debug\Capstone-20130302.pdb
