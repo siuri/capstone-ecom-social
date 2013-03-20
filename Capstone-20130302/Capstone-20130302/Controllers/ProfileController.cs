@@ -9,6 +9,7 @@ using Capstone_20130302.Models;
 using System.Data.Entity.Validation;
 using System.Text;
 using System.IO;
+using WebMatrix.WebData;
 
 namespace Capstone_20130302.Controllers
 {
@@ -42,6 +43,7 @@ namespace Capstone_20130302.Controllers
 
         public ActionResult Create()
         {
+
             var profile = new Profile();
             var address = new Address();
             profile.Addresses = new List<Address>();
@@ -73,7 +75,15 @@ namespace Capstone_20130302.Controllers
                     profile.ProfileImage = image;
                     db.Profiles.Add(profile);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+
+                    // Update profileid for Account
+                    var userid = (from _user in db.UserProfiles
+                                  where _user.UserName == User.Identity.Name
+                                  select _user.UserId).FirstOrDefault();
+                    UserProfile user = db.UserProfiles.Find(userid);
+                    user.Profile = profile;
+                    db.SaveChanges();
+                    return RedirectToAction("Follow","Category");
                 }
             }
             

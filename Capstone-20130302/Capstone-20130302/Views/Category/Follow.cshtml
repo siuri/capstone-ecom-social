@@ -8,65 +8,26 @@
     <h3>Follow your Favorites</h3>
     <div class="chooser-wrapper clearfix">
         <ul>
-            <li>
-                <div class="cate-wrapper">
+            @foreach (var item in Model)
+            {
+                      <li>
+                <div class="cate-wrapper" id="@item.CategoryId">
+                  
                     <div class="cover">
-                        <img class="cate" src="/Image/1">
+                        <img class="cate" src="/Image/@item.CoverImage.Path">
                     </div>
                     <div class="select-box"></div>
-                    <div class="caption">Bag</div>
+                    <div class="caption">@item.Name</div>
                 </div>
             </li>
-            <li>
-                <div class="cate-wrapper">
-                    <div class="cover">
-                        <img class="cate" src="/Image/2">
-                    </div>
-                    <div class="select-box"></div>
-                    <div class="caption">Men's</div>
-                </div>
-            </li>
-            <li>
-                <div class="cate-wrapper">
-                    <div class="cover">
-                        <img class="cate" src="/Image/3">
-                    </div>
-                    <div class="select-box"></div>
-                    <div class="caption">Men's</div>
-                </div>
-            </li>
-            <li>
-                <div class="cate-wrapper">
-                    <div class="cover">
-                        <img class="cate" src="/Image/2">
-                    </div>
-                    <div class="select-box"></div>
-                    <div class="caption">Men's</div>
-                </div>
-            </li>
-            <li>
-                <div class="cate-wrapper">
-                    <div class="cover">
-                        <img class="cate" src="/Image/1">
-                    </div>
-                    <div class="select-box"></div>
-                    <div class="caption">Men's</div>
-                </div>
-            </li>
-            <li>
-                <div class="cate-wrapper">
-                    <div class="cover">
-                        <img class="cate" src="/Image/3">
-                    </div>
-                    <div class="select-box"></div>
-                    <div class="caption">Men's</div>
-                </div>
-            </li>
+                
+            }
+      
         </ul>
     </div>
     <div style="width: 372px; margin: 0 auto; height: 40px;">
         <a href="/" class="btn btn-default span2">Skip to Home</a>
-        <a class="btn span2">Ready for Surprises</a>
+        <a class="btn span2"  onclick="JavaScript:SubmitSurprises();">Ready for Surprises</a>
     </div>
 </div>
 
@@ -136,4 +97,33 @@
             $(this).toggleClass("selected");
         });
     });
+
+    function SubmitSurprises() {
+        var strid = '';
+        var listtag = document.getElementsByClassName('cate-wrapper selected');
+        for (var i = 0; i < listtag.length; ++i) {
+            if (strid != '') {
+                strid = strid + '_';
+            }
+            strid = strid  + listtag[i].id;
+        }
+        var postData = { 'strcategory': strid };
+      
+        jQuery.ajax({
+            url: '../../Follow/RegFollow',
+            traditional: true,
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json', type: "POST",
+            data: JSON.stringify(postData),
+            success: function (data) {
+                window.location = '../';
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.statusText);
+            }
+        });
+
+        return true;
+    }
+
 </script>

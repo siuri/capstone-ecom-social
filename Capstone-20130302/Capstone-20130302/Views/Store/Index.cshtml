@@ -3,30 +3,51 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<style type="text/css">
+    .tablemain
+    {
+        width: 100%;
+    }
+    .tablemain td,.tablemain th
+    {
+        border:solid 1px black;
+    }
+    .tablemain tr:nth-of-type(2n)
+    {
+        background:rgb(201, 201, 201);
+    }
+    .create a
+    {
+        text-align: center;
+        display: table-cell;
+        vertical-align: middle;
+        width: 164px;
+        height: 33px;
+        border: inset;
+        
+    }
+</style>
 <h2>Index</h2>
 
-<p>
+<p id ="create" class ="create">
     @Html.ActionLink("Create New", "Create")
 </p>
-<table>
+<table id="tablemain" class ="tablemain">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.StoreName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.CreateDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ContactNumber)
+            Open Order
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Slogan)
+            @Html.DisplayNameFor(model => model.Status)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ShipFee)
-        </th>
-        <th></th>
+  
+        <th>   Action </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -35,16 +56,13 @@
             @Html.DisplayFor(modelItem => item.StoreName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Description)
+            @Html.DisplayFor(modelItem => item.CreateDate)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ContactNumber)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Slogan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShipFee)
+            @Html.DisplayFor(modelItem => item.Status.Name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.StoreId }) |

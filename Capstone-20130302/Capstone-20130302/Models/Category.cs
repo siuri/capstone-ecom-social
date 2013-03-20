@@ -15,9 +15,10 @@ namespace Capstone_20130302.Models
             Templates = new List<Template>();
             CoverImage = new Image();
         }
+
         [Key]
         public int CategoryId { get; set; }
-
+        
         [Required]
         [Display(Name = "Category Name")]
         [MaxLength(50)]
@@ -29,13 +30,13 @@ namespace Capstone_20130302.Models
         public virtual Category Parent { get; set; }
 
         public virtual ICollection<Category> SubCategories { get; set; }
-
-
         public virtual Image CoverImage { get; set; }
         public virtual ICollection<Template> Templates { get; set; }
         public virtual ICollection<Follow> Followings { get; set; }
         public virtual ICollection<Product> Products { get; set; }
     }
+
+
 
     public class Template
     {

@@ -20,10 +20,15 @@ namespace Capstone_20130302.Controllers
 
         public ActionResult Follow()
         {
-            // Get all parent categories
-            List<Category> parentCategories = db.Categories.ToList(); // TODO
-            return View();
+            // Get categories list 
+            var cates = from c in db.Categories
+                            where c.ParentId == 1
+                            select c;
+            List<Category> parentCategories = cates.ToList();
+
+            return View(parentCategories);
         }
+
 
         //
         // GET: /Category/Follow
@@ -34,9 +39,9 @@ namespace Capstone_20130302.Controllers
         {
             if (ModelState.IsValid)
             {
-                // TODO: Get current user
+                //  Get current user
                 UserProfile user = db.UserProfiles.Find(WebSecurity.CurrentUserId);
-                // TODO: Iterate Category list and add to User
+                //  Iterate Category list and add to User
                 Follow follow = null;
                 foreach (var category in categories)
                 {

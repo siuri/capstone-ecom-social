@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Capstone_20130302.Logic;
 using Capstone_20130302.Models;
 using WebMatrix.WebData;
 
@@ -14,6 +15,7 @@ namespace Capstone_20130302.Controllers
 
         public ActionResult Index()
         {
+            //  return Json(Category_Logic.CateroryCombobox(),JsonRequestBehavior.AllowGet);
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
             return View();
         }
@@ -21,7 +23,6 @@ namespace Capstone_20130302.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your app description page.";
-
             return View();
         }
 

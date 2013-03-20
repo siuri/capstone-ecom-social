@@ -29,6 +29,7 @@ namespace Capstone_20130302.Controllers
         public ActionResult Search(string searchString)
         {            
             var products = db.Products.Where(p => p.Name.ToUpper().Contains(searchString.ToUpper()));
+
             return View(products.ToList());
         }
 
