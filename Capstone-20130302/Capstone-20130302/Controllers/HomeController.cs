@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Capstone_20130302.Logic;
 using Capstone_20130302.Models;
 using WebMatrix.WebData;
 

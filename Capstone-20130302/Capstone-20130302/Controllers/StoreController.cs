@@ -5,7 +5,6 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Capstone_20130302.Logic;
 using Capstone_20130302.Models;
 
 namespace Capstone_20130302.Controllers

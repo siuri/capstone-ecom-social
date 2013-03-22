@@ -17,7 +17,11 @@ namespace Capstone_20130302.Models
         public string UserName { get; set; }
         public virtual ICollection<Product> LikedProducts { get; set; }
         public virtual ICollection<Store> Stores { get; set; }
+
+        public virtual int? ProfileId { get; set; }
+        [ForeignKey("ProfileId")]
         public virtual Profile Profile { get; set; }
+
         public virtual ICollection<Role> Roles { get; set; }
         public virtual ICollection<Message> Messages { get; set; }
     }

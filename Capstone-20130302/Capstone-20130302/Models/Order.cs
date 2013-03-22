@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -13,10 +14,6 @@ namespace Capstone_20130302.Models
         {
             OrderDate = DateTime.Now;
             IsUsedAsShipping = true;
-            Status = new OrderStatus();
-            BillingAddress = new Address();
-            ShippingAddress = new Address();
-            OrderDetails = new List<OrderDetail>();
         }
         public int OrderId { get; set; }
 
@@ -33,17 +30,29 @@ namespace Capstone_20130302.Models
         [Required]
         public string BillingName { get; set; }
 
-        [DisplayName("Billing Address")]
+        
+        public virtual int? BillingAddressId { get; set; }
         [Required]
+        [ForeignKey("BillingAddressId")]
         public virtual Address BillingAddress { get; set; }
+
         public bool IsUsedAsShipping { get; set; }
 
-        [DisplayName("Shipping Address")]
+        
+        [DisplayName("Shipping Name")]
         public string ShippingName { get; set; }
+
+        public virtual int? ShippingAddressId { get; set; }
+        [ForeignKey("ShippingAddressId")]
         public virtual Address ShippingAddress { get; set; }
 
+        public virtual int? StatusId { get; set; }
+
+        [ForeignKey("StatusId")]
         [DisplayName("Order Status")]
         public virtual OrderStatus Status { get; set; }
+
+
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 
@@ -64,7 +73,12 @@ namespace Capstone_20130302.Models
         [DisplayName("Sold Price")]
         public float SoldPrice { get; set; }
 
+        public virtual int? ProductId { get; set; }
+        [ForeignKey("ProductId")]
         public virtual Product Product { get; set; }
+
+        public virtual int? OrderId { get; set; }
+        [ForeignKey("OrderId")]
         public virtual Order Order { get; set; }
     }
 }

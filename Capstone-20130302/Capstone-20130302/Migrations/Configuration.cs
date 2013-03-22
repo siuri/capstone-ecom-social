@@ -73,17 +73,16 @@ namespace Capstone_20130302.Migrations
 
             // Seed Category
             context.Categories.AddOrUpdate(
-                new Category { CategoryId = 1, Name = "Root", CoverImage = context.Images.Find(1) },
-                new Category { CategoryId = 2, Name = "Men's", CoverImage = context.Images.Find(2), ParentId = 1, Parent = context.Categories.Find(1) },
-                new Category { CategoryId = 3, Name = "Women's", CoverImage = context.Images.Find(3), ParentId = 1, Parent = context.Categories.Find(1) },
+                new Category { CategoryId = 1, Name = "Root", CoverImageId = 1 },
+                new Category { CategoryId = 2, Name = "Men's", CoverImageId = 2, ParentId = 1 },
+                new Category { CategoryId = 3, Name = "Women's", CoverImageId = 3, ParentId = 1 },
                 new Category
                 {
                     CategoryId = 4,
                     Name = "Shoes",
-                    CoverImage = context.Images.Find(4),
+                    CoverImageId = 4,
                     ParentId = 2,
-                    Parent = context.Categories.Find(2),
-                    Templates = new List<Template> { new Template { TemplateId = 1, ContentInJson = "[{name: 'Color', content: 'Red'}, {name: 'Size', content: '42, 43'}]" } }
+                    Template = new Template { TemplateId = 1, ContentInJson = "[{name: 'Color', content: 'Red'}, {name: 'Size', content: '42, 43'}]" }
                 });
             context.Stores.AddOrUpdate(
                 new Store
@@ -92,13 +91,13 @@ namespace Capstone_20130302.Migrations
                     StoreName = "Casual Shoes Lovers",
                     ContactNumber = "023-432-5234",
                     Description = "A shop for shoes lovers with thousand pairs of shoes",
-                    Owner = context.UserProfiles.Find(WebSecurity.GetUserId("shoes_lovers")),
+                    OwnerId = WebSecurity.GetUserId("shoes_lovers"),
                     ShipFee = 9.99F,
-                    Status = context.StoreStatuses.Find(1),
-                    CoverImage = context.Images.Find(1),
+                    StatusId = 1,
+                    CoverImageId = 1,
                     Slogan = "Find the best shoes in town here.",
-                    ProfileImage = context.Images.Find(1),
-                    Addresses = new List<Address> { new Address { AddressId = 1, Number = "123", Street = "Shoes' Street", City = "Saigon", Country = "Vietnam", Zipcode = "70100", State = "" } }
+                    ProfileImageId = 1,
+                    Address = new Address { AddressId = 1, Number = "123", Street = "Shoes' Street", City = "Saigon", Country = "Vietnam", Zipcode = "70100", State = "" }
                 });
 
             // Seed Product;
@@ -108,12 +107,12 @@ namespace Capstone_20130302.Migrations
                     ProductId = 1,
                     Name = "Joe Dark Blue Yellow Casual Shoes",
                     Description = "A pair of beautiful shoes for your daily activities",
-                    Category = context.Categories.Find(4),
+                    CategoryId = 4,
                     Price = 35.7F,
-                    Status = context.ProductStatuses.Find(1),
+                    StatusId = 1,
                     SpecsInJson = @"[{ key: 'Color', value: 'Dark Blue'}, { key: 'Size', value: '42, 43, 44'}]",
                     ProductImages = new List<Image> { context.Images.Find(5), context.Images.Find(6), context.Images.Find(7) },
-                    Store = context.Stores.Find(1)
+                    StoreId = 1
                 });
         }
     }

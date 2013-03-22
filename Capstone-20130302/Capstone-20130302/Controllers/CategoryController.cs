@@ -22,8 +22,8 @@ namespace Capstone_20130302.Controllers
         {
             // Get categories list 
             var cates = from c in db.Categories
-                            where c.ParentId == 1
-                            select c;
+                        where c.ParentId == 1
+                        select c;
             List<Category> parentCategories = cates.ToList();
 
             return View(parentCategories);
