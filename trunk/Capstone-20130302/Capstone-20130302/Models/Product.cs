@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -11,9 +12,6 @@ namespace Capstone_20130302.Models
     {
         public Product()
         {
-            Status = new ProductStatus();
-            Category = new Category();
-            ProductImages = new List<Image>();
             CreateDate = DateTime.Now;
         }
         public int ProductId { get; set; }
@@ -46,10 +44,20 @@ namespace Capstone_20130302.Models
         [ScaffoldColumn(false)]
         public DateTime CreateDate { get; set; }
 
+        public virtual int? StatusId { get; set; }
+        [ForeignKey("StatusId")]
         public virtual ProductStatus Status { get; set; }
+
+        public virtual int? CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
+
         public virtual ICollection<Image> ProductImages { get; set; }
+
+        public virtual int? StoreId { get; set; }
+        [ForeignKey("StoreId")]
         public virtual Store Store { get; set; }
+
         public virtual ICollection<UserProfile> Likers { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }

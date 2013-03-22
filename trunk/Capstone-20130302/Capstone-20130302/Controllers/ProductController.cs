@@ -53,7 +53,7 @@ namespace Capstone_20130302.Controllers
         {
             Category cate = db.Categories.Find(4);
             Product p = new Product();
-            p.SpecsInJson = cate.Templates.ElementAt(0).ContentInJson;
+            p.SpecsInJson = cate.Template.ContentInJson;
             return View(p);
         }
 

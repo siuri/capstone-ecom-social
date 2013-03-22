@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 
@@ -9,15 +10,6 @@ namespace Capstone_20130302.Models
 {
     public class Profile
     {
-        public Profile()
-        {
-            ProfileImage = new Image();
-            Address address = new Address();
-
-            Addresses = new List<Address>();
-            Addresses.Add(address);
-
-        }
         public int ProfileId { get; set; }
 
         [Required]
@@ -43,7 +35,9 @@ namespace Capstone_20130302.Models
         public int TotalFollowers { get; set; }
         [ScaffoldColumn(false)]
         public int TotalFollowings { get; set; }
-        
+
+        public virtual int? ProfileImageId { get; set; }
+        [ForeignKey("ProfileImageId")]
         public virtual Image ProfileImage { get; set; }
 
         public virtual ICollection<Address> Addresses { get; set; }

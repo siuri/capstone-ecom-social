@@ -12,14 +12,7 @@ namespace Capstone_20130302.Models
     {
         public Store()
         {
-            StoreName = "Untitled Store Name";
-            Description = "Describe your Store here.";
             CreateDate = DateTime.Now;
-            Slogan = "Describe your Slogan here.";
-            Status = new StoreStatus();
-            CoverImage = new Image();
-            ProfileImage = new Image();
-            Addresses = new List<Address>();
         }
         public int StoreId { get; set; }
 
@@ -55,16 +48,25 @@ namespace Capstone_20130302.Models
         [ScaffoldColumn(false)]
         public int TotalFollowings { get; set; }
 
+        public virtual int? OwnerId { get; set; }
+        [ForeignKey("OwnerId")]
         public virtual UserProfile Owner { get; set; }
+
+        public virtual int? StatusId { get; set; }
+        [ForeignKey("StatusId")]
         public virtual StoreStatus Status { get; set; }
 
-        [DisplayName("Cover Image")]
+        public virtual int? CoverImageId { get; set; }
+        [ForeignKey("CoverImageId")]
         public virtual Image CoverImage { get; set; }
 
-        [DisplayName("Profile Image")]
+        public virtual int? ProfileImageId { get; set; }
+        [ForeignKey("ProfileImageId")]
         public virtual Image ProfileImage { get; set; }
 
-        public virtual ICollection<Address> Addresses { get; set; }
+        public virtual int? AddressId { get; set; }
+        [ForeignKey("AddressId")]
+        public virtual Address Address { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }
 
