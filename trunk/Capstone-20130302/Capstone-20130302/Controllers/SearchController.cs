@@ -15,59 +15,72 @@ namespace Capstone_20130302.Controllers
 
         public ActionResult Index(string searchString)
         {
-            List<SearchItem> listitem = SearchLocal(searchString);
-            return View(listitem);
+            return View();
         }
 
         public JsonResult Search(string searchString)
-        {
-            List<SearchItem> listitem = SearchLocal(searchString);
-            return this.Json(listitem, JsonRequestBehavior.AllowGet);
-        }
-        private List<SearchItem> SearchLocal(string searchString)
         {
             List<Product> products = (from pr in db.Products where pr.Name.ToUpper().Contains(searchString.ToUpper()) select pr).ToList();
             List<Store> stores = (from pr in db.Stores where pr.StoreName.ToUpper().Contains(searchString.ToUpper()) select pr).ToList();
             List<Profile> users = (from pr in db.Profiles where pr.DisplayName.ToUpper().Contains(searchString.ToUpper()) select pr).ToList();
 
-            List<SearchItem> listitem = new List<SearchItem>();
-            for (int i = 0; i < products.Count(); i++)
-            {
-                listitem.Add(new SearchItem
-                {
-                    Text = "Product",
-                    ID = "" + products[i].ProductId,
-                    Value = products[i].Name,
-                    ImageUrl = products[i].ProductImages.ElementAt(0).Path
+            List<SearchItem> productResults = new List<SearchItem>();
+            List<SearchItem> storeResults = new List<SearchItem>();
+            List<SearchItem> userResults = new List<SearchItem>();
 
-                });
-            }
-            for (int i = 0; i < stores.Count(); i++)
+            foreach (var product in products)
             {
-                listitem.Add(new SearchItem
+                if (product != null && product.ProductImages != null && product.ProductImages.Count > 0)
                 {
-                    Text = "Store",
-                    ID = "" + stores[i].StoreId,
-                    Value = stores[i].StoreName,
-                    ImageUrl = stores[i].CoverImage.Path
-
-                });
+                    productResults.Add(new SearchItem
+                    {
+                        ID = "/Product/" + product.ProductId,
+                        Value = product.Name,
+                        ImageId = product.ProductImages.ElementAt(0).ImageId
+                    });
+                }
             }
 
-            for (int i = 0; i < users.Count(); i++)
+            foreach (var store in stores)
             {
-                listitem.Add(new SearchItem
+                if (store != null && store.ProfileImage != null)
                 {
-                    Text = "User",
-                    ID = "" + users[i].ProfileId,
-                    Value = users[i].DisplayName,
-                    ImageUrl = users[i].ProfileImage.Path,
-
-                });
+                    storeResults.Add(new SearchItem
+                    {
+                        ID = "/Store/" + store.StoreId,
+                        Value = store.StoreName,
+                        ImageId = store.ProfileImage.ImageId
+                    });
+                }
             }
 
-            return listitem;
+            var userId = (dynamic) null;
+            foreach (var user in users)
+            {
+                if (user != null && user.ProfileImage != null)
+                {
+                    userId = (from _user in db.UserProfiles
+                                  where _user.ProfileId == user.ProfileId
+                                  select _user.UserId).FirstOrDefault();
+                    userResults.Add(new SearchItem
+                    {
+                        ID = "/User/" + userId,
+                        Value = user.DisplayName,
+                        ImageId = user.ProfileImage.ImageId
+                    });
+                }
+            }
+            var json = new { Products = productResults, Stores = storeResults, Users = userResults };
+            return Json(json, JsonRequestBehavior.AllowGet);
         }
 
+    }
+
+
+    public class SearchItem
+    {
+        public string ID { get; set; }
+        public string Value { get; set; }
+        public int ImageId { get; set; }
     }
 }

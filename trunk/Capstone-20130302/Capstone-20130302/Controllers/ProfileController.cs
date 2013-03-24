@@ -43,12 +43,7 @@ namespace Capstone_20130302.Controllers
 
         public ActionResult Create()
         {
-
-            var profile = new Profile();
-            var address = new Address();
-            profile.Addresses = new List<Address>();
-            profile.Addresses.Add(address);
-            return View(profile);
+            return View();
         }
 
         //
@@ -69,9 +64,7 @@ namespace Capstone_20130302.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    if (profile.Addresses.Count != 0)
-                        profile.Addresses.Clear();
-                    profile.Addresses.Add(address);
+                    profile.Address = address;
                     profile.ProfileImage = image;
                     db.Profiles.Add(profile);
                     db.SaveChanges();

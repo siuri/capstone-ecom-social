@@ -40,6 +40,8 @@ namespace Capstone_20130302.Models
         [ForeignKey("ProfileImageId")]
         public virtual Image ProfileImage { get; set; }
 
-        public virtual ICollection<Address> Addresses { get; set; }
+        public virtual int? AddressId { get; set; }
+        [ForeignKey("AddressId")]
+        public virtual Address Address { get; set; }
     }
 }
