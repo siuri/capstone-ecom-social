@@ -34,7 +34,7 @@ namespace Capstone_20130302.Controllers
                 {
                     productResults.Add(new SearchItem
                     {
-                        ID = "/Product/" + product.ProductId,
+                        ID = "/Product/Id/" + product.ProductId,
                         Value = product.Name,
                         ImageId = product.ProductImages.ElementAt(0).ImageId
                     });
@@ -47,7 +47,7 @@ namespace Capstone_20130302.Controllers
                 {
                     storeResults.Add(new SearchItem
                     {
-                        ID = "/Store/" + store.StoreId,
+                        ID = "/Store/Id/" + store.StoreId,
                         Value = store.StoreName,
                         ImageId = store.ProfileImage.ImageId
                     });
@@ -64,7 +64,7 @@ namespace Capstone_20130302.Controllers
                                   select _user.UserId).FirstOrDefault();
                     userResults.Add(new SearchItem
                     {
-                        ID = "/User/" + userId,
+                        ID = "/User/Id/" + userId,
                         Value = user.DisplayName,
                         ImageId = user.ProfileImage.ImageId
                     });

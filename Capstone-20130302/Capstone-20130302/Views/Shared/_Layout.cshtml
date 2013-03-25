@@ -26,7 +26,8 @@
             <div class="inner">
                 <div class="search-box">
                     <form action="Search" method="GET">
-                        <input type="text" class="span4" id="searchString" name="searchString" placeholder="Search for Stores, Products, and People"  onkeyup="search()">
+                        <input type="text" class="span4" id="searchString" name="searchString" placeholder="Search for Products, Stores, and People" onblur="$('#searchresult').hide()" onkeyup="search()">
+                        <!-- <input type="text" class="span4" id="searchString" name="searchString" placeholder="Search for Products, Stores, and People" onkeyup="search()"> -->
                         <div id ="searchresult">
                             <table>
                                 <tbody></tbody>

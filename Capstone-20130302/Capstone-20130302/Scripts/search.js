@@ -10,17 +10,18 @@
             success: function (data) {
                 $("#searchresult table tbody").html("");
                 var types = ["Products", "Stores", "Users"];
+                // $("#searchresult table tbody").append("<tr><th class='head' colspan='2'>Results for \""+searchvalue+"\"</th></tr>");
                 for (var i = 0; i < types.length; i++) {
                     $("#searchresult table tbody").append("<tr><th colspan='2'>"+ types[i] +" ("+data[types[i]].length+")</th></tr>");
                     if (data[types[i]].length == 0) {
-                        $("#searchresult table tbody").append("<tr><td colspan='2'>No matched result.</td></tr>");
+                        $("#searchresult table tbody").append("<tr><td colspan='2' class='empty'>No matched result.</td></tr>");
                     } else {
                         $.each(data[types[i]], function (i, item) {
-                            $("#searchresult table tbody").append("<tr><td><img src='/Image/"+ item.ImageId +"'/></td><td>" + item.Value + "</td></tr>");
+                            $("#searchresult table tbody").append("<tr><td><a href='"+item.ID+"'>"+"<div class='frame' style='background-image: url(/Image/"+ item.ImageId +");'></div></a></td><td><a class='value' href='"+item.ID+"'>" + item.Value + "</a></td></tr>");
                         });
                     }
                 };
-                $("#searchresult").slideDown(300);
+                $("#searchresult").show();
             },
         });
     } else {
