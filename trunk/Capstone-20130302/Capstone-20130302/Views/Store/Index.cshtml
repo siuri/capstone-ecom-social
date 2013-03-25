@@ -3,37 +3,28 @@
 @{
     ViewBag.Title = "Index";
 }
-<style type="text/css">
-    .tablemain
-    {
-        width: 100%;
-    }
-    .tablemain td,.tablemain th
-    {
-        border:solid 1px black;
-    }
-    .tablemain tr:nth-of-type(2n)
-    {
-        background:rgb(201, 201, 201);
-    }
-    .create a
-    {
-        text-align: center;
-        display: table-cell;
-        vertical-align: middle;
-        width: 164px;
-        height: 33px;
-        border: inset;
-        
-    }
-</style>
 <h2>Index</h2>
+        <link href="~/Content/demo_page.css" rel="stylesheet" />
+        <link href="~/Content/demo_table.css" rel="stylesheet" />
+       <script src="~/Scripts/jquery.dataTables.js"></script>
+		
+        <script type="text/javascript" charset="utf-8">
+			$(document).ready(function() {
+				$('#example').dataTable();
+			} );
+		</script>
+
+
 
 <p id ="create" class ="create">
     @Html.ActionLink("Create New", "Create")
 </p>
-<table id="tablemain" class ="tablemain">
-    <tr>
+
+
+
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+	<thead>
+		<tr>
         <th>
             @Html.DisplayNameFor(model => model.StoreName)
         </th>
@@ -49,8 +40,10 @@
   
         <th>   Action </th>
     </tr>
+	</thead>
+	<tbody>
 
-@foreach (var item in Model) {
+        @foreach (var item in Model) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.StoreName)
@@ -70,6 +63,8 @@
             @Html.ActionLink("Delete", "Delete", new { id=item.StoreId })
         </td>
     </tr>
-}
-
+}		
+	</tbody>
+	
 </table>
+

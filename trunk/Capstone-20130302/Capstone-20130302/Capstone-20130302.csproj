@@ -31,6 +31,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -211,6 +212,8 @@
     <Content Include="Content\compiled\store.css" />
     <Content Include="Content\compiled\user-profile.css" />
     <Content Include="Content\default.css" />
+    <Content Include="Content\demo_page.css" />
+    <Content Include="Content\demo_table.css" />
     <Content Include="Content\flexcrollstyles.css" />
     <Content Include="Content\override.css" />
     <Content Include="Content\select2.css" />
@@ -289,8 +292,15 @@
     <Content Include="Content\less\user-profile.less" />
     <Content Include="Images\avatar-social.jpg" />
     <Content Include="Images\avatar_default.jpg" />
+    <Content Include="Images\back_disabled.png" />
+    <Content Include="Images\back_enabled.png" />
+    <Content Include="Images\back_enabled_hover.png" />
     <Content Include="Images\chain.png" />
     <Content Include="Images\done.png" />
+    <Content Include="Images\favicon.ico" />
+    <Content Include="Images\forward_disabled.png" />
+    <Content Include="Images\forward_enabled.png" />
+    <Content Include="Images\forward_enabled_hover.png" />
     <Content Include="Images\header_bg.jpg" />
     <Content Include="Images\header_bg.png" />
     <Content Include="Images\header_bg2.jpg" />
@@ -312,12 +322,18 @@
     <Content Include="Images\product-image4.png" />
     <Content Include="Images\product-image5.png" />
     <Content Include="Images\product-label-inactive.jpg" />
+    <Content Include="Images\sort_asc.png" />
+    <Content Include="Images\sort_asc_disabled.png" />
+    <Content Include="Images\sort_both.png" />
+    <Content Include="Images\sort_desc.png" />
+    <Content Include="Images\sort_desc_disabled.png" />
     <Content Include="Images\statistic-content-header.png" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\default.js" />
     <Content Include="Scripts\flexcroll-uncompressed.js" />
     <Content Include="Scripts\flexcroll.js" />
     <Content Include="Scripts\countries.js" />
+    <Content Include="Images\Sorting icons.psd" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -325,8 +341,10 @@
     <Content Include="Scripts\jquery-1.9.0.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.1.js" />
     <Content Include="Scripts\jquery-ui-1.10.1.min.js" />
+    <Content Include="Scripts\jquery.dataTables.js" />
     <Content Include="Scripts\jquery.filedrop.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.maskedinput.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
