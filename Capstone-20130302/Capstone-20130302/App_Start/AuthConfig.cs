@@ -23,8 +23,10 @@ namespace Capstone_20130302
             //    consumerSecret: "");
 
             OAuthWebSecurity.RegisterFacebookClient(
-                appId: "541295582548776",
-                appSecret: "bd4ee84ce81e70abe259401a7357392a");
+                appId: "564470956905452",
+                appSecret: "096b7def86ef26d4c575914500599f13");
+                //appId: "541295582548776",
+               // appSecret: "bd4ee84ce81e70abe259401a7357392a"); 
 
             //OAuthWebSecurity.RegisterGoogleClient();
         }
