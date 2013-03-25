@@ -13,12 +13,18 @@ using Capstone_20130302.Models;
 
 namespace Capstone_20130302.Controllers
 {
+    
+
     [Authorize]
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //
         // GET: /Account/Login
+
+
+        private SocialBuyContext db = new SocialBuyContext();
+
 
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -80,9 +86,10 @@ namespace Capstone_20130302.Controllers
                 try
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+
                     WebSecurity.Login(model.UserName, model.Password);
-
-
+                    //  Get current user
+                    Roles.AddUsersToRoles(new[] { model.UserName }, new[] { "buyer" });
                     return RedirectToAction("Create", "Profile");
                 }
                 catch (MembershipCreateUserException e)
@@ -277,7 +284,7 @@ namespace Capstone_20130302.Controllers
 
                         OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
                         OAuthWebSecurity.Login(provider, providerUserId, createPersistentCookie: false);
-
+                        Roles.AddUsersToRoles(new[] { model.UserName }, new[] { "buyer" });
                         return RedirectToAction("Create","Profile");
                     }
                     else

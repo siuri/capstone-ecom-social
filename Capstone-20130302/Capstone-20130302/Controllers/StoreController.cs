@@ -18,6 +18,7 @@ namespace Capstone_20130302.Controllers
         
         public ActionResult Index()
         {
+            
             List<Store> store = db.Stores.ToList();
             return View(store);       
         }
@@ -51,6 +52,10 @@ namespace Capstone_20130302.Controllers
         {
             if (ModelState.IsValid)
             {
+                store.StatusId = 1;
+                store.TotalFollowers = 0;
+                store.TotalFollowings = 0;
+                store.CreateDate = DateTime.Now;
                 db.Stores.Add(store);
                 db.SaveChanges();
                 return RedirectToAction("Index");

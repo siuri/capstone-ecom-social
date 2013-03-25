@@ -177,6 +177,7 @@
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
+    <Compile Include="Logic\Category_Logic.cs" />
     <Compile Include="Migrations\201303221418493_Init.cs" />
     <Compile Include="Migrations\201303221418493_Init.Designer.cs">
       <DependentUpon>201303221418493_Init.cs</DependentUpon>
@@ -334,6 +335,9 @@
     <Content Include="Scripts\flexcroll.js" />
     <Content Include="Scripts\countries.js" />
     <Content Include="Images\Sorting icons.psd" />
+    <Content Include="Content\avenir-book-webfont.ttf" />
+    <Content Include="Content\avenir-heavy-webfont.ttf" />
+    <Content Include="Content\avenir-medium-webfont.ttf" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -419,7 +423,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Logic\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
