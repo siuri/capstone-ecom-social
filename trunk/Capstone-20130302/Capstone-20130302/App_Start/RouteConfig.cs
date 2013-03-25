@@ -16,17 +16,17 @@ namespace Capstone_20130302
 
             routes.MapRoute(
                 name: "StoreRoute",
-                url: "Store/{id}",
+                url: "Store/Id/{id}",
                 defaults: new { controller = "Store", action = "Details", id = UrlParameter.Optional }
             );
             routes.MapRoute(
                 name: "ProductRoute",
-                url: "Product/{id}",
+                url: "Product/Id/{id}",
                 defaults: new { controller = "Product", action = "Details", id = UrlParameter.Optional }
             );
             routes.MapRoute(
                 name: "UserRoute",
-                url: "User/{id}",
+                url: "User/Id/{id}",
                 defaults: new { controller = "User", action = "Details", id = UrlParameter.Optional }
             );
             routes.MapRoute(

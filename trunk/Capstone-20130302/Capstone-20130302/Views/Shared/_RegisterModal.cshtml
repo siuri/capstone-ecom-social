@@ -5,17 +5,17 @@
 <div id="register-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-logo"></div>
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">Become a Member</h3>
     </div>
     <div class="modal-body">
         <section id="registerForm">
             <form action="/Account/Register" method="post" novalidate="novalidate">
                 @Html.AntiForgeryToken()
-
-                <ul>
-                    <li style="display:none"></li>
-                </ul>
+                <br>
+                <div class="validation-summary-errors" data-valmsg-summary="true">
+                    <ul>
+                    </ul>
+                </div>
                 <ul>
                     <li>
                         <input placeholder="User name" data-val="true" data-val-required="The User name field is required." id="UserName" name="UserName" type="text">
