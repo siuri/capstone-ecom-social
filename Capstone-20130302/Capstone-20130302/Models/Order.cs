@@ -47,11 +47,15 @@ namespace Capstone_20130302.Models
         public virtual Address ShippingAddress { get; set; }
 
         public virtual int? StatusId { get; set; }
-
         [ForeignKey("StatusId")]
         [DisplayName("Order Status")]
         public virtual OrderStatus Status { get; set; }
 
+
+        public virtual int? UserId { get; set; }
+        [ForeignKey("UserId")]
+        [DisplayName("UserId")]
+        public virtual UserProfile Users { get; set; }
 
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
