@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    <link rel="stylesheet" href="/Content/select2.css" />
+    <link rel="stylesheet" href="/Content/themes/base/jquery-ui.css" />
+    <script src="/Scripts/jquery.filedrop.js"></script>
+    <script src="/Scripts/upload.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
+    <script src="/Scripts/jquery.maskedinput.min.js"></script>
+    <script src="/Scripts/select2.min.js"></script>
+    <script src="/Scripts/search.js"></script>
+    @Scripts.Render("~/bundles/default")
+
+</head>
+<body>
+    <div id="content-header">
+        <header>
+            <div class="inner">
+                <div class="search-box">
+                    <form action="Search" method="GET">
+                        <input type="text" class="span4" id="searchString" name="searchString" placeholder="Search for Products, Stores, and People" onblur="$('#searchresult').hide()" onkeyup="search()">
+                        <!-- <input type="text" class="span4" id="searchString" name="searchString" placeholder="Search for Products, Stores, and People" onkeyup="search()"> -->
+                        <div id ="searchresult">
+                            <table>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+                <div id="logo"></div>
+                <div id="header-menu">
+                    <div class="user-menu">
+                        @Html.Partial("_LoginPartial")
+                    </div>
+                    <ul class="noti5s">
+                        <li id="cart"><a href="#">
+                            <img src="images/icon-cart.png"><span class="badge badge-inverse">3</span></a><div class="cart-container" style="display: none;">
+                                <div class="store"><a href="#" class="store-title">KLIA Outlet Store</a><a href="#" class="check-out">CHECK OUT</a></div>
+                                <div class="product">
+                                    <img src="images/product-icon.jpg"><div class="info">
+                                        <div class="title"><a href="#">KLIA Double Bed</a></div>
+                                        <div class="price-quantity">$19.35 x&nbsp;<span class="badge">3</span></div>
+                                        <div class="action"><a href="#">Remove</a></div>
+                                    </div>
+                                </div>
+                                <div class="product">
+                                    <img src="images/product-icon.jpg"><div class="info">
+                                        <div class="title"><a href="#">KLIA Double Bed</a></div>
+                                        <div class="price-quantity">$19.35 x&nbsp;<span class="badge">3</span></div>
+                                        <div class="action"><a href="#">Remove</a></div>
+                                    </div>
+                                </div>
+                                <div class="store"><a href="#" class="store-title">KLIA Outlet Store</a><a href="#" class="check-out">CHECK OUT</a></div>
+                                <div class="product">
+                                    <img src="images/product-icon.jpg"><div class="info">
+                                        <div class="title"><a href="#">KLIA Double Bed</a></div>
+                                        <div class="price-quantity">$19.35 x&nbsp;<span class="badge">3</span></div>
+                                        <div class="action"><a href="#">Remove</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <nav>
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <ul class="nav">
+                        <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        <li><a href="#">Link</a></li>
+                        <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Link<b class="caret"></b></a><ul class="dropdown-menu">
+                            <li><a href="#">Sub menu1</a></li>
+                            <li><a href="#">Sub menu1</a></li>
+                        </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    @RenderBody()
+    @RenderSection("featured", required: false)
+    @RenderSection("scripts", required: false)
+</body>
+</html>
