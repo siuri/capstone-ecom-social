@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Capstone_20130302.Logic;
 using Capstone_20130302.Models;
 
 namespace Capstone_20130302.Controllers
@@ -29,6 +30,10 @@ namespace Capstone_20130302.Controllers
         public ActionResult Details(int id = 0)
         {
             Store store = db.Stores.Find(id);
+
+            List<UserProfile> listprofile = new List<UserProfile>();
+            listprofile = Follow_Logic.GetListFollow(3, id);
+            ViewBag.listprofile = listprofile;
             if (store == null)
             {
                 return HttpNotFound();

@@ -9,6 +9,7 @@ using Capstone_20130302.Models;
 using System.IO;
 using System.Data.Entity.Validation;
 using System.Text;
+using Capstone_20130302.Logic;
 
 namespace Capstone_20130302.Controllers
 {
@@ -39,6 +40,9 @@ namespace Capstone_20130302.Controllers
         public ActionResult Details(int id = 0)
         {
             Product product = db.Products.Find(id);
+
+           
+
             if (product == null)
             {
                 return HttpNotFound();
