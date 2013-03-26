@@ -1,87 +1,418 @@
 ﻿@model Capstone_20130302.Models.Product
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = @Html.DisplayFor(model => model.Name) + " - SocialBuy.vn";
+    Layout = "~/Views/Shared/_FreeLayout.cshtml";
 }
 
-<h2>Details</h2>
+<div class="page" id="p-product">
+    <div class="header">
+        <div class="ribbon-wrapper">
+            <div class="btn-like"></div>
+        </div>
+        <div class="like-wrapper">
+            <div class="stat"><span>1,645</span> likes</div>
+            <div class="like-list">
+                <ul>
+                    <li><a href=""><img class="user" src="avt1.jpg"></a></li>
+                    <li><a href=""><img class="user" src="avt1.jpg"></a></li>
+                    <li><a href=""><img class="user" src="avt1.jpg"></a></li>
+                    <li><a href=""><img class="user" src="avt1.jpg"></a></li>
+                    <li><a href=""><img class="user" src="avt1.jpg"></a></li>
+                </ul>
+            </div>
+        </div>
+        <h3>@Html.DisplayFor(model => model.Name)</h3>
+        <a class="store " href="/Store/Id/@Html.DisplayFor(model => model.Store.StoreId)">@Html.DisplayFor(model => model.Store.StoreName)</a>
+            
+    </div>
+    <div class="clearfix">
+        <div class="left-side">
+            <div class="buy-wrapper">
+                <div class="stat"><span>16</span> people've bought this item</div>
+                <div class="buy-list">
+                    <ul>
+                        <li><a href=""><img class="user" src="avt1.jpg"></a></li>
+                        <li><a href=""><img class="user" src="avt1.jpg"></a></li>
+                        <li><a href=""><img class="user" src="avt1.jpg"></a></li>
+                        <li><a href=""><img class="user" src="avt1.jpg"></a></li>
+                        <li><a href=""><img class="user" src="avt1.jpg"></a></li>
+                    </ul>
+                </div>
+                <a class="btn add-cart" data-pid="@Model.ProductId" data-title="@Model.Name" data-sid="@Model.StoreId" data-store="@Model.Store.StoreName" data-fee="@Model.Store.ShipFee" data-image="/Image/@Model.ProductImages.ElementAt(0).ImageId" data-price="32.5">
+                    <span>@Html.DisplayFor(model => model.Price)</span>Add to Cart
+                </a>
+                <div class="desc">
+                    @Html.DisplayFor(model => model.Description)
+                </div>
+                <div class="specs">
+                    <h4>Specifications</h4>
+                    <table class="table">
+                        <tbody><tr><th>Colors</th><td>Red, Blue, Yellow</td></tr>
+                        <tr><th>Size</th><td>Small, Medium, Large</td></tr>
+                        <tr><th>Note</th><td>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </td></tr>
+                    </tbody></table>
+                </div>
+            </div>
+                
+        </div>
+        <div class="right-side">
+            <div id="product-carousel" class="carousel slide">
+                <!-- Carousel items -->
+                <div class="carousel-inner">
+                    @foreach (var image in Model.ProductImages)
+                    {
+                        if (image.ImageId == Model.ProductImages.ElementAt(0).ImageId) 
+                        {
+                            <div class="item active" style="background-image: url(/Image/@image.ImageId)"></div>
+                        }
+                        else {
+                            <div class="item" style="background-image: url(/Image/@image.ImageId)"></div>
+                        }
+                    }
+                </div>
+                <!-- Carousel nav -->
+                <a class="carousel-control left" href="#product-carousel" data-slide="prev">‹</a>
+                <a class="carousel-control right" href="#product-carousel" data-slide="next">›</a>
+            </div>
+            <div class="comment-wrapper">
+                <div class="stat"><span>12</span> comments</div>
+                <!-- Post box -->
+                <div class="postbox">
+                    <form action="">
+                        <div class="textarea-wrapper" data-role="textarea">
+                            <div class="textarea">
+                                <textarea placeholder="Leave a message..." rows="1"></textarea>
+                            </div>
+                            <div class="post-actions">
+                                <button type="submit" class="btn btn-small btn-default">
+                                    Post this comment
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Post box -->
+                <ul class="comment-list">
+                    <li class="item">
+                        <div class="avatar">
+                            <a href=""><img class="user" src="avt1.jpg"></a>
+                        </div>
+                        <div class="comment-box">
+                            <div class="header">
+                                <a href="" class="name">Jonathan Ive</a>
+                                <span class="time">05/20/2013 12:32:42</span>
+                            </div>
+                            <div class="content">Seeking a brand identity and packaging system for its new line of scrubbers and washcloths, Strategic Asian Imports partnered with Brand  to develop designs supportive of a high quality, luxury positioning. </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <div class="avatar">
+                            <a href=""><img class="user" src="avt1.jpg"></a>
+                        </div>
+                        <div class="comment-box">
+                            <div class="header">
+                                <a href="" class="name">Shop Owner<span class="owner"></span></a>
+                                <span class="time">05/20/2013 12:32:42</span>
+                            </div>
+                            <div class="content">Seeking a brand identity and packaging system for its new line of scrubbers and washcloths, Strategic Asian Imports partnered with Brand  to develop designs supportive of a high quality, luxury positioning. </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <div class="avatar">
+                            <a href=""><img class="user" src="avt1.jpg"></a>
+                        </div>
+                        <div class="comment-box">
+                            <div class="header">
+                                <a href="" class="name">Jonathan Ive</a>
+                                <span class="time">05/20/2013 12:32:42</span>
+                            </div>
+                            <div class="content">Seeking a brand identity and packaging system for its new line of scrubbers and washcloths, Strategic Asian Imports partnered with Brand  to develop designs supportive of a high quality, luxury positioning. </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <div class="avatar">
+                            <a href=""><img class="user" src="avt1.jpg"></a>
+                        </div>
+                        <div class="comment-box">
+                            <div class="header">
+                                <a href="" class="name">Shop Owner<span class="owner"></span></a>
+                                <span class="time">05/20/2013 12:32:42</span>
+                            </div>
+                            <div class="content">Seeking a brand identity and packaging system for its new line of scrubbers and washcloths, Strategic Asian Imports partnered with Brand  to develop designs supportive of a high quality, luxury positioning. </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 
-<fieldset>
-    <legend>Product</legend>
+<style type="text/css">
+    #p-product {
+        border: solid 1px #DBDBEA;
+        background: #fff;
+        margin: 50px auto;
+        padding: 40px;
+        box-sizing: border-box;
+        line-height: 1.5;
+        color: #646472;
+    }
+    #p-product .header {
+        position: relative;
+    }
+    #p-product .header h3 {
+        font-family: "Century";
+        font-weight: normal;
+        color: #1F1F2C;
+        font-size: 28px;
+    }
+    .like-wrapper {
+        float: right;
+        width: 220px;
+    }
+    
+    .buy-wrapper .stat span,
+    .comment-wrapper .stat span,
+    .like-wrapper .stat span {
+        font-family: "Century";
+        color: #CA6E63;
+        font-size: 120%;
+    }
+    .buy-wrapper .buy-list ul,
+    .like-wrapper .like-list ul {
+        margin-left: 0;
+        list-style: none;
+    }
+    .buy-wrapper .buy-list ul li,
+    .like-wrapper .like-list ul li {
+        margin-right: 1px;
+        float: left;
+    }
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
-    </div>
+    .left-side {
+        padding-top: 30px;
+        width: 35%;
+        float: left;
+    }
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Description)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Description)
-    </div>
+    .left-side h4 {
+        margin-top: 20px;
+        color: #CA6D63;
+    }
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Price)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Price)
-    </div>
+    .left-side table tr th {
+        padding-left: 0;
+        font-weight: normal;
+        color: rgba(100, 100, 114, 0.61);
+    }
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.TotalLikes)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.TotalLikes)
-    </div>
+    .left-side table tr td,
+    .left-side table tr th {
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.TotalComments)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.TotalComments)
-    </div>
+    .add-cart {
+        text-transform: uppercase;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.36);
+        font-size: 90%;
+        margin: 30px 0;
+        padding: 3px 15px;
+    }
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.TotalBuy)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.TotalBuy)
-    </div>
+    .add-cart span {
+        font-family: "Century";
+        margin-right: 10px;
+        font-size: 140%;
+        font-weight: normal;
+    }
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.SpecsInJson)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.SpecsInJson)
-    </div>
+    .right-side {
+        padding-top: 30px;
+        width: 60%;
+        float: right;
+    }
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.CreateDate)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.CreateDate)
-    </div>
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Category)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Category.Name)
-    </div>
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ProductImages)
-    </div>
-    <div class="display-field">
-        @foreach (var image in Model.ProductImages)
-        {
-            <img src="/Image/@image.ImageId" />
-        }
-        
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.ProductId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    .carousel .carousel-inner .item {
+        height: 400px;
+        overflow: hidden;
+        background-position: center;
+        background-size: 100%;
+        border-radius: 5px;
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.22);
+    }
+
+    .comment-form textarea {
+        width: 90%;
+        height: 30px;
+    }
+
+    .comment-form textarea:focus {
+        width: 90%;
+        height: 60px;
+    }
+
+    .postbox {
+        position: relative;
+        margin: 15px 0;
+    }
+
+    .postbox .post-actions {
+        visibility: visible;
+        filter: alpha(opacity=100);
+        -khtml-opacity: 1;
+        -moz-opacity: 1;
+        opacity: 1;
+    }
+
+    .postbox .post-actions {
+        -webkit-transition: opacity linear .2s;
+        -moz-transition: opacity linear .2s;
+        -ms-transition: opacity linear .2s;
+        -o-transition: opacity linear .2s;
+        transition: opacity linear .2s;
+        border-top: 1px dotted #C6CDD6;
+        text-align: right;
+    }
+
+    .textarea-wrapper {
+        -webkit-transition: all .2s linear;
+        -moz-transition: all .2s linear;
+        -ms-transition: all .2s linear;
+        -o-transition: all .2s linear;
+        transition: all .2s linear;
+        position: relative;
+        padding: 5px 0 0;
+        border-radius: 3px;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+        background-color: rgba(255, 255, 255, 0.45);
+        background-image: -webkit-linear-gradient(top,rgba(245, 245, 245, 0),rgba(255, 255, 255, 0.45));
+        border: 1px solid rgba(75, 83, 94, 0.45);
+    }
+
+    .textarea-wrapper textarea {
+        border: none;
+        margin: 0;
+        width: 100%;
+        box-sizing: border-box;
+        box-shadow: none;
+        resize: none;
+    }
+
+    .textarea-wrapper textarea:focus {
+        box-shadow: none;
+        height: 60px;
+    }
+
+    .textarea-wrapper:focus .post-actions {
+        opacity: 1;
+    }
+
+    .post-actions .btn {
+        border-radius: 0 0 4px 0;
+        border: solid 1px #979797;
+        color: #424242;
+        font-weight: bold;
+        text-transform: uppercase;
+        background: -webkit-linear-gradient(top, #FCFCFC, #CACACA);
+        text-shadow: 1px 1px 2px white;
+        box-shadow: inset 1px 1px 5px white;
+        position: relative;
+        right: -2px;
+    }
+
+    .post-actions .btn:hover {
+        background: -webkit-linear-gradient(top, #CACACA, #FCFCFC);
+    }
+    .post-actions .btn:focus {
+        background: #CACACA;
+    }
+
+    .comment-list {
+        list-style: none;
+        margin-left: 0;
+    }
+
+    .comment-list li.item {
+        margin-bottom: 10px;
+    }
+
+    .comment-list li.item .avatar {
+        position: absolute;
+    }
+
+    .comment-list li.item .comment-box {
+        margin-left: 55px;
+    }
+
+    .comment-list li.item .comment-box .content {
+        line-height: 1.4;
+        opacity: .8
+    }
+
+    .comment-list li.item img {
+        float: left;
+        margin-right: 15px;
+    }
+
+    .comment-list li.item a.name {
+        font-weight: bold;
+        color: #D86959;
+    }
+
+    .comment-list li.item a.name .owner:after {
+        content: "Owner";
+        margin-left: 8px;
+        text-transform: uppercase;
+        background: rgba(236, 97, 97, 0.69);
+        font-weight: normal;
+        color: white;
+        font-size: 80%;
+        padding: 2px 5px;
+        border-radius: 2px;
+    }
+
+    .comment-list li.item .time {
+        opacity: 0;
+        float: right;
+    } 
+
+    .comment-list li.item:hover .time {
+        opacity: .6;
+    }
+
+    .ribbon-wrapper {
+        position: absolute;
+        width: 41px;
+        top: -59px;
+        right: 0;
+    }
+
+    .btn-like {
+        background: url(like-ribbon.png) no-repeat 0 -73px;
+        width: 41px;
+        height: 66px;
+        cursor: pointer;
+        -webkit-transition: opacity linear .5s;
+        -moz-transition: opacity linear .5s;
+        -ms-transition: opacity linear .5s;
+        -o-transition: opacity linear .5s;
+        transition: opacity linear .5s;
+    }
+
+    .btn-like.active {
+        background: url(like-ribbon.png) no-repeat 0 0;
+        -webkit-transition: opacity linear .5s;
+        -moz-transition: opacity linear .5s;
+        -ms-transition: opacity linear .5s;
+        -o-transition: opacity linear .5s;
+        transition: opacity linear .5s;
+    }
+
+</style>
+<script type="text/javascript">
+    $(".btn-like").click(function() {
+        $(this).toggleClass("active");
+    })
+</script>
