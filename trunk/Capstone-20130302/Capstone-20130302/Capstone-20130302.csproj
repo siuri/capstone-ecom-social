@@ -179,9 +179,9 @@
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Logic\Category_Logic.cs" />
     <Compile Include="Logic\Follow_Logic.cs" />
-    <Compile Include="Migrations\201303221418493_Init.cs" />
-    <Compile Include="Migrations\201303221418493_Init.Designer.cs">
-      <DependentUpon>201303221418493_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201303261615429_Init.cs" />
+    <Compile Include="Migrations\201303261615429_Init.Designer.cs">
+      <DependentUpon>201303261615429_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
@@ -197,6 +197,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Image.cs" />
+    <Compile Include="Models\ProductLike.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\Store.cs" />
     <Compile Include="Models\SocialBuyContext.cs" />
@@ -430,8 +431,8 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201303221418493_Init.resx">
-      <DependentUpon>201303221418493_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201303261615429_Init.resx">
+      <DependentUpon>201303261615429_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
