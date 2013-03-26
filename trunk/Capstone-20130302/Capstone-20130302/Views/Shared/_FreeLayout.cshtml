@@ -42,29 +42,29 @@
                     </div>
                     <ul class="noti5s">
                         <li id="cart"><a href="#">
-                            <img src="images/icon-cart.png"><span class="badge badge-inverse">3</span></a><div class="cart-container" style="display: none;">
-                                <div class="store"><a href="#" class="store-title">KLIA Outlet Store</a><a href="#" class="check-out">CHECK OUT</a></div>
-                                <div class="product">
-                                    <img src="images/product-icon.jpg"><div class="info">
-                                        <div class="title"><a href="#">KLIA Double Bed</a></div>
-                                        <div class="price-quantity">$19.35 x&nbsp;<span class="badge">3</span></div>
-                                        <div class="action"><a href="#">Remove</a></div>
+                            <img src="images/icon-cart.png"><span class="badge badge-inverse">3</span></a>
+                            <div class="cart-container" style="display: none;">
+                                <div data-bind="style:{display:shops().length==0?'none':'block'}">
+                                <div data-bind="foreach: shops">
+                                    <div class="store">
+                                        <a href="#" class="store-title" data-bind="text: storeTitle"></a>
+                                        <a href="#" class="check-out">CHECK OUT</a>
+                                    </div>
+                                    <div data-bind="foreach: products">
+                                        <div class="product">
+                                            <img src="images/product-icon.jpg" data-bind="attr:{src: productImage}">
+                                            <div class="info">
+                                                <div class="title">
+                                                    <a href="#" data-bind="text: productTitle"></a>
+                                                </div>
+                                                <div class="price-quantity">
+                                                    $<span  data-bind="text: productPrice"></span>
+                                                    x&nbsp;<span class="badge" data-bind="text: productQuantity"></span></div>
+                                                <div class="action"><a href="#" data-bind="click: function(data){$parent.removeProduct(data,$root)}">Remove</a></div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="product">
-                                    <img src="images/product-icon.jpg"><div class="info">
-                                        <div class="title"><a href="#">KLIA Double Bed</a></div>
-                                        <div class="price-quantity">$19.35 x&nbsp;<span class="badge">3</span></div>
-                                        <div class="action"><a href="#">Remove</a></div>
-                                    </div>
-                                </div>
-                                <div class="store"><a href="#" class="store-title">KLIA Outlet Store</a><a href="#" class="check-out">CHECK OUT</a></div>
-                                <div class="product">
-                                    <img src="images/product-icon.jpg"><div class="info">
-                                        <div class="title"><a href="#">KLIA Double Bed</a></div>
-                                        <div class="price-quantity">$19.35 x&nbsp;<span class="badge">3</span></div>
-                                        <div class="action"><a href="#">Remove</a></div>
-                                    </div>
                                 </div>
                             </div>
                         </li>
