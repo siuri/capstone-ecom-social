@@ -177,9 +177,11 @@
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
+    <Compile Include="Logic\Account_Logic.cs" />
     <Compile Include="Logic\Category_Logic.cs" />
     <Compile Include="Logic\Follow_Logic.cs" />
     <Compile Include="Logic\Product_Logic.cs" />
+    <Compile Include="Logic\UserProfiles_Logic.cs" />
     <Compile Include="Migrations\201303261615429_Init.cs" />
     <Compile Include="Migrations\201303261615429_Init.Designer.cs">
       <DependentUpon>201303261615429_Init.cs</DependentUpon>

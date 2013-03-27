@@ -1,12 +1,32 @@
 ﻿@model Capstone_20130302.Models.Profile
-
+@using Capstone_20130302.Models
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_SimpleLayout.cshtml";
+    List<Store> liststore = ViewBag.liststore;
+    List<Product> listpro = ViewBag.listpro;
 }
-
 <h2>Details</h2>
+<p>Store follow and Product like </p>
+    
+<p>@liststore.Count Store follow</p>
+@foreach (Store store in liststore)
+{
+    <div>
+        @store.StoreName
+    </div>
+}
+<br />
 
+
+<p>@listpro.Count Product like</p>
+
+@foreach (Product pro in listpro)
+{
+    <div>
+        @pro.Name;
+    </div>
+}
 <fieldset>
     <legend>Profile</legend>
 

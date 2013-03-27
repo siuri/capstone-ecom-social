@@ -23,7 +23,11 @@ namespace Capstone_20130302.Logic
 
         private static SocialBuyContext db = new SocialBuyContext();
 
-
+        #region [ Caterory Combobox ]
+        /// <summary>
+        ///  Create Caterory Combobox
+        /// </summary>
+        /// <returns>List json</returns>
         public static List<_text> CateroryCombobox()
         {
 
@@ -86,5 +90,7 @@ namespace Capstone_20130302.Logic
            
            // return json;
         }
+
+        #endregion
     }
 }

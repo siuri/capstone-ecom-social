@@ -10,6 +10,7 @@ using System.Data.Entity.Validation;
 using System.Text;
 using System.IO;
 using WebMatrix.WebData;
+using Capstone_20130302.Logic;
 
 namespace Capstone_20130302.Controllers
 {
@@ -35,6 +36,18 @@ namespace Capstone_20130302.Controllers
             {
                 return HttpNotFound();
             }
+            // Get user profile
+            UserProfile user = UserProfiles_Logic.GetUserProfileByProfileID(id);
+            
+            // Get list store follow
+            List<Store> liststore = Account_Logic.GetListStoreFollowByUser(user.UserId);
+            ViewBag.liststore = liststore;
+
+            // Get list product like
+            List<Product> listpro = Account_Logic.GetListProductLikeByUser(user.UserId);
+            ViewBag.listpro = listpro;
+
+
             return View(profile);
         }
 
