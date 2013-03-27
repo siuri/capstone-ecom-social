@@ -1,8 +1,14 @@
-﻿@model Capstone_20130302.Models.Product
-
+﻿@using Capstone_20130302.Models
 @{
+    List<UserProfile> listlike = ViewBag.listlike;
+    List<UserProfile> listbuy = ViewBag.listbuy;
+}
+@model Capstone_20130302.Models.Product
+@{
+  
     ViewBag.Title = @Html.DisplayFor(model => model.Name) + " - SocialBuy.vn";
     Layout = "~/Views/Shared/_FreeLayout.cshtml";
+    
 }
 
 <div class="page" id="p-product">
@@ -11,14 +17,15 @@
             <div class="btn-like"></div>
         </div>
         <div class="like-wrapper">
-            <div class="stat"><span>1,645</span> likes</div>
+            <div class="stat"><span>@listlike.Count.ToString("###,###,###,0")</span> likes</div>
             <div class="like-list">
                 <ul>
-                    <li><a href=""><img class="user" src="avt1.jpg"></a></li>
-                    <li><a href=""><img class="user" src="avt1.jpg"></a></li>
-                    <li><a href=""><img class="user" src="avt1.jpg"></a></li>
-                    <li><a href=""><img class="user" src="avt1.jpg"></a></li>
-                    <li><a href=""><img class="user" src="avt1.jpg"></a></li>
+                    @foreach(UserProfile user in listlike)
+                    {
+                        
+                        <li><a href="#"><img class="user" src="/Images/@user.Profile.ProfileImage.Path"></a></li>
+                    }
+                    
                 </ul>
             </div>
         </div>
@@ -29,14 +36,14 @@
     <div class="clearfix">
         <div class="left-side">
             <div class="buy-wrapper">
-                <div class="stat"><span>16</span> people've bought this item</div>
+                <div class="stat"><span>@listbuy.Count.ToString("###,###,###,0")</span> people've bought this item</div>
                 <div class="buy-list">
                     <ul>
-                        <li><a href=""><img class="user" src="avt1.jpg"></a></li>
-                        <li><a href=""><img class="user" src="avt1.jpg"></a></li>
-                        <li><a href=""><img class="user" src="avt1.jpg"></a></li>
-                        <li><a href=""><img class="user" src="avt1.jpg"></a></li>
-                        <li><a href=""><img class="user" src="avt1.jpg"></a></li>
+                        @foreach(UserProfile user in listbuy)
+                        {
+                            <li><a href=""><img class="user" src="@user.Profile.ProfileImage.Path"></a></li>
+                        }
+                       
                     </ul>
                 </div>
                 <a class="btn add-cart" data-pid="@Model.ProductId" data-title="@Model.Name" data-sid="@Model.Store.StoreId" data-store="@Model.Store.StoreName" data-fee="@Model.Store.ShipFee" data-image="/Image/@Model.ProductImages.ElementAt(0).ImageId" data-price="32.5">

@@ -39,14 +39,16 @@ namespace Capstone_20130302.Controllers
 
         public ActionResult Details(int id = 0)
         {
+
             Product product = db.Products.Find(id);
-
-           
-
             if (product == null)
             {
                 return HttpNotFound();
             }
+            List<UserProfile> listlike = Product_Logic.GetListUserProfileRandom(1, id, 5);
+            ViewBag.listlike = listlike;
+            List<UserProfile> listbuy = Product_Logic.GetListUserProfileRandom(2, id, 5);
+            ViewBag.listbuy = listbuy;
             return View(product);
         }
 
