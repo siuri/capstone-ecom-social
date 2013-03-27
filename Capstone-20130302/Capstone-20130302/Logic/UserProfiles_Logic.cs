@@ -24,5 +24,22 @@ namespace Capstone_20130302.Logic
             return user;
         }
         #endregion
+
+
+        #region [Get User Profile By User Name]
+        /// <summary>
+        /// Get User Profile By User Name
+        /// </summary>
+        /// <param name="profileID">User Name</param>
+        /// <returns>object UserProfile</returns>
+        public static UserProfile GetUserProfileByUserName(string username)
+        {
+            UserProfile user = (from UserProfile us in db.UserProfiles
+                                where us.UserName == username
+                                select us).FirstOrDefault();
+            return user;
+        }
+        #endregion
+
     }
 }

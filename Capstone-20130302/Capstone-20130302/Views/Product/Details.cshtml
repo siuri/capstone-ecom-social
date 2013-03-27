@@ -2,6 +2,8 @@
 @{
     List<UserProfile> listlike = ViewBag.listlike;
     List<UserProfile> listbuy = ViewBag.listbuy;
+    List<Comment> listcmt = ViewBag.listcmt;
+    UserProfile _user  =  ViewBag.detailuser;
 }
 @model Capstone_20130302.Models.Product
 @{
@@ -86,72 +88,48 @@
                 <a class="carousel-control right" href="#product-carousel" data-slide="next">›</a>
             </div>
             <div class="comment-wrapper">
-                <div class="stat"><span>12</span> comments</div>
+                <div class="stat"><span>@listcmt.Count</span> comments</div>
                 <!-- Post box -->
                 <div class="postbox">
-                    <form action="">
+
+                    <form action="" method="get" onsubmit="return PostComment()" accept-charset="utf-8">
+
                         <div class="textarea-wrapper" data-role="textarea">
-                            <div class="textarea">
-                                <textarea placeholder="Leave a message..." rows="1"></textarea>
+                            <div class="textarea" >
+                                <textarea onkeyup="CheckContent(this.value)" id="contentcomment" placeholder="Leave a message..." rows="1"></textarea>
+
                             </div>
+
                             <div class="post-actions">
+                                <div id="error" class ="errorcomment"></div>
                                 <button type="submit" class="btn btn-small btn-default">
                                     Post this comment
                                 </button>
                             </div>
                         </div>
                     </form>
+
+
                 </div>
                 <!-- Post box -->
                 <ul class="comment-list">
-                    <li class="item">
+                    @foreach (Comment cmt in listcmt)
+                    {
+                           <li class="item">
                         <div class="avatar">
-                            <a href=""><img class="user" src="avt1.jpg"></a>
+                            <a href=""><img class="user" src="@cmt.User.Profile.ProfileImage.Path"></a>
                         </div>
                         <div class="comment-box">
                             <div class="header">
-                                <a href="" class="name">Jonathan Ive</a>
-                                <span class="time">05/20/2013 12:32:42</span>
+                                <a href="" class="name">@cmt.User.Profile.DisplayName   @if (cmt.User.UserName == Model.Store.Owner.UserName)
+                                                                                        { <span class="owner"></span> } </a>
+                                <span class="time">@cmt.CreateDate.ToString("dd/MM/yyyy hh:mm:ss")</span>
                             </div>
-                            <div class="content">Seeking a brand identity and packaging system for its new line of scrubbers and washcloths, Strategic Asian Imports partnered with Brand  to develop designs supportive of a high quality, luxury positioning. </div>
+                            <div class="content">@cmt.CommentContent</div>
                         </div>
-                    </li>
-                    <li class="item">
-                        <div class="avatar">
-                            <a href=""><img class="user" src="avt1.jpg"></a>
-                        </div>
-                        <div class="comment-box">
-                            <div class="header">
-                                <a href="" class="name">Shop Owner<span class="owner"></span></a>
-                                <span class="time">05/20/2013 12:32:42</span>
-                            </div>
-                            <div class="content">Seeking a brand identity and packaging system for its new line of scrubbers and washcloths, Strategic Asian Imports partnered with Brand  to develop designs supportive of a high quality, luxury positioning. </div>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <div class="avatar">
-                            <a href=""><img class="user" src="avt1.jpg"></a>
-                        </div>
-                        <div class="comment-box">
-                            <div class="header">
-                                <a href="" class="name">Jonathan Ive</a>
-                                <span class="time">05/20/2013 12:32:42</span>
-                            </div>
-                            <div class="content">Seeking a brand identity and packaging system for its new line of scrubbers and washcloths, Strategic Asian Imports partnered with Brand  to develop designs supportive of a high quality, luxury positioning. </div>
-                        </div>
-                    </li>
-                    <li class="item">
-                        <div class="avatar">
-                            <a href=""><img class="user" src="avt1.jpg"></a>
-                        </div>
-                        <div class="comment-box">
-                            <div class="header">
-                                <a href="" class="name">Shop Owner<span class="owner"></span></a>
-                                <span class="time">05/20/2013 12:32:42</span>
-                            </div>
-                            <div class="content">Seeking a brand identity and packaging system for its new line of scrubbers and washcloths, Strategic Asian Imports partnered with Brand  to develop designs supportive of a high quality, luxury positioning. </div>
-                        </div>
-                    </li>
+                     </li>
+                    }
+
                 </ul>
             </div>
         </div>
@@ -159,6 +137,10 @@
 </div>
 
 <style type="text/css">
+    .errorcomment    {
+        float:left;
+        color:red;
+    }
     #p-product {
         border: solid 1px #DBDBEA;
         background: #fff;
@@ -441,6 +423,80 @@
 </script>
 
 <script type="text/javascript">
+    function CheckContent(value){
+        if(value.length < 1 )
+        {
+            $('#error').text('Comment field is required.');
+            return false;
+        }
+        else
+        {
+            $('#error').text('');
+            return true;
+        }
+    }
+    function GetHTMLContent(text){
+        @if (User.Identity.IsAuthenticated != false)
+        {
+            <text>
+                var texthtml = '';
+                texthtml = '<li class="item">';
+                texthtml +=  '<div class="avatar">';
+                texthtml += '<a href=""><img class="user" src="@_user.Profile.ProfileImage.Path"></a>';
+                texthtml += '</div>';
+                texthtml += '<div class="comment-box">';
+                texthtml += '<div class="header">';
+                texthtml += '<a href="" class="name"> @_user.Profile.DisplayName';
+                if (_user.UserName == Model.Store.Owner.UserName)
+                {
+                   texthtml +=  ' <span class="owner"></span>';                                                      
+                }
+                texthtml += '</a>';
+                texthtml += '<span class="time">@DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss")</span>';
+                texthtml +='</div>';
+                texthtml +='<div class="content">' + text + '</div>';
+                texthtml += '</div>';
+                texthtml += '</li>';
+             </text>
+        }
+    }
+
+    function PostComment(){       
+        var text = document.getElementById('contentcomment');
+        if(text.value.length < 1 )
+        {
+            $('#error').text('Comment field is required.');
+
+            return false;
+        }
+
+        var postData = { 'ProductId': @Model.ProductId,'CommentContent' : text.value };
+        jQuery.ajax({
+            url: '../../Product/PostComment',
+            traditional: true,
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json', type: "POST",
+            data: JSON.stringify(postData),
+            success: function (data) {
+               
+                if (data == "true") {
+                    var html = GetHTMLContent(text.value);
+                    alert(html);
+                    $('comment-list').append('')
+                }
+                else
+                {
+                    alert(data);     
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.statusText);
+            }
+        });
+        return false;
+    }
+
+
     function CartViewModel() {
         var self = this;
         self.shops = ko.observableArray([]);

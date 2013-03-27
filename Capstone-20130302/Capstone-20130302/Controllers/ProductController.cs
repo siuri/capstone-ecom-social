@@ -47,12 +47,44 @@ namespace Capstone_20130302.Controllers
             {
                 return HttpNotFound();
             }
+            if (User.Identity.IsAuthenticated != false)
+            {
+                UserProfile user = UserProfiles_Logic.GetUserProfileByUserName(User.Identity.Name);
+                ViewBag.detailuser = user;
+            }
+            else
+            {
+                ViewBag.detailuser = null;
+            }
+            // List user like product
             List<UserProfile> listlike = Product_Logic.GetListUserProfileRandom(1, id, 5);
             ViewBag.listlike = listlike;
+            // List user buy product
             List<UserProfile> listbuy = Product_Logic.GetListUserProfileRandom(2, id, 5);
             ViewBag.listbuy = listbuy;
+            // List comment product
+            List<Comment> listcmt = Comment_Logic.GetListCommentByProductID(id);
+            ViewBag.listcmt = listcmt;
             return View(product);
         }
+
+        [HttpPost]
+        public JsonResult PostComment(Comment cmt)
+        {
+            if (User.Identity.IsAuthenticated == false)
+            {
+                return Json("You must login to comment");
+            }
+            cmt.CreateDate = DateTime.Now;
+            cmt.User = UserProfiles_Logic.GetUserProfileByUserName(User.Identity.Name);
+            if (Comment_Logic.AddNewComment(cmt) > 0)
+            {
+                return Json("true");   
+            }
+            return Json("Add comment error");  
+                   
+        }
+
 
         //
         // GET: /Product/Create
