@@ -31,17 +31,22 @@ namespace Capstone_20130302.Models
         public float Price { get; set; }
 
         [ScaffoldColumn(false)]
+        [DisplayName("Likes")]
         public int TotalLikes { get; set; }
         
         [ScaffoldColumn(false)]
+        [DisplayName("Comments")]
         public int TotalComments { get; set; }
 
         [ScaffoldColumn(false)]
+        [DisplayName("Purchases")]
         public int TotalBuy { get; set; }
 
         public string SpecsInJson { get; set; }
         
         [ScaffoldColumn(false)]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
+        [DisplayName("Create Date")]
         public DateTime CreateDate { get; set; }
 
         public virtual int? StatusId { get; set; }

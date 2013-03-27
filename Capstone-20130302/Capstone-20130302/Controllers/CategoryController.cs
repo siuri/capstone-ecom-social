@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Capstone_20130302.Models;
 using WebMatrix.WebData;
+using Capstone_20130302.Logic;
 
 namespace Capstone_20130302.Controllers
 {
@@ -52,6 +53,11 @@ namespace Capstone_20130302.Controllers
                 return RedirectToAction("Index"); // TODO: redirect to home
             }
             return View(categories);
+        }
+
+        public ActionResult DropDown()
+        {
+            return Json(Category_Logic.CateroryCombobox(), JsonRequestBehavior.AllowGet);
         }
 
         //

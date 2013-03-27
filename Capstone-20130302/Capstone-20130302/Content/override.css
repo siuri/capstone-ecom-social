@@ -582,3 +582,7 @@ td.title {
     margin: 0;
     float: right;
 }
+
+.center {
+    text-align: center !important;
+}
