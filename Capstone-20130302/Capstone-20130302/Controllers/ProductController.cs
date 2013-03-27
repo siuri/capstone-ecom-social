@@ -10,6 +10,8 @@ using System.IO;
 using System.Data.Entity.Validation;
 using System.Text;
 using Capstone_20130302.Logic;
+using Capstone_20130302.Constants;
+using WebMatrix.WebData;
 
 namespace Capstone_20130302.Controllers
 {
@@ -54,27 +56,56 @@ namespace Capstone_20130302.Controllers
 
         //
         // GET: /Product/Create
-
-        public ActionResult Create()
+        [Authorize(Roles = Constant.ROLE_SELLER)]
+        public ActionResult Create(int sid = -1, int cid = -1)
         {
-            Category cate = db.Categories.Find(4);
-            Product p = new Product();
-            p.SpecsInJson = cate.Template.ContentInJson;
-            return View(p);
+            if (sid == -1 || cid == -1)
+            {
+                ViewBag.Message = "Please define your Store and Category.";
+                return View("Error");
+            }
+            else
+            {
+                Store store = db.Stores.Find(sid);
+                if (store != null && store.OwnerId == WebSecurity.CurrentUserId)
+                {
+                    Category category = db.Categories.Find(cid);
+                    if (category != null)
+                    {
+                        Product p = new Product();
+                        p.SpecsInJson = category.Template.ContentInJson;
+                        p.StoreId = store.StoreId;
+                        ViewBag.Store = store;
+                        ViewBag.Category = category;
+                        return View(p);
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Can't define the Category";
+                        return View("Error");
+                    }
+                }
+                else
+                {
+                    ViewBag.Message = "Sorry, we can't find the store or you're not the owner.";
+                    return View("Error");
+                }
+                
+            }
         }
 
         //
         // POST: /Product/Create
-
+        [Authorize(Roles = Constant.ROLE_SELLER)]
         [HttpPost]
-        public ActionResult Create(Product product)
+        public ActionResult Create(Product product, int sid, int cid)
         {
             Guid guid = new Guid();
             var path = "";
             List<Image> images = new List<Image>();
-            foreach (string file in Request.Files)
+            for (int i = 0; i < Request.Files.AllKeys.Length; i++)
             {
-                HttpPostedFileBase hpf = Request.Files[file] as HttpPostedFileBase;
+                HttpPostedFileBase hpf = Request.Files[i] as HttpPostedFileBase;
                 if (hpf != null && hpf.ContentLength > 0)
                 {
                     guid = Guid.NewGuid();
@@ -86,7 +117,8 @@ namespace Capstone_20130302.Controllers
             }
             if (ModelState.IsValid)
             {
-                product.Category = db.Categories.Find(4);
+                product.CategoryId = cid;
+                product.StoreId = sid;
                 product.ProductImages = images;
                 db.Products.Add(product);
                 
@@ -121,7 +153,7 @@ namespace Capstone_20130302.Controllers
 
         //
         // GET: /Product/Edit/5
-
+        [Authorize(Roles = Constant.ROLE_SELLER)]
         public ActionResult Edit(int id = 0)
         {
             Product product = db.Products.Find(id);
@@ -134,7 +166,7 @@ namespace Capstone_20130302.Controllers
 
         //
         // POST: /Product/Edit/5
-
+        [Authorize(Roles = Constant.ROLE_SELLER)]
         [HttpPost]
         public ActionResult Edit(Product product)
         {
@@ -149,7 +181,7 @@ namespace Capstone_20130302.Controllers
 
         //
         // GET: /Product/Delete/5
-
+        [Authorize(Roles = Constant.ROLE_SELLER)]
         public ActionResult Delete(int id = 0)
         {
             Product product = db.Products.Find(id);
@@ -162,7 +194,7 @@ namespace Capstone_20130302.Controllers
 
         //
         // POST: /Product/Delete/5
-
+        [Authorize(Roles = Constant.ROLE_SELLER)]
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
