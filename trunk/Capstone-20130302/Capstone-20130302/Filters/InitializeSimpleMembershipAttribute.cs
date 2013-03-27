@@ -37,8 +37,8 @@ namespace Capstone_20130302.Filters
                             ((IObjectContextAdapter)context).ObjectContext.CreateDatabase();
                         }
                     }
-
-                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+                    if (!WebSecurity.Initialized)
+                        WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
                 }
                 catch (Exception ex)
                 {
