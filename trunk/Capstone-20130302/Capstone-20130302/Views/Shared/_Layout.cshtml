@@ -18,7 +18,111 @@
     <script src="/Scripts/select2.min.js"></script>
     <script src="/Scripts/search.js"></script>
     @Scripts.Render("~/bundles/default")
+    <script src="/Scripts/knockout-2.2.1.js"></script>
+    <script>
+        function CartViewModel() {
+            var self = this;
+            self.shops = ko.observableArray([]);
+            self.addProduct = function (product) {
+                if (product instanceof ProductModel) {
+                    if (product.shopId != -1) {
+                        self.shops().forEach(function (shop) {
+                            if (shop.shopId == product.shopId) {
+                                var checkIfExistProduct = 0;
+                                var pro
+                                shop.products().forEach(function (p) {
+                                    if (product.productId == p.productId) {
+                                        checkIfExistProduct++;
+                                        p.productQuantity(p.productQuantity() + product.productQuantity());
+                                    }
+                                })
+                                if (checkIfExistProduct == 0) {
+                                    shop.products.push(product);
+                                }
+                            }
+                            self.saveToStorage();
+                            return;
+                        })
+                    }
+                }
+            }
+            self.checkShop = function (shop) {
+                var i = 0;
+                self.shops().forEach(function (sh) {
+                    if (sh.shopId == shop.shopId) {
+                        i++;
+                        return
+                    }
+                })
+                if (i == 0) {
+                    self.shops.push(shop);
+                }
+            }
+            self.saveToStorage = function () {
+                var dummyCart = []
+                self.shops().forEach(function (s) {
+                    var shop = [];
+                    shop.push(s.shopId);
+                    shop.push(s.storeTitle);
 
+                    s.products().forEach(function (p) {
+                        var product = [];
+                        product.push(p.productId);
+                        product.push(p.productTitle);
+                        product.push(p.productImage);
+                        product.push(p.productPrice);
+                        product.push(p.productQuantity());
+
+                        shop.push(product)
+                    })
+                    dummyCart.push(shop);
+                })
+                var json = JSON.stringify(dummyCart);
+                localStorage.setItem("sb_cartData", json);
+            }
+            self.loadFromStorage = function () {
+                var json = localStorage.getItem("sb_cartData");
+                var dataObject = JSON.parse(json);
+                dataObject.forEach(function (s) {
+                    var shop = new ShopModel(s[1], s[0])
+                    shop.products.push(new ProductModel(s[2][1], s[2][2], s[2][3], s[2][4], s[2][0], s[0]));
+                    //s[2].forEach(function(p){
+                    //    shop.products.push(new ProductModel(p[1], p[2], p[3],p[4],p[0],s[0]));
+                    //})
+                    cartmodel.shops.push(shop)
+                })
+            }
+        }
+        function ShopModel(title, shopId) {
+            var self = this;
+            self.shopId = typeof shopId == "undefined" ? -1 : shopId;
+            self.storeTitle = title;
+            self.products = ko.observableArray([])
+            self.removeProduct = function (product, $root) {
+                self.products.remove(product);
+                if (self.products().length == 0) {
+                    $root.shops.remove(self);
+                }
+                $root.saveToStorage();
+            }
+        }
+        function ProductModel(title, image, price, quantity, productId, shopId) {
+            var self = this;
+            self.productId = typeof productId == "undefined" ? -1 : productId;
+            self.shopId = typeof shopId == "undefined" ? -1 : shopId;
+
+            self.productTitle = title;
+            self.productImage = image;
+            self.productPrice = price;
+            self.productQuantity = ko.observable(quantity);
+        }
+
+        var cartmodel = new CartViewModel();
+        cartmodel.loadFromStorage();
+        $(function () {
+            ko.applyBindings(cartmodel);
+        })
+    </script>
 </head>
 <body>
     <div id="content-header">
@@ -42,23 +146,29 @@
                     </div>
                     <ul class="noti5s">
                         <li id="cart"><a href="#">
-                            <img src="images/icon-cart.png">
-                            <span class="badge badge-inverse">3</span></a>
+                            <img src="images/icon-cart.png"><span class="badge badge-inverse">3</span></a>
                             <div class="cart-container" style="display: none;">
-                                <div class="store"><a href="#" class="store-title">KLIA Outlet Store</a><a href="#" class="check-out">CHECK OUT</a></div>
-                                <div class="product">
-                                    <img src="images/product-icon.jpg"><div class="info">
-                                        <div class="title"><a href="#">KLIA Double Bed</a></div>
-                                        <div class="price-quantity">$19.35 x&nbsp;<span class="badge">3</span></div>
-                                        <div class="action"><a href="#">Remove</a></div>
+                                <div data-bind="style:{display:shops().length==0?'none':'block'}">
+                                <div data-bind="foreach: shops">
+                                    <div class="store">
+                                        <a href="#" class="store-title" data-bind="text: storeTitle"></a>
+                                        <a href="#" class="check-out">CHECK OUT</a>
+                                    </div>
+                                    <div data-bind="foreach: products">
+                                        <div class="product">
+                                            <img src="images/product-icon.jpg" data-bind="attr:{src: productImage}">
+                                            <div class="info">
+                                                <div class="title">
+                                                    <a href="#" data-bind="text: productTitle"></a>
+                                                </div>
+                                                <div class="price-quantity">
+                                                    $<span  data-bind="text: productPrice"></span>
+                                                    x&nbsp;<span class="badge" data-bind="text: productQuantity"></span></div>
+                                                <div class="action"><a href="#" data-bind="click: function(data){$parent.removeProduct(data,$root)}">Remove</a></div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="product">
-                                    <img src="images/product-icon.jpg"><div class="info">
-                                        <div class="title"><a href="#">KLIA Double Bed</a></div>
-                                        <div class="price-quantity">$19.35 x&nbsp;<span class="badge">3</span></div>
-                                        <div class="action"><a href="#">Remove</a></div>
-                                    </div>
                                 </div>
                             </div>
                         </li>
