@@ -3,7 +3,10 @@
 @{
     ViewBag.Title = "New Product";
 }
+For <b>@ViewBag.Store.StoreName</b>, under category <b>@ViewBag.Category.Name</b>.<br /><br />
 <a href="/Product"><i class='icon icon-circle-arrow-left'></i> Back to Product List</a>
+
+
 @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "create", data_bind="submit: save", enctype = "multipart/form-data" }))
 {
     @Html.ValidationSummary(true)
@@ -39,7 +42,6 @@
         <div class="span5">
             <legend>Specifications</legend>
             <div class="editor-field">
-                @Html.HiddenFor(model => model.SpecsInJson)
                 <table class="table table-bordered table-as-form">
                     <thead>
                         <tr>
@@ -60,7 +62,8 @@
             </div>
         </div>
     </div>
-    
+    <input type="hidden" name="cid" value="@ViewBag.Category.CategoryId"/>
+    <input type="hidden" name="sid" value="@ViewBag.Store.StoreId"/>
     <br>
     <center>
         <input class="btn span3" type="submit" value="Create" /> 
@@ -154,9 +157,11 @@
 
 <script src="/Scripts/knockout-2.2.1.js"></script>
 <script>
+    var uploadWrapper;
+    var inputFiles;
     $(function () {
-        var uploadWrapper = $(".upload-wrapper");
-        var inputFiles = $("#uploadFiles");
+        uploadWrapper = $(".upload-wrapper");
+        inputFiles = $("#uploadFiles");
 
         uploadWrapper.click(function () {
             inputFiles.trigger("click");
@@ -225,6 +230,6 @@
         ko.applyBindings(viewModel);
          
         // Activate jQuery Validation
-        $("form.create").validate({ submitHandler: function () { viewModel.save } });
+        $("form.create").validate({ submitHandler: function () { viewModel.save; $("form.create")[0].submit() } });
     })
 </script>
