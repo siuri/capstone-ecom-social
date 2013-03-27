@@ -19,5 +19,9 @@ namespace Capstone_20130302.Models
         public virtual int? UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual UserProfile User { get; set; }
+
+        public virtual int? ProductId { get; set; }
+        [ForeignKey("ProductId")]
+        public virtual Product Product { get; set; }
     }
 }
