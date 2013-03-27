@@ -558,3 +558,6 @@ div.frame {
     width: 40px;
 }
 
+.search-box form {
+    margin: 0;
+}
