@@ -42,6 +42,7 @@ For <b>@ViewBag.Store.StoreName</b>, under category <b>@ViewBag.Category.Name</b
         <div class="span5">
             <legend>Specifications</legend>
             <div class="editor-field">
+                @Html.HiddenFor(model => model.SpecsInJson)
                 <table class="table table-bordered table-as-form">
                     <thead>
                         <tr>

@@ -561,3 +561,24 @@ div.frame {
 .search-box form {
     margin: 0;
 }
+
+.dataTables_length select {
+    width: 75px;
+}
+
+.spare-down {
+    margin-bottom: 15px;
+}
+
+.sorting_1 {
+    background: #FFEDEC !important;
+}
+
+td.title {
+    font-weight: bold;
+}
+
+.dataTables_paginate {
+    margin: 0;
+    float: right;
+}
