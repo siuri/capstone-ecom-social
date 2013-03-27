@@ -22,7 +22,7 @@ namespace Capstone_20130302.Logic
             List<Comment> list = new List<Comment>();
             list = (from Comment cm in db.Comments
                     where cm.ProductId == productID
-                    select cm).ToList();
+                    select cm).OrderByDescending(cm =>cm.CreateDate).ToList();
             return list;
         }
         #endregion
@@ -41,7 +41,7 @@ namespace Capstone_20130302.Logic
                 db.SaveChanges();
                 return cmt.CommentId;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return -1;
             }

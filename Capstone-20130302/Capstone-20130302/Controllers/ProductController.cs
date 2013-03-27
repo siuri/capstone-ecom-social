@@ -76,7 +76,7 @@ namespace Capstone_20130302.Controllers
                 return Json("You must login to comment");
             }
             cmt.CreateDate = DateTime.Now;
-            cmt.User = UserProfiles_Logic.GetUserProfileByUserName(User.Identity.Name);
+            cmt.UserId = UserProfiles_Logic.GetUserProfileByUserName(User.Identity.Name).UserId;
             if (Comment_Logic.AddNewComment(cmt) > 0)
             {
                 return Json("true");   
