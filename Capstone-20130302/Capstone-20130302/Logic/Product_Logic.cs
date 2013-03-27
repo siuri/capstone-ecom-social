@@ -11,10 +11,15 @@ namespace Capstone_20130302.Logic
     public class Product_Logic
     {
         private static SocialBuyContext db = new SocialBuyContext();
-        
-        // Get List User Like,Buy Product 
-        // Type : 1_Like , 2_Buy
-        // ID : ID product
+
+        #region [ Get List All User Like,Buy Product ]
+        /// <summary>
+        ///  Get List All User Like,Buy Product
+        /// </summary>
+        /// <param name="type"> 1_Like , 2_Buy</param>
+        /// <param name="ID">ID Product</param>
+        /// <returns>List <UserProfile></returns>
+        /// 
         public static List<UserProfile> GetListUserProfileAll(int type,int ID)
         {
             List<UserProfile> listuser = new List<UserProfile>();
@@ -35,13 +40,17 @@ namespace Capstone_20130302.Logic
             }
             return listuser;
         }
+        #endregion
 
-
-        // Get List User Like,Buy Product 
-        // Type : 1_Like , 2_Buy
-        // ID : ID product
-        // number : Amount row select
-        public static List<UserProfile> GetListUserProfileRandom(int type, int ID,int number)
+        #region [ Get List User Like,Buy Product ]
+        /// <summary>
+        ///  Get List User Like,Buy Product
+        /// </summary>
+        /// <param name="type"> 1_Like , 2_Buy</param>
+        /// <param name="ID">ID Product</param>
+        /// <param name="number">Amount row select</param>
+        /// <returns>List <UserProfile></returns>
+        public static List<UserProfile> GetListUserProfileRandom(int type, int ID, int number)
         {
             List<UserProfile> listuser = new List<UserProfile>();
             switch (type)
@@ -57,7 +66,7 @@ namespace Capstone_20130302.Logic
                                 select order.Order.Users).Distinct().ToList();
                     break;
                 default:
-                    break;  
+                    break;
             }
 
             int count = listuser.Count(); // get count here
@@ -67,7 +76,7 @@ namespace Capstone_20130302.Logic
 
             return result;
         }
-
+        #endregion
 
     }
 }

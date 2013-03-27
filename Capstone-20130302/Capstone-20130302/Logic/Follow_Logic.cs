@@ -11,11 +11,16 @@ namespace Capstone_20130302.Logic
     {
         private static SocialBuyContext db = new SocialBuyContext();
         
-        // Type : 1_Categories , 2_Users , 3_Store
-        // ID : ID with type 
+        #region [ Get List Follow ]
+        /// <summary>
+        /// Get List Follow 
+        /// </summary>
+        /// <param name="type"> 1_Categories , 2_Users , 3_Store</param>
+        /// <param name="ID">ID with type(Categories,UsersID,StoreID) </param>
+        /// <returns>List <UserProfile></returns>
+        /// 
         public static List<UserProfile> GetListFollow(int type, int ID)
         {
-
             List<Follow> lst = new List<Follow>();
             List<UserProfile> list_profile = new List<UserProfile>();
             switch (type)
@@ -45,5 +50,7 @@ namespace Capstone_20130302.Logic
             }
             return list_profile;
         }
+        #endregion
+
     }
 }
