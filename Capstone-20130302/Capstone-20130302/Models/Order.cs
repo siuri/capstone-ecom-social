@@ -30,7 +30,7 @@ namespace Capstone_20130302.Models
         [Required]
         public string BillingName { get; set; }
 
-        
+
         public virtual int? BillingAddressId { get; set; }
         [Required]
         [ForeignKey("BillingAddressId")]
@@ -38,7 +38,7 @@ namespace Capstone_20130302.Models
 
         public bool IsUsedAsShipping { get; set; }
 
-        
+
         [DisplayName("Shipping Name")]
         public string ShippingName { get; set; }
 
