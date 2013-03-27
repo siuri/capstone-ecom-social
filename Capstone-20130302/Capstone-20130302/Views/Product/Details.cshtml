@@ -400,7 +400,7 @@
     }
 
     .btn-like {
-        background: url(like-ribbon.png) no-repeat 0 -73px;
+        background: url(/Images/like-ribbon.png) no-repeat 0 -73px;
         width: 41px;
         height: 66px;
         cursor: pointer;
@@ -412,7 +412,7 @@
     }
 
     .btn-like.active {
-        background: url(like-ribbon.png) no-repeat 0 0;
+        background: url(/Images/like-ribbon.png) no-repeat 0 0;
         -webkit-transition: opacity linear .5s;
         -moz-transition: opacity linear .5s;
         -ms-transition: opacity linear .5s;
@@ -424,6 +424,13 @@
 <script src="/Scripts/knockout-2.2.1.js"></script>
 
 <script>
+    $(document).ready(function() {
+        $(".btn-like").click(function() {
+            alert("gasgas");
+            $(this).toggleClass("active");
+        });
+    });
+    
     var specsJsonData = @Html.Raw(Model.SpecsInJson);
 
     var SpecModel = function (specs) {

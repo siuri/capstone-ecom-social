@@ -1,70 +1,81 @@
 ﻿@model IEnumerable<Capstone_20130302.Models.Store>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Store Management";
 }
-<h2>Index</h2>
-        <link href="~/Content/demo_page.css" rel="stylesheet" />
-        <link href="~/Content/demo_table.css" rel="stylesheet" />
-       <script src="~/Scripts/jquery.dataTables.js"></script>
-		
-        <script type="text/javascript" charset="utf-8">
-			$(document).ready(function() {
-				$('#example').dataTable();
+<script src="~/Scripts/jquery.dataTables.js"></script>
+<script src="~/Scripts/dataTables.bootstrap.js"></script>
+
+
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function() {
+				$('#example').dataTable( {
+					"sDom": "<'row spare-down'<'span4'f><'span3'l>r>t<'row'<'span3'i><'span8'p>>",
+					"sPaginationType": "bootstrap",
+					"oLanguage": {
+						"sLengthMenu": "_MENU_ records per page"
+					}
+				} );
 			} );
-		</script>
+</script>
 
 
 
-<p id ="create" class ="create">
-    @Html.ActionLink("Create New", "Create")
+<p id="create" class="create">
+    @Html.ActionLink("Open a New Store", "Create", null, new { @class = "btn pull-right btn-small" })
 </p>
 
+@if (Model.ToList().Count > 0)
+{
+<div class="form-inline data-content">
+    <table cellpadding="0" cellspacing="0" border="0" class="display table table-striped table-bordered" id="example">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.StoreName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDate)
+                </th>
+                <th>Open Order
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
 
+                <th>Action </th>
+            </tr>
+        </thead>
+        <tbody>
 
-<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
-	<thead>
-		<tr>
-        <th>
-            @Html.DisplayNameFor(model => model.StoreName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </th>
-        <th>
-            Open Order
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-  
-        <th>   Action </th>
-    </tr>
-	</thead>
-	<tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="title">
+                        @Html.DisplayFor(modelItem => item.StoreName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ContactNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status.Name)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.StoreId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.StoreId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.StoreId })
+                    </td>
+                </tr>
+            }
+        </tbody>
 
-        @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.StoreName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreateDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ContactNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.StoreId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.StoreId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.StoreId })
-        </td>
-    </tr>
-}		
-	</tbody>
-	
-</table>
-
+    </table>
+</div>
+}
+else
+{
+    <text>You have no store.</text>
+}
