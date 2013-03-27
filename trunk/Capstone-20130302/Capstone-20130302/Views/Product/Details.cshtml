@@ -88,7 +88,7 @@
                 <a class="carousel-control right" href="#product-carousel" data-slide="next">›</a>
             </div>
             <div class="comment-wrapper">
-                <div class="stat"><span>@listcmt.Count</span> comments</div>
+                <div class="stat"><span  id="countcomment">@listcmt.Count</span> comments</div>
                 <!-- Post box -->
                 <div class="postbox">
 
@@ -436,10 +436,13 @@
         }
     }
     function GetHTMLContent(text){
-        @if (User.Identity.IsAuthenticated != false)
+      
+        var texthtml = '';
+        var User_UserName = '@_user.UserName';
+        var Owner_UserName = '@Model.Store.Owner.UserName';
+        @if (_user != null)
         {
             <text>
-                var texthtml = '';
                 texthtml = '<li class="item">';
                 texthtml +=  '<div class="avatar">';
                 texthtml += '<a href=""><img class="user" src="@_user.Profile.ProfileImage.Path"></a>';
@@ -447,7 +450,7 @@
                 texthtml += '<div class="comment-box">';
                 texthtml += '<div class="header">';
                 texthtml += '<a href="" class="name"> @_user.Profile.DisplayName';
-                if (_user.UserName == Model.Store.Owner.UserName)
+                if (User_UserName == Owner_UserName)
                 {
                    texthtml +=  ' <span class="owner"></span>';                                                      
                 }
@@ -459,6 +462,7 @@
                 texthtml += '</li>';
              </text>
         }
+        return texthtml;
     }
 
     function PostComment(){       
@@ -466,10 +470,8 @@
         if(text.value.length < 1 )
         {
             $('#error').text('Comment field is required.');
-
             return false;
         }
-
         var postData = { 'ProductId': @Model.ProductId,'CommentContent' : text.value };
         jQuery.ajax({
             url: '../../Product/PostComment',
@@ -479,10 +481,14 @@
             data: JSON.stringify(postData),
             success: function (data) {
                
-                if (data == "true") {
+                if (data == "true") {                    
+                    
                     var html = GetHTMLContent(text.value);
-                    alert(html);
-                    $('comment-list').append('')
+
+                    $('.comment-list').prepend(html);
+                    var num =  $('#countcomment').text();
+                    num = parseInt(num) + 1;
+                    $('#countcomment').text(num);
                 }
                 else
                 {

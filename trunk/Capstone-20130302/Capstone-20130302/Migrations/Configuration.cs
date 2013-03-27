@@ -41,8 +41,6 @@ namespace Capstone_20130302.Migrations
                     "123456");
             if (!Roles.GetRolesForUser("admin001").Contains("admin"))
                 Roles.AddUsersToRoles(new[] { "admin001" }, new[] { "admin" });
-            if (!Roles.GetRolesForUser("shoes_lovers").Contains("seller"))
-                Roles.AddUsersToRoles(new[] { "shoes_lovers" }, new[] { "seller" });
             // Seed Status
             context.OrderStatuses.AddOrUpdate(
                 new OrderStatus { StatusId = 1, Name = "Pending", Description = "The order is waiting for process." },
@@ -70,11 +68,9 @@ namespace Capstone_20130302.Migrations
                 new Image { ImageId = 4, Path = "men_shoes.jpg" },
                 new Image { ImageId = 5, Path = "men_shoes_1_1.jpg" },
                 new Image { ImageId = 6, Path = "men_shoes_1_2.jpg" },
-                new Image { ImageId = 7, Path = "men_shoes_1_3.jpg" },
-                new Image { ImageId = 8, Path = "foods.jpg" },
-                new Image { ImageId = 9, Path = "cakes.jpg" }
+                new Image { ImageId = 7, Path = "men_shoes_1_3.jpg" }
             );
-            
+
             context.Profiles.AddOrUpdate(
              
               new Profile { ProfileId = 1, DisplayName = "Chip",DateOfBirth = DateTime.Now,Email = "a@yahoo.com",ContactNumber = "111-11111-1111",TotalFollowers=0,TotalFollowings=0,ProfileImageId =1,AddressId=1 }
@@ -87,18 +83,18 @@ namespace Capstone_20130302.Migrations
 
            );
             // Seed Category
-            context.Templates.AddOrUpdate(
-                new Template { TemplateId = 1, ContentInJson = "[{name: 'Color', content: 'Red'}, {name: 'Size', content: '42, 43'}]" });
-            context.Templates.AddOrUpdate(
-                new Template { TemplateId = 2, ContentInJson = "[{name: 'Material', content: 'Wheat, sugar'}, {name: 'Energy', content: '250kcal'}, {name: 'Package', content: '3 packs'}]" });
             context.Categories.AddOrUpdate(
                 new Category { CategoryId = 1, Name = "Root", CoverImageId = 1 },
                 new Category { CategoryId = 2, Name = "Men's", CoverImageId = 2, ParentId = 1 },
                 new Category { CategoryId = 3, Name = "Women's", CoverImageId = 3, ParentId = 1 },
-                new Category { CategoryId = 4, Name = "Shoes", CoverImageId = 4, ParentId = 2, TemplateId = 1},
-                new Category { CategoryId = 5, Name = "Food & Beverages", CoverImageId = 8, ParentId = 1 },
-                new Category { CategoryId = 6, Name = "Breads & Cakes", CoverImageId = 9, ParentId = 5, TemplateId = 2 }
-                );
+                new Category
+                {
+                    CategoryId = 4,
+                    Name = "Shoes",
+                    CoverImageId = 4,
+                    ParentId = 2,
+                    Template = new Template { TemplateId = 1, ContentInJson = "[{name: 'Color', content: 'Red'}, {name: 'Size', content: '42, 43'}]" }
+                });
             context.Stores.AddOrUpdate(
                 new Store
                 {
@@ -109,20 +105,6 @@ namespace Capstone_20130302.Migrations
                     OwnerId = WebSecurity.GetUserId("shoes_lovers"),
                     ShipFee = 9.99F,
                     StatusId = 1,
-                    CoverImageId = 1,
-                    Slogan = "Find the best shoes in town here.",
-                    ProfileImageId = 1,
-                    Address = new Address { AddressId = 1, Number = "123", Street = "Shoes' Street", City = "Saigon", Country = "Vietnam", Zipcode = "70100", State = "" }
-                },
-                new Store
-                {
-                    StoreId = 2,
-                    StoreName = "Cake Lovers",
-                    ContactNumber = "012-462-5934",
-                    Description = "A greate place for cake lovers with thousands kinds of cakes.",
-                    OwnerId = WebSecurity.GetUserId("shoes_lovers"),
-                    ShipFee = 9.99F,
-                    StatusId = 2,
                     CoverImageId = 1,
                     Slogan = "Find the best shoes in town here.",
                     ProfileImageId = 1,
