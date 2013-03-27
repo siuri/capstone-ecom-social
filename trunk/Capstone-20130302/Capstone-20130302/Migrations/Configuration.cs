@@ -34,11 +34,11 @@ namespace Capstone_20130302.Migrations
                 WebSecurity.CreateUserAndAccount(
                     "admin001",
                     "123456");
+
             if (!WebSecurity.UserExists("shoes_lovers"))
                 WebSecurity.CreateUserAndAccount(
                     "shoes_lovers",
                     "123456");
-
             if (!Roles.GetRolesForUser("admin001").Contains("admin"))
                 Roles.AddUsersToRoles(new[] { "admin001" }, new[] { "admin" });
             // Seed Status
@@ -71,6 +71,17 @@ namespace Capstone_20130302.Migrations
                 new Image { ImageId = 7, Path = "men_shoes_1_3.jpg" }
             );
 
+            context.Profiles.AddOrUpdate(
+             
+              new Profile { ProfileId = 1, DisplayName = "Chip",DateOfBirth = DateTime.Now,Email = "a@yahoo.com",ContactNumber = "111-11111-1111",TotalFollowers=0,TotalFollowings=0,ProfileImageId =1,AddressId=1 }
+
+
+          );
+            context.ProductLikes.AddOrUpdate(
+               new ProductLike { ProductId = 1, UserId = 1 },
+               new ProductLike { ProductId = 2, UserId = 1 }
+
+           );
             // Seed Category
             context.Categories.AddOrUpdate(
                 new Category { CategoryId = 1, Name = "Root", CoverImageId = 1 },
@@ -113,7 +124,21 @@ namespace Capstone_20130302.Migrations
                     SpecsInJson = @"[{ key: 'Color', value: 'Dark Blue'}, { key: 'Size', value: '42, 43, 44'}]",
                     ProductImages = new List<Image> { context.Images.Find(5), context.Images.Find(6), context.Images.Find(7) },
                     StoreId = 1
-                });
+                },
+                 new Product
+                 {
+                     ProductId = 2,
+                     Name = "Joe Dark Blue Yellow Casual Shoes 2",
+                     Description = "A pair of beautiful shoes for your daily activities 2",
+                     CategoryId = 4,
+                     Price = 35.7F,
+                     StatusId = 1,
+                     SpecsInJson = @"[{ key: 'Color', value: 'Dark Blue'}, { key: 'Size', value: '42, 43, 44'}]",
+                     ProductImages = new List<Image> { context.Images.Find(5), context.Images.Find(6), context.Images.Find(7) },
+                     StoreId = 1
+                 });
+
+
         }
     }
 }
