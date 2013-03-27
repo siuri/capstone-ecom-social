@@ -41,6 +41,8 @@ namespace Capstone_20130302.Migrations
                     "123456");
             if (!Roles.GetRolesForUser("admin001").Contains("admin"))
                 Roles.AddUsersToRoles(new[] { "admin001" }, new[] { "admin" });
+            if (!Roles.GetRolesForUser("shoes_lovers").Contains("seller"))
+                Roles.AddUsersToRoles(new[] { "shoes_lovers" }, new[] { "seller" });
             // Seed Status
             context.OrderStatuses.AddOrUpdate(
                 new OrderStatus { StatusId = 1, Name = "Pending", Description = "The order is waiting for process." },
@@ -70,7 +72,7 @@ namespace Capstone_20130302.Migrations
                 new Image { ImageId = 6, Path = "men_shoes_1_2.jpg" },
                 new Image { ImageId = 7, Path = "men_shoes_1_3.jpg" }
             );
-
+            
             context.Profiles.AddOrUpdate(
              
               new Profile { ProfileId = 1, DisplayName = "Chip",DateOfBirth = DateTime.Now,Email = "a@yahoo.com",ContactNumber = "111-11111-1111",TotalFollowers=0,TotalFollowings=0,ProfileImageId =1,AddressId=1 }
@@ -83,6 +85,8 @@ namespace Capstone_20130302.Migrations
 
            );
             // Seed Category
+            context.Templates.AddOrUpdate(
+                new Template { TemplateId = 1, ContentInJson = "[{name: 'Color', content: 'Red'}, {name: 'Size', content: '42, 43'}]" });
             context.Categories.AddOrUpdate(
                 new Category { CategoryId = 1, Name = "Root", CoverImageId = 1 },
                 new Category { CategoryId = 2, Name = "Men's", CoverImageId = 2, ParentId = 1 },
@@ -93,7 +97,7 @@ namespace Capstone_20130302.Migrations
                     Name = "Shoes",
                     CoverImageId = 4,
                     ParentId = 2,
-                    Template = new Template { TemplateId = 1, ContentInJson = "[{name: 'Color', content: 'Red'}, {name: 'Size', content: '42, 43'}]" }
+                    TemplateId = 1
                 });
             context.Stores.AddOrUpdate(
                 new Store

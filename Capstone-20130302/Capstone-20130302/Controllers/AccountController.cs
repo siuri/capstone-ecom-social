@@ -10,6 +10,7 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using Capstone_20130302.Filters;
 using Capstone_20130302.Models;
+using Capstone_20130302.Constants;
 
 namespace Capstone_20130302.Controllers
 {
@@ -89,7 +90,7 @@ namespace Capstone_20130302.Controllers
 
                     WebSecurity.Login(model.UserName, model.Password);
                     //  Get current user
-                    Roles.AddUsersToRoles(new[] { model.UserName }, new[] { "buyer" });
+                    Roles.AddUsersToRoles(new[] { model.UserName }, new[] { Constant.ROLE_BUYER });
                     return RedirectToAction("Create", "Profile");
                 }
                 catch (MembershipCreateUserException e)
