@@ -54,11 +54,14 @@
                 </div>
                 <div class="specs">
                     <h4>Specifications</h4>
-                    <table class="table">
-                        <tbody><tr><th>Colors</th><td>Red, Blue, Yellow</td></tr>
-                        <tr><th>Size</th><td>Small, Medium, Large</td></tr>
-                        <tr><th>Note</th><td>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </td></tr>
-                    </tbody></table>
+                    <table class="table specs">
+                        <tbody data-bind='foreach: specs'>
+                            <tr>
+                                <th data-bind='text: name'></th>
+                                <td data-bind='text: content'></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
                 
@@ -419,6 +422,17 @@
 
 </style>
 <script src="/Scripts/knockout-2.2.1.js"></script>
+
+<script>
+    var specsJsonData = @Html.Raw(Model.SpecsInJson);
+
+    var SpecModel = function (specs) {
+        var self = this;
+        self.specs = ko.observableArray(specs); 
+    };
+    ko.applyBindings(new SpecModel(specsJsonData));
+</script>
+
 <script type="text/javascript">
     function CartViewModel() {
         var self = this;
