@@ -1,0 +1,118 @@
+﻿@model Capstone_20130302.Models.Order
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_FreeLayout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Order</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TotalPayment)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TotalPayment)
+            @Html.ValidationMessageFor(model => model.TotalPayment)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BillingName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BillingName)
+            @Html.ValidationMessageFor(model => model.BillingName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BillingAddressId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BillingAddressId)
+            @Html.ValidationMessageFor(model => model.BillingAddressId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsUsedAsShipping)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsUsedAsShipping)
+            @Html.ValidationMessageFor(model => model.IsUsedAsShipping)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ShippingName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ShippingName)
+            @Html.ValidationMessageFor(model => model.ShippingName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ShippingAddressId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ShippingAddressId)
+            @Html.ValidationMessageFor(model => model.ShippingAddressId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StatusId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StatusId)
+            @Html.ValidationMessageFor(model => model.StatusId)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+
+
+<div class="page clearfix" id="p-checkout">
+    <div class="checkout">
+
+    </div>
+    <div class="cart-view">
+
+    </div>
+</div>
+
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+<style>
+    #p-checkout {
+        border: solid 1px #DBDBEA;
+        background: #fff;
+        margin: 50px auto;
+        padding: 40px;
+        box-sizing: border-box;
+        line-height: 1.5;
+        color: #646472;
+    }
+    .checkout {
+        width:
+    }
+    .cart-view {
+
+    }
+
+</style>
