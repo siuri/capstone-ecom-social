@@ -19,7 +19,6 @@ namespace Capstone_20130302.Controllers
         
         public ActionResult Index()
         {
-            
             List<Store> store = db.Stores.ToList();
             return View(store);       
         }

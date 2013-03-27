@@ -1,75 +1,91 @@
 ﻿@model IEnumerable<Capstone_20130302.Models.Product>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Products";
 }
+<script src="~/Scripts/jquery.dataTables.js"></script>
+<script src="~/Scripts/dataTables.bootstrap.js"></script>
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+	    $('#example').dataTable({
+		    "sDom": "<'row spare-down'<'span4'f><'span3'l>r>t<'row'<'span3'i><'span8'p>>",
+		    "sPaginationType": "bootstrap",
+		    "oLanguage": {
+			    "sLengthMenu": "_MENU_ records per page"
+		    }
+	    });
+    });
+</script>
+
+<p id="create" class="create">
+    @Html.ActionLink("Create a New Product", "Create", null, new { @class = "btn pull-right btn-small" })
 </p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalLikes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalComments)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalBuy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SpecsInJson)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalLikes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalComments)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalBuy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SpecsInJson)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreateDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProductId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProductId })
-        </td>
-    </tr>
+@if (Model.ToList().Count > 0)
+{
+    <div class="form-inline data-content">
+        <table cellpadding="0" cellspacing="0" border="0" class="display table table-striped table-bordered" id="example">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalLikes)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalComments)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalBuy)
+                    </th>
+                    <th class="center">
+                        @Html.DisplayNameFor(model => model.CreateDate)
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalLikes)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalComments)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalBuy)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreateDate)
+                        </td>
+                        <td>
+                            <a href="Product/Edit/@item.ProductId"><i class="icon-pencil"></i></a>
+                            <a href="Product/Id/@item.ProductId"><i class="icon-zoom-in"></i></a>
+                            @*<a href="Product/Delete/@item.ProductId"><i class="icon-trash"></i></a>*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
 }
-
-</table>
+else
+{
+    <text>You have no product.</text>
+}

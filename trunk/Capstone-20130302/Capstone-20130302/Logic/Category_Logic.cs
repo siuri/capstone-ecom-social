@@ -47,8 +47,8 @@ namespace Capstone_20130302.Logic
                  for (int j = 0; j < category_child.Count; j++)
                  {
                      children child = new children();
-                     child.id = category_child[i].CategoryId;
-                     child.text = category_child[i].Name;
+                     child.id = category_child[j].CategoryId;
+                     child.text = category_child[j].Name;
                      temp.children.Add(child);
                  }
                  list.Add(temp);

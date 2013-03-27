@@ -1,25 +1,26 @@
 ﻿@model IEnumerable<Capstone_20130302.Models.Store>
 
 @{
-    ViewBag.Title = "Store Management";
+    ViewBag.Title = "Stores";
 }
 <script src="~/Scripts/jquery.dataTables.js"></script>
 <script src="~/Scripts/dataTables.bootstrap.js"></script>
 
 
 <script type="text/javascript" charset="utf-8">
-$(document).ready(function() {
-				$('#example').dataTable( {
-					"sDom": "<'row spare-down'<'span4'f><'span3'l>r>t<'row'<'span3'i><'span8'p>>",
-					"sPaginationType": "bootstrap",
-					"oLanguage": {
-						"sLengthMenu": "_MENU_ records per page"
-					}
-				} );
-			} );
+    var categories;
+    $(document).ready(function() {
+	    $('#example').dataTable({
+		    "sDom": "<'row spare-down'<'span4'f><'span3'l>r>t<'row'<'span3'i><'span8'p>>",
+		    "sPaginationType": "bootstrap",
+		    "oLanguage": {
+			    "sLengthMenu": "_MENU_ records per page"
+		    }
+	    });
+    });
 </script>
 
-
+<input type="text" id="categories"/>
 
 <p id="create" class="create">
     @Html.ActionLink("Open a New Store", "Create", null, new { @class = "btn pull-right btn-small" })
@@ -27,53 +28,53 @@ $(document).ready(function() {
 
 @if (Model.ToList().Count > 0)
 {
-<div class="form-inline data-content">
-    <table cellpadding="0" cellspacing="0" border="0" class="display table table-striped table-bordered" id="example">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.StoreName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CreateDate)
-                </th>
-                <th>Open Order
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Status)
-                </th>
-
-                <th>Action </th>
-            </tr>
-        </thead>
-        <tbody>
-
-            @foreach (var item in Model)
-            {
+    <div class="form-inline data-content">
+        <table cellpadding="0" cellspacing="0" border="0" class="display table table-striped table-bordered" id="example">
+            <thead>
                 <tr>
-                    <td class="title">
-                        @Html.DisplayFor(modelItem => item.StoreName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CreateDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ContactNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Status.Name)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.StoreId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.StoreId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.StoreId })
-                    </td>
-                </tr>
-            }
-        </tbody>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StoreName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreateDate)
+                    </th>
+                    <th>Open Order
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
 
-    </table>
-</div>
+                    <th>Action </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StoreName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreateDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ContactNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status.Name)
+                        </td>
+                        <td>
+                            <a href="Store/Edit/@item.StoreId"><i class="icon-pencil"></i></a>
+                            <a href="Store/Id/@item.StoreId"><i class="icon-zoom-in"></i></a>
+                            @*<a href="Store/Delete/@item.StoreId"><i class="icon-trash"></i></a>*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
 }
 else
 {
