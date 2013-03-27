@@ -35,18 +35,18 @@ namespace Capstone_20130302.Controllers
         }
 
         //
-        // GET: /Order/Create
+        // GET: /Order/Checkout
 
-        public ActionResult Create()
+        public ActionResult Checkout()
         {
             return View();
         }
 
         //
-        // POST: /Order/Create
+        // POST: /Order/Checkout
 
         [HttpPost]
-        public ActionResult Create(Order order)
+        public ActionResult Checkout(Order order)
         {
             if (ModelState.IsValid)
             {
