@@ -16,12 +16,38 @@
 			    "sLengthMenu": "_MENU_ records per page"
 		    }
 	    });
+	    var categories;
+	    $.getJSON("/Category/DropDown", function (data) {
+	        categories = data;
+	    });
+	    $("#categories").select2({
+	        placeholder: "Category",
+	        width: "element",
+	        query: function (query) {
+	            var data = { results: categories };
+	            query.callback(data);
+	        }
+	    });
     });
 </script>
 
-<p id="create" class="create">
-    @Html.ActionLink("Create a New Product", "Create", null, new { @class = "btn pull-right btn-small" })
-</p>
+<!-- Button to trigger modal -->
+<a href="#chooseCate" role="button" class="btn pull-right btn-small" data-toggle="modal">Add New</a>
+
+<!-- Modal -->
+<div id="chooseCate" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="chooseCate" aria-hidden="true">
+    <div class="modal-header">
+        <h3 id="myModalLabel">Choose a Category</h3>
+    </div>
+    <div class="modal-body">
+        <p>Please choose a Category for your Product, a template will be generated from your selection.</p>
+        <input type="hidden" id="categories" />
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn" aria-hidden="true" onclick='location.href = "/Product/Create?cid="+ $("#categories").val() + "&sid=@ViewBag.sid"'>Continue</button>
+    </div>
+</div>
 
 @if (Model.ToList().Count > 0)
 {
@@ -89,3 +115,13 @@ else
 {
     <text>You have no product.</text>
 }
+
+<style>
+    #chooseCate {
+        width: 500px;
+        margin-left: -200px;
+    }
+        #chooseCate .modal-body {
+            padding: 50px 40px 40px 40px;
+        }
+</style>
