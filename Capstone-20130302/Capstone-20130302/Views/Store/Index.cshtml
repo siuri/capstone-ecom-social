@@ -8,19 +8,19 @@
 
 
 <script type="text/javascript" charset="utf-8">
-    var categories;
-    $(document).ready(function() {
-	    $('#example').dataTable({
-		    "sDom": "<'row spare-down'<'span4'f><'span3'l>r>t<'row'<'span3'i><'span8'p>>",
-		    "sPaginationType": "bootstrap",
-		    "oLanguage": {
-			    "sLengthMenu": "_MENU_ records per page"
-		    }
-	    });
+
+    $(document).ready(function () {
+        $('#example').dataTable({
+            "sDom": "<'row spare-down'<'span4'f><'span3'l>r>t<'row'<'span3'i><'span8'p>>",
+            "sPaginationType": "bootstrap",
+            "oLanguage": {
+                "sLengthMenu": "_MENU_ records per page"
+            }
+        });
     });
 </script>
 
-<input type="text" id="categories"/>
+
 
 <p id="create" class="create">
     @Html.ActionLink("Open a New Store", "Create", null, new { @class = "btn pull-right btn-small" })
@@ -80,3 +80,4 @@ else
 {
     <text>You have no store.</text>
 }
+
