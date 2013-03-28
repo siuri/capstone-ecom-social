@@ -22,9 +22,9 @@ namespace Capstone_20130302.Controllers
         //
         // GET: /Product/
         [Authorize(Roles = Constant.ROLE_SELLER)]
-        public ActionResult Index(int sid)
+        public ActionResult Index(int sid = 0)
         {
-            if (sid < 0)
+            if (sid <= 0)
             {
                 ViewBag.Message = "Sorry, you must provide a valid Store Id.";
                 return View("Error");
@@ -109,9 +109,9 @@ namespace Capstone_20130302.Controllers
         //
         // GET: /Product/Create
         [Authorize(Roles = Constant.ROLE_SELLER)]
-        public ActionResult Create(int sid = -1, int cid = -1)
+        public ActionResult Create(int sid = 0, int cid = 0)
         {
-            if (sid == -1 || cid == -1)
+            if (sid <= 0 || cid <= 0)
             {
                 ViewBag.Message = "Please define your Store and Category.";
                 return View("Error");
