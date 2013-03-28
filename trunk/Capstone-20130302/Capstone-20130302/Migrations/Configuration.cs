@@ -8,6 +8,7 @@ namespace Capstone_20130302.Migrations
     using System.Web.Security;
     using Capstone_20130302.Models;
     using WebMatrix.WebData;
+    using System.Data;
 
     internal sealed class Configuration : DbMigrationsConfiguration<Capstone_20130302.Models.SocialBuyContext>
     {
@@ -39,8 +40,17 @@ namespace Capstone_20130302.Migrations
                 WebSecurity.CreateUserAndAccount(
                     "shoes_lovers",
                     "123456");
+            if (!WebSecurity.UserExists("hongdc"))
+                WebSecurity.CreateUserAndAccount(
+                    "hongdc",
+                    "123456");
+
             if (!Roles.GetRolesForUser("admin001").Contains("admin"))
                 Roles.AddUsersToRoles(new[] { "admin001" }, new[] { "admin" });
+            if (!Roles.GetRolesForUser("shoes_lovers").Contains("seller"))
+                Roles.AddUsersToRoles(new[] { "shoes_lovers" }, new[] { "seller" });
+            if (!Roles.GetRolesForUser("hongdc").Contains("seller"))
+                Roles.AddUsersToRoles(new[] { "hongdc" }, new[] { "seller" });
             // Seed Status
             context.OrderStatuses.AddOrUpdate(
                 new OrderStatus { StatusId = 1, Name = "Pending", Description = "The order is waiting for process." },
@@ -68,33 +78,64 @@ namespace Capstone_20130302.Migrations
                 new Image { ImageId = 4, Path = "men_shoes.jpg" },
                 new Image { ImageId = 5, Path = "men_shoes_1_1.jpg" },
                 new Image { ImageId = 6, Path = "men_shoes_1_2.jpg" },
-                new Image { ImageId = 7, Path = "men_shoes_1_3.jpg" }
+                new Image { ImageId = 7, Path = "men_shoes_1_3.jpg" },
+                new Image { ImageId = 8, Path = "foods.jpg" },
+                new Image { ImageId = 9, Path = "cakes.jpg" },
+                new Image { ImageId = 10, Path = "alcohol.jpg" },
+                new Image { ImageId = 11, Path = "kame.jpg" },
+                new Image { ImageId = 12, Path = "kame1.jpg" },
+                new Image { ImageId = 13, Path = "kame2.jpg" },
+                new Image { ImageId = 14, Path = "alcohol.jpg" },
+                new Image { ImageId = 15, Path = "sacra1.jpg" },
+                new Image { ImageId = 16, Path = "sacra2.jpg" },
+                new Image { ImageId = 17, Path = "sacra3.jpg" },
+                new Image { ImageId = 18, Path = "avt.jpg" }
             );
 
             context.Profiles.AddOrUpdate(
-             
-              new Profile { ProfileId = 1, DisplayName = "Chip",DateOfBirth = DateTime.Now,Email = "a@yahoo.com",ContactNumber = "111-11111-1111",TotalFollowers=0,TotalFollowings=0,ProfileImageId =1,AddressId=1 }
+               new Profile { ProfileId = 1, DisplayName = "Admin", DateOfBirth = DateTime.Now, Email = "admin@socialbuy.vn", ContactNumber = "111-11111-1111", TotalFollowers = 0, TotalFollowings = 0, ProfileImageId = 1, AddressId = 1 },
+               new Profile { ProfileId = 2, DisplayName = "Shoes Lover", DateOfBirth = DateTime.Now, Email = "shoes@socialbuy.vn", ContactNumber = "111-11111-1111", TotalFollowers = 0, TotalFollowings = 0, ProfileImageId = 1, AddressId = 1 },
+               new Profile { ProfileId = 3, DisplayName = "HongDC", DateOfBirth = DateTime.Now, Email = "hongdc@gmail.com", ContactNumber = "111-23423-1111", TotalFollowers = 0, TotalFollowings = 0, ProfileImageId = 18, AddressId = 1 }
+            );
+
+            // Connect Profile with User
+            var user1 = context.UserProfiles.Find(1);
+            user1.ProfileId = 1;
+            context.Entry(user1).State = EntityState.Modified;
+            var user2 = context.UserProfiles.Find(2);
+            user1.ProfileId = 2;
+            context.Entry(user2).State = EntityState.Modified;
+            var user3 = context.UserProfiles.Find(3);
+            user1.ProfileId = 3;
+            context.Entry(user3).State = EntityState.Modified;
+            context.SaveChanges();
 
 
-          );
             context.ProductLikes.AddOrUpdate(
-               new ProductLike { ProductId = 1, UserId = 1 },
-               new ProductLike { ProductId = 2, UserId = 1 }
+               new ProductLike { ProductLikeId = 1, ProductId = 1, UserId = 1 },
+               new ProductLike { ProductLikeId = 2, ProductId = 2, UserId = 1 },
+               new ProductLike { ProductLikeId = 3, ProductId = 1, UserId = 2 },
+               new ProductLike { ProductLikeId = 4, ProductId = 2, UserId = 2 },
+               new ProductLike { ProductLikeId = 5, ProductId = 1, UserId = 3 },
+               new ProductLike { ProductLikeId = 6, ProductId = 2, UserId = 3 }
+            );
 
-           );
             // Seed Category
+            context.Templates.AddOrUpdate(
+                new Template { TemplateId = 1, ContentInJson = "[{name: 'Color', content: 'Red'}, {name: 'Size', content: '42, 43'}]" });
+            context.Templates.AddOrUpdate(
+                new Template { TemplateId = 2, ContentInJson = "[{name: 'Material', content: 'Wheat, sugar'}, {name: 'Energy', content: '250kcal'}, {name: 'Package', content: '3 packs'}]" });
+            context.Templates.AddOrUpdate(
+                new Template { TemplateId = 3, ContentInJson = "[{name: 'Type', content: 'Isopropyl Alcohol'}, {name: 'Percentage', content: '90%'}, {name: 'Color', content: 'Red'}, {name: 'Materials', content: 'Grapes'}, ]" });
             context.Categories.AddOrUpdate(
                 new Category { CategoryId = 1, Name = "Root", CoverImageId = 1 },
                 new Category { CategoryId = 2, Name = "Men's", CoverImageId = 2, ParentId = 1 },
                 new Category { CategoryId = 3, Name = "Women's", CoverImageId = 3, ParentId = 1 },
-                new Category
-                {
-                    CategoryId = 4,
-                    Name = "Shoes",
-                    CoverImageId = 4,
-                    ParentId = 2,
-                    Template = new Template { TemplateId = 1, ContentInJson = "[{name: 'Color', content: 'Red'}, {name: 'Size', content: '42, 43'}]" }
-                });
+                new Category { CategoryId = 4, Name = "Shoes", CoverImageId = 4, ParentId = 2, TemplateId = 1 },
+                new Category { CategoryId = 5, Name = "Food & Beverages", CoverImageId = 8, ParentId = 1 },
+                new Category { CategoryId = 6, Name = "Breads & Cakes", CoverImageId = 9, ParentId = 5, TemplateId = 2 },
+                new Category { CategoryId = 7, Name = "Wine & Alcohol", CoverImageId = 10, ParentId = 5, TemplateId = 3 }
+            );
             context.Stores.AddOrUpdate(
                 new Store
                 {
@@ -109,6 +150,20 @@ namespace Capstone_20130302.Migrations
                     Slogan = "Find the best shoes in town here.",
                     ProfileImageId = 1,
                     Address = new Address { AddressId = 1, Number = "123", Street = "Shoes' Street", City = "Saigon", Country = "Vietnam", Zipcode = "70100", State = "" }
+                },
+                new Store
+                {
+                    StoreId = 2,
+                    StoreName = "Drink & Cake Lovers",
+                    ContactNumber = "012-462-5934",
+                    Description = "A greate place for cake lovers with thousands kinds of cakes.",
+                    OwnerId = WebSecurity.GetUserId("shoes_lovers"),
+                    ShipFee = 9.99F,
+                    StatusId = 2,
+                    CoverImageId = 1,
+                    Slogan = "Find the best shoes in town here.",
+                    ProfileImageId = 1,
+                    Address = new Address { AddressId = 2, Number = "123", Street = "Cakes' Street", City = "Saigon", Country = "Vietnam", Zipcode = "70100", State = "" }
                 });
 
             // Seed Product;
@@ -125,18 +180,30 @@ namespace Capstone_20130302.Migrations
                     ProductImages = new List<Image> { context.Images.Find(5), context.Images.Find(6), context.Images.Find(7) },
                     StoreId = 1
                 },
-                 new Product
-                 {
-                     ProductId = 2,
-                     Name = "Joe Dark Blue Yellow Casual Shoes 2",
-                     Description = "A pair of beautiful shoes for your daily activities 2",
-                     CategoryId = 4,
-                     Price = 35.7F,
-                     StatusId = 1,
-                     SpecsInJson = @"[{ key: 'Color', value: 'Dark Blue'}, { key: 'Size', value: '42, 43, 44'}]",
-                     ProductImages = new List<Image> { context.Images.Find(5), context.Images.Find(6), context.Images.Find(7) },
-                     StoreId = 1
-                 });
+                new Product
+                {
+                    ProductId = 2,
+                    Name = "Sacramentalia",
+                    Description = "A 'How-to' Ward off Evil Spirits package design that comes with nine (really ten) things to help you ward off evil spirits. Most are spices and household ingredients, but the idea is that they are blessed by popes of the past and become something that is 'holy'. Hierarchy is based off the numbered steps than the items/ingredients itself.",
+                    CategoryId = 4,
+                    Price = 35.7F,
+                    StatusId = 2,
+                    SpecsInJson = @"[{ key: 'Taste', value: 'Spicy'}, { key: 'Size', value: 'S, M, L'}, { key: 'Packing', value: '3 bottles / pack'}]",
+                    ProductImages = new List<Image> { context.Images.Find(15), context.Images.Find(16), context.Images.Find(17) },
+                    StoreId = 2
+                },
+                new Product
+                {
+                    ProductId = 3,
+                    Name = "KAME Wine",
+                    Description = "KAME is the BODEGAS EGURENUGARTE brand for their wines in Tierra de Castilla. KAME is the conjuction of the initial letters of the names of the brothers owners of the winery. This wines are oriented to the modern consumer. The minimalistic and elegant treatment of the K letter shows the spirit of the brand.",
+                    CategoryId = 7,
+                    Price = 135.99F,
+                    StatusId = 2,
+                    SpecsInJson = @"[{ key: 'Color', value: 'Yellow, Red'}, { key: 'Percentage', value: '70%'}]",
+                    ProductImages = new List<Image> { context.Images.Find(11), context.Images.Find(12), context.Images.Find(13) },
+                    StoreId = 2
+                });
 
 
         }

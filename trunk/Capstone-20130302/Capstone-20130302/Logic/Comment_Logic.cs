@@ -20,9 +20,7 @@ namespace Capstone_20130302.Logic
         public static List<Comment> GetListCommentByProductID(int productID)
         {
             List<Comment> list = new List<Comment>();
-            list = (from Comment cm in db.Comments
-                    where cm.ProductId == productID
-                    select cm).OrderByDescending(cm =>cm.CreateDate).ToList();
+            list = db.Comments.Where(c => c.ProductId == productID).OrderByDescending(c => c.CreateDate).ToList();
             return list;
         }
         #endregion
