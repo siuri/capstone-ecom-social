@@ -183,10 +183,11 @@
     <Compile Include="Logic\Comment_Logic.cs" />
     <Compile Include="Logic\Follow_Logic.cs" />
     <Compile Include="Logic\Product_Logic.cs" />
+    <Compile Include="Logic\Store_Logic.cs" />
     <Compile Include="Logic\UserProfiles_Logic.cs" />
-    <Compile Include="Migrations\201303270200271_Init.cs" />
-    <Compile Include="Migrations\201303270200271_Init.Designer.cs">
-      <DependentUpon>201303270200271_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201303280818111_Init.cs" />
+    <Compile Include="Migrations\201303280818111_Init.Designer.cs">
+      <DependentUpon>201303280818111_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
@@ -436,8 +437,8 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201303270200271_Init.resx">
-      <DependentUpon>201303270200271_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201303280818111_Init.resx">
+      <DependentUpon>201303280818111_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

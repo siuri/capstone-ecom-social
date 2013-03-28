@@ -438,10 +438,11 @@
     function GetHTMLContent(text){
       
         var texthtml = '';
-        var User_UserName = '@_user.UserName';
-        var Owner_UserName = '@Model.Store.Owner.UserName';
+     
         @if (_user != null)
         {
+             var User_UserName = _user.UserName;
+             var Owner_UserName = Model.Store.Owner.UserName;
             <text>
                 texthtml = '<li class="item">';
                 texthtml +=  '<div class="avatar">';
