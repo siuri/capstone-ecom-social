@@ -410,6 +410,7 @@
             alert("gasgas");
             $(this).toggleClass("active");
         });
+        ko.applyBindings(new SpecModel(specsJsonData));
     });
     
     var specsJsonData = @Html.Raw(Model.SpecsInJson);
@@ -418,7 +419,7 @@
         var self = this;
         self.specs = ko.observableArray(specs); 
     };
-    ko.applyBindings(new SpecModel(specsJsonData));
+    
 </script>
 
 <script type="text/javascript">
