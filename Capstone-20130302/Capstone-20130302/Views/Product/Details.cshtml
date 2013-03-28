@@ -436,14 +436,14 @@
         }
     }
     function GetHTMLContent(text){
-      
-        var texthtml = '';
      
+        var texthtml = '';
         @if (_user != null)
         {
-             var User_UserName = _user.UserName;
-             var Owner_UserName = Model.Store.Owner.UserName;
+
             <text>
+                var User_UserName = '@_user.UserName';
+                var Owner_UserName = '@Model.Store.Owner.UserName';
                 texthtml = '<li class="item">';
                 texthtml +=  '<div class="avatar">';
                 texthtml += '<a href="/User/Id/@_user.UserId"><img class="user" src="/Image/@_user.Profile.ProfileImage.ImageId"></a>';
@@ -463,6 +463,7 @@
                 texthtml += '</li>';
              </text>
         }
+      
         return texthtml;
     }
 
@@ -481,11 +482,8 @@
             dataType: 'json', type: "POST",
             data: JSON.stringify(postData),
             success: function (data) {
-               
-                if (data == "true") {                    
-                    
+                if (data == "true") {                   
                     var html = GetHTMLContent(text.value);
-
                     $('.comment-list').prepend(html);
                     var num =  $('#countcomment').text();
                     num = parseInt(num) + 1;
