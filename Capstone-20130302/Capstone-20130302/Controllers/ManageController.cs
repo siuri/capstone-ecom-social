@@ -1,18 +1,51 @@
-﻿using System;
+﻿using Capstone_20130302.Constants;
+using Capstone_20130302.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebMatrix.WebData;
 
 namespace Capstone_20130302.Controllers
 {
     public class ManageController : Controller
     {
+        private SocialBuyContext db = new SocialBuyContext();
+
+        
+        
         //
         // GET: /Manage/
-
+        // Return seller's store
+        [Authorize(Roles = Constant.ROLE_SELLER)]
         public ActionResult Index()
         {
+            return View(db.Stores.Where(s => s.OwnerId == WebSecurity.CurrentUserId).ToList());
+        }
+
+        public ActionResult Dashboard(int sid)
+        {
+            
+            if (sid == -1)
+            {
+                ViewBag.Message = "Please define your Store.";
+                return View("Error");
+            }
+            else
+            {
+                var store = db.Stores.Find(sid);
+                if (store != null && store.OwnerId == WebSecurity.CurrentUserId)
+                {
+                    ViewBag.Store = store;
+                }
+                else
+                {
+                    ViewBag.Message = "Sorry, we can't find the store or you're not the owner.";
+                    return View("Error");
+                }
+            }
+            
             return View();
         }
 

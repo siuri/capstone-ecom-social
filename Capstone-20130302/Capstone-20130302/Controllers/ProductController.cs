@@ -21,10 +21,30 @@ namespace Capstone_20130302.Controllers
 
         //
         // GET: /Product/
-
-        public ActionResult Index()
+        [Authorize(Roles = Constant.ROLE_SELLER)]
+        public ActionResult Index(int sid)
         {
-            return View(db.Products.ToList());
+            if (sid < 0)
+            {
+                ViewBag.Message = "Sorry, you must provide a valid Store Id.";
+                return View("Error");
+            }
+            else
+            {
+                Store store = db.Stores.Find(sid);
+                if (store != null && store.OwnerId == WebSecurity.CurrentUserId)
+                {
+                    ViewBag.sid = sid;
+                    return View(db.Products.Where(p => p.StoreId == sid).ToList());
+                }
+                else
+                {
+                    ViewBag.Message = "Sorry, we can't find the store or you're not the owner.";
+                    return View("Error");
+                }
+
+            }
+            
         }
 
         //

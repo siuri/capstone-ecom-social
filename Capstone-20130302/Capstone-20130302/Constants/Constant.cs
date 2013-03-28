@@ -10,5 +10,6 @@ namespace Capstone_20130302.Constants
         public const string ROLE_SELLER = "seller";
         public const string ROLE_BUYER = "buyer";
         public const string ROLE_ADMIN = "admin";
+        public const string SESSION_CURRENT_STORE = "SESSION_CURRENT_STORE";
     }
 }
