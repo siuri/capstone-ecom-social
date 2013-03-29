@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "New Product";
 }
-For <b>@ViewBag.Store.StoreName</b>, under category <b>@ViewBag.Category.Name</b>.<br /><br />
+For <em>@ViewBag.Store.StoreName</em>, under category <em>@ViewBag.Category.Name</em>.<br /><br />
 <a href="/Product"><i class='icon icon-circle-arrow-left'></i> Back to Product List</a>
 
 
@@ -83,77 +83,6 @@ For <b>@ViewBag.Store.StoreName</b>, under category <b>@ViewBag.Category.Name</b
     .field-validation-error {
         display: block;
     }
-    .upload-wrapper {
-        background: rgba(255, 255, 255, 0.43);
-        border: dashed 1px #CCC;
-        cursor: pointer;
-        border-radius: 6px;
-        margin-bottom: 20px;
-    }
-    .upload-wrapper:hover {
-        background-color: #FFFFE7;
-    }
-    .upload-wrapper div {
-        margin: 40px auto;
-        display: block;
-        width: 300px;
-        text-align: center;
-    }
-    .upload-wrapper img.select {
-        height: 180px;
-        padding: 2px;
-        border: solid 1px #CCC;
-        margin: 16px 8px;
-        background: white;
-        box-shadow: 0px 0px 4px #CACACA;
-    }
-    .upload-wrapper img.select:first-child {
-        margin-left: 16px;
-    }
-    .table-as-form {
-        background-color: #fff;
-    }
-        .table-as-form th {
-            padding: 8px 0 4px 10px;
-            background: -webkit-linear-gradient(top, white, #E6E6E6);
-            text-shadow: 1px 2px 1px white;
-            color: #505050;
-            font-weight: normal;
-            text-transform: uppercase;
-        }
-
-        .table-as-form input[type=text] {
-            border: none;
-            padding: 0;
-            margin: 0;
-            background: transparent;
-            box-shadow: none;
-            width: 100%;
-        }
-        .table-as-form tr:hover {
-            background-color: #FFFFE7;
-        }
-        .table-as-form tr > td:first-child {
-            width: 35%;
-        }
-        .table-as-form tr > td:last-child {
-            width: 5%;
-        }
-    .table-bordered th:not(:first-child), .table-bordered td:not(:first-child) {
-        border-left: none;
-    }
-    .rm {   
-        opacity: 0;
-    }
-    .add {
-        position: relative;
-        top: -2px;
-        right: 5px;
-    }
-    .table-as-form tr:hover .rm {
-        opacity: 1;
-    }
-
 </style>
 
 <script src="/Scripts/knockout-2.2.1.js"></script>
@@ -231,6 +160,6 @@ For <b>@ViewBag.Store.StoreName</b>, under category <b>@ViewBag.Category.Name</b
         ko.applyBindings(viewModel);
          
         // Activate jQuery Validation
-        $("form.create").validate({ submitHandler: function () { viewModel.save; $("form.create")[0].submit() } });
+        $("form.create").validate({ submitHandler: function(form) { viewModel.save(); form.submit() } });
     })
 </script>

@@ -8,13 +8,11 @@
     <div class="clearfix">
         <h3>Let people know you</h3>
         <div class="avatar-wrapper">
-            <form id="image-form" action="~/api/File/PostImage" enctype="multipart/form-data" method="POST">
-                <div class="image-upload">
+            <div class="image-upload">
 
-                    <div class="image" data-toggle="tooltip" title="Upload your avatar">
-                    </div>
+                <div class="image" data-toggle="tooltip" title="Upload your avatar">
                 </div>
-            </form>
+            </div>
         </div>
         <div id="profile">
             @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "profile-form", enctype = "multipart/form-data" }))
