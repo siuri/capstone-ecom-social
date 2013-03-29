@@ -586,3 +586,80 @@ td.title {
 .center {
     text-align: center !important;
 }
+
+em {
+    color: #B43A3A;
+    font-weight: bold;
+    font-style: normal;
+}
+
+.upload-wrapper {
+        background: rgba(255, 255, 255, 0.43);
+        border: dashed 1px #CCC;
+        cursor: pointer;
+        border-radius: 6px;
+        margin-bottom: 20px;
+    }
+    .upload-wrapper:hover {
+        background-color: #FFFFE7;
+    }
+    .upload-wrapper div {
+        margin: 40px auto;
+        display: block;
+        width: 300px;
+        text-align: center;
+    }
+    .upload-wrapper img.select {
+        height: 180px;
+        padding: 2px;
+        border: solid 1px #CCC;
+        margin: 16px 8px;
+        background: white;
+        box-shadow: 0px 0px 4px #CACACA;
+    }
+    .upload-wrapper img.select:first-child {
+        margin-left: 16px;
+    }
+    .table-as-form {
+        background-color: #fff;
+    }
+        .table-as-form th {
+            padding: 8px 0 4px 10px;
+            background: -webkit-linear-gradient(top, white, #E6E6E6);
+            text-shadow: 1px 2px 1px white;
+            color: #505050;
+            font-weight: normal;
+            text-transform: uppercase;
+        }
+
+        .table-as-form input[type=text] {
+            border: none;
+            padding: 0;
+            margin: 0;
+            background: transparent;
+            box-shadow: none;
+            width: 100%;
+        }
+        .table-as-form tr:hover {
+            background-color: #FFFFE7;
+        }
+        .table-as-form tr > td:first-child {
+            width: 35%;
+        }
+        .table-as-form tr > td:last-child {
+            width: 5%;
+        }
+    .table-bordered th:not(:first-child), .table-bordered td:not(:first-child) {
+        border-left: none;
+    }
+    .rm {   
+        opacity: 0;
+    }
+    .add {
+        position: relative;
+        top: -2px;
+        right: 5px;
+    }
+    .table-as-form tr:hover .rm {
+        opacity: 1;
+    }
