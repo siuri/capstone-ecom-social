@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Capstone_20130302.Logic;
 using Capstone_20130302.Models;
+using System.IO;
 
 namespace Capstone_20130302.Controllers
 {
@@ -54,6 +55,19 @@ namespace Capstone_20130302.Controllers
         [HttpPost]
         public ActionResult Create(Store store)
         {
+            Guid guid = new Guid();
+            var path = "";
+            for (int i = 0; i < Request.Files.AllKeys.Length; i++)
+            {
+                HttpPostedFileBase hpf = Request.Files[i] as HttpPostedFileBase;
+                if (hpf != null && hpf.ContentLength > 0)
+                {
+                    guid = Guid.NewGuid();
+                    path = Path.Combine(Server.MapPath("~/App_Data/Images"), guid.ToString());
+                    hpf.SaveAs(path);
+                    Image image = new Image { Path = guid.ToString() };
+                }
+            }
             if (ModelState.IsValid)
             {
                 store.StatusId = 1;

@@ -10,10 +10,6 @@ namespace Capstone_20130302.Models
 {
     public class Store
     {
-        public Store()
-        {
-            CreateDate = DateTime.Now;
-        }
         public int StoreId { get; set; }
 
         [Required]
