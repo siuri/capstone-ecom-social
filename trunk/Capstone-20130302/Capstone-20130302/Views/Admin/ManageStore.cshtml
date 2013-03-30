@@ -1,0 +1,96 @@
+﻿@model IEnumerable<Capstone_20130302.Models.Store>
+
+@{
+    ViewBag.Title = "Manage Stores";
+}
+<script src="~/Scripts/jquery.dataTables.js"></script>
+<script src="~/Scripts/dataTables.bootstrap.js"></script>
+
+
+<script type="text/javascript" charset="utf-8">
+
+    $(document).ready(function () {
+        $('#example').dataTable({
+            "sDom": "<'row spare-down'<'span4'f><'span3'l>r>t<'row'<'span3'i><'span8'p>>",
+            "sPaginationType": "bootstrap",
+            "oLanguage": {
+                "sLengthMenu": "_MENU_ records per page"
+            }
+        });
+
+        function updateStoreStatus(sid, stt) {
+            $.ajax({
+                url: "/Admin/UpdateStoreStatus",
+                type: 'POST',
+                data: { storeID: sid, status: stt },
+                success: function (response) {
+                    if (response == "OK") {
+                        $('#status-' + sid).text(stt);
+                    }
+                    else {
+                        alert("Error! Can not update product status");
+                    }
+                }
+            });
+
+            //$('#regisModal').find('input#regis').click();
+        }
+
+        $(".changeStatus").change(function () {
+            var storeID = $(this).data("sid");
+            //alert(productID);
+            var status = $('#n-status-' + storeID + ' option:selected').text();
+            //alert(status);
+            updateStoreStatus(storeID, status);
+        });
+    });
+</script>
+
+
+@if (Model.ToList().Count > 0)
+{
+    <div class="form-inline data-content">
+        <table cellpadding="0" cellspacing="0" border="0" class="display table table-striped table-bordered" id="example">
+            <thead>
+                <tr>
+                    <th>Store Name
+                    </th>
+                    <th>Create Date
+                    </th>
+                    <th>Status
+                    </th>
+
+                    <th>Action </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StoreName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreateDate)
+                        </td>
+                        <td data-sid="@item.StoreId" id= "status-@item.StoreId">
+                            @Html.DisplayFor(modelItem => item.Status.Name)
+                        </td>
+                        <td data-sid="@item.StoreId">
+                            @*<a href="Store/Edit/@item.StoreId"><i class="icon-pencil"></i></a>*@
+                            <a href="/Store/Id/@item.StoreId"><i class="icon-zoom-in"></i></a>
+                            @Html.DropDownList("StatusID", (SelectList)ViewBag.StatusID, "--Change--", new { id = "n-status-" + @item.StoreId, @class = "changeStatus", data_sid = @item.StoreId })
+                            @*<a href="Store/Delete/@item.StoreId"><i class="icon-trash"></i></a>*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+}
+else
+{
+    <text>no product.</text>
+}
