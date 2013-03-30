@@ -1,11 +1,10 @@
 ﻿@model Capstone_20130302.Models.Store
 @using Capstone_20130302.Models;
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Model.StoreName;
     List<UserProfile> list = ViewBag.listprofile;
+    Layout = "~/Views/Shared/_FreeLayout.cshtml";
 }
-
-<h2>Details</h2>
 
 <p> List User Follow</p>
 @foreach (UserProfile profile in list)
@@ -15,47 +14,266 @@
     </div> 
 }
 
+<div class="page" id="p-store">
+    <div class="cover-wrapper">
+        <div class="cover" style="background: url(/Image/@Model.CoverImage.ImageId)">
+        </div>
+        <div class="ease-fade"></div>
+    </div>
+    
+    <div class="header-wrapper">
+        <div class="store-avatar">
+            <img src="/Image/@Model.ProfileImage.ImageId">
+        </div>
+        <div class="header">
+            <h2>@Model.StoreName</h2>
+            <span class="slogan glyphicon glyphicon-bullhorn">@Model.Slogan</span>
+            <span class="place glyphicon glyphicon-map-marker">Ho Chi Minh City</span>
+            <span class="contact glyphicon glyphicon-th">@Model.ContactNumber</span>
+        </div>
+        <div class="follow-wrapper">
+            <div class="btn-follow"></div>
+            <div class="stat"><span>1,366</span> people following</div>
+            <div class="follow-list">
+                <ul>
+                    <li><a href="/User/Id/2"><img class="user" src="/Image/1"></a></li>
+                    <li><a href="/User/Id/3"><img class="user" src="/Image/18"></a></li>
+                    <li><a href="/User/Id/2"><img class="user" src="/Image/1"></a></li>
+                    <li><a href="/User/Id/3"><img class="user" src="/Image/18"></a></li>
+                    <li><a href="/User/Id/2"><img class="user" src="/Image/1"></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="item-wrapper product">
+        <div class="heading"></div>
+        <div class="filter clearfix">
+            <ul id="filters">
+                <li><a href=""  data-filter="*" class="active">All Categories <span>(@Model.Products.Count)</span> </a></li>
+                @foreach (var cateItem in Model.Products)
+                {
+                    int count = @Model.Products.Where(p => p.CategoryId == cateItem.CategoryId).ToList().Count;
+                    <li><a href=""  data-filter=".cate-@cateItem.CategoryId">@cateItem.Category.Name <span>(@count)</span> </a></li>
+                }
+            </ul>
+        </div>
+        <div class="product-grid">
+            @foreach (var item in Model.Products)
+            {
+                <div class="product cate-@item.CategoryId">
+                    <a href="/Product/Id/@item.ProductId">
+                        <div class="image">
+                            <img src="/Image/@item.ProductImages.First().ImageId"/>
+                            <div class="detail">
+                                <div class="price">
+                                    $@item.Price
+                                </div>
+                                <button onclick="alert('cart'); return false;">ADD TO CART</button>
+                            </div>
+                        </div>
+                        <div class="description">
+                            <h4>@item.Name</h4>
+                            <p>@item.Description.Substring(0, 30)...</p>
+                        </div>
+                   </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
 
+<style type="text/css">
+    #p-store {
+        border: solid 1px #fff;
+        background: #fff;
+        margin: 50px auto;
+        line-height: 1.5;
+        color: #646472;
+        box-shadow: 0px 1px 11px #A5A5A5;
+        position: relative;
+        color: #1F1F2C;
+    }
+    .cover-wrapper {
+        position: relative;
+    }
+    .cover {
+        height: 300px;
+        width: 100%;
+    }
 
-<fieldset>
-    <legend>Store</legend>
+    .ease-fade {
+        height: 140px;
+        width: 100%;
+        background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.47), white);
+        position: absolute;
+        bottom: 0px;
+    }
+    .store-avatar {
+        height: 150px;
+        width: 150px;
+        position: absolute;
+        left: 50%;
+        margin-left: -75px;
+        top: -75px;
+    }
+    .store-avatar img {
+        padding: 5px;
+        border-radius: 500px;
+        border: solid 1px #ccc;
+        width: 150px;
+        height: 150px;
+        background: white;
+        box-shadow: 1px 0px 12px rgba(61, 61, 61, 0.5);
+    }
+    .header-wrapper {
+        padding: 70px 50px 40px;
+        position: relative;
+        height: 100px;
+        background: -webkit-linear-gradient(top, white 50%, rgba(255, 255, 255, 0.54), rgba(227, 225, 221, 0.65));
+    }
+    h2 {
+        font-family: "Century";
+        font-weight: normal;
+        font-size: 28px;
+        margin: 0 0 10px 0;
+        color: #646473;
+        background-color: #565656;
+        color: transparent;
+        text-shadow: 0px 2px 3px rgba(255, 255, 255, 0.5);
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        background-clip: text;
+    }
+    .glyphicon {
+        margin-right: 20px;
+    }
+    .glyphicon:before {
+        margin-right: 8px;
+        font-size: 16px;
+        top: 4px;
+        position: relative;
+        background: -webkit-linear-gradient(top, #B13E30, #DB2525);
+        color: transparent;
+        text-shadow: 0px 2px 3px rgba(255, 255, 255, 0.5);
+        -webkit-background-clip: text;
+    }
+    .follow-wrapper {
+        background: url(/Images/vertical-fade.png) -3px no-repeat;
+        width: 260px;
+        height: 100px;
+        position: relative;
+        right: 0;
+        float: right;
+        top: -85px;
+    }
+    .btn-follow {
+        background: url(/Images/follow.png) no-repeat 0 0;
+        width: 87px;
+        height: 31px;
+        margin: 10px 0;
+        float: left;
+        cursor: pointer;
+    }
+    .btn-follow:hover {
+        opacity: .9;
+    }
+    .stat {
+        margin: 12px 0 0 10px;
+        display: inline-block;
+    }
+    .follow-wrapper .follow-list ul {
+        margin-left: 20px;
+        list-style: none;
+        float: left;
+    }
+    .item-wrapper.product {
+        width: 100%;
+        border-top: solid 1px #fff;
+        padding-bottom: 40px;
+    }
+    .product .heading {
+        background: url(/Images/h-products.png) no-repeat;
+        margin: 0 auto;
+        height: 64px;
+        width: 870px;
+        position: relative;
+        top: -4px;
+    }
+    .item-wrapper {
+        background: url(/Images/grain-bg.jpg);
+        box-shadow: inset 0px 10px 70px 1px rgba(155, 155, 140, 0.67);
+        padding: 0 40px;
+        box-sizing: border-box;
+    }
+    .item-wrapper .filter ul {
+        list-style: none;
+        margin: 0;
+    }
+    .item-wrapper .filter ul li {
+        float: left;
+        margin-right: 15px;
+    }
+    .item-wrapper .filter ul li a {
+        color: #646472;
+        padding: 5px 10px;
+    }
+    .item-wrapper .filter ul li a.active {
+        font-weight: bold;
+        border-bottom: solid 4px #B9B9C8;
+    }
+    .item-wrapper .filter ul li a span {
+        opacity: .6;
+        color: #646472;
+        font-weight: normal;
+    }
+    .filter {
+        margin: 20px 0 40px 0;
+        text-shadow: 1px 1px 1px #fff;
+    }
+    .product-grid {
+        width: 100%;
+        margin: -10px;
+    }
+    .product-grid .product {
+        padding: 0;
+        border: solid 1px white;
+        box-shadow: 1px 2px 6px #B1B1B1;
+        margin: 10px;
+    }
+    .product-grid .product .description {
+        padding: 10px;
+        color: #646472;
+    }
+    .product-grid .product .description h4 {
+        font-size: 120%;
+        margin: 0;
+        font-family: "Century";
+        font-weight: normal;
+    }
+    .product-grid .product .description p {
+        margin-bottom: 0;
+        opacity: .7;
+    }
+</style> 
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.StoreName)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.StoreName)
-    </div>
+<script>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Description)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Description)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ContactNumber)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ContactNumber)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Slogan)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Slogan)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ShipFee)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ShipFee)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.StoreId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    $(function() {
+        $(".product-grid").isotope({
+            layoutMode: "masonry",
+            masonry: {
+            }
+        });
+        setTimeout(function () {
+            $(".product-grid").isotope({ filter: "*" });
+        }, 500);
+        
+        $('#filters a').click(function(){
+            var selector = $(this).attr('data-filter');
+            $(".product-grid").isotope({ filter: selector });
+            $('#filters a').removeClass("active");
+            $(this).addClass("active");
+            return false;
+        });
+    });
+</script>

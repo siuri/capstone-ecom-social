@@ -238,7 +238,7 @@ body {
   min-height: 500px;
   width: 960px;
 }
-#page > section .product-area > .product-grid > .product {
+#page > section .product-area > .product-grid .product {
   -ms-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -249,18 +249,18 @@ body {
   padding: 12px;
   background: white;
 }
-#page > section .product-area > .product-grid > .product .image {
+#page > section .product-area .product-grid .product .image {
   position: relative;
   overflow: hidden;
   width: 100%;
 }
-#page > section .product-area > .product-grid > .product .image img {
+#page > section .product-area .product-grid .product .image img {
   width: 100%;
 }
-#page > section .product-area > .product-grid > .product .image > a {
+#page > section .product-area .product-grid .product .image > a {
   display: block;
 }
-#page > section .product-area > .product-grid > .product .image .detail {
+#page > section .product-area .product-grid .product .image .detail {
   position: absolute;
   -ms-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -282,10 +282,10 @@ body {
   font-family: Century;
   font-size: 19px;
 }
-#page > section .product-area > .product-grid > .product .image .detail .price {
+#page > section .product-area .product-grid .product .image .detail .price {
   float: left;
 }
-#page > section .product-area > .product-grid > .product .image .detail a {
+#page > section .product-area .product-grid .product .image .detail a {
   font-size: 12px;
   float: right;
   color: white;
@@ -293,18 +293,18 @@ body {
   font-weight: bolder;
   padding-top: 1px;
 }
-#page > section .product-area > .product-grid > .product .image:hover .detail {
+#page > section .product-area .product-grid .product .image:hover .detail {
   bottom: 0;
 }
-#page > section .product-area > .product-grid > .product .description {
+#page > section .product-area .product-grid .product .description {
   padding: 6px 0;
   font-size: 13px;
   line-height: 20px;
 }
-#page > section .product-area > .product-grid > .product hr {
+#page > section .product-area .product-grid .product hr {
   margin: 3px 0;
 }
-#page > section .product-area > .product-grid > .product .misc a {
+#page > section .product-area .product-grid .product .misc a {
   margin-right: 5px;
   color: #868695;
 }
