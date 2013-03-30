@@ -319,6 +319,7 @@
     <Content Include="Images\icon-cart.png" />
     <Content Include="Images\like-gray.png" />
     <Content Include="Images\like-red.png" />
+    <Content Include="Images\like-ribbon.png" />
     <Content Include="Images\location-icon.png" />
     <Content Include="Images\logo_small.png" />
     <Content Include="Images\logo_small_gray.jpg" />
@@ -429,6 +430,8 @@
     <Content Include="Views\Order\Checkout.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

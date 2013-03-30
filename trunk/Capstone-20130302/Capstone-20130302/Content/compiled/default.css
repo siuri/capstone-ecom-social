@@ -328,31 +328,31 @@ body {
 .product-grid.edit > .product .image .detail a {
   float: none;
 }
-.product-grid > .product {
+.product-grid .product {
   -ms-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   color: #868695;
-  width: 227px;
+  width: 200px;
   border: 1px solid #D7D3D4;
   padding: 12px;
   display: inline-block;
   margin-bottom: 10px;
   background: white;
 }
-.product-grid > .product .image {
+.product-grid .product .image {
   position: relative;
   overflow: hidden;
   width: 100%;
 }
-.product-grid > .product .image img {
+.product-grid .product .image img {
   width: 100%;
 }
-.product-grid > .product .image > a {
+.product-grid .product .image > a {
   display: block;
 }
-.product-grid > .product .image .detail {
+.product-grid .product .image .detail {
   position: absolute;
   -ms-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -374,18 +374,20 @@ body {
   font-family: Century;
   font-size: 19px;
 }
-.product-grid > .product .image .detail .price {
+.product-grid .product .image .detail .price {
   float: left;
 }
-.product-grid > .product .image .detail a {
+.product-grid .product .image .detail button {
   font-size: 12px;
   float: right;
   color: white;
   font-family: Arial;
   font-weight: bolder;
   padding-top: 1px;
+  background: transparent;
+  border: none;
 }
-.product-grid > .product:hover .detail {
+.product-grid .product:hover .detail {
   bottom: 0;
 }
 .product-grid > .product .description {
