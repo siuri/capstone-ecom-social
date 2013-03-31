@@ -649,9 +649,6 @@ em {
         .table-as-form tr > td:last-child {
             width: 5%;
         }
-    .table-bordered th:not(:first-child), .table-bordered td:not(:first-child) {
-        border-left: none;
-    }
     .rm {   
         opacity: 0;
     }
