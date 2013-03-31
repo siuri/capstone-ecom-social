@@ -684,3 +684,41 @@ em {
         margin-right: 1px;
         float: left;
     }
+
+    .dl-message {
+        width: 438px;
+        margin: 60px auto;
+    }
+    .dl-message .head {
+        background: url(/Images/dl-head.png) center no-repeat;
+        height: 138px;
+    }
+
+    .head h4 {
+        margin-top: 92px;
+        font-family: "Century";
+        color: #B13E30;
+        text-shadow: 1px 2px 0 white;
+        background: -webkit-linear-gradient(top, whiteSmoke, #EBEBEB);
+        display: inline-block;
+        padding: 0 20px;
+        font-size: 160%;
+    }
+    .dl-message .body {
+        background: url(/Images/dl-body.png) no-repeat;
+        background-size: 100% 100%;
+        padding: 0 50px;
+        text-shadow: 1px 1px 1px #fff;
+        box-sizing: border-box;
+    }
+    .dl-message .tail {
+        background: url(/Images/dl-tail.png) no-repeat;
+        height: 77px;
+        
+    }
+    .dl-message > div {
+        padding: 0 50px;
+        box-sizing: border-box;
+        width: 100%;
+        text-align: center;
+    }
