@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Capstone_20130302.Models.Product>
 
 @{
-    ViewBag.Title = "Manage Products";
+    ViewBag.Title = "Product Administration";
 }
 <script src="~/Scripts/jquery.dataTables.js"></script>
 <script src="~/Scripts/dataTables.bootstrap.js"></script>
@@ -84,8 +84,8 @@
                         </td>
                         <td data-pid="@item.ProductId">
                             @*<a href="Store/Edit/@item.StoreId"><i class="icon-pencil"></i></a>*@
-                            <a href="/Product/Id/@item.ProductId"><i class="icon-zoom-in"></i></a>
-                            @Html.DropDownList("StatusID", (SelectList)ViewBag.StatusID, "--Change--", new { id = "n-status-" + @item.ProductId, @class = "changeStatus", data_pid = @item.ProductId })
+                            <a href="/Product/Id/@item.ProductId"><i class="icon-zoom-in"></i></a> &nbsp;&nbsp;
+                            @Html.DropDownList("StatusID", (SelectList)ViewBag.StatusID, "- Update -", new { id = "n-status-" + @item.ProductId, @class = "changeStatus span2", data_pid = @item.ProductId})
                             @*<a href="Store/Delete/@item.StoreId"><i class="icon-trash"></i></a>*@
                         </td>
                     </tr>

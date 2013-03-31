@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Capstone_20130302.Models.Store>
 
 @{
-    ViewBag.Title = "Manage Stores";
+    ViewBag.Title = "Store Administration";
 }
 <script src="~/Scripts/jquery.dataTables.js"></script>
 <script src="~/Scripts/dataTables.bootstrap.js"></script>
@@ -26,9 +26,21 @@
                 success: function (response) {
                     if (response == "OK") {
                         $('#status-' + sid).text(stt);
+                        $.pnotify({
+                            title: 'jQuery UI Effect',
+                            text: 'I use an effect from jQuery UI.',
+                            type: 'success',
+                            styling: 'bootstrap'
+                        });
                     }
                     else {
-                        alert("Error! Can not update product status");
+                        $.notification(
+					        {
+					            title: "Status Update Failed",
+					            content: "Please check again.",
+					            error: true
+					        }
+				        );
                     }
                 }
             });
@@ -53,13 +65,13 @@
         <table cellpadding="0" cellspacing="0" border="0" class="display table table-striped table-bordered" id="example">
             <thead>
                 <tr>
-                    <th>Store Name
+                    <th class="span4">Store Name
                     </th>
-                    <th>Create Date
+                    <th>Store Owner</th>
+                    <th>Apply Date
                     </th>
                     <th>Status
                     </th>
-
                     <th>Action </th>
                 </tr>
             </thead>
@@ -72,6 +84,9 @@
                             @Html.DisplayFor(modelItem => item.StoreName)
                         </td>
                         <td>
+                            @Html.DisplayFor(modelItem => item.Owner.Profile.DisplayName)
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.CreateDate)
                         </td>
                         <td data-sid="@item.StoreId" id= "status-@item.StoreId">
@@ -79,8 +94,8 @@
                         </td>
                         <td data-sid="@item.StoreId">
                             @*<a href="Store/Edit/@item.StoreId"><i class="icon-pencil"></i></a>*@
-                            <a href="/Store/Id/@item.StoreId"><i class="icon-zoom-in"></i></a>
-                            @Html.DropDownList("StatusID", (SelectList)ViewBag.StatusID, "--Change--", new { id = "n-status-" + @item.StoreId, @class = "changeStatus", data_sid = @item.StoreId })
+                            <a href="/Store/Id/@item.StoreId"><i class="icon-zoom-in"></i></a>&nbsp;&nbsp;
+                            @Html.DropDownList("StatusID", (SelectList)ViewBag.StatusID, "- Update -", new { id = "n-status-" + @item.StoreId, @class = "span2 changeStatus", data_sid = @item.StoreId })
                             @*<a href="Store/Delete/@item.StoreId"><i class="icon-trash"></i></a>*@
                         </td>
                     </tr>
