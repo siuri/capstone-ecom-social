@@ -5,6 +5,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Capstone_20130302.Constants;
+using Capstone_20130302.Logic;
 using Capstone_20130302.Models;
 
 namespace Capstone_20130302.Controllers
@@ -33,7 +35,53 @@ namespace Capstone_20130302.Controllers
             }
             return View(order);
         }
+        
+        [Authorize(Roles = Constant.ROLE_SELLER)]
+        public ActionResult SellerManage()
+        {
+            var userid = (from _user in db.UserProfiles
+                          where _user.UserName == User.Identity.Name
+                          select _user.UserId).FirstOrDefault();
+            UserProfile user = db.UserProfiles.Find(userid);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            List<Order> list = Order_Logic.GetListByUserID(userid,1);
+            return View(list);
+        }
 
+
+        public ActionResult UserManage()
+        {
+            if (User.Identity.IsAuthenticated == false)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            var userid = (from _user in db.UserProfiles
+                          where _user.UserName == User.Identity.Name
+                          select _user.UserId).FirstOrDefault();
+            UserProfile user = db.UserProfiles.Find(userid);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            List<Order> list = Order_Logic.GetListByUserID(userid, 0);
+            return View(list);
+        }
+        public ActionResult OrderDetails(int id)
+        {
+            if (id <= 0)
+            {
+                ViewBag.Message = "Sorry, you must provide a  Order Id.";
+                return View("Error");
+            }
+
+            List<OrderDetail> order = new List<OrderDetail>();
+            order = OrderDetails_Logic.GetOrderDetailByOrderID(id);
+            return View(order);
+        }
+        
         //
         // GET: /Order/Checkout
 

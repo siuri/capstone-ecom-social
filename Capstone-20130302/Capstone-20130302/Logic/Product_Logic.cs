@@ -78,5 +78,26 @@ namespace Capstone_20130302.Logic
         }
         #endregion
 
+        #region [ Get Prodcut By ID ]
+        /// <summary>
+        /// Get Prodcut By ID
+        /// </summary>
+        /// <param name="ID">Procut UD</param>
+        /// <returns>Product</returns>
+        public static Product GetProductByID(int ID)
+        {
+            try
+            {
+                Product temp = db.Products.FirstOrDefault(m => m.ProductId == ID);
+                return temp;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+           
+        }
+        #endregion
+
     }
 }
