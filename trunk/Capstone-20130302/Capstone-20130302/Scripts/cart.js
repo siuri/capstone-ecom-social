@@ -76,7 +76,16 @@ function ShopModel(title, shopId) {
     var self = this;
     self.shopId = typeof shopId == "undefined" ? -1 : shopId;
     self.storeTitle = title;
+    self.checkoutLink = "/Order/Checkout?sid=" + self.shopId;
     self.products = ko.observableArray([])
+    self.isCheckoutshop = ko.computed(function () {
+        var regrs = location.search.match(/[?&]sid=(\d)[&$]?/);
+        if (regrs.length > 1) {
+            var sid = parseInt(regrs[1]);
+            if (sid == self.shopId) return true;
+        }
+        return false;
+    })
     self.removeProduct = function (product, $root) {
         self.products.remove(product);
         if (self.products().length == 0) {
@@ -100,4 +109,5 @@ var cartmodel = new CartViewModel();
 cartmodel.loadFromStorage();
 $(function () {
     ko.applyBindings(cartmodel);
+    
 })

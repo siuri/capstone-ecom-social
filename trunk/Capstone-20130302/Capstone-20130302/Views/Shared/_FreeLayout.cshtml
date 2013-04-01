@@ -51,7 +51,7 @@
                                 <div data-bind="foreach: shops">
                                     <div class="store">
                                         <a href="#" class="store-title" data-bind="text: storeTitle"></a>
-                                        <a href="#" class="check-out">CHECK OUT</a>
+                                        <a href="/Order/Checkout" data-bind="attr:{'href': checkoutLink}" class="check-out">CHECK OUT</a>
                                     </div>
                                     <div data-bind="foreach: products">
                                         <div class="product">
@@ -104,12 +104,17 @@
         $("#cart > a").click(function () {
             $("#cart > .cart-container").toggle(300);
         })
-        $(document).click(function () {
-            $(".cart-container").hide(200);
+        $(document).click(function (e) {
+            if (e.target.tagName.toLowerCase() != "a") {
+                $(".cart-container").hide(200);
+            }
         })
         $(".cart-container,#cart > a").click(function (e) {
-            e.preventDefault();
-            return false;
+            if (e.target.tagName.toLowerCase() != "a") {
+                e.preventDefault();
+                return false;
+            }
+            return true;
         });
         $("[class*=logo], #logo").click(function () {
             location.href = "/";

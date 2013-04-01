@@ -9,7 +9,9 @@
 
 
 
-
+<script>
+    
+</script>
 <div class="page clearfix" id="p-checkout">
     <div class="checkout">
         @using (Html.BeginForm())
@@ -85,6 +87,7 @@
         <h2>Shopping cart
         </h2>
         <div data-bind="foreach: shops">
+            <div data-bind="if: isCheckoutshop">
             <div data-bind="foreach: products">
                 <div class="product">
                     <img src="/Image/10" data-bind="attr:{src: productImage}">
@@ -100,6 +103,7 @@
                         <div class="action"><a href="#" data-bind="click: function(data){$parent.removeProduct(data,$root)}">Remove</a></div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>
