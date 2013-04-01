@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Capstone_20130302.Models.Order>
+@{
+    ViewBag.Title = "Seller Manage";
+}
+
+<script src="~/Scripts/jquery.dataTables.js"></script>
+<script src="~/Scripts/dataTables.bootstrap.js"></script>
+
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        $('#example').dataTable({
+            "sDom": "<'row spare-down'<'span4'f><'span3'l>r>t<'row'<'span3'i><'span8'p>>",
+            "sPaginationType": "bootstrap",
+            "oLanguage": {
+                "sLengthMenu": "_MENU_ records per page"
+            }
+        });
+    });
+</script>
+
+
+@if (Model.ToList().Count > 0)
+{
+    <div class="form-inline data-content">
+        <table cellpadding="0" cellspacing="0" border="0" class="display table table-striped table-bordered" id="example">
+            <thead>
+                <tr>
+                    <th>Order ID
+                    </th>
+                    <th>Create Date
+                    </th>
+                    <th>Billing Name
+                    </th>
+                    <th>Billing Address
+                    </th>
+                    <th>Total Payment
+                    </th>
+                     <th>Status
+                    </th>
+                    <th>Action </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BillingName)
+                        </td>
+                         <td>
+                            @Html.DisplayFor(item.BillingAddress.Number + "/" +item.BillingAddress.Street + "/" + item.BillingAddress.City)
+                        </td>
+                         <td>
+                            @Html.DisplayFor(item.TotalPayment)
+                        </td>
+                        <td data-pid="@item.OrderId" id= "status-@item.OrderId">
+                            @Html.DisplayFor(modelItem => item.Status.Name)
+                        </td>
+                        <td data-pid="@item.OrderId">
+                           <a href="Product/Edit/@item.OrderId"><i class="icon-pencil"></i></a>
+                            <a href="Product/Id/@item.OrderId"><i class="icon-zoom-in"></i></a>
+                            @*<a href="Product/Delete/@item.ProductId"><i class="icon-trash"></i></a>*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+}
+else
+{
+    <text>no order.</text>
+}
