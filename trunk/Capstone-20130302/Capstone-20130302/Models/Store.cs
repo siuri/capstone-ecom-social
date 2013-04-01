@@ -29,7 +29,7 @@ namespace Capstone_20130302.Models
         [ScaffoldColumn(false)]
         [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         [DisplayName("Create Date")]
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
 
         [MaxLength(150)]
         public string Slogan { get; set; }

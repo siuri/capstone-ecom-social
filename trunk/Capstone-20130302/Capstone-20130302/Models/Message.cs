@@ -17,6 +17,6 @@ namespace Capstone_20130302.Models
 
         public string Title { get; set; }
         public string Body { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
     }
 }

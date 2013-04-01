@@ -20,7 +20,7 @@ namespace Capstone_20130302.Models
         [Required]
         public string CommentContent { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
 
         public virtual int? UserId { get; set; }
         [ForeignKey("UserId")]

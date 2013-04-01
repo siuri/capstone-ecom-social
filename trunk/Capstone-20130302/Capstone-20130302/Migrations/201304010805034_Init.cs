@@ -31,7 +31,7 @@ namespace Capstone_20130302.Migrations
                         TotalComments = c.Int(nullable: false),
                         TotalBuy = c.Int(nullable: false),
                         SpecsInJson = c.String(),
-                        CreateDate = c.DateTime(nullable: false),
+                        CreateDate = c.DateTime(),
                         StatusId = c.Int(),
                         CategoryId = c.Int(),
                         StoreId = c.Int(),
@@ -122,7 +122,7 @@ namespace Capstone_20130302.Migrations
                         StoreName = c.String(nullable: false, maxLength: 50),
                         Description = c.String(nullable: false),
                         ContactNumber = c.String(nullable: false),
-                        CreateDate = c.DateTime(nullable: false),
+                        CreateDate = c.DateTime(),
                         Slogan = c.String(maxLength: 150),
                         ShipFee = c.Single(nullable: false),
                         TotalFollowers = c.Int(nullable: false),
@@ -178,7 +178,7 @@ namespace Capstone_20130302.Migrations
                         StoreId = c.Int(),
                         Title = c.String(),
                         Body = c.String(),
-                        CreateDate = c.DateTime(nullable: false),
+                        CreateDate = c.DateTime(),
                         User_UserId = c.Int(),
                     })
                 .PrimaryKey(t => t.MessageId)
@@ -193,7 +193,7 @@ namespace Capstone_20130302.Migrations
                     {
                         CommentId = c.Int(nullable: false, identity: true),
                         CommentContent = c.String(nullable: false),
-                        CreateDate = c.DateTime(nullable: false),
+                        CreateDate = c.DateTime(),
                         UserId = c.Int(),
                         ProductId = c.Int(),
                     })
@@ -224,7 +224,7 @@ namespace Capstone_20130302.Migrations
                 c => new
                     {
                         OrderId = c.Int(nullable: false, identity: true),
-                        OrderDate = c.DateTime(nullable: false),
+                        OrderDate = c.DateTime(),
                         TotalPayment = c.Single(nullable: false),
                         BillingName = c.String(nullable: false),
                         BillingAddressId = c.Int(nullable: false),
@@ -260,7 +260,7 @@ namespace Capstone_20130302.Migrations
                     {
                         ProfileId = c.Int(nullable: false, identity: true),
                         DisplayName = c.String(nullable: false, maxLength: 50),
-                        DateOfBirth = c.DateTime(nullable: false),
+                        DateOfBirth = c.DateTime(),
                         Email = c.String(nullable: false),
                         ContactNumber = c.String(),
                         TotalFollowers = c.Int(nullable: false),
@@ -326,6 +326,17 @@ namespace Capstone_20130302.Migrations
                 .Index(t => t.ProductId);
             
             CreateTable(
+                "dbo.EditorPicks",
+                c => new
+                    {
+                        EditorPickId = c.Int(nullable: false, identity: true),
+                        ProductId = c.Int(),
+                    })
+                .PrimaryKey(t => t.EditorPickId)
+                .ForeignKey("dbo.Products", t => t.ProductId)
+                .Index(t => t.ProductId);
+            
+            CreateTable(
                 "dbo.ProductUserProfiles",
                 c => new
                     {
@@ -359,6 +370,7 @@ namespace Capstone_20130302.Migrations
             DropIndex("dbo.webpages_UsersInRoles", new[] { "UserId" });
             DropIndex("dbo.ProductUserProfiles", new[] { "UserProfile_UserId" });
             DropIndex("dbo.ProductUserProfiles", new[] { "Product_ProductId" });
+            DropIndex("dbo.EditorPicks", new[] { "ProductId" });
             DropIndex("dbo.ProductLikes", new[] { "ProductId" });
             DropIndex("dbo.ProductLikes", new[] { "UserId" });
             DropIndex("dbo.Profiles", new[] { "AddressId" });
@@ -394,6 +406,7 @@ namespace Capstone_20130302.Migrations
             DropForeignKey("dbo.webpages_UsersInRoles", "UserId", "dbo.UserProfile");
             DropForeignKey("dbo.ProductUserProfiles", "UserProfile_UserId", "dbo.UserProfile");
             DropForeignKey("dbo.ProductUserProfiles", "Product_ProductId", "dbo.Products");
+            DropForeignKey("dbo.EditorPicks", "ProductId", "dbo.Products");
             DropForeignKey("dbo.ProductLikes", "ProductId", "dbo.Products");
             DropForeignKey("dbo.ProductLikes", "UserId", "dbo.UserProfile");
             DropForeignKey("dbo.Profiles", "AddressId", "dbo.Addresses");
@@ -427,6 +440,7 @@ namespace Capstone_20130302.Migrations
             DropForeignKey("dbo.UserProfile", "ProfileId", "dbo.Profiles");
             DropTable("dbo.webpages_UsersInRoles");
             DropTable("dbo.ProductUserProfiles");
+            DropTable("dbo.EditorPicks");
             DropTable("dbo.ProductLikes");
             DropTable("dbo.webpages_OAuthMembership");
             DropTable("dbo.webpages_Membership");

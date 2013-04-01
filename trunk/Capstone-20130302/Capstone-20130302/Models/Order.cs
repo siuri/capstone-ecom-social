@@ -12,7 +12,6 @@ namespace Capstone_20130302.Models
     {
         public Order()
         {
-            OrderDate = DateTime.Now;
             IsUsedAsShipping = true;
         }
         public int OrderId { get; set; }
@@ -20,7 +19,7 @@ namespace Capstone_20130302.Models
         [ScaffoldColumn(false)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         [DisplayName("Order Date")]
-        public DateTime OrderDate { get; set; }
+        public DateTime? OrderDate { get; set; }
 
         [DisplayName("Total Payment")]
         [DataType(DataType.Currency)]

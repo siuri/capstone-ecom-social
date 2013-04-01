@@ -170,6 +170,8 @@ body {
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
   display: block;
   float: left;
+  max-width: 50px;
+  max-height: 50px;
 }
 #content-header > header > .inner #header-menu ul.noti5s #cart .cart-container .product .info {
   margin-left: 10px;

@@ -89,13 +89,17 @@ namespace Capstone_20130302.Migrations
                 new Image { ImageId = 15, Path = "sacra1.jpg" },
                 new Image { ImageId = 16, Path = "sacra2.jpg" },
                 new Image { ImageId = 17, Path = "sacra3.jpg" },
-                new Image { ImageId = 18, Path = "avt.jpg" }
+                new Image { ImageId = 18, Path = "avt.jpg" },
+                new Image { ImageId = 19, Path = "cover.jpg" }
             );
-
+            context.Addresses.AddOrUpdate(
+                new Address { AddressId = 1, Number = "123", City = "Saigon", Country = "Vietnam", State = "Ho Chi Minh", Street = "Street Road", Zipcode = "70100" },
+                new Address { AddressId = 2, Number = "234", City = "Hanoi", Country = "Vietnam", State = "Hanoi", Street = "Phan Boi Chau", Zipcode = "70110" },
+                new Address { AddressId = 3, Number = "563", City = "Saigon", Country = "Vietnam", State = "Ho Chi Minh", Street = "Ba Thang Hai Road", Zipcode = "70400" });
             context.Profiles.AddOrUpdate(
                new Profile { ProfileId = 1, DisplayName = "Admin", DateOfBirth = DateTime.Now, Email = "admin@socialbuy.vn", ContactNumber = "111-11111-1111", TotalFollowers = 0, TotalFollowings = 0, ProfileImageId = 1, AddressId = 1 },
-               new Profile { ProfileId = 2, DisplayName = "Shoes Lover", DateOfBirth = DateTime.Now, Email = "shoes@socialbuy.vn", ContactNumber = "111-11111-1111", TotalFollowers = 0, TotalFollowings = 0, ProfileImageId = 1, AddressId = 1 },
-               new Profile { ProfileId = 3, DisplayName = "HongDC", DateOfBirth = DateTime.Now, Email = "hongdc@gmail.com", ContactNumber = "111-23423-1111", TotalFollowers = 0, TotalFollowings = 0, ProfileImageId = 18, AddressId = 1 }
+               new Profile { ProfileId = 2, DisplayName = "Shoes Lover", DateOfBirth = DateTime.Now, Email = "shoes@socialbuy.vn", ContactNumber = "111-11111-1111", TotalFollowers = 0, TotalFollowings = 0, ProfileImageId = 1, AddressId = 2 },
+               new Profile { ProfileId = 3, DisplayName = "HongDC", DateOfBirth = DateTime.Now, Email = "hongdc@gmail.com", ContactNumber = "111-23423-1111", TotalFollowers = 0, TotalFollowings = 0, ProfileImageId = 18, AddressId = 3 }
             );
 
             // Connect Profile with User
@@ -160,7 +164,7 @@ namespace Capstone_20130302.Migrations
                     OwnerId = WebSecurity.GetUserId("shoes_lovers"),
                     ShipFee = 9.99F,
                     StatusId = 2,
-                    CoverImageId = 1,
+                    CoverImageId = 19,
                     Slogan = "Find the best shoes in town here.",
                     ProfileImageId = 1,
                     Address = new Address { AddressId = 2, Number = "123", Street = "Cakes' Street", City = "Saigon", Country = "Vietnam", Zipcode = "70100", State = "" }
@@ -204,8 +208,6 @@ namespace Capstone_20130302.Migrations
                     ProductImages = new List<Image> { context.Images.Find(11), context.Images.Find(12), context.Images.Find(13) },
                     StoreId = 2
                 });
-
-
         }
     }
 }
