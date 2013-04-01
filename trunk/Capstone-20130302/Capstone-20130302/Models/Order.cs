@@ -56,6 +56,10 @@ namespace Capstone_20130302.Models
         [DisplayName("UserId")]
         public virtual UserProfile Users { get; set; }
 
+        public virtual int? StoreId { get; set; }
+        [ForeignKey("StoreId")]
+        public virtual Store Stores { get; set; }
+       
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 

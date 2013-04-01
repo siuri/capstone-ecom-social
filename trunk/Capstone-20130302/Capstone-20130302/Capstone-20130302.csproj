@@ -167,6 +167,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Constants\Constant.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\FollowController.cs" />
@@ -182,18 +183,20 @@
     <Compile Include="Logic\Category_Logic.cs" />
     <Compile Include="Logic\Comment_Logic.cs" />
     <Compile Include="Logic\Follow_Logic.cs" />
+    <Compile Include="Logic\OrderDetails_Logic.cs" />
     <Compile Include="Logic\Order_Logic.cs" />
     <Compile Include="Logic\Product_Logic.cs" />
     <Compile Include="Logic\Store_Logic.cs" />
     <Compile Include="Logic\UserProfiles_Logic.cs" />
-    <Compile Include="Migrations\201303280818111_Init.cs" />
-    <Compile Include="Migrations\201303280818111_Init.Designer.cs">
-      <DependentUpon>201303280818111_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201304012022037_Init.cs" />
+    <Compile Include="Migrations\201304012022037_Init.Designer.cs">
+      <DependentUpon>201304012022037_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\EditorPick.cs" />
     <Compile Include="Models\Follow.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Order.cs" />
@@ -205,6 +208,7 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\ProductLike.cs" />
+    <Compile Include="Models\ProductOrder.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\Store.cs" />
     <Compile Include="Models\SocialBuyContext.cs" />
@@ -433,6 +437,11 @@
     </Content>
     <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Manage\Dashboard.cshtml" />
+    <Content Include="Views\Admin\ManageProduct.cshtml" />
+    <Content Include="Views\Admin\ManageStore.cshtml" />
+    <Content Include="Views\Order\SellerManage.cshtml" />
+    <Content Include="Views\Order\OrderDetails.cshtml" />
+    <Content Include="Views\Order\UserManage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -441,8 +450,8 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201303280818111_Init.resx">
-      <DependentUpon>201303280818111_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201304012022037_Init.resx">
+      <DependentUpon>201304012022037_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
