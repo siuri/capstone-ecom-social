@@ -14,7 +14,14 @@ else
     @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
     <a href="#register-modal" role="button" data-toggle="modal">Register</a>
     <a href="#login-modal" role="button" data-toggle="modal">Log in</a>
-    
+    <div class="navbar">
+        <div class="navbar-inner">
+            <ul class="nav">
+                <li><a href="#register-modal" role="button" data-toggle="modal">Register</a></li>
+                <li><a href="#login-modal" role="button" data-toggle="modal">Log in</a></li>
+            </ul>
+        </div>
+    </div>
     @Html.Partial("_LoginModal", new Capstone_20130302.Models.LoginModel())
     @Html.Partial("_RegisterModal", new Capstone_20130302.Models.RegisterModel())
 }

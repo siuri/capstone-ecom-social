@@ -34,6 +34,7 @@ namespace Capstone_20130302.Models
         public DbSet<Store> Stores { get; set; }
         public DbSet<StoreStatus> StoreStatuses { get; set; }
         public DbSet<ProductLike> ProductLikes { get; set; }
+        public DbSet<EditorPick> EditorPicks { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

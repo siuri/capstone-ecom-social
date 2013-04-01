@@ -46,8 +46,6 @@ namespace Capstone_20130302.Controllers
             // Get list product like
             List<Product> listpro = Account_Logic.GetListProductLikeByUser(user.UserId);
             ViewBag.listpro = listpro;
-
-
             return View(profile);
         }
 

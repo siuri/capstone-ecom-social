@@ -2,13 +2,13 @@
 @using Capstone_20130302.Models
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_SimpleLayout.cshtml";
+    Layout = "~/Views/Shared/_FreeLayout.cshtml";
     List<Store> liststore = ViewBag.liststore;
     List<Product> listpro = ViewBag.listpro;
 }
 <h2>Details</h2>
 <p>Store follow and Product like </p>
-    
+
 <p>@liststore.Count Store follow</p>
 @foreach (Store store in liststore)
 {
@@ -27,39 +27,280 @@
         @pro.Name;
     </div>
 }
-<fieldset>
-    <legend>Profile</legend>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DisplayName)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DisplayName)
-    </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DateOfBirth)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DateOfBirth)
+<div class="page" id="p-profile">
+    <div class="cover-wrapper">
+        <div class="header-cover" style="background: url(/Images/pattern.png)">
+        </div>
+        <div class="ease-fade"></div>
     </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Email)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Email)
-    </div>
+    <div class="header-wrapper">
+        <div class="store-avatar">
+            <img src="/Image/@Model.ProfileImage.ImageId">
+        </div>
+        <div class="header">
+            <h2>@Model.DisplayName</h2>
+            <span class="place glyphicon glyphicon-map-marker">@Model.Address.City, @Model.Address.Country</span>
+        </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ContactNumber)
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ContactNumber)
-    </div>
+    <div class="content clearfix">
+        <div class="left-side">
+            <div class="h-people"></div>
+            <div class="follow-wrapper">
+                <div class="stat"><span>1,366</span> people following</div>
+                <div class="follow-list">
+                    <ul>
+                        <li><a href="http://localhost:1701/User/Id/2">
+                            <img class="user" src="1"></a></li>
+                        <li><a href="http://localhost:1701/User/Id/3">
+                            <img class="user" src="18"></a></li>
+                        <li><a href="http://localhost:1701/User/Id/2">
+                            <img class="user" src="1"></a></li>
+                        <li><a href="http://localhost:1701/User/Id/3">
+                            <img class="user" src="18"></a></li>
+                        <li><a href="http://localhost:1701/User/Id/2">
+                            <img class="user" src="1"></a></li>
+                    </ul>
+                </div>
 
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.ProfileId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+                <div class="stat"><span>1,366</span> people following</div>
+                <div class="follow-list">
+                    <ul>
+                        <li><a href="http://localhost:1701/User/Id/2">
+                            <img class="user" src="1"></a></li>
+                        <li><a href="http://localhost:1701/User/Id/3">
+                            <img class="user" src="18"></a></li>
+                        <li><a href="http://localhost:1701/User/Id/2">
+                            <img class="user" src="1"></a></li>
+                        <li><a href="http://localhost:1701/User/Id/3">
+                            <img class="user" src="18"></a></li>
+                        <li><a href="http://localhost:1701/User/Id/2">
+                            <img class="user" src="1"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="right-side">
+            <h4>Favorite categories</h4>
+            <div class="chooser-wrapper">
+                <ul>
+                    <li>
+                        <div class="cate-wrapper">
+
+                            <div class="cover">
+                                <img class="cate" src="womens.jpg">
+                            </div>
+                            <div class="caption">Men's</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="cate-wrapper">
+
+                            <div class="cover">
+                                <img class="cate" src="mens.jpg">
+                            </div>
+                            <div class="caption">Women's</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="cate-wrapper">
+
+                            <div class="cover">
+                                <img class="cate" src="necklace.jpg">
+                            </div>
+                            <div class="caption">Food &amp; Beverages</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="cate-wrapper">
+
+                            <div class="cover">
+                                <img class="cate" src="mens.jpg">
+                            </div>
+                            <div class="caption">Women's</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style type="text/css">
+    #p-profile {
+        border: solid 1px #fff;
+        background: #fff;
+        margin: 50px auto;
+        line-height: 1.5;
+        color: #646472;
+        box-shadow: 0px 1px 11px #A5A5A5;
+        position: relative;
+        color: #1F1F2C;
+        border-radius: 5px;
+    }
+
+    .cover-wrapper {
+        position: relative;
+    }
+
+    .header-cover {
+        height: 200px;
+        width: 100%;
+        background-position: center;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .ease-fade {
+        height: 50px;
+        width: 100%;
+        background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.84), white);
+        position: absolute;
+        bottom: 0px;
+    }
+
+    .store-avatar {
+        height: 150px;
+        width: 150px;
+        position: absolute;
+        left: 50%;
+        margin-left: -75px;
+        top: -75px;
+    }
+
+        .store-avatar img {
+            padding: 5px;
+            border-radius: 500px;
+            border: solid 1px #ccc;
+            width: 150px;
+            height: 150px;
+            background: white;
+            box-shadow: 1px 1px 4px rgba(61, 61, 61, 0.24);
+        }
+
+    .header-wrapper {
+        padding: 0px 50px 40px;
+        position: relative;
+        height: 100px;
+        background: -webkit-linear-gradient(top, white 50%, rgba(255, 255, 255, 0.54), rgba(227, 225, 221, 0.65));
+    }
+
+    h2 {
+        font-family: "Century";
+        font-weight: normal;
+        font-size: 32px;
+        margin: 0 0 10px 0;
+        color: #646473;
+        background-color: #565656;
+        color: transparent;
+        text-shadow: 0px 2px 3px rgba(255, 255, 255, 0.5);
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        background-clip: text;
+    }
+
+    .glyphicon {
+        margin-right: 20px;
+    }
+
+        .glyphicon:before {
+            margin-right: 8px;
+            font-size: 16px;
+            top: 4px;
+            position: relative;
+            background: -webkit-linear-gradient(top, #B13E30, #DB2525);
+            color: transparent;
+            text-shadow: 0px 2px 3px rgba(255, 255, 255, 0.5);
+            -webkit-background-clip: text;
+        }
+
+    .follow-wrapper {
+        width: 260px;
+    }
+
+    .btn-follow:hover {
+        opacity: .9;
+    }
+
+    .content {
+        padding: 0 40px;
+    }
+
+    .stat {
+        margin: 12px 0 10px 0;
+        display: inline-block;
+    }
+
+    .follow-wrapper .follow-list ul {
+        margin-left: 0;
+        list-style: none;
+        float: left;
+    }
+
+    .h-people {
+        background: url(/Images/people.png);
+        width: 205px;
+        height: 103px;
+        position: relative;
+        top: -8px;
+    }
+
+    .left-side {
+        width: 30%;
+        background: url(/Images/shadow.png) no-repeat;
+        background-position: top right;
+        min-height: 400px;
+        float: left;
+    }
+
+    .right-side {
+        float: left;
+        width: 70%;
+        padding: 40px 40px;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    h4 {
+        font-family: "Century";
+        font-weight: normal;
+        font-size: 180%;
+        display: inline;
+    }
+
+    .chooser-wrapper {
+        margin-top: 25px;
+        width: 100%;
+    }
+
+
+    ul {
+        list-style: none;
+        margin-left: 0;
+    }
+
+    .chooser-wrapper ul li {
+        padding: 15px;
+        display: inline-block;
+    }
+
+    .chooser-wrapper .cate-wrapper {
+        position: relative;
+        text-align: center;
+    }
+
+    .chooser-wrapper .caption {
+        color: #747474;
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    .chooser-wrapper .cover img {
+        border-radius: 500px;
+        padding: 2px;
+        box-shadow: 0px 0px 3px #BBB;
+        width: 80px;
+    }
+</style>
