@@ -182,6 +182,7 @@
     <Compile Include="Logic\Category_Logic.cs" />
     <Compile Include="Logic\Comment_Logic.cs" />
     <Compile Include="Logic\Follow_Logic.cs" />
+    <Compile Include="Logic\Order_Logic.cs" />
     <Compile Include="Logic\Product_Logic.cs" />
     <Compile Include="Logic\Store_Logic.cs" />
     <Compile Include="Logic\UserProfiles_Logic.cs" />
