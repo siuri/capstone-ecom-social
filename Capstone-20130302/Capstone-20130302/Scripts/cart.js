@@ -80,7 +80,7 @@ function ShopModel(title, shopId) {
     self.products = ko.observableArray([])
     self.isCheckoutshop = ko.computed(function () {
         var regrs = location.search.match(/[?&]sid=(\d)[&$]?/);
-        if (regrs.length > 1) {
+        if (regrs !=null && regrs.length > 1) {
             var sid = parseInt(regrs[1]);
             if (sid == self.shopId) return true;
         }
