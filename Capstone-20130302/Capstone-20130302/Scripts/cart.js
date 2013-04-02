@@ -64,7 +64,9 @@
         var dataObject = JSON.parse(json);
         dataObject.forEach(function (s) {
             var shop = new ShopModel(s[1], s[0])
-            shop.products.push(new ProductModel(s[2][1], s[2][2], s[2][3], s[2][4], s[2][0], s[0]));
+            for (var i = 2; i < s.length; i++) {
+                shop.products.push(new ProductModel(s[i][1], s[i][2], s[i][3], s[i][4], s[i][0], s[0]));
+            }
             //s[2].forEach(function(p){
             //    shop.products.push(new ProductModel(p[1], p[2], p[3],p[4],p[0],s[0]));
             //})
