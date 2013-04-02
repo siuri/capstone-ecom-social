@@ -19,8 +19,9 @@ namespace Capstone_20130302.Models
 
         [DisplayName("Date of Birth")]
         [DataType(DataType.Date)]
+        [Column(TypeName = "datetime2")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
-        public DateTime? DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
         [EmailAddress]
         [Required]
