@@ -10,7 +10,26 @@
 
 
 <script>
-    
+    $(function(){
+        $(".checkout form").bind("submit", function () {
+            var cdata = "[";
+            var shops = cartmodel.shops();
+            for (var i = 0; i < shops.length; i++) {
+                var shop = shops[i];
+                if (shop.isCheckoutshop()) {
+                    var products = shop.products();
+                    for (var j = 0; j < products.length; j++) {
+                        var p = products[j];
+                        if (j != 0) cdata += ",";
+                        cdata += "{product_id:" + p.productId + ", quantity:" + p.productQuantity() + "}"
+                    }
+                }
+            }
+            cdata+="]"
+            $("#cartdata").val(cdata)
+            alert($("#cartdata").val());
+        })
+    })
 </script>
 <div class="page clearfix" id="p-checkout">
     <div class="checkout">
@@ -76,7 +95,7 @@
                     @Html.EditorFor(model => model.StatusId)
                     @Html.ValidationMessageFor(model => model.StatusId)
                 </div>
-
+                <input type="hidden" name="cartdata" id="cartdata"/>
                 <p>
                     <input type="submit" value="Create" />
                 </p>
@@ -96,7 +115,7 @@
                             <a href="#" data-bind="text: productTitle">Joe Dark Blue Yellow Casual Shoes</a>
                         </div>
                         <div class="price-quantity">
-                            $<span data-bind="text: productPrice">32.5</span>
+                            $<span data-bind="text: productPrice"></span>
                             x&nbsp;
                             <input type="number" min="1" data-bind="value: productQuantity" />
                         </div>
