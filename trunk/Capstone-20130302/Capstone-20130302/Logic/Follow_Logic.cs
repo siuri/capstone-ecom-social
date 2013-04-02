@@ -25,7 +25,6 @@ namespace Capstone_20130302.Logic
             List<UserProfile> list_profile = new List<UserProfile>();
             switch (type)
             {
-               
                 case 1:
                     lst = (from follow in db.Follows
                                        where follow.CategoryId == ID
@@ -33,7 +32,7 @@ namespace Capstone_20130302.Logic
                     break;
                 case 2:
                     lst = (from follow in db.Follows
-                           where follow.UserId == ID
+                           where follow.FollowedUserId == ID
                            select follow).ToList();
                     break;
                 case 3:
@@ -46,7 +45,7 @@ namespace Capstone_20130302.Logic
             }
             foreach (Follow temp in lst)
             {
-                list_profile.Add(temp.FollowedUser);
+                list_profile.Add(temp.User);
             }
             return list_profile;
         }

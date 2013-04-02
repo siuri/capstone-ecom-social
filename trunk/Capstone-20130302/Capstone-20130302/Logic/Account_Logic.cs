@@ -21,7 +21,7 @@ namespace Capstone_20130302.Logic
         {
             List<Store> liststore = new List<Store>();
             liststore = (from Follow follow in db.Follows
-                         where follow.UserId == userID
+                         where follow.UserId == userID && follow.StoreId != null
                          select follow.Store).ToList();
             return liststore;
         }

@@ -56,10 +56,10 @@
             dummyCart.push(shop);
         })
         var json = JSON.stringify(dummyCart);
-        localStorage.setItem("sb_cartData", json);
+        sessionStorage.setItem("sb_cartData", json);
     }
     self.loadFromStorage = function () {
-        var json = localStorage.getItem("sb_cartData");
+        var json = sessionStorage.getItem("sb_cartData");
         if (json == null) return;
         var dataObject = JSON.parse(json);
         dataObject.forEach(function (s) {

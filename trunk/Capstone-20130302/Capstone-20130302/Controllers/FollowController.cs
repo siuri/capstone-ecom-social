@@ -39,7 +39,7 @@ namespace Capstone_20130302.Controllers
 
                     // Create Follow and Save
                     Follow follow = new Follow();
-                    follow.FollowedUser = user;
+                    follow.User = user;
                     follow.Category = cate;
                     try
                     {

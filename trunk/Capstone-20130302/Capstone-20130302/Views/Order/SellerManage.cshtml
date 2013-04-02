@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Capstone_20130302.Models.Order>
 @{
     ViewBag.Title = "Seller Manage";
+    Layout = "~/Views/Shared/_MerchantLayout.cshtml";
 }
 
 <script src="~/Scripts/jquery.dataTables.js"></script>
@@ -32,7 +33,7 @@
                     </th>
                     <th>Billing Name
                     </th>
-                    <th>Billing Address
+                    <th>Shipping Name
                     </th>
                     <th>Total Payment
                     </th>
@@ -55,14 +56,14 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.BillingName)
                         </td>
-                         <td>
-                            @Html.DisplayFor(item.BillingAddress.Number + "/" +item.BillingAddress.Street + "/" + item.BillingAddress.City)
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ShippingName)
                         </td>
                          <td>
-                            @Html.DisplayFor(item.TotalPayment)
+                            @item.TotalPayment
                         </td>
                         <td data-pid="@item.OrderId" id= "status-@item.OrderId">
-                            @Html.DisplayFor(modelItem => item.Status.Name)
+                            <span class="or-@item.StatusId">@item.Status.Name</span>
                         </td>
                         <td data-pid="@item.OrderId">
                            <a href="Product/Edit/@item.OrderId"><i class="icon-pencil"></i></a>
@@ -78,5 +79,13 @@
 }
 else
 {
-    <text>no order.</text>
+    <div class="dl-message">
+        <div class="head">
+            <h4>Empty Order Stack</h4>
+        </div>
+        <div class="body">
+            It seems that your store is quite quiet at the moment. But don't worry. Introduce more friends to your business. People gotta know your products.
+        </div>
+        <div class="tail"></div>
+    </div>
 }
