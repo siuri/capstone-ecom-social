@@ -394,15 +394,17 @@
             alert("gasgas");
             $(this).toggleClass("active");
         });
+        var specsJsonData = @Html.Raw(Model.SpecsInJson);
+
+        var SpecModel = function (specs) {
+            var self = this;
+            self.specs = ko.observableArray(specs); 
+        };
+
         ko.applyBindings(new SpecModel(specsJsonData));
     });
     
-    var specsJsonData = @Html.Raw(Model.SpecsInJson);
-
-    var SpecModel = function (specs) {
-        var self = this;
-        self.specs = ko.observableArray(specs); 
-    };
+    
     
 </script>
 
