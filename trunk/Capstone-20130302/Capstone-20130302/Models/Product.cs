@@ -46,7 +46,8 @@ namespace Capstone_20130302.Models
         [ScaffoldColumn(false)]
         [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         [DisplayName("Create Date")]
-        public DateTime? CreateDate { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime CreateDate { get; set; }
 
         public virtual int? StatusId { get; set; }
         [ForeignKey("StatusId")]

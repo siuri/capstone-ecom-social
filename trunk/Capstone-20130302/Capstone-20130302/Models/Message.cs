@@ -17,6 +17,8 @@ namespace Capstone_20130302.Models
 
         public string Title { get; set; }
         public string Body { get; set; }
-        public DateTime? CreateDate { get; set; }
+
+        [Column(TypeName = "datetime2")]
+        public DateTime CreateDate { get; set; }
     }
 }
