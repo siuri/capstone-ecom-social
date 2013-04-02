@@ -51,7 +51,7 @@ namespace Capstone_20130302.Controllers
             return View(list);
         }
 
-
+        [Authorize]
         public ActionResult UserManage()
         {
             if (User.Identity.IsAuthenticated == false)
@@ -68,18 +68,6 @@ namespace Capstone_20130302.Controllers
             }
             List<Order> list = Order_Logic.GetListByUserID(userid, 0);
             return View(list);
-        }
-        public ActionResult OrderDetails(int id)
-        {
-            if (id <= 0)
-            {
-                ViewBag.Message = "Sorry, you must provide a  Order Id.";
-                return View("Error");
-            }
-
-            List<OrderDetail> order = new List<OrderDetail>();
-            order = OrderDetails_Logic.GetOrderDetailByOrderID(id);
-            return View(order);
         }
         
         //

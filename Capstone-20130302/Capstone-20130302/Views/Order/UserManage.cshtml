@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Capstone_20130302.Models.Order>
 @{
-    ViewBag.Title = "UserManage";
+    ViewBag.Title = "Order Tracking";
 }
 
 <script src="~/Scripts/jquery.dataTables.js"></script>
@@ -55,14 +55,14 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.BillingName)
                         </td>
-                         <td>
-                            @Html.DisplayFor(item.BillingAddress.Number + "/" +item.BillingAddress.Street + "/" + item.BillingAddress.City)
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ShippingName)
                         </td>
                          <td>
-                            @Html.DisplayFor(item.TotalPayment)
+                            @item.TotalPayment
                         </td>
                         <td data-pid="@item.OrderId" id= "status-@item.OrderId">
-                            @Html.DisplayFor(modelItem => item.Status.Name)
+                            <span class="or-@item.StatusId">@item.Status.Name</span>
                         </td>
                         <td data-pid="@item.OrderId">
                            @*<a href="Product/Edit/@item.OrderId"><i class="icon-pencil"></i></a>*@
@@ -79,5 +79,16 @@
 }
 else
 {
-    <text>no order.</text>
+    <div class="dl-message">
+        <div class="head">
+            <h4>It's Shopping Time!</h4>
+        </div>
+        <div class="body">
+            It seems like you haven't make any order. Why don't you start your great journey with us and grab an item?
+            <br />
+            <br />
+            <a href="/" class="btn">Look for Great things out there</a>
+        </div>
+        <div class="tail"></div>
+    </div>
 }

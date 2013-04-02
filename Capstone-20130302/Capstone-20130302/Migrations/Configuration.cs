@@ -185,7 +185,7 @@ namespace Capstone_20130302.Migrations
                     CategoryId = 4,
                     Price = 35.7F,
                     StatusId = 1,
-                    SpecsInJson = @"[{ key: 'Color', value: 'Dark Blue'}, { key: 'Size', value: '42, 43, 44'}]",
+                    SpecsInJson = @"[{ 'name': 'Color', 'content': 'Dark Blue'}, { 'name': 'Size', 'content': '42, 43, 44'}]",
                     ProductImages = new List<Image> { context.Images.Find(5), context.Images.Find(6), context.Images.Find(7) },
                     StoreId = 1
                 },
@@ -197,7 +197,7 @@ namespace Capstone_20130302.Migrations
                     CategoryId = 4,
                     Price = 35.7F,
                     StatusId = 2,
-                    SpecsInJson = @"[{ key: 'Taste', value: 'Spicy'}, { key: 'Size', value: 'S, M, L'}, { key: 'Packing', value: '3 bottles / pack'}]",
+                    SpecsInJson = @"[{ 'name': 'Taste', 'content': 'Spicy'}, { 'name': 'Size', 'content': 'S, M, L'}, { 'name': 'Packing', 'content': '3 bottles / pack'}]",
                     ProductImages = new List<Image> { context.Images.Find(15), context.Images.Find(16), context.Images.Find(17) },
                     StoreId = 2,
                     Comments = new List<Comment> { new Comment { CommentId = 1, CommentContent = "Good", CreateDate = DateTime.Now, ProductId = 2, UserId = WebSecurity.GetUserId("shoes_lovers") } }
@@ -210,7 +210,7 @@ namespace Capstone_20130302.Migrations
                     CategoryId = 7,
                     Price = 135.99F,
                     StatusId = 2,
-                    SpecsInJson = @"[{ key: 'Color', value: 'Yellow, Red'}, { key: 'Percentage', value: '70%'}]",
+                    SpecsInJson = @"[{ 'name': 'Color', 'content': 'Yellow, Red'}, { 'name': 'Percentage', 'content': '70%'}]",
                     ProductImages = new List<Image> { context.Images.Find(11), context.Images.Find(12), context.Images.Find(13) },
                     StoreId = 2,
                     Comments = new List<Comment> { new Comment { CommentId = 2, CommentContent = "Worse", CreateDate = DateTime.Now, ProductId = 2, UserId = WebSecurity.GetUserId("shoes_lovers") } }

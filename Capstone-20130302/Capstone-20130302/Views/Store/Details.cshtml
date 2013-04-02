@@ -6,14 +6,6 @@
     Layout = "~/Views/Shared/_FreeLayout.cshtml";
 }
 
-<p> List User Follow</p>
-@foreach (UserProfile profile in list)
-{
-    <div>
-        <p>@profile.Profile.DisplayName</p>
-    </div> 
-}
-
 <div class="page" id="p-store">
     <div class="cover-wrapper">
         <div class="cover" style="background: url(/Image/@Model.CoverImage.ImageId)">
@@ -33,14 +25,13 @@
         </div>
         <div class="follow-wrapper">
             <div class="btn-follow"></div>
-            <div class="stat"><span>1,366</span> people following</div>
+            <div class="stat"><span>@Model.TotalFollowers</span> people following</div>
             <div class="follow-list">
                 <ul>
-                    <li><a href="/User/Id/2"><img class="user" src="/Image/1"></a></li>
-                    <li><a href="/User/Id/3"><img class="user" src="/Image/18"></a></li>
-                    <li><a href="/User/Id/2"><img class="user" src="/Image/1"></a></li>
-                    <li><a href="/User/Id/3"><img class="user" src="/Image/18"></a></li>
-                    <li><a href="/User/Id/2"><img class="user" src="/Image/1"></a></li>
+                    @foreach (UserProfile profile in list)
+                    {
+                        <li><a href="/User/Id/@profile.UserId" title="@profile.Profile.DisplayName"><img class="user" src="/Image/@profile.Profile.ProfileImageId"></a></li>
+                    }
                 </ul>
             </div>
         </div>
@@ -178,7 +169,7 @@
         opacity: .9;
     }
     .stat {
-        margin: 12px 0 0 10px;
+        margin: 12px 0 15px 10px;
         display: inline-block;
     }
     .follow-wrapper .follow-list ul {

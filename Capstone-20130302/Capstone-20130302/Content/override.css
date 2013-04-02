@@ -719,3 +719,18 @@ em {
         width: 100%;
         text-align: center;
     }
+
+.well table th, .well table td {
+    border-top: 1px dashed #DDD;
+}
+
+.well table tr:first-child th, .well table tr:first-child td {
+    border-top: none;
+}
+
+.well table th {
+    opacity: .8;
+    font-weight: normal;
+}
+
+

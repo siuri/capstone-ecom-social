@@ -1,0 +1,105 @@
+﻿@model Capstone_20130302.Models.Order
+@{
+    ViewBag.Title = "Order # " +  Model.OrderId;
+}
+
+
+<script src="~/Scripts/jquery.dataTables.js"></script>
+<script src="~/Scripts/dataTables.bootstrap.js"></script>
+
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        $('#example').dataTable({
+            "sDom": "<'row spare-down'<'span4'f><'span3'l>r>t<'row'<'span3'i><'span8'p>>",
+            "sPaginationType": "bootstrap",
+            "oLanguage": {
+                "sLengthMenu": "_MENU_ records per page"
+            }
+        });
+    });
+</script>
+
+<legend>Order Summary</legend>
+<div class="well">
+    <table class="table">
+        <tr>
+            <th class="span3">Order Date</th>
+            <td>@Model.OrderDate</td>
+        </tr>
+        <tr>
+            <th>Order Status</th>
+            <td> <span class="or-@Model.StatusId">@Model.Status.Name</span> </td>
+        </tr>
+        <tr>
+            <th>Total Payment</th>
+            <td>@Model.TotalPayment</td>
+        </tr>
+        <tr>
+            <th>Billing Address</th>
+            <td>
+                @Model.BillingName <br />
+                @Model.BillingAddress.Number @Model.BillingAddress.Street, @Model.BillingAddress.City
+                <br /> @Model.BillingAddress.State, @Model.BillingAddress.Zipcode, @Model.BillingAddress.Country
+            </td>
+        </tr>
+        <tr>
+            <th>Shipping Information</th>
+            <td>
+                @Model.ShippingName <br />
+                @Model.ShippingAddress.Number @Model.ShippingAddress.Street, @Model.ShippingAddress.City
+                <br /> @Model.ShippingAddress.State, @Model.ShippingAddress.Zipcode, @Model.ShippingAddress.Country
+            </td>
+        </tr>
+    </table>
+</div>
+
+@if (Model.OrderDetails.ToList().Count > 0)
+{
+    <legend>Order Details</legend>
+    <div class="form-inline data-content">
+        <table cellpadding="0" cellspacing="0" border="0" class="display table table-striped table-bordered" id="example">
+            <thead>
+                <tr>
+                    <th>Item Name
+                    </th>
+                    <th>Price
+                    </th>
+                    <th>Amount
+                    </th>
+                    <th>Total Price
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.OrderDetails)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SoldPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                        
+                         <td>
+                            $@(item.Amount*item.SoldPrice)
+                        </td>
+@*                        <td data-pid="@item.OrderId" id= "status-@item.OrderId">
+                            @Html.DisplayFor(modelItem => item.Status.Name)
+                        </td>*@
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+}
+else
+{
+    <text>Sorry, no order detail.</text>
+}

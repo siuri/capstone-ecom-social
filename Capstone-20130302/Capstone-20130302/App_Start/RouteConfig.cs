@@ -27,7 +27,7 @@ namespace Capstone_20130302
             routes.MapRoute(
                 name: "UserRoute",
                 url: "User/Id/{id}",
-                defaults: new { controller = "User", action = "Details", id = UrlParameter.Optional }
+                defaults: new { controller = "Profile", action = "Details", id = UrlParameter.Optional }
             );
             routes.MapRoute(
                 name: "ImageRoute",
