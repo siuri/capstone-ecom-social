@@ -19,7 +19,8 @@ namespace Capstone_20130302.Models
         [ScaffoldColumn(false)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         [DisplayName("Order Date")]
-        public DateTime? OrderDate { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime OrderDate { get; set; }
 
         [DisplayName("Total Payment")]
         [DataType(DataType.Currency)]
