@@ -73,6 +73,40 @@
             cartmodel.shops.push(shop)
         })
     }
+
+    self.checkout_totalItem=ko.computed(function(){
+        var total = 0;
+        var shops = self.shops();
+        for (var i = 0; i < shops.length; i++) {
+            var shop = shops[i];
+            if (shop.isCheckoutshop() == true) {
+                var products = shop.products();
+                for (var j = 0; j < products.length; j++) {
+                    total += products[j].productQuantity();
+                }
+            }
+        }
+        return total;
+    })
+    self.checkout_netTotal = ko.computed(function () {
+        var total = 0;
+        var shops = self.shops();
+        for (var i = 0; i < shops.length; i++) {
+            var shop = shops[i];
+            if (shop.isCheckoutshop() == true) {
+                var products = shop.products();
+                for (var j = 0; j < products.length; j++) {
+                    total += products[j].productQuantity() * products[j].productPrice;
+                }
+            }
+        }
+        return parseFloat(total.toFixed(2));
+    })
+    self.checkout_shippingFees = ko.observable(1);
+    self.checkout_subTotal = ko.computed(function(){
+        return (parseFloat(self.checkout_netTotal()) + parseFloat(self.checkout_shippingFees())).toFixed(2);
+    })
+    
 }
 function ShopModel(title, shopId) {
     var self = this;
@@ -111,5 +145,4 @@ var cartmodel = new CartViewModel();
 cartmodel.loadFromStorage();
 $(function () {
     ko.applyBindings(cartmodel);
-    
 })

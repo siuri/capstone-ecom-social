@@ -4,10 +4,11 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_FreeLayout.cshtml";
 }
-
-
 <script>
+    
+    
     $(function () {
+        cartmodel.checkout_shippingFees(parseFloat($("#Stores_ShipFee").val()));
         $(".checkout form").bind("submit", function () {
             var cdata = "[";
             var shops = cartmodel.shops();
@@ -134,19 +135,21 @@
             <table>
                 <tr>
                     <th>Total Items</th>
-                    <td>9</td>
+                    <td>
+                        <span data-bind="text: checkout_totalItem"></span>
+                    </td>
                 </tr>
                 <tr>
                     <th>Net Total</th>
-                    <td>$84.99</td>
+                    <td>$<span data-bind="text: checkout_netTotal"></span></td>
                 </tr>
                 <tr>
                     <th>Shipping Fee</th>
-                    <td>$10</td>
+                    <td>$<span data-bind="text: checkout_shippingFees"></span></td>
                 </tr>
                 <tr class="total">
                     <th>SUBTOTAL</th>
-                    <td>$93.99</td>
+                    <td>$<span data-bind="text: checkout_subTotal"></span></td>
                 </tr>
             </table>
             <br>
