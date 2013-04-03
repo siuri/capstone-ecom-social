@@ -40,6 +40,7 @@
         <div class="left-side">
             <div class="h-people"></div>
             <div class="follow-wrapper">
+                 <div class="btn-follow"></div>
                 <div class="stat"><span>1,366</span> people following</div>
                 <div class="follow-list">
                     <ul>
@@ -382,9 +383,55 @@
         margin-bottom: 0;
         opacity: .7;
     }
+
+    .btn-follow {
+        background: url(/Images/follow.png) no-repeat 0 0;
+        width: 87px;
+        height: 31px;
+        margin: 10px 0;
+        float: left;
+        cursor: pointer;
+    }
+    .btn-follow:hover {
+        opacity: .9;
+    }
 </style>
 
 <script>
+
+
+    $(document).ready(function () {
+        $.getJSON("/Profile/GetUserFollow/@Model.ProfileId", function (data) {
+            if (data) {
+                $(".btn-follow").toggleClass("active");
+            }
+        });
+    });
+    $(".btn-follow").click(function () {
+        var classname = $('.btn-follow').attr('class');
+        if (classname == 'btn-follow active') {
+            $.getJSON("/Profile/DeleteUserFollow/@Model.ProfileId", function (data) {
+                if (data) {
+                    $(".btn-follow").toggleClass("active");
+                }
+                else {
+                    alert(data);
+                }
+            });
+        }
+        else {
+            $.getJSON("/Profile/AddUserFollow/@Model.ProfileId", function (data) {
+                if (data) {
+                    $(".btn-follow").toggleClass("active");
+                }
+                else {
+                    alert(data);
+                }
+            });
+        }
+      })
+
+
 
     $(function() {
         $(".product-grid").isotope({
