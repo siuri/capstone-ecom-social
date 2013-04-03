@@ -733,4 +733,19 @@ em {
     font-weight: normal;
 }
 
+.validation-summary-errors ul {
+    margin-left: 0;
+}
 
+.table-striped.table-bordered a {
+    color: #C04A41;
+    margin-right: 10px;
+}
+
+.table-striped.table-bordered a i {
+    opacity: .6;
+}
+
+.table-striped.table-bordered a:hover {
+    opacity: .8;
+}
