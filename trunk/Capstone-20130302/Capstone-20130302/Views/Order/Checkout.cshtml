@@ -6,11 +6,8 @@
 }
 
 
-
-
-
 <script>
-    $(function(){
+    $(function () {
         $(".checkout form").bind("submit", function () {
             var cdata = "[";
             var shops = cartmodel.shops();
@@ -25,17 +22,17 @@
                     }
                 }
             }
-            cdata+="]"
+            cdata += "]"
             $("#cartdata").val(cdata)
             alert($("#cartdata").val());
         })
     })
 </script>
 <div class="page clearfix" id="p-checkout">
-    
+
     <div class="checkout">
         <h2>Checkout</h2>
-        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "checkoutForm"}))
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "checkoutForm" }))
         {
             @Html.ValidationSummary(true)
 
@@ -77,7 +74,9 @@
 
                 <div class="editor-field form-inline">
                     @*@Html.EditorFor(model => model.IsUsedAsShipping)*@
-                    <label class="checkbox"><input class="check-box" data-val="true" data-val-required="The Is used as shipping address field is required." id="IsUsedAsShipping" name="IsUsedAsShipping" type="checkbox" value="true" checked > @Html.DisplayNameFor(model => model.IsUsedAsShipping)</label>
+                    <label class="checkbox">
+                        <input class="check-box" data-val="true" data-val-required="The Is used as shipping address field is required." id="IsUsedAsShipping" name="IsUsedAsShipping" type="checkbox" value="true" checked>
+                        @Html.DisplayNameFor(model => model.IsUsedAsShipping)</label>
                     @Html.ValidationMessageFor(model => model.IsUsedAsShipping)
                 </div>
                 <div class="shipping-wrapper">
@@ -101,9 +100,10 @@
                         @Html.TextBoxFor(model => model.ShippingAddress.Country, new { placeholder = @Html.DisplayNameFor(model => model.ShippingAddress.Country), title = @Html.DisplayNameFor(model => model.ShippingAddress.Country), @class = "span3" })
                     </div>
                 </div>
-                <input type="hidden" name="cartdata" id="cartdata"/>
-                @Html.HiddenFor(model => model.StoreId);
-                @Html.HiddenFor(model => model.UserId);
+                <input type="hidden" name="cartdata" id="cartdata" />
+                @Html.HiddenFor(model => model.StoreId)
+                @Html.HiddenFor(model => model.Stores.ShipFee)
+                @Html.HiddenFor(model => model.UserId)
             </fieldset>
         }
     </div>
@@ -111,22 +111,22 @@
         <h3>Shopping cart</h3>
         <div class="cart-wrap" data-bind="foreach: shops">
             <div data-bind="if: isCheckoutshop">
-            <div data-bind="foreach: products">
-                <div class="product clearfix">
-                    <img src="/Image/10" data-bind="attr:{src: productImage}">
-                    <div class="info">
-                        <div class="title">
-                            <a href="#" data-bind="text: productTitle">Joe Dark Blue Yellow Casual Shoes</a>
-                        </div>
-                        <div class="price-quantity">
-                            $<span data-bind="text: productPrice"></span>
-                            x&nbsp;
+                <div data-bind="foreach: products">
+                    <div class="product clearfix">
+                        <img src="/Image/10" data-bind="attr:{src: productImage}">
+                        <div class="info">
+                            <div class="title">
+                                <a href="#" data-bind="text: productTitle">Joe Dark Blue Yellow Casual Shoes</a>
+                            </div>
+                            <div class="price-quantity">
+                                $<span data-bind="text: productPrice"></span>
+                                x&nbsp;
                             <input type="number" min="1" data-bind="value: productQuantity" />
+                            </div>
+                            <div class="action"><a href="#" data-bind="click: function(data){$parent.removeProduct(data,$root)}">Remove</a></div>
                         </div>
-                        <div class="action"><a href="#" data-bind="click: function(data){$parent.removeProduct(data,$root)}">Remove</a></div>
                     </div>
                 </div>
-            </div>
             </div>
         </div>
         <div class="summary">
@@ -159,12 +159,6 @@
 </div>
 
 
-
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
@@ -174,12 +168,13 @@
     #p-checkout {
         border: solid 1px #DBDBEA;
         margin: 50px auto;
-        padding: 40px;
+        padding: 50px 40px 40px 65px;
         box-sizing: border-box;
         line-height: 1.5;
         color: #646472;
         background: #fff url(/Images/ckbg.jpg) right repeat-y;
     }
+
     h2 {
         font-family: "Century";
         font-weight: normal;
@@ -187,11 +182,11 @@
     }
 
     .cart-wrap {
-        min-height: 232px;
+        min-height: 235px;
     }
 
     .checkout {
-        width: 500px;
+        width: auto;
         float: left;
     }
 
@@ -205,11 +200,11 @@
     }
 
     .cart-view {
-        width: 305px;
+        width: 295px;
         float: right;
         height: 100%;
         background: url(/images/ckout-ribbon.png) no-repeat;
-        margin: -48px 0 0 0;
+        margin: -58px 0 0 0;
         padding: 20px 0 0 5px;
         box-sizing: border-box;
     }
@@ -220,15 +215,17 @@
             margin-left: 60px;
             font-size: 180%;
             margin-bottom: 20px;
+            margin-top: 35px;
             color: #6B522D;
         }
 
-            .cart-view .product {
-                height: 45px;
-                border-bottom: solid 1px #E3DFD5;
-                position: relative;
-                padding: 20px 0;
-            }
+        .cart-view .product {
+            height: 45px;
+            border-bottom: solid 1px #E3DFD5;
+            position: relative;
+            padding: 20px 0;
+        }
+
             .cart-view .product:after {
                 display: block;
                 width: 100%;
@@ -275,6 +272,7 @@
                     color: #555;
                     font-family: "Century";
                 }
+
                     .cart-view .product .info .price-quantity input[type=number] {
                         width: 40px;
                         height: 20px;
@@ -282,17 +280,21 @@
                         line-height: 15px;
                         margin-bottom: 3px;
                     }
+
                 .cart-view .product .info .action {
                     display: none;
                     float: right;
                 }
-                .cart-view .product .info .action a {
-                    color: rgba(231, 22, 0, 0.79);
-                    font-size: 90%;
-                }
+
+                    .cart-view .product .info .action a {
+                        color: rgba(231, 22, 0, 0.79);
+                        font-size: 90%;
+                    }
+
             .cart-view .product:hover .info .action {
-                display:block;
+                display: block;
             }
+
     .summary h4 {
         color: #6B522D;
         font-weight: normal;
@@ -300,42 +302,51 @@
         padding-bottom: 5px;
         margin-bottom: 6px;
     }
+
     .summary table {
         width: 100%;
     }
-    .summary table th {
-        font-weight: normal;
-        opacity: .8;
-        text-align: left;
-    }
-    .summary table td {
-        text-align: right;
-    }
-    .summary table th,
-    .summary table td {
-        border-top: dashed 1px #E4D3BA;
-        padding: 8px 0;
-    }
-    .summary table tr:first-child th,
-    .summary table tr:first-child td {
-        border-top: none;
-    }
+
+        .summary table th {
+            font-weight: normal;
+            opacity: .8;
+            text-align: left;
+        }
+
+        .summary table td {
+            text-align: right;
+        }
+
+        .summary table th,
+        .summary table td {
+            border-top: dashed 1px #E4D3BA;
+            padding: 8px 0;
+        }
+
+        .summary table tr:first-child th,
+        .summary table tr:first-child td {
+            border-top: none;
+        }
+
     .total td, .total th {
         font-weight: bold;
         line-height: 1.5;
     }
+
     .total td {
         color: #DB6363;
-        font-size: 160%;
+        font-size: 220%;
+        font-weight: normal;
+        font-family: "Century";
     }
 </style>
 <script type="text/javascript">
     $(document).ready(function () {
         $(".shipping-wrapper").hide();
-        $('#IsUsedAsShipping').click(function(){
+        $('#IsUsedAsShipping').click(function () {
             if ($(this).is(':checked')) {
                 $(".shipping-wrapper").hide();
-            } else{
+            } else {
                 $(".shipping-wrapper").show();
             }
         });
