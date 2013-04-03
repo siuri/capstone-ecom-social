@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using Capstone_20130302.Models;
@@ -121,10 +123,23 @@ namespace Capstone_20130302.Logic
         {
             try
             {
-                Order _order = db.Orders.Single(t => t.OrderId == orderID);
+                Order _order = (from Order _od in db.Orders
+                                where _od.OrderId == orderID
+                                select _od).FirstOrDefault();
                 _order.StatusId = statusID;
                 db.SaveChanges();
                 return true;
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Trace.TraceInformation("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+                    }
+                }
+                return false;
             }
             catch (Exception ex)
             {
