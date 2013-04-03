@@ -51,10 +51,10 @@
             <div class="navbar">
                 <div class="navbar-inner">
                     <ul class="nav">
-                        <li>@Html.ActionLink("Store Management", "Index", "Store")</li>
-                        <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Switch to Store<b class="caret"></b></a><ul class="dropdown-menu">
-                            <li><a href="#">Sub menu1</a></li>
-                            <li><a href="#">Sub menu1</a></li>
+                        <li><a href="/Admin"><i class="icon-dashboard"></i> Admin Dashboard</a></li>
+                        <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-cog"></i> Manage<b class="caret"></b></a><ul class="dropdown-menu">
+                            <li><a href="/Admin/ManageStore"><i class="icon-shopping-cart"></i> Stores</a></li>
+                            <li><a href="/Admin/ManageProduct"><i class="icon-tasks"></i> Products</a></li>
                         </ul>
                         </li>
                     </ul>
@@ -76,20 +76,6 @@
     <script>
         $(".modal").on("show", function () {
             $(".modal").not(this).modal("hide");
-        });
-        //$('[rel=tooltip]').tooltip();
-        $("#cart > a").click(function () {
-            $("#cart > .cart-container").toggle(300);
-        })
-        $(document).click(function () {
-            $(".cart-container").hide(200);
-        })
-        $(".cart-container,#cart > a").click(function (e) {
-            e.preventDefault();
-            return false;
-        });
-        $("[class*=logo], #logo").click(function () {
-            location.href = "/";
         });
     </script>
 </body>

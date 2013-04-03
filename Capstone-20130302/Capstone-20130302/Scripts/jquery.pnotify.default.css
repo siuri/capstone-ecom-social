@@ -46,6 +46,11 @@ margin-bottom: .4em;
 }
 .ui-pnotify-text {
 display: block;
+margin: 10px -10px -11px;
+padding: 10px;
+background: -webkit-linear-gradient(top, rgba(230, 230, 230, 0.59), #FFF);
+border-radius: 0 0 4px 4px;
+color: #4B4B4B;
 }
 .ui-pnotify-icon, .ui-pnotify-icon span {
 display: block;
@@ -80,4 +85,26 @@ width: 100%;
 .ui-pnotify-history-container .ui-pnotify-history-pulldown {
 display: block;
 margin: 0 auto;
+}
+
+.ui-pnotify h4 {
+
+font-size: 110%;
+line-height: 1;
+margin-left: 24px;
+}
+
+.ui-pnotify .alert-success h4 {
+	color: #255726;
+}
+.ui-pnotify .alert-success {
+background: -webkit-linear-gradient(top, #8FB471, #FFF);
+border-color: #8CB16E;
+color: #468847;
+}
+
+.ui-pnotify .alert-error {
+background: -webkit-linear-gradient(top, #b94a48, #FFF);
+border-color: #b94a48;
+color: #720D0A;
 }
