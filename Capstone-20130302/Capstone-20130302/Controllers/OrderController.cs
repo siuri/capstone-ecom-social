@@ -94,10 +94,17 @@ namespace Capstone_20130302.Controllers
         {
             if (sid <= 0)
             {
-                ViewBag.Message = "Sorry, some parameters are missing.";
+                ViewBag.Message = "Sorry, store identifier are missing. Please try again.";
                 return View("Error");
             }
+            Store store = db.Stores.Find(sid);
             Order order = new Order();
+            Profile profile = db.Profiles.Find(WebSecurity.CurrentUserId);
+            if (profile.Address != null)
+            {
+                order.BillingAddress = profile.Address;
+            }
+            order.Stores = store;
             order.StatusId = Constant.ORDER_STATUS_PENDING;
             order.UserId = WebSecurity.CurrentUserId;
             order.StoreId = sid;
