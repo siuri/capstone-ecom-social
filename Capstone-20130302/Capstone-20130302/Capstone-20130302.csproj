@@ -185,12 +185,13 @@
     <Compile Include="Logic\Follow_Logic.cs" />
     <Compile Include="Logic\OrderDetails_Logic.cs" />
     <Compile Include="Logic\Order_Logic.cs" />
+    <Compile Include="Logic\ProductLike_Logic.cs" />
     <Compile Include="Logic\Product_Logic.cs" />
     <Compile Include="Logic\Store_Logic.cs" />
     <Compile Include="Logic\UserProfiles_Logic.cs" />
-    <Compile Include="Migrations\201304012022037_Init.cs" />
-    <Compile Include="Migrations\201304012022037_Init.Designer.cs">
-      <DependentUpon>201304012022037_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201304020228219_Init.cs" />
+    <Compile Include="Migrations\201304020228219_Init.Designer.cs">
+      <DependentUpon>201304020228219_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Address.cs" />
@@ -450,8 +451,8 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201304012022037_Init.resx">
-      <DependentUpon>201304012022037_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201304020228219_Init.resx">
+      <DependentUpon>201304020228219_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

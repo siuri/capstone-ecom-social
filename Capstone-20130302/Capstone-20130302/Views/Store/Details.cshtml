@@ -249,6 +249,41 @@
 
 <script>
 
+    $(document).ready(function() {
+        $.getJSON("/Store/GetStoreFollow/@Model.StoreId", function (data) {
+             if(data)
+             {
+                 $(".btn-follow").toggleClass("active");
+             }
+         });
+    });
+
+
+    $(".btn-follow").click(function () {
+        var classname = $('.btn-follow').attr('class');
+        if (classname == 'btn-follow active') {
+            $.getJSON("/Store/DeleteStoreFollow/@Model.StoreId", function (data) {
+                if (data) {
+                    $(".btn-follow").toggleClass("active");
+                }
+                else {
+                    alert(data);
+                }
+            });
+        }
+        else {
+            $.getJSON("/Store/AddStoreFollow/@Model.StoreId", function (data) {
+                if (data) {
+                    $(".btn-follow").toggleClass("active");
+                }
+                else {
+                    alert(data);
+                }
+            });
+        }
+    })
+
+
     $(function() {
         $(".product-grid").isotope({
             layoutMode: "masonry",

@@ -44,6 +44,42 @@ namespace Capstone_20130302.Controllers
         //
         // GET: /Store/Create
 
+
+        public ActionResult GetStoreFollow(int ID)
+        {
+            if (User.Identity.IsAuthenticated != false)
+            {
+                UserProfile user = UserProfiles_Logic.GetUserProfileByUserName(User.Identity.Name);
+                return Json(Follow_Logic.CheckFollowForUser(user.UserId,ID,3), JsonRequestBehavior.AllowGet);
+            }
+            return Json(false, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public ActionResult AddStoreFollow(int ID)
+        {
+            if (User.Identity.IsAuthenticated == false)
+            {
+                return Json("You must login to Like", JsonRequestBehavior.AllowGet);
+            }
+            UserProfile user = UserProfiles_Logic.GetUserProfileByUserName(User.Identity.Name);
+            Follow temp = new Follow();
+            temp.UserId = user.UserId;
+            temp.StoreId = ID;
+            return Json(Follow_Logic.AddNewFollow(temp).ToString(), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult DeleteStoreFollow(int ID)
+        {
+            if (User.Identity.IsAuthenticated == false)
+            {
+                return Json("You must login to Like", JsonRequestBehavior.AllowGet);
+            }
+            UserProfile user = UserProfiles_Logic.GetUserProfileByUserName(User.Identity.Name);
+            return Json(Follow_Logic.DeletFollow(user.UserId,ID,3).ToString(), JsonRequestBehavior.AllowGet);
+
+
+        }
         public ActionResult Create()
         {
             return View();

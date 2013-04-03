@@ -88,8 +88,40 @@ namespace Capstone_20130302.Controllers
             return View(product);
         }
 
+  
+        public ActionResult GetProductLike(int ID)
+        {
+            if (User.Identity.IsAuthenticated != false)
+            {
+                UserProfile user = UserProfiles_Logic.GetUserProfileByUserName(User.Identity.Name);
+                return Json(ProductLike_Logic.CheckLikeProductUserID(ID, user.UserId), JsonRequestBehavior.AllowGet);
+            }
+            return Json(false, JsonRequestBehavior.AllowGet);
+           
+        }
+
+        public ActionResult AddProductLike(int ID)
+        {
+            if (User.Identity.IsAuthenticated == false)
+            {
+                return Json("You must login to Like", JsonRequestBehavior.AllowGet);
+            }
+            UserProfile user = UserProfiles_Logic.GetUserProfileByUserName(User.Identity.Name);
+            return Json(ProductLike_Logic.AddProductLike(ID, user.UserId).ToString(), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult DeleteProductLike(int ID)
+        {
+            if (User.Identity.IsAuthenticated == false)
+            {
+                return Json("You must login to Like", JsonRequestBehavior.AllowGet);
+            }
+            UserProfile user = UserProfiles_Logic.GetUserProfileByUserName(User.Identity.Name);
+            return Json(ProductLike_Logic.DeleteProductLike(ID, user.UserId).ToString(), JsonRequestBehavior.AllowGet);
+        }
+        
         [HttpPost]
-        public JsonResult PostComment(Comment cmt)
+        public ActionResult PostComment(Comment cmt)
         {
             if (User.Identity.IsAuthenticated == false)
             {
