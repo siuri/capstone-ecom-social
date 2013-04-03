@@ -3,7 +3,7 @@
     List<UserProfile> listlike = ViewBag.listlike;
     List<UserProfile> listbuy = ViewBag.listbuy;
     List<Comment> listcmt = ViewBag.listcmt;
-    UserProfile _user  =  ViewBag.detailuser;
+    UserProfile _user = ViewBag.detailuser;
 }
 @model Capstone_20130302.Models.Product
 @{
@@ -22,18 +22,18 @@
             <div class="stat"><span>@listlike.Count.ToString("###,###,###,0")</span> likes</div>
             <div class="like-list">
                 <ul>
-                    @foreach(UserProfile user in listlike)
+                    @foreach (UserProfile user in listlike)
                     {
-                        
-                        <li><a href="/User/Id/@user.UserId"><img class="user" src="/Image/@user.Profile.ProfileImage.ImageId"></a></li>
+                        <li><a href="/User/Id/@user.UserId">
+                            <img class="user" src="/Image/@user.Profile.ProfileImage.ImageId"></a></li>
                     }
-                    
+
                 </ul>
             </div>
         </div>
         <h3>@Html.DisplayFor(model => model.Name)</h3>
         <a class="store " href="/Store/Id/@Html.DisplayFor(model => model.Store.StoreId)">@Html.DisplayFor(model => model.Store.StoreName)</a>
-            
+
     </div>
     <div class="clearfix">
         <div class="left-side">
@@ -41,15 +41,17 @@
                 @if (listbuy.Count > 0)
                 {
                     <div class="stat">
-                        <span>@listbuy.Count.ToString("###,###,###,0")</span> <text>people've ordered this item</text>
+                        <span>@listbuy.Count.ToString("###,###,###,0")</span>
+                        <text>people've ordered this item</text>
                     </div>                                                 
                     <div class="buy-list">
                         <ul class="clearfix">
-                            @foreach(UserProfile user in listbuy)
+                            @foreach (UserProfile user in listbuy)
                             {
-                                <li><a href="/User/Id/@user.UserId"><img class="user" src="/Image/@user.Profile.ProfileImage.ImageId"></a></li>
+                                <li><a href="/User/Id/@user.UserId">
+                                    <img class="user" src="/Image/@user.Profile.ProfileImage.ImageId"></a></li>
                             }
-                       
+
                         </ul>
                     </div>
                 }
@@ -71,7 +73,7 @@
                     </table>
                 </div>
             </div>
-                
+
         </div>
         <div class="right-side">
             <div id="product-carousel" class="carousel slide">
@@ -79,12 +81,13 @@
                 <div class="carousel-inner">
                     @foreach (var image in Model.ProductImages)
                     {
-                        if (image.ImageId == Model.ProductImages.ElementAt(0).ImageId) 
+                        if (image.ImageId == Model.ProductImages.ElementAt(0).ImageId)
                         {
-                            <div class="item active" style="background-image: url(/Image/@image.ImageId)"></div>
+                        <div class="item active" style="background-image: url(/Image/@image.ImageId)"></div>
                         }
-                        else {
-                            <div class="item" style="background-image: url(/Image/@image.ImageId)"></div>
+                        else
+                        {
+                        <div class="item" style="background-image: url(/Image/@image.ImageId)"></div>
                         }
                     }
                 </div>
@@ -93,47 +96,48 @@
                 <a class="carousel-control right" href="#product-carousel" data-slide="next">›</a>
             </div>
             <div class="comment-wrapper">
-                <div class="stat"><span  id="countcomment">@listcmt.Count</span> comments</div>
+                <div class="stat"><span id="countcomment">@listcmt.Count</span> comments</div>
                 <!-- Post box -->
                 @if (User.Identity.IsAuthenticated)
                 {
-                <div class="postbox">
+                    <div class="postbox">
 
-                    <form action="" method="get" onsubmit="return PostComment()" accept-charset="utf-8">
+                        <form action="" method="get" onsubmit="return PostComment()" accept-charset="utf-8">
 
-                        <div class="textarea-wrapper" data-role="textarea">
-                            <div class="textarea" >
-                                <textarea onkeyup="CheckContent(this.value)" id="contentcomment" placeholder="Leave a message..." rows="1"></textarea>
+                            <div class="textarea-wrapper" data-role="textarea">
+                                <div class="textarea">
+                                    <textarea onkeyup="CheckContent(this.value)" id="contentcomment" placeholder="Leave a message..." rows="1"></textarea>
 
+                                </div>
+
+                                <div class="post-actions">
+                                    <div id="error" class="errorcomment"></div>
+                                    <button type="submit" class="btn btn-small btn-default">
+                                        Post this comment
+                                    </button>
+                                </div>
                             </div>
-
-                            <div class="post-actions">
-                                <div id="error" class ="errorcomment"></div>
-                                <button type="submit" class="btn btn-small btn-default">
-                                    Post this comment
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <!-- Post box -->
+                        </form>
+                    </div>
+                    <!-- Post box -->
                 }
                 <ul class="comment-list">
                     @foreach (Comment cmt in listcmt)
                     {
-                           <li class="item">
-                        <div class="avatar">
-                            <a href="/User/Id/@cmt.User.UserId"><img class="user" src="/Image/@cmt.User.Profile.ProfileImage.ImageId"></a>
-                        </div>
-                        <div class="comment-box">
-                            <div class="header">
-                                <a href="" class="name">@cmt.User.Profile.DisplayName   @if (cmt.User.UserName == Model.Store.Owner.UserName)
-                                                                                        { <span class="owner"></span> } </a>
-                                <span class="time">@cmt.CreateDate.ToString("dd/MM/yyyy hh:mm:ss")</span>
+                        <li class="item">
+                            <div class="avatar">
+                                <a href="/User/Id/@cmt.User.UserId">
+                                    <img class="user" src="/Image/@cmt.User.Profile.ProfileImage.ImageId"></a>
                             </div>
-                            <div class="content">@cmt.CommentContent</div>
-                        </div>
-                     </li>
+                            <div class="comment-box">
+                                <div class="header">
+                                    <a href="" class="name">@cmt.User.Profile.DisplayName   @if (cmt.User.UserName == Model.Store.Owner.UserName)
+                                                                                            { <span class="owner"></span> } </a>
+                                    <span class="time">@cmt.CreateDate.ToString("dd/MM/yyyy hh:mm:ss")</span>
+                                </div>
+                                <div class="content">@cmt.CommentContent</div>
+                            </div>
+                        </li>
                     }
 
                 </ul>
@@ -143,11 +147,12 @@
 </div>
 
 <style type="text/css">
-    .errorcomment    {
+    .errorcomment {
         margin: 5px 7px;
         float: left;
         color: #E93535;
     }
+
     #p-product {
         border: solid 1px #DBDBEA;
         background: #fff;
@@ -158,15 +163,18 @@
         color: #646472;
         box-shadow: 0px 2px 5px #CCC;
     }
-    #p-product .header {
-        position: relative;
-    }
-    #p-product .header h3 {
-        font-family: "Century";
-        font-weight: normal;
-        color: #1F1F2C;
-        font-size: 28px;
-    }
+
+        #p-product .header {
+            position: relative;
+        }
+
+            #p-product .header h3 {
+                font-family: "Century";
+                font-weight: normal;
+                color: #1F1F2C;
+                font-size: 28px;
+            }
+
     .like-wrapper {
         float: right;
         width: 220px;
@@ -183,28 +191,28 @@
         float: left;
     }
 
-    .left-side h4 {
-        margin-top: 20px;
-        color: #CA6D63;
-    }
+        .left-side h4 {
+            margin-top: 20px;
+            color: #CA6D63;
+        }
 
-    .left-side table tr th {
-        padding-left: 0;
-        font-weight: normal;
-        color: rgba(100, 100, 114, 0.61);
-    }
+        .left-side table tr th {
+            padding-left: 0;
+            font-weight: normal;
+            color: rgba(100, 100, 114, 0.61);
+        }
 
-    .left-side table tr td,
-    .left-side table tr th {
-        padding-top: 3px;
-        padding-bottom: 3px;
-        border-top: 1px dashed #ccc;
-    }
+        .left-side table tr td,
+        .left-side table tr th {
+            padding-top: 3px;
+            padding-bottom: 3px;
+            border-top: 1px dashed #ccc;
+        }
 
-    .left-side table tr:first-child td,
-    .left-side table tr:first-child th {
-        border-top: none;
-    }
+        .left-side table tr:first-child td,
+        .left-side table tr:first-child th {
+            border-top: none;
+        }
 
     .add-cart {
         text-transform: uppercase;
@@ -214,12 +222,12 @@
         padding: 3px 15px;
     }
 
-    .add-cart span {
-        font-family: "Century";
-        margin-right: 10px;
-        font-size: 140%;
-        font-weight: normal;
-    }
+        .add-cart span {
+            font-family: "Century";
+            margin-right: 10px;
+            font-size: 140%;
+            font-weight: normal;
+        }
 
     .right-side {
         padding-top: 30px;
@@ -251,23 +259,23 @@
         margin: 15px 0;
     }
 
-    .postbox .post-actions {
-        visibility: visible;
-        filter: alpha(opacity=100);
-        -khtml-opacity: 1;
-        -moz-opacity: 1;
-        opacity: 1;
-    }
+        .postbox .post-actions {
+            visibility: visible;
+            filter: alpha(opacity=100);
+            -khtml-opacity: 1;
+            -moz-opacity: 1;
+            opacity: 1;
+        }
 
-    .postbox .post-actions {
-        -webkit-transition: opacity linear .2s;
-        -moz-transition: opacity linear .2s;
-        -ms-transition: opacity linear .2s;
-        -o-transition: opacity linear .2s;
-        transition: opacity linear .2s;
-        border-top: 1px dotted #C6CDD6;
-        text-align: right;
-    }
+        .postbox .post-actions {
+            -webkit-transition: opacity linear .2s;
+            -moz-transition: opacity linear .2s;
+            -ms-transition: opacity linear .2s;
+            -o-transition: opacity linear .2s;
+            transition: opacity linear .2s;
+            border-top: 1px dotted #C6CDD6;
+            text-align: right;
+        }
 
     .textarea-wrapper {
         -webkit-transition: all .2s linear;
@@ -284,23 +292,23 @@
         border: 1px solid rgba(75, 83, 94, 0.45);
     }
 
-    .textarea-wrapper textarea {
-        border: none;
-        margin: 0;
-        width: 100%;
-        box-sizing: border-box;
-        box-shadow: none;
-        resize: none;
-    }
+        .textarea-wrapper textarea {
+            border: none;
+            margin: 0;
+            width: 100%;
+            box-sizing: border-box;
+            box-shadow: none;
+            resize: none;
+        }
 
-    .textarea-wrapper textarea:focus {
-        box-shadow: none;
-        height: 60px;
-    }
+            .textarea-wrapper textarea:focus {
+                box-shadow: none;
+                height: 60px;
+            }
 
-    .textarea-wrapper:focus .post-actions {
-        opacity: 1;
-    }
+        .textarea-wrapper:focus .post-actions {
+            opacity: 1;
+        }
 
     .post-actions .btn {
         border-radius: 0 0 4px 0;
@@ -315,65 +323,66 @@
         right: -2px;
     }
 
-    .post-actions .btn:hover {
-        background: -webkit-linear-gradient(top, #CACACA, #FCFCFC);
-    }
-    .post-actions .btn:focus {
-        background: #CACACA;
-    }
+        .post-actions .btn:hover {
+            background: -webkit-linear-gradient(top, #CACACA, #FCFCFC);
+        }
+
+        .post-actions .btn:focus {
+            background: #CACACA;
+        }
 
     .comment-list {
         list-style: none;
         margin-left: 0;
     }
 
-    .comment-list li.item {
-        margin-bottom: 10px;
-    }
+        .comment-list li.item {
+            margin-bottom: 10px;
+        }
 
-    .comment-list li.item .avatar {
-        position: absolute;
-    }
+            .comment-list li.item .avatar {
+                position: absolute;
+            }
 
-    .comment-list li.item .comment-box {
-        margin-left: 55px;
-    }
+            .comment-list li.item .comment-box {
+                margin-left: 55px;
+            }
 
-    .comment-list li.item .comment-box .content {
-        line-height: 1.4;
-        opacity: .8
-    }
+                .comment-list li.item .comment-box .content {
+                    line-height: 1.4;
+                    opacity: .8;
+                }
 
-    .comment-list li.item img {
-        float: left;
-        margin-right: 15px;
-    }
+            .comment-list li.item img {
+                float: left;
+                margin-right: 15px;
+            }
 
-    .comment-list li.item a.name {
-        font-weight: bold;
-        color: #D86959;
-    }
+            .comment-list li.item a.name {
+                font-weight: bold;
+                color: #D86959;
+            }
 
-    .comment-list li.item a.name .owner:after {
-        content: "Owner";
-        margin-left: 8px;
-        text-transform: uppercase;
-        background: rgba(236, 97, 97, 0.69);
-        font-weight: normal;
-        color: white;
-        font-size: 80%;
-        padding: 2px 5px;
-        border-radius: 2px;
-    }
+                .comment-list li.item a.name .owner:after {
+                    content: "Owner";
+                    margin-left: 8px;
+                    text-transform: uppercase;
+                    background: rgba(236, 97, 97, 0.69);
+                    font-weight: normal;
+                    color: white;
+                    font-size: 80%;
+                    padding: 2px 5px;
+                    border-radius: 2px;
+                }
 
-    .comment-list li.item .time {
-        opacity: 0;
-        float: right;
-    } 
+            .comment-list li.item .time {
+                opacity: 0;
+                float: right;
+            }
 
-    .comment-list li.item:hover .time {
-        opacity: .6;
-    }
+            .comment-list li.item:hover .time {
+                opacity: .6;
+            }
 
     .ribbon-wrapper {
         position: absolute;
@@ -394,20 +403,19 @@
         transition: opacity linear .5s;
     }
 
-    .btn-like.active {
-        background: url(/Images/like-ribbon.png) no-repeat 0 0;
-        -webkit-transition: opacity linear .5s;
-        -moz-transition: opacity linear .5s;
-        -ms-transition: opacity linear .5s;
-        -o-transition: opacity linear .5s;
-        transition: opacity linear .5s;
-    }
-
+        .btn-like.active {
+            background: url(/Images/like-ribbon.png) no-repeat 0 0;
+            -webkit-transition: opacity linear .5s;
+            -moz-transition: opacity linear .5s;
+            -ms-transition: opacity linear .5s;
+            -o-transition: opacity linear .5s;
+            transition: opacity linear .5s;
+        }
 </style>
 <script>
     $(document).ready(function() {
         $(".btn-like").click(function() {
-            alert("gasgas");
+            postToFeed();
             $(this).toggleClass("active");
         });
         var specsJsonData = @Html.Raw(Model.SpecsInJson)
@@ -440,18 +448,18 @@
         {
 
             <text>
-                var User_UserName = '@_user.UserName';
-                var Owner_UserName = '@Model.Store.Owner.UserName';
-                texthtml = '<li class="item">';
-                texthtml +=  '<div class="avatar">';
-                texthtml += '<a href="/User/Id/@_user.UserId"><img class="user" src="/Image/@_user.Profile.ProfileImage.ImageId"></a>';
+        var User_UserName = '@_user.UserName';
+        var Owner_UserName = '@Model.Store.Owner.UserName';
+        texthtml = '<li class="item">';
+        texthtml +=  '<div class="avatar">';
+        texthtml += '<a href="/User/Id/@_user.UserId"><img class="user" src="/Image/@_user.Profile.ProfileImage.ImageId"></a>';
                 texthtml += '</div>';
                 texthtml += '<div class="comment-box">';
                 texthtml += '<div class="header">';
                 texthtml += '<a href="" class="name"> @_user.Profile.DisplayName';
                 if (User_UserName == Owner_UserName)
                 {
-                   texthtml +=  ' <span class="owner"></span>';                                                      
+                    texthtml +=  ' <span class="owner"></span>';                                                      
                 }
                 texthtml += '</a>';
                 texthtml += '<span class="time">@DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss")</span>';
@@ -500,19 +508,6 @@
     }
 
 
-
-    
-    /*
-    var shop1 = new ShopModel("KLIA Outlet Store");
-    var product1 = new ProductModel("KLIA Double Bed", "", 23.23, 1)
-    var product2 = new ProductModel("KLIA Double Bed 2", "", 250.23, 2)
-    shop1.products().push(product1);
-    shop1.products().push(product2);
-    cartmodel.shops().push(shop1);
-    */
-    $(".btn-like").click(function() {
-        $(this).toggleClass("active");
-    })
     $(".btn.add-cart").click(function(){
         var $this = $(this)
         var shop = new ShopModel($this.attr("data-store"), parseInt($this.attr("data-sid")));
@@ -522,4 +517,30 @@
     })
     
     
+</script>
+
+<div id='fb-root'></div>
+<script src='http://connect.facebook.net/en_US/all.js'></script>
+
+<script> 
+    FB.init({appId: "541295582548776", status: true, cookie: true});
+
+    function postToFeed() {
+
+        // calling the API ...
+        var obj = {
+            method: 'feed',
+            redirect_uri: 'http://socialbuy.vn:1701/Product/Id/@Model.ProductId',
+            link: 'http://socialbuy.vn:1701/Product/Id/@Model.ProductId',
+            picture: 'http://socialbuy.vn:1701/Image/@Model.ProductImages.ElementAt(0).ImageId',
+            name: '@Model.Name',
+            caption: 'From @Model.Store.StoreName',
+            description: '@Model.Description'
+        };
+
+        function callback(response) {
+            document.getElementById('msg').innerHTML = "Post ID: " + response['post_id'];
+        }
+        FB.ui(obj, callback);
+    }
 </script>

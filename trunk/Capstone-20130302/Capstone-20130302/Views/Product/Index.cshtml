@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Products";
+    Layout = "~/Views/Shared/_MerchantLayout.cshtml";
 }
 <script src="~/Scripts/jquery.dataTables.js"></script>
 <script src="~/Scripts/dataTables.bootstrap.js"></script>
@@ -100,9 +101,20 @@
                             @Html.DisplayFor(modelItem => item.CreateDate)
                         </td>
                         <td>
-                            <a href="Product/Edit/@item.ProductId"><i class="icon-pencil"></i></a>
-                            <a href="Product/Id/@item.ProductId"><i class="icon-zoom-in"></i></a>
+                            <a href="Product/Edit/@item.ProductId"><i class="icon-edit"></i> Edit</a>
+                            <a href="Product/Id/@item.ProductId"><i class="icon-search"></i> View</a>
                             @*<a href="Product/Delete/@item.ProductId"><i class="icon-trash"></i></a>*@
+                            <a 
+                                onclick="postToFeed({
+                                    method: 'feed',
+                                    redirect_uri: 'http://socialbuy.vn:1701/Product/Id/@item.ProductId',
+                                    link: 'http://socialbuy.vn:1701/Product/Id/@item.ProductId',
+                                    name: '@item.Name',
+                                    caption: 'From @item.Store.StoreName',
+                                    description: '@item.Description'
+                                }); return false;"
+                                href=""
+                                class=""><i class="icon-facebook"></i> Share</a>
                         </td>
                     </tr>
                 }
@@ -138,3 +150,19 @@ else
             padding: 50px 40px 40px 40px;
         }
 </style>
+
+<div id='fb-root'></div>
+<script src='http://connect.facebook.net/en_US/all.js'></script>
+
+<script>
+    FB.init({ appId: "541295582548776", status: true, cookie: true });
+
+    function postToFeed(obj) {
+
+        // calling the API ...
+        function callback(response) {
+            document.getElementById('msg').innerHTML = "Post ID: " + response['post_id'];
+        }
+        FB.ui(obj, callback);
+    }
+</script>

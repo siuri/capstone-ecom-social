@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Open a Store";
+    Layout = "~/Views/Shared/_MerchantLayout.cshtml";
 }
 <a href="/Store"><i class='icon icon-circle-arrow-left'></i> Back to Product List</a>
 @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))

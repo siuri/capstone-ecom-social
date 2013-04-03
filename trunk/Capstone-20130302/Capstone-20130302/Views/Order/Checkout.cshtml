@@ -38,15 +38,7 @@
             @Html.ValidationSummary(true)
 
             <fieldset>
-                <legend>Order</legend>
-
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.TotalPayment)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.TotalPayment)
-                    @Html.ValidationMessageFor(model => model.TotalPayment)
-                </div>
+                <legend>Billing Information</legend>
 
                 <div class="editor-label">
                     @Html.LabelFor(model => model.BillingName)
@@ -56,12 +48,17 @@
                     @Html.ValidationMessageFor(model => model.BillingName)
                 </div>
 
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.BillingAddressId)
+                <div class="controls controls-row">
+                    @Html.TextBoxFor(model => model.BillingAddress.Number, new { placeholder = @Html.DisplayNameFor(model => model.BillingAddress.Number), title = @Html.DisplayNameFor(model => model.BillingAddress.Number), @class = "span2" })
+                    @Html.TextBoxFor(model => model.BillingAddress.Street, new { placeholder = @Html.DisplayNameFor(model => model.BillingAddress.Street), title = @Html.DisplayNameFor(model => model.BillingAddress.Street), @class = "span4" })
                 </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.BillingAddressId)
-                    @Html.ValidationMessageFor(model => model.BillingAddressId)
+                <div class="controls controls-row">
+                    @Html.TextBoxFor(model => model.BillingAddress.City, new { placeholder = @Html.DisplayNameFor(model => model.BillingAddress.City), title = @Html.DisplayNameFor(model => model.BillingAddress.City), @class = "span3" })
+                    @Html.TextBoxFor(model => model.BillingAddress.State, new { placeholder = @Html.DisplayNameFor(model => model.BillingAddress.State), title = @Html.DisplayNameFor(model => model.BillingAddress.State), @class = "span3" })
+                </div>
+                <div class="controls controls-row">
+                    @Html.TextBoxFor(model => model.BillingAddress.Zipcode, new { placeholder = @Html.DisplayNameFor(model => model.BillingAddress.Zipcode), title = @Html.DisplayNameFor(model => model.BillingAddress.Zipcode), @class = "span3" })
+                    @Html.TextBoxFor(model => model.BillingAddress.Country, new { placeholder = @Html.DisplayNameFor(model => model.BillingAddress.Country), title = @Html.DisplayNameFor(model => model.BillingAddress.Country), @class = "span3" })
                 </div>
 
                 <div class="editor-label">
@@ -72,29 +69,25 @@
                     @Html.ValidationMessageFor(model => model.IsUsedAsShipping)
                 </div>
 
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.ShippingName)
-                </div>
+                <legend>Shipping Information</legend>
                 <div class="editor-field">
-                    @Html.EditorFor(model => model.ShippingName)
+                    @Html.TextBoxFor(model => model.ShippingName, new { placeholder = @Html.DisplayNameFor(model => model.ShippingName), title = @Html.DisplayNameFor(model => model.ShippingName), @class = "span6" })
                     @Html.ValidationMessageFor(model => model.ShippingName)
                 </div>
 
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.ShippingAddressId)
+                <div class="controls controls-row">
+                    @Html.TextBoxFor(model => model.ShippingAddress.Number, new { placeholder = @Html.DisplayNameFor(model => model.ShippingAddress.Number), title = @Html.DisplayNameFor(model => model.ShippingAddress.Number), @class = "span2" })
+                    @Html.TextBoxFor(model => model.ShippingAddress.Street, new { placeholder = @Html.DisplayNameFor(model => model.ShippingAddress.Street), title = @Html.DisplayNameFor(model => model.ShippingAddress.Street), @class = "span4" })
                 </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.ShippingAddressId)
-                    @Html.ValidationMessageFor(model => model.ShippingAddressId)
+                <div class="controls controls-row">
+                    @Html.TextBoxFor(model => model.ShippingAddress.City, new { placeholder = @Html.DisplayNameFor(model => model.ShippingAddress.City), title = @Html.DisplayNameFor(model => model.ShippingAddress.City), @class = "span3" })
+                    @Html.TextBoxFor(model => model.ShippingAddress.State, new { placeholder = @Html.DisplayNameFor(model => model.ShippingAddress.State), title = @Html.DisplayNameFor(model => model.ShippingAddress.State), @class = "span3" })
+                </div>
+                <div class="controls controls-row">
+                    @Html.TextBoxFor(model => model.ShippingAddress.Zipcode, new { placeholder = @Html.DisplayNameFor(model => model.ShippingAddress.Zipcode), title = @Html.DisplayNameFor(model => model.ShippingAddress.Zipcode), @class = "span3" })
+                    @Html.TextBoxFor(model => model.ShippingAddress.Country, new { placeholder = @Html.DisplayNameFor(model => model.ShippingAddress.Country), title = @Html.DisplayNameFor(model => model.ShippingAddress.Country), @class = "span3" })
                 </div>
 
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.StatusId)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.StatusId)
-                    @Html.ValidationMessageFor(model => model.StatusId)
-                </div>
                 <input type="hidden" name="cartdata" id="cartdata"/>
                 <p>
                     <input type="submit" value="Create" />
@@ -103,12 +96,11 @@
         }
     </div>
     <div class="cart-view">
-        <h2>Shopping cart
-        </h2>
-        <div data-bind="foreach: shops">
+        <h3>Shopping cart</h3>
+        <div class="cart-wrap" data-bind="foreach: shops">
             <div data-bind="if: isCheckoutshop">
             <div data-bind="foreach: products">
-                <div class="product">
+                <div class="product clearfix">
                     <img src="/Image/10" data-bind="attr:{src: productImage}">
                     <div class="info">
                         <div class="title">
@@ -124,6 +116,27 @@
                 </div>
             </div>
             </div>
+        </div>
+        <div class="summary">
+            <h4>Summary</h4>
+            <table>
+                <tr>
+                    <th>Total Items</th>
+                    <td>9</td>
+                </tr>
+                <tr>
+                    <th>Net Total</th>
+                    <td>$84.99</td>
+                </tr>
+                <tr>
+                    <th>Shipping Fee</th>
+                    <td>$10</td>
+                </tr>
+                <tr class="total">
+                    <th>SUBTOTAL</th>
+                    <td>$93.99</td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
@@ -143,12 +156,16 @@
 <style>
     #p-checkout {
         border: solid 1px #DBDBEA;
-        background: #fff;
         margin: 50px auto;
         padding: 40px;
         box-sizing: border-box;
         line-height: 1.5;
         color: #646472;
+        background: #fff url(/Images/ckbg.jpg) right repeat-y;
+    }
+
+    .cart-wrap {
+        min-height: 310px;
     }
 
     .checkout {
@@ -157,15 +174,44 @@
     }
 
     .cart-view {
-        width: 350px;
+        width: 305px;
         float: right;
-        background-color: #FFF099;
         height: 100%;
+        background: url(/images/ckout-ribbon.png) no-repeat;
+        margin: -48px 0 0 0;
+        padding: 20px 0 0 5px;
+        box-sizing: border-box;
     }
 
-        .cart-view .product {
-            margin: 10px 20px;
+        .cart-view h3 {
+            font-family: "Century";
+            font-weight: normal;
+            margin-left: 60px;
+            font-size: 180%;
+            margin-bottom: 20px;
+            color: #6B522D;
         }
+
+            .cart-view .product {
+                height: 45px;
+                border-bottom: solid 1px #E3DFD5;
+                position: relative;
+                padding: 20px 0;
+            }
+            .cart-view .product:after {
+                display: block;
+                width: 100%;
+                border-bottom: 2px solid #FFF;
+                position: absolute;
+                left: 0;
+                bottom: -3px;
+                content: "";
+            }
+
+            .cart-view .product:last-child,
+            .cart-view .product:last-child:after {
+                border-bottom: none;
+            }
 
             .cart-view .product > img {
                 width: 50px;
@@ -178,19 +224,25 @@
 
             .cart-view .product .info {
                 float: left;
-                margin-left: 10px;
-                width: -webkit-calc(100% - 64px);
+                margin-left: 15px;
+                width: 220px;
             }
 
                 .cart-view .product .info .title a {
                     font-size: 14px;
                     color: #C44949;
+                    display: inline-block;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    width: 220px;
                 }
 
                 .cart-view .product .info .price-quantity {
                     float: left;
                     font-size: 16px;
-                    color: black;
+                    color: #555;
+                    font-family: "Century";
                 }
                     .cart-view .product .info .price-quantity input[type=number] {
                         width: 40px;
@@ -203,8 +255,46 @@
                     display: none;
                     float: right;
                 }
+                .cart-view .product .info .action a {
+                    color: rgba(231, 22, 0, 0.79);
+                    font-size: 90%;
+                }
             .cart-view .product:hover .info .action {
                 display:block;
             }
-                    
+    .summary h4 {
+        color: #6B522D;
+        font-weight: normal;
+        border-bottom: solid 2px #E4D3BA;
+        padding-bottom: 5px;
+        margin-bottom: 6px;
+    }
+    .summary table {
+        width: 100%;
+    }
+    .summary table th {
+        font-weight: normal;
+        opacity: .8;
+        text-align: left;
+    }
+    .summary table td {
+        text-align: right;
+    }
+    .summary table th,
+    .summary table td {
+        border-top: dashed 1px #E4D3BA;
+        padding: 8px 0;
+    }
+    .summary table tr:first-child th,
+    .summary table tr:first-child td {
+        border-top: none;
+    }
+    .total td, .total th {
+        font-weight: bold;
+        line-height: 1.5;
+    }
+    .total td {
+        color: #DB6363;
+        font-size: 160%;
+    }
 </style>

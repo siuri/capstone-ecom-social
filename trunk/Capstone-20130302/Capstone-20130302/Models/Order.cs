@@ -36,6 +36,7 @@ namespace Capstone_20130302.Models
         [ForeignKey("BillingAddressId")]
         public virtual Address BillingAddress { get; set; }
 
+        [DisplayName("Is used as shipping address")]
         public bool IsUsedAsShipping { get; set; }
 
 
