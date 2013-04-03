@@ -414,10 +414,12 @@
 </style>
 <script>
     $(document).ready(function() {
-        $(".btn-like").click(function() {
-            postToFeed();
-            $(this).toggleClass("active");
-        });
+
+        $.getJSON("/Product/GetProductLike/@Model.ProductId", function (data) {
+            if(data)
+            {
+                $(".btn-like").toggleClass("active");
+            }
         var specsJsonData = @Html.Raw(Model.SpecsInJson)
         for (var i = 0; i < specsJsonData.length; i++) {
             $(".specs tbody").append("<tr><th>"+specsJsonData[i].name+"</th><td>"+specsJsonData[i].content+"</td></tr>");
@@ -506,6 +508,40 @@
         });
         return false;
     }
+    $(".btn-like").click(function() {
+      
+        var classname= $('.btn-like').attr('class');
+        if(classname == 'btn-like active')
+        {
+            $.getJSON("/Product/DeleteProductLike/@Model.ProductId", function (data) {
+                if(data)
+                {
+                    $(".btn-like").toggleClass("active");
+                   
+                }
+                else
+                {
+                    alert(data);
+                }
+            });
+        }
+        else
+        {
+            $.getJSON("/Product/AddProductLike/@Model.ProductId", function (data) {
+                if(data)
+                {
+                    $(".btn-like").toggleClass("active");
+                    postToFeed();
+                }
+                else
+                {
+                    alert(data);
+                }
+            });
+        }
+    })
+
+
 
 
     $(".btn.add-cart").click(function(){
