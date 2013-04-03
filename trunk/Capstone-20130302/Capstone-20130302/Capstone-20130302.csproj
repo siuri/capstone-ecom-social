@@ -184,6 +184,7 @@
     <Compile Include="Logic\Comment_Logic.cs" />
     <Compile Include="Logic\Follow_Logic.cs" />
     <Compile Include="Logic\OrderDetails_Logic.cs" />
+    <Compile Include="Logic\OrderStatus_Logic.cs" />
     <Compile Include="Logic\Order_Logic.cs" />
     <Compile Include="Logic\ProductLike_Logic.cs" />
     <Compile Include="Logic\Product_Logic.cs" />
@@ -441,8 +442,8 @@
     <Content Include="Views\Admin\ManageProduct.cshtml" />
     <Content Include="Views\Admin\ManageStore.cshtml" />
     <Content Include="Views\Order\SellerManage.cshtml" />
-    <Content Include="Views\Order\OrderDetails.cshtml" />
     <Content Include="Views\Order\UserManage.cshtml" />
+    <Content Include="Views\Order\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

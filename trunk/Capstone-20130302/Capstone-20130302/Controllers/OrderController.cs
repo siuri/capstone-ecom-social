@@ -52,7 +52,17 @@ namespace Capstone_20130302.Controllers
             }
             return View(order);
         }
-        
+
+        public ActionResult GetNameStatusByID(int ID)
+        {
+            return Json(OrderStatus_Logic.GetNameOrderStatusByID(ID), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult UpdateOrderStatus(int ID,int StatusID)
+        {
+            return Json(Order_Logic.UpdateStatusOrder(ID,StatusID), JsonRequestBehavior.AllowGet);
+        }
+
         [Authorize(Roles = Constant.ROLE_SELLER)]
         public ActionResult SellerManage()
         {

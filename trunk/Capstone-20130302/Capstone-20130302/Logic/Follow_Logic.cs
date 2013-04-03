@@ -94,7 +94,6 @@ namespace Capstone_20130302.Logic
         }
         #endregion
 
-
         #region [ Delete new Follow ]
         /// <summary>
         /// 

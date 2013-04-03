@@ -15,7 +15,7 @@ namespace Capstone_20130302.Logic
         /// Add Order
         /// </summary>
         /// <param name="_order">Object Order</param>
-        /// <param name="pro">list Object pro</param>
+        /// <param name="pro">list Object product</param>
         /// <returns>Order ID</returns>
         public static int AddOrder(Order _order,List<ProductOrder> pro)
         {
@@ -39,13 +39,12 @@ namespace Capstone_20130302.Logic
                 }
                 return orderid;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return -1;
             }
         }
         #endregion
-
 
         #region [ Get List Order By UserID]
         /// <summary>
@@ -107,6 +106,29 @@ namespace Capstone_20130302.Logic
             catch (Exception ex)
             {
                 return null;
+            }
+        }
+        #endregion
+
+        #region [Update Status Order]
+        /// <summary>
+        /// [Update Status Order]
+        /// </summary>
+        /// <param name="orderID">Order ID</param>
+        /// <param name="statusID">Status ID</param>
+        /// <returns>True or False</returns>
+        public static bool UpdateStatusOrder(int orderID, int statusID)
+        {
+            try
+            {
+                Order _order = db.Orders.Single(t => t.OrderId == orderID);
+                _order.StatusId = statusID;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
         #endregion

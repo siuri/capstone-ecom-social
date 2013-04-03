@@ -29,7 +29,12 @@
         </tr>
         <tr>
             <th>Order Status</th>
-            <td> <span class="or-@Model.StatusId">@Model.Status.Name</span> </td>
+            <td>
+                 <span class="or-@Model.StatusId" id="StatusName">@Model.Status.Name</span> 
+                  <input id="@Model.StatusId" class="button_Changestatus" type="button" value ="" />
+
+            </td>
+          
         </tr>
         <tr>
             <th>Total Payment</th>
@@ -53,6 +58,8 @@
         </tr>
     </table>
 </div>
+
+
 
 @if (Model.OrderDetails.ToList().Count > 0)
 {
@@ -103,3 +110,43 @@ else
 {
     <text>Sorry, no order detail.</text>
 }
+<script>
+
+    $(document).ready(function () {
+        var id = $(".button_Changestatus").attr('id');
+        if (id == 5) {
+            id = 0;
+        }
+        $.getJSON("/Order/GetNameStatusByID/" + (parseInt(id)+1), function (data) {
+            if (data) {
+                $(".button_Changestatus").attr('value', data);
+            }
+        });
+    });
+
+    $(".button_Changestatus").click(function () {
+        var id = $(".button_Changestatus").attr('id');
+        if (id == 5) {
+            id = 0;
+        }
+        var num = parseInt(id) + 1;
+        $.getJSON("/Order/UpdateOrderStatus?ID=@Model.OrderId&StatusID=" + num, function (data) {
+            if(data)
+            {
+                $(".button_Changestatus").attr('id', num);
+                if (num == 5) {
+                    num = 0;
+                }
+                num = parseInt(num) + 1;
+                $.getJSON("/Order/GetNameStatusByID/" + num, function (data) {
+                    if (data) {
+                        var value = $(".button_Changestatus").attr('value');
+                        $('#StatusName').text(value);
+                        $(".button_Changestatus").attr('value', data);
+                    }
+                });
+            }
+        })
+    });
+
+</script>
