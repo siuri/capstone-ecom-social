@@ -749,3 +749,7 @@ em {
 .table-striped.table-bordered a:hover {
     opacity: .8;
 }
+
+.small {
+    font-size: 90%;
+}
