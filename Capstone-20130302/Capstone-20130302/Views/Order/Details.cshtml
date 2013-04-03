@@ -125,28 +125,29 @@ else
     });
 
     $(".button_Changestatus").click(function () {
-        var id = $(".button_Changestatus").attr('id');
-        if (id == 5) {
-            id = 0;
-        }
-        var num = parseInt(id) + 1;
-        $.getJSON("/Order/UpdateOrderStatus?ID=@Model.OrderId&StatusID=" + num, function (data) {
-            if(data)
-            {
-                $(".button_Changestatus").attr('id', num);
-                if (num == 5) {
-                    num = 0;
-                }
-                num = parseInt(num) + 1;
-                $.getJSON("/Order/GetNameStatusByID/" + num, function (data) {
-                    if (data) {
-                        var value = $(".button_Changestatus").attr('value');
-                        $('#StatusName').text(value);
-                        $(".button_Changestatus").attr('value', data);
-                    }
-                });
+        if (confirm('Are you sure change status')) {
+            var id = $(".button_Changestatus").attr('id');
+            if (id == 5) {
+                id = 0;
             }
-        })
+            var num = parseInt(id) + 1;
+            $.getJSON("/Order/UpdateOrderStatus?ID=@Model.OrderId&StatusID=" + num, function (data) {
+                if (data) {
+                    $(".button_Changestatus").attr('id', num);
+                    if (num == 5) {
+                        num = 0;
+                    }
+                    num = parseInt(num) + 1;
+                    $.getJSON("/Order/GetNameStatusByID/" + num, function (data) {
+                        if (data) {
+                            var value = $(".button_Changestatus").attr('value');
+                            $('#StatusName').text(value);
+                            $(".button_Changestatus").attr('value', data);
+                        }
+                    });
+                }
+            })
+        }
     });
 
 </script>
