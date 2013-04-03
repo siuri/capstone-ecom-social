@@ -40,7 +40,7 @@ namespace Capstone_20130302.Models
         public bool IsUsedAsShipping { get; set; }
 
 
-        [DisplayName("Shipping Name")]
+        [DisplayName("Shipping Name or Company")]
         public string ShippingName { get; set; }
 
         public virtual int? ShippingAddressId { get; set; }

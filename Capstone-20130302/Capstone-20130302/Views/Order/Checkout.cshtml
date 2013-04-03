@@ -32,20 +32,34 @@
     })
 </script>
 <div class="page clearfix" id="p-checkout">
+    
     <div class="checkout">
-        @using (Html.BeginForm())
+        <h2>Checkout</h2>
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "checkoutForm"}))
         {
             @Html.ValidationSummary(true)
+
+            @Html.ValidationMessageFor(model => model.BillingName)
+            @Html.ValidationMessageFor(model => model.BillingAddress.Number)
+            @Html.ValidationMessageFor(model => model.BillingAddress.Street)
+            @Html.ValidationMessageFor(model => model.BillingAddress.City)
+            @Html.ValidationMessageFor(model => model.BillingAddress.State)
+            @Html.ValidationMessageFor(model => model.BillingAddress.Zipcode)
+            @Html.ValidationMessageFor(model => model.BillingAddress.Country)
+
+            @Html.ValidationMessageFor(model => model.ShippingName)
+            @Html.ValidationMessageFor(model => model.ShippingAddress.Number)
+            @Html.ValidationMessageFor(model => model.ShippingAddress.Street)
+            @Html.ValidationMessageFor(model => model.ShippingAddress.City)
+            @Html.ValidationMessageFor(model => model.ShippingAddress.State)
+            @Html.ValidationMessageFor(model => model.ShippingAddress.Zipcode)
+            @Html.ValidationMessageFor(model => model.ShippingAddress.Country)
 
             <fieldset>
                 <legend>Billing Information</legend>
 
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.BillingName)
-                </div>
                 <div class="editor-field">
-                    @Html.EditorFor(model => model.BillingName)
-                    @Html.ValidationMessageFor(model => model.BillingName)
+                    @Html.TextBoxFor(model => model.BillingName, new { placeholder = @Html.DisplayNameFor(model => model.BillingName), title = @Html.DisplayNameFor(model => model.BillingName), @class = "span6" })
                 </div>
 
                 <div class="controls controls-row">
@@ -61,37 +75,35 @@
                     @Html.TextBoxFor(model => model.BillingAddress.Country, new { placeholder = @Html.DisplayNameFor(model => model.BillingAddress.Country), title = @Html.DisplayNameFor(model => model.BillingAddress.Country), @class = "span3" })
                 </div>
 
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.IsUsedAsShipping)
-                </div>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.IsUsedAsShipping)
+                <div class="editor-field form-inline">
+                    @*@Html.EditorFor(model => model.IsUsedAsShipping)*@
+                    <label class="checkbox"><input class="check-box" data-val="true" data-val-required="The Is used as shipping address field is required." id="IsUsedAsShipping" name="IsUsedAsShipping" type="checkbox" value="true" checked > @Html.DisplayNameFor(model => model.IsUsedAsShipping)</label>
                     @Html.ValidationMessageFor(model => model.IsUsedAsShipping)
                 </div>
+                <div class="shipping-wrapper">
+                    <br />
+                    <legend>Shipping Information</legend>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.ShippingName, new { placeholder = @Html.DisplayNameFor(model => model.ShippingName), title = @Html.DisplayNameFor(model => model.ShippingName), @class = "span6" })
+                        @Html.ValidationMessageFor(model => model.ShippingName)
+                    </div>
 
-                <legend>Shipping Information</legend>
-                <div class="editor-field">
-                    @Html.TextBoxFor(model => model.ShippingName, new { placeholder = @Html.DisplayNameFor(model => model.ShippingName), title = @Html.DisplayNameFor(model => model.ShippingName), @class = "span6" })
-                    @Html.ValidationMessageFor(model => model.ShippingName)
+                    <div class="controls controls-row">
+                        @Html.TextBoxFor(model => model.ShippingAddress.Number, new { placeholder = @Html.DisplayNameFor(model => model.ShippingAddress.Number), title = @Html.DisplayNameFor(model => model.ShippingAddress.Number), @class = "span2" })
+                        @Html.TextBoxFor(model => model.ShippingAddress.Street, new { placeholder = @Html.DisplayNameFor(model => model.ShippingAddress.Street), title = @Html.DisplayNameFor(model => model.ShippingAddress.Street), @class = "span4" })
+                    </div>
+                    <div class="controls controls-row">
+                        @Html.TextBoxFor(model => model.ShippingAddress.City, new { placeholder = @Html.DisplayNameFor(model => model.ShippingAddress.City), title = @Html.DisplayNameFor(model => model.ShippingAddress.City), @class = "span3" })
+                        @Html.TextBoxFor(model => model.ShippingAddress.State, new { placeholder = @Html.DisplayNameFor(model => model.ShippingAddress.State), title = @Html.DisplayNameFor(model => model.ShippingAddress.State), @class = "span3" })
+                    </div>
+                    <div class="controls controls-row">
+                        @Html.TextBoxFor(model => model.ShippingAddress.Zipcode, new { placeholder = @Html.DisplayNameFor(model => model.ShippingAddress.Zipcode), title = @Html.DisplayNameFor(model => model.ShippingAddress.Zipcode), @class = "span3" })
+                        @Html.TextBoxFor(model => model.ShippingAddress.Country, new { placeholder = @Html.DisplayNameFor(model => model.ShippingAddress.Country), title = @Html.DisplayNameFor(model => model.ShippingAddress.Country), @class = "span3" })
+                    </div>
                 </div>
-
-                <div class="controls controls-row">
-                    @Html.TextBoxFor(model => model.ShippingAddress.Number, new { placeholder = @Html.DisplayNameFor(model => model.ShippingAddress.Number), title = @Html.DisplayNameFor(model => model.ShippingAddress.Number), @class = "span2" })
-                    @Html.TextBoxFor(model => model.ShippingAddress.Street, new { placeholder = @Html.DisplayNameFor(model => model.ShippingAddress.Street), title = @Html.DisplayNameFor(model => model.ShippingAddress.Street), @class = "span4" })
-                </div>
-                <div class="controls controls-row">
-                    @Html.TextBoxFor(model => model.ShippingAddress.City, new { placeholder = @Html.DisplayNameFor(model => model.ShippingAddress.City), title = @Html.DisplayNameFor(model => model.ShippingAddress.City), @class = "span3" })
-                    @Html.TextBoxFor(model => model.ShippingAddress.State, new { placeholder = @Html.DisplayNameFor(model => model.ShippingAddress.State), title = @Html.DisplayNameFor(model => model.ShippingAddress.State), @class = "span3" })
-                </div>
-                <div class="controls controls-row">
-                    @Html.TextBoxFor(model => model.ShippingAddress.Zipcode, new { placeholder = @Html.DisplayNameFor(model => model.ShippingAddress.Zipcode), title = @Html.DisplayNameFor(model => model.ShippingAddress.Zipcode), @class = "span3" })
-                    @Html.TextBoxFor(model => model.ShippingAddress.Country, new { placeholder = @Html.DisplayNameFor(model => model.ShippingAddress.Country), title = @Html.DisplayNameFor(model => model.ShippingAddress.Country), @class = "span3" })
-                </div>
-
                 <input type="hidden" name="cartdata" id="cartdata"/>
-                <p>
-                    <input type="submit" value="Create" />
-                </p>
+                @Html.HiddenFor(model => model.StoreId);
+                @Html.HiddenFor(model => model.UserId);
             </fieldset>
         }
     </div>
@@ -137,6 +149,11 @@
                     <td>$93.99</td>
                 </tr>
             </table>
+            <br>
+            <p class="small">
+                Please read our term of use carefully. By clicking "Check Out" button, you agree with all terms. 
+            </p>
+            <input form="checkoutForm" type="submit" class="btn" value="Check Out" />
         </div>
     </div>
 </div>
@@ -163,14 +180,28 @@
         color: #646472;
         background: #fff url(/Images/ckbg.jpg) right repeat-y;
     }
+    h2 {
+        font-family: "Century";
+        font-weight: normal;
+        margin-top: 0;
+    }
 
     .cart-wrap {
-        min-height: 310px;
+        min-height: 232px;
     }
 
     .checkout {
         width: 500px;
         float: left;
+    }
+
+    input[type=submit] {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 5px 0;
+        text-transform: uppercase;
+        margin: 20px 0 0 0;
+        display: block;
     }
 
     .cart-view {
@@ -298,3 +329,15 @@
         font-size: 160%;
     }
 </style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".shipping-wrapper").hide();
+        $('#IsUsedAsShipping').click(function(){
+            if ($(this).is(':checked')) {
+                $(".shipping-wrapper").hide();
+            } else{
+                $(".shipping-wrapper").show();
+            }
+        });
+    });
+</script>

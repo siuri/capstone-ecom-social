@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Capstone_20130302.Constants;
 using Capstone_20130302.Logic;
 using Capstone_20130302.Models;
+using WebMatrix.WebData;
 
 namespace Capstone_20130302.Controllers
 {
@@ -25,13 +26,29 @@ namespace Capstone_20130302.Controllers
 
         //
         // GET: /Order/Details/5
-
+        [Authorize]
         public ActionResult Details(int id = 0)
         {
             Order order = db.Orders.Find(id);
             if (order == null)
             {
                 return HttpNotFound();
+            }
+            if (User.IsInRole(Constant.ROLE_SELLER))
+            {
+                if (order.Stores != null && order.Stores.OwnerId != WebSecurity.CurrentUserId)
+                {
+                    ViewBag.Message = "Sorry, you can only access orders of the stores that you are owning.";
+                    return View("Error");
+                }
+            }
+            else
+            {
+                if (order.Stores != null && order.UserId != WebSecurity.CurrentUserId)
+                {
+                    ViewBag.Message = "Sorry, have not right to access orders other than yours.";
+                    return View("Error");
+                }
             }
             return View(order);
         }
@@ -72,18 +89,30 @@ namespace Capstone_20130302.Controllers
         
         //
         // GET: /Order/Checkout
-
-        public ActionResult Checkout()
+        [Authorize]
+        public ActionResult Checkout(int sid = 0)
         {
-            return View();
+            if (sid <= 0)
+            {
+                ViewBag.Message = "Sorry, some parameters are missing.";
+                return View("Error");
+            }
+            Order order = new Order();
+            order.StatusId = Constant.ORDER_STATUS_PENDING;
+            order.UserId = WebSecurity.CurrentUserId;
+            order.StoreId = sid;
+            return View(order);
         }
 
         //
         // POST: /Order/Checkout
 
         [HttpPost]
-        public ActionResult Checkout(Order order)
+        [Authorize]
+        public ActionResult Checkout(Order order, String cartdata)
         {
+            order.OrderDate = DateTime.Now;
+            
             if (ModelState.IsValid)
             {
                 db.Orders.Add(order);
