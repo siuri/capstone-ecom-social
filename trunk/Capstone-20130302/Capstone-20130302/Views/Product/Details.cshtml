@@ -4,6 +4,7 @@
     List<UserProfile> listbuy = ViewBag.listbuy;
     List<Comment> listcmt = ViewBag.listcmt;
     UserProfile _user = ViewBag.detailuser;
+    List<Product> listrecommend = ViewBag.listrecommend;
 }
 @model Capstone_20130302.Models.Product
 @{
@@ -149,61 +150,20 @@
     <div class="item-wrapper product">
         <div class="heading"></div>
         <div class="product-grid isotope" style="position: relative; overflow: hidden; height: 262px;">
-                <div class="product cate-5 isotope-item" style="position: absolute; left: 0px; top: 0px; -webkit-transform: translate(0px, 0px);">
-                    <a href="/Product/Id/2">
+             @foreach (var item in listrecommend)
+            {
+                <div class="product cate-@item.CategoryId">
+                    <a href="/Product/Id/@item.ProductId">
                         <div class="image">
-                            <img src="/Image/15">
+                            <img src="/Image/@item.ProductImages.First().ImageId"/>
                         </div>
                         <div class="description">
-                            <h4>Sacramentalia</h4>
-                            <p>A 'How-to' Ward off Evil Spiri...</p>
+                            <h4>@item.Name</h4>
+                            <p>@item.Description.Substring(0, 30)...</p>
                         </div>
                    </a>
                 </div>
-                <div class="product cate-7 isotope-item" style="position: absolute; left: 0px; top: 0px; -webkit-transform: translate(220px, 0px);">
-                    <a href="/Product/Id/3">
-                        <div class="image">
-                            <img src="/Image/11">
-                        </div>
-                        <div class="description">
-                            <h4>KAME Wine</h4>
-                            <p>KAME is the BODEGAS EGURENUGAR...</p>
-                        </div>
-                   </a>
-                </div>
-                <div class="product cate-5 isotope-item" style="position: absolute; left: 0px; top: 0px; -webkit-transform: translate(440px, 0px);">
-                    <a href="/Product/Id/1">
-                        <div class="image">
-                            <img src="/Image/5">
-                        </div>
-                        <div class="description">
-                            <h4>Joe Dark Blue Yellow Casual Shoes</h4>
-                            <p>A pair of beautiful shoes for ...</p>
-                        </div>
-                   </a>
-                </div>
-             <div class="product cate-5 isotope-item" style="position: absolute; left: 0px; top: 0px; -webkit-transform: translate(440px, 0px);">
-                    <a href="/Product/Id/1">
-                        <div class="image">
-                            <img src="/Image/5">
-                        </div>
-                        <div class="description">
-                            <h4>Joe Dark Blue Yellow Casual Shoes</h4>
-                            <p>A pair of beautiful shoes for ...</p>
-                        </div>
-                   </a>
-                </div>
-             <div class="product cate-5 isotope-item" style="position: absolute; left: 0px; top: 0px; -webkit-transform: translate(440px, 0px);">
-                    <a href="/Product/Id/1">
-                        <div class="image">
-                            <img src="/Image/5">
-                        </div>
-                        <div class="description">
-                            <h4>Joe Dark Blue Yellow Casual Shoes</h4>
-                            <p>A pair of beautiful shoes for ...</p>
-                        </div>
-                   </a>
-                </div>
+            }
 
         </div>
     </div>
