@@ -6,18 +6,6 @@
     List<Store> liststore = ViewBag.liststore;
     List<Product> listpro = ViewBag.listpro;
 }
-<h2>Details</h2>
-<p>Store follow and Product like </p>
-
-<p>@liststore.Count Store follow</p>
-@foreach (Store store in liststore)
-{
-    <div>
-        @store.StoreName
-    </div>
-}
-<br />
-
 
 <div class="page" id="p-profile">
     <div class="cover-wrapper">
