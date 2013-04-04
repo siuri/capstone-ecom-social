@@ -20,11 +20,11 @@
         </div>
         <div class="like-wrapper">
             <div class="stat"><span>@listlike.Count.ToString("###,###,###,0")</span> likes</div>
-            <div class="like-list">
-                <ul>
+             <div class="like-list" id="like-list">
+                <ul id="like-list_member" class="like-list_member">
                     @foreach (UserProfile user in listlike)
                     {
-                        <li><a href="/User/Id/@user.UserId">
+                        <li id="user_@user.UserId"><a href="/User/Id/@user.UserId">
                             <img class="user"  title="@user.Profile.DisplayName" src="/Image/@user.Profile.ProfileImage.ImageId"></a></li>
                     }
 
@@ -432,6 +432,23 @@
 </script>
 
 <script type="text/javascript">
+ $(document).ready(function() {
+        $.getJSON("/Product/GetProductLike/@Model.ProductId", function (data) {
+            if(data)
+            {
+                $(".btn-like").toggleClass("active");
+            }
+        });
+		
+		 var specsJsonData = @Html.Raw(Model.SpecsInJson)
+
+
+        for(var i = 0; i < specsJsonData.length; i++) {
+                $(".specs tbody").append("<tr><th>"+specsJsonData[i].name+"</th><td>"+specsJsonData[i].content+"</td></tr>");
+            };
+
+        });
+		
     function CheckContent(value){
         if(value.length < 1 )
         {
@@ -509,7 +526,21 @@
         });
         return false;
     }
-    $(".btn-like").click(function() {
+
+    function CreateTextUser()
+    {
+         @if (_user != null)
+         {
+             <text>
+                var html = "";
+                html ="<li id='user_@_user.UserId'><a href='/User/Id/@_user.UserId'>"
+                html +="<img class='user' src='/Image/@_user.Profile.ProfileImage.ImageId'></a></li>"
+                return html;
+            </text>
+         }
+    }
+
+       $(".btn-like").click(function() {
       
         var classname= $('.btn-like').attr('class');
         if(classname == 'btn-like active')
@@ -518,7 +549,16 @@
                 if(data)
                 {
                     $(".btn-like").toggleClass("active");
-                   
+                    var num =  $('#TotalLike').text();
+                    num = parseInt(num) -1;
+                    $('#TotalLike').text(num);
+                    @if (_user != null)
+                     {
+                         <text>
+                              $("#user_@_user.UserId").remove();
+                        </text>
+                     }
+                    
                 }
                 else
                 {
@@ -529,9 +569,20 @@
         else
         {
             $.getJSON("/Product/AddProductLike/@Model.ProductId", function (data) {
-                if(data)
+                if(data == "true")
                 {
                     $(".btn-like").toggleClass("active");
+                    var num =  $('#TotalLike').text();
+                    num = parseInt(num) +1;
+                    $('#TotalLike').text(num);
+                    @if (_user != null && listlike.Count < 6)
+                    {
+                        <text>
+                              var html = CreateTextUser();
+                            
+                              $('.like-list_member').prepend(html);
+                        </text>
+                    }
                     postToFeed();
                 }
                 else
@@ -541,6 +592,8 @@
             });
         }
     })
+
+
 
 
 
