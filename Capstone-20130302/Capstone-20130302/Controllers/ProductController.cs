@@ -107,7 +107,11 @@ namespace Capstone_20130302.Controllers
                 return Json("You must login to Like", JsonRequestBehavior.AllowGet);
             }
             UserProfile user = UserProfiles_Logic.GetUserProfileByUserName(User.Identity.Name);
-            return Json(ProductLike_Logic.AddProductLike(ID, user.UserId).ToString(), JsonRequestBehavior.AllowGet);
+            if (ProductLike_Logic.AddProductLike(ID, user.UserId))
+            {
+                return Json("true", JsonRequestBehavior.AllowGet);
+            }
+            return Json("Error", JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult DeleteProductLike(int ID)

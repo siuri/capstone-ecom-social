@@ -25,12 +25,16 @@
         </div>
         <div class="follow-wrapper">
             <div class="btn-follow"></div>
-            <div class="stat"><span>@Model.TotalFollowers</span> people following</div>
+            <div class="stat"><span id="TotalFollow">@Model.TotalFollowers</span> people following</div>
             <div class="follow-list">
                 <ul>
                     @foreach (UserProfile profile in list)
                     {
-                        <li><a href="/User/Id/@profile.UserId" title="@profile.Profile.DisplayName"><img class="user" src="/Image/@profile.Profile.ProfileImageId"></a></li>
+                        <li>
+                            <a href="/User/Id/@profile.UserId" title="@profile.Profile.DisplayName">
+                                <img class="user" src="/Image/@profile.Profile.ProfileImageId" />
+                            </a>
+                        </li>
                     }
                 </ul>
             </div>
@@ -265,6 +269,9 @@
             $.getJSON("/Store/DeleteStoreFollow/@Model.StoreId", function (data) {
                 if (data) {
                     $(".btn-follow").toggleClass("active");
+                    var num = $('#TotalFollow').text();
+                    num = parseInt(num) - 1;
+                    $('#TotalFollow').text(num);
                 }
                 else {
                     alert(data);
@@ -275,6 +282,9 @@
             $.getJSON("/Store/AddStoreFollow/@Model.StoreId", function (data) {
                 if (data) {
                     $(".btn-follow").toggleClass("active");
+                    var num = $('#TotalFollow').text();
+                    num = parseInt(num) + 1;
+                    $('#TotalFollow').text(num);
                 }
                 else {
                     alert(data);

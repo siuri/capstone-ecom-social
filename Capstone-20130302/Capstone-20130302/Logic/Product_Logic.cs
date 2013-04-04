@@ -58,23 +58,23 @@ namespace Capstone_20130302.Logic
                 case 1:
                     listuser = (from ProductLike pro in db.ProductLikes
                                 where pro.ProductId == ID
-                                select pro.User).Take(number).ToList();
+                                select pro.User).Take(number).Take(5).ToList();
                     break;
                 case 2:
                     listuser = (from OrderDetail order in db.OrderDetails
                                 where order.ProductId == ID
-                                select order.Order.Users).Distinct().ToList();
+                                select order.Order.Users).Take(5).Distinct().ToList();
                     break;
                 default:
                     break;
             }
 
-            int count = listuser.Count(); // get count here
-            int index = new Random(number).Next(count);
+           // int count = listuser.Count(); // get count here
+           // int index = new Random(number).Next(count);
 
-            var result = listuser.Skip(index).ToList(); // pick on here 
+           // var result = listuser.Skip(index).ToList(); // pick on here 
 
-            return result;
+            return listuser;
         }
         #endregion
 
