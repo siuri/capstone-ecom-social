@@ -76,6 +76,10 @@ namespace Capstone_20130302.Controllers
             {
                 ViewBag.detailuser = null;
             }
+
+            // List product recommend
+            List<Product> listrecommend = Product_Logic.GetListProdcutRecommend(id, 10);
+
             // List user like product
             List<UserProfile> listlike = Product_Logic.GetListUserProfileRandom(1, id, 5);
             ViewBag.listlike = listlike;
