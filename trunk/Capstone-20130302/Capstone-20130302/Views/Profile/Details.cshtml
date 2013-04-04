@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_FreeLayout.cshtml";
     List<Store> liststore = ViewBag.liststore;
     List<Product> listpro = ViewBag.listpro;
+    List<UserProfile> listfollow = ViewBag.listfollow;
+    UserProfile _user = ViewBag._user;
 }
 
 <div class="page" id="p-profile">
@@ -29,37 +31,18 @@
             <div class="h-people"></div>
             <div class="follow-wrapper">
                  <div class="btn-follow"></div>
-                <div class="stat"><span>1,366</span> people following</div>
+                <div class="stat"><span id="TotalFollow">@listfollow.Count.ToString("##,###,###")</span> people following</div>
                 <div class="follow-list">
-                    <ul>
-                        <li><a href="http://localhost:1701/User/Id/2">
-                            <img class="user" src="1"></a></li>
-                        <li><a href="http://localhost:1701/User/Id/3">
-                            <img class="user" src="18"></a></li>
-                        <li><a href="http://localhost:1701/User/Id/2">
-                            <img class="user" src="1"></a></li>
-                        <li><a href="http://localhost:1701/User/Id/3">
-                            <img class="user" src="18"></a></li>
-                        <li><a href="http://localhost:1701/User/Id/2">
-                            <img class="user" src="1"></a></li>
-                    </ul>
+                   <ul id="follow-list_member" class="follow-list_member">
+                    @foreach (UserProfile profile in listfollow)
+                    {
+                        <li id="user_@profile.UserId"><a href="/User/Id/@profile.UserId">
+                            <img class="user"  title="@profile.Profile.DisplayName" src="/Image/@profile.Profile.ProfileImage.ImageId"></a></li>
+                    }
+                </ul>
                 </div>
 
-                <div class="stat"><span>1,366</span> people following</div>
-                <div class="follow-list">
-                    <ul>
-                        <li><a href="http://localhost:1701/User/Id/2">
-                            <img class="user" src="1"></a></li>
-                        <li><a href="http://localhost:1701/User/Id/3">
-                            <img class="user" src="18"></a></li>
-                        <li><a href="http://localhost:1701/User/Id/2">
-                            <img class="user" src="1"></a></li>
-                        <li><a href="http://localhost:1701/User/Id/3">
-                            <img class="user" src="18"></a></li>
-                        <li><a href="http://localhost:1701/User/Id/2">
-                            <img class="user" src="1"></a></li>
-                    </ul>
-                </div>
+              
             </div>
         </div>
         <div class="right-side">
@@ -395,12 +378,34 @@
             }
         });
     });
+
+    function CreateTextUser() {
+         @if (_user != null)
+         {
+             <text>
+           var html = "";
+           html = "<li id='user_@_user.UserId'><a href='/User/Id/@_user.UserId'>"
+           html += "<img class='user' src='/Image/@_user.Profile.ProfileImage.ImageId'></a></li>"
+           return html;
+            </text>
+         }
+    }
+
     $(".btn-follow").click(function () {
         var classname = $('.btn-follow').attr('class');
         if (classname == 'btn-follow active') {
             $.getJSON("/Profile/DeleteUserFollow/@Model.ProfileId", function (data) {
                 if (data) {
                     $(".btn-follow").toggleClass("active");
+                    var num = $('#TotalFollow').text();
+                    num = parseInt(num) - 1;
+                    $('#TotalFollow').text(num);
+                     @if (_user != null)
+                     {
+                         <text>
+                    $("#user_@_user.UserId").remove();
+                        </text>
+                     }
                 }
                 else {
                     alert(data);
@@ -411,6 +416,16 @@
             $.getJSON("/Profile/AddUserFollow/@Model.ProfileId", function (data) {
                 if (data) {
                     $(".btn-follow").toggleClass("active");
+                    var num = $('#TotalFollow').text();
+                    num = parseInt(num) + 1;
+                    $('#TotalFollow').text(num);
+                     @if (_user != null && listfollow.Count < 6)
+                     {
+                        <text>
+                    var html = CreateTextUser();
+                    $('.follow-list_member').prepend(html);
+                        </text>
+                    }
                 }
                 else {
                     alert(data);

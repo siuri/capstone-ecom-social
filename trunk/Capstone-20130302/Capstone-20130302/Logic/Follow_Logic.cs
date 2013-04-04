@@ -17,37 +17,71 @@ namespace Capstone_20130302.Logic
         /// </summary>
         /// <param name="type"> 1_Categories , 2_Users , 3_Store</param>
         /// <param name="ID">ID with type(Categories,UsersID,StoreID) </param>
+        /// <param name="number"> number row ( if -1 all)</param>
         /// <returns>List <UserProfile></returns>
         /// 
-        public static List<UserProfile> GetListFollow(int type, int ID)
+        public static List<UserProfile> GetListFollow(int type, int ID,int number)
         {
-            List<Follow> lst = new List<Follow>();
-            List<UserProfile> list_profile = new List<UserProfile>();
-            switch (type)
+            if (number == -1)
             {
-                case 1:
-                    lst = (from follow in db.Follows
-                                       where follow.CategoryId == ID
-                                       select follow).ToList();
-                    break;
-                case 2:
-                    lst = (from follow in db.Follows
-                           where follow.FollowedUserId == ID
-                           select follow).ToList();
-                    break;
-                case 3:
-                    lst = (from follow in db.Follows
-                           where follow.StoreId == ID
-                           select follow).ToList();
-                    break;
-                default:
-                    break;
+                List<Follow> lst = new List<Follow>();
+                List<UserProfile> list_profile = new List<UserProfile>();
+                switch (type)
+                {
+                    case 1:
+                        lst = (from follow in db.Follows
+                               where follow.CategoryId == ID
+                               select follow).ToList();
+                        break;
+                    case 2:
+                        lst = (from follow in db.Follows
+                               where follow.FollowedUserId == ID
+                               select follow).ToList();
+                        break;
+                    case 3:
+                        lst = (from follow in db.Follows
+                               where follow.StoreId == ID
+                               select follow).ToList();
+                        break;
+                    default:
+                        break;
+                }
+                foreach (Follow temp in lst)
+                {
+                    list_profile.Add(temp.User);
+                }
+                return list_profile;
             }
-            foreach (Follow temp in lst)
+            else
             {
-                list_profile.Add(temp.User);
+                List<Follow> lst = new List<Follow>();
+                List<UserProfile> list_profile = new List<UserProfile>();
+                switch (type)
+                {
+                    case 1:
+                        lst = (from follow in db.Follows
+                               where follow.CategoryId == ID
+                               select follow).Take(number).ToList();
+                        break;
+                    case 2:
+                        lst = (from follow in db.Follows
+                               where follow.FollowedUserId == ID
+                               select follow).Take(number).ToList();
+                        break;
+                    case 3:
+                        lst = (from follow in db.Follows
+                               where follow.StoreId == ID
+                               select follow).Take(number).ToList();
+                        break;
+                    default:
+                        break;
+                }
+                foreach (Follow temp in lst)
+                {
+                    list_profile.Add(temp.User);
+                }
+                return list_profile;
             }
-            return list_profile;
         }
         #endregion
 
