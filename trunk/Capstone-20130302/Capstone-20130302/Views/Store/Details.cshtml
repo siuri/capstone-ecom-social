@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = Model.StoreName;
     List<UserProfile> list = ViewBag.listprofile;
+    UserProfile _user = ViewBag.detailuser;
     Layout = "~/Views/Shared/_FreeLayout.cshtml";
 }
 
@@ -27,14 +28,11 @@
             <div class="btn-follow"></div>
             <div class="stat"><span id="TotalFollow">@Model.TotalFollowers</span> people following</div>
             <div class="follow-list">
-                <ul>
+                <ul id="follow-list_member" class="follow-list_member">
                     @foreach (UserProfile profile in list)
                     {
-                        <li>
-                            <a href="/User/Id/@profile.UserId" title="@profile.Profile.DisplayName">
-                                <img class="user" src="/Image/@profile.Profile.ProfileImageId" />
-                            </a>
-                        </li>
+                        <li id="user_@profile.UserId"><a href="/User/Id/@profile.UserId">
+                            <img class="user"  title="@profile.Profile.DisplayName" src="/Image/@profile.Profile.ProfileImage.ImageId"></a></li>
                     }
                 </ul>
             </div>
@@ -262,16 +260,34 @@
          });
     });
 
+    function CreateTextUser() {
+         @if (_user != null)
+         {
+             <text>
+           var html = "";
+           html = "<li id='user_@_user.UserId'><a href='/User/Id/@_user.UserId'>"
+                html += "<img class='user' src='/Image/@_user.Profile.ProfileImage.ImageId'></a></li>"
+           return html;
+            </text>
+         }
+       }
+
 
     $(".btn-follow").click(function () {
         var classname = $('.btn-follow').attr('class');
         if (classname == 'btn-follow active') {
             $.getJSON("/Store/DeleteStoreFollow/@Model.StoreId", function (data) {
-                if (data) {
+                if (data=='true') {
                     $(".btn-follow").toggleClass("active");
                     var num = $('#TotalFollow').text();
                     num = parseInt(num) - 1;
                     $('#TotalFollow').text(num);
+                     @if (_user != null)
+                     {
+                         <text>
+                             $("#user_@_user.UserId").remove();
+                        </text>
+                     }
                 }
                 else {
                     alert(data);
@@ -280,11 +296,19 @@
         }
         else {
             $.getJSON("/Store/AddStoreFollow/@Model.StoreId", function (data) {
-                if (data) {
+                if (data=='true') {
                     $(".btn-follow").toggleClass("active");
                     var num = $('#TotalFollow').text();
                     num = parseInt(num) + 1;
                     $('#TotalFollow').text(num);
+                     @if (_user != null && list.Count < 6)
+                     {
+                        <text>
+                            var html = CreateTextUser();
+                           $('.follow-list_member').prepend(html);
+                        </text>
+                    }
+
                 }
                 else {
                     alert(data);

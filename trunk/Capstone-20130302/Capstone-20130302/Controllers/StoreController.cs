@@ -30,14 +30,22 @@ namespace Capstone_20130302.Controllers
         public ActionResult Details(int id = 0)
         {
             Store store = db.Stores.Find(id);
-
-            List<UserProfile> listprofile = new List<UserProfile>();
-            listprofile = Follow_Logic.GetListFollow(3, id);
-            ViewBag.listprofile = listprofile;
             if (store == null)
             {
                 return HttpNotFound();
             }
+            if (User.Identity.IsAuthenticated != false)
+            {
+                UserProfile user = UserProfiles_Logic.GetUserProfileByUserName(User.Identity.Name);
+                ViewBag.detailuser = user;
+            }
+            else
+            {
+                ViewBag.detailuser = null;
+            }
+            List<UserProfile> listprofile = new List<UserProfile>();
+            listprofile = Follow_Logic.GetListFollow(3, id);
+            ViewBag.listprofile = listprofile;
             return View(store);
         }
 
@@ -60,24 +68,31 @@ namespace Capstone_20130302.Controllers
         {
             if (User.Identity.IsAuthenticated == false)
             {
-                return Json("You must login to Like", JsonRequestBehavior.AllowGet);
+                return Json("You must login to Follow", JsonRequestBehavior.AllowGet);
             }
             UserProfile user = UserProfiles_Logic.GetUserProfileByUserName(User.Identity.Name);
             Follow temp = new Follow();
             temp.UserId = user.UserId;
             temp.StoreId = ID;
-            return Json(Follow_Logic.AddNewFollow(temp).ToString(), JsonRequestBehavior.AllowGet);
+            if(Follow_Logic.AddNewFollow(temp))
+            {
+                return Json("true", JsonRequestBehavior.AllowGet);
+            }
+            return Json("false", JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult DeleteStoreFollow(int ID)
         {
             if (User.Identity.IsAuthenticated == false)
             {
-                return Json("You must login to Like", JsonRequestBehavior.AllowGet);
+                return Json("You must login to Follow", JsonRequestBehavior.AllowGet);
             }
             UserProfile user = UserProfiles_Logic.GetUserProfileByUserName(User.Identity.Name);
-            return Json(Follow_Logic.DeletFollow(user.UserId,ID,3).ToString(), JsonRequestBehavior.AllowGet);
-
+            if (Follow_Logic.DeletFollow(user.UserId, ID, 3))
+            {
+                return Json("true", JsonRequestBehavior.AllowGet);
+            }
+            return Json("false", JsonRequestBehavior.AllowGet);
 
         }
         public ActionResult Create()
