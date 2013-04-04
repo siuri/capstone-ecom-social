@@ -44,7 +44,7 @@ namespace Capstone_20130302.Controllers
                 ViewBag.detailuser = null;
             }
             List<UserProfile> listprofile = new List<UserProfile>();
-            listprofile = Follow_Logic.GetListFollow(3, id);
+            listprofile = Follow_Logic.GetListFollow(3, id,5);
             ViewBag.listprofile = listprofile;
             return View(store);
         }

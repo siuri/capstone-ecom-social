@@ -36,9 +36,13 @@ namespace Capstone_20130302.Controllers
             {
                 return HttpNotFound();
             }
+            // Get List Follow 
+            List<UserProfile> listfollow = Follow_Logic.GetListFollow(2, id,5);
+            ViewBag.listfollow = listfollow;
+
             // Get user profile
             UserProfile user = UserProfiles_Logic.GetUserProfileByProfileID(id);
-            
+            ViewBag._user = user;
             // Get list store follow
             List<Store> liststore = Account_Logic.GetListStoreFollowByUser(user.UserId);
             ViewBag.liststore = liststore;
