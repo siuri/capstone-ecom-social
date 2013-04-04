@@ -99,5 +99,36 @@ namespace Capstone_20130302.Logic
         }
         #endregion
 
+        #region [Get List Product Recommend]
+        /// <summary>
+        /// [Get List Product Recommend]
+        /// </summary>
+        /// <param name="ProductID">Product ID</param>
+        /// <param name="number">Number product</param>
+        /// <returns>List Product</returns>
+        public static List<Product> GetListProdcutRecommend(int ProductID,int number)
+        {
+            List<Product> list = new List<Product>();
+
+            Product current = db.Products.Find(ProductID);
+            if (current != null)
+            {
+                list = (from Product pro in db.Products
+                        where pro.CategoryId == current.CategoryId && current.StoreId == pro.StoreId && pro.ProductId != current.ProductId
+                        select pro ).Take(number).ToList();
+            }
+            if (list.Count < number)
+            {
+                var temp = (from Product pro in db.Products
+                            where pro.CategoryId == current.CategoryId && current.StoreId != pro.StoreId && pro.ProductId != current.ProductId
+                            select pro).Take(number - list.Count).ToList();
+                list.AddRange(temp);
+            }
+            return list;
+        }
+
+        #endregion
+
+
     }
 }

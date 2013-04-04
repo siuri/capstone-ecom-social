@@ -20,7 +20,7 @@
         </div>
         <div class="like-wrapper">
             <div class="stat"><span id="TotalLike">@listlike.Count.ToString("###,###,###,0")</span> likes</div>
-             <div class="like-list" id="like-list">
+            <div class="like-list" id="like-list">
                 <ul id="like-list_member" class="like-list_member">
                     @foreach (UserProfile user in listlike)
                     {
@@ -143,17 +143,23 @@
                 </ul>
             </div>
         </div>
+       
+    </div>
+
+
     </div>
 </div>
 
 <style type="text/css">
-    .errorcomment {
+    .errorcomment
+    {
         margin: 5px 7px;
         float: left;
         color: #E93535;
     }
 
-    #p-product {
+    #p-product
+    {
         border: solid 1px #DBDBEA;
         background: #fff;
         margin: 50px auto;
@@ -164,57 +170,67 @@
         box-shadow: 0px 2px 5px #CCC;
     }
 
-        #p-product .header {
+        #p-product .header
+        {
             position: relative;
         }
 
-            #p-product .header h3 {
+            #p-product .header h3
+            {
                 font-family: "Century";
                 font-weight: normal;
                 color: #1F1F2C;
                 font-size: 28px;
             }
 
-    .like-wrapper {
+    .like-wrapper
+    {
         float: right;
         width: 220px;
     }
 
-    .buy-list ul {
+    .buy-list ul
+    {
         margin-top: 10px;
         margin-bottom: 15px;
     }
 
-    .left-side {
+    .left-side
+    {
         padding-top: 30px;
         width: 35%;
         float: left;
     }
 
-        .left-side h4 {
+        .left-side h4
+        {
             margin-top: 20px;
             color: #CA6D63;
         }
 
-        .left-side table tr th {
+        .left-side table tr th
+        {
             padding-left: 0;
             font-weight: normal;
             color: rgba(100, 100, 114, 0.61);
         }
 
         .left-side table tr td,
-        .left-side table tr th {
+        .left-side table tr th
+        {
             padding-top: 3px;
             padding-bottom: 3px;
             border-top: 1px dashed #ccc;
         }
 
         .left-side table tr:first-child td,
-        .left-side table tr:first-child th {
+        .left-side table tr:first-child th
+        {
             border-top: none;
         }
 
-    .add-cart {
+    .add-cart
+    {
         text-transform: uppercase;
         text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.36);
         font-size: 90%;
@@ -222,20 +238,23 @@
         padding: 3px 15px;
     }
 
-        .add-cart span {
+        .add-cart span
+        {
             font-family: "Century";
             margin-right: 10px;
             font-size: 140%;
             font-weight: normal;
         }
 
-    .right-side {
+    .right-side
+    {
         padding-top: 30px;
         width: 60%;
         float: right;
     }
 
-    .carousel .carousel-inner .item {
+    .carousel .carousel-inner .item
+    {
         height: 400px;
         overflow: hidden;
         background-position: center;
@@ -244,22 +263,26 @@
         box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.22);
     }
 
-    .comment-form textarea {
+    .comment-form textarea
+    {
         width: 90%;
         height: 30px;
     }
 
-    .comment-form:focus textarea {
+    .comment-form:focus textarea
+    {
         width: 90%;
         height: 60px;
     }
 
-    .postbox {
+    .postbox
+    {
         position: relative;
         margin: 15px 0;
     }
 
-        .postbox .post-actions {
+        .postbox .post-actions
+        {
             visibility: visible;
             filter: alpha(opacity=100);
             -khtml-opacity: 1;
@@ -267,7 +290,8 @@
             opacity: 1;
         }
 
-        .postbox .post-actions {
+        .postbox .post-actions
+        {
             -webkit-transition: opacity linear .2s;
             -moz-transition: opacity linear .2s;
             -ms-transition: opacity linear .2s;
@@ -277,7 +301,8 @@
             text-align: right;
         }
 
-    .textarea-wrapper {
+    .textarea-wrapper
+    {
         -webkit-transition: all .2s linear;
         -moz-transition: all .2s linear;
         -ms-transition: all .2s linear;
@@ -292,7 +317,8 @@
         border: 1px solid rgba(75, 83, 94, 0.45);
     }
 
-        .textarea-wrapper textarea {
+        .textarea-wrapper textarea
+        {
             border: none;
             margin: 0;
             width: 100%;
@@ -301,16 +327,19 @@
             resize: none;
         }
 
-            .textarea-wrapper textarea:focus {
+            .textarea-wrapper textarea:focus
+            {
                 box-shadow: none;
                 height: 60px;
             }
 
-        .textarea-wrapper:focus .post-actions {
+        .textarea-wrapper:focus .post-actions
+        {
             opacity: 1;
         }
 
-    .post-actions .btn {
+    .post-actions .btn
+    {
         border-radius: 0 0 4px 0;
         border: solid 1px #979797;
         color: #424242;
@@ -323,47 +352,57 @@
         right: -2px;
     }
 
-        .post-actions .btn:hover {
+        .post-actions .btn:hover
+        {
             background: -webkit-linear-gradient(top, #CACACA, #FCFCFC);
         }
 
-        .post-actions .btn:focus {
+        .post-actions .btn:focus
+        {
             background: #CACACA;
         }
 
-    .comment-list {
+    .comment-list
+    {
         list-style: none;
         margin-left: 0;
     }
 
-        .comment-list li.item {
+        .comment-list li.item
+        {
             margin-bottom: 10px;
         }
 
-            .comment-list li.item .avatar {
+            .comment-list li.item .avatar
+            {
                 position: absolute;
             }
 
-            .comment-list li.item .comment-box {
+            .comment-list li.item .comment-box
+            {
                 margin-left: 55px;
             }
 
-                .comment-list li.item .comment-box .content {
+                .comment-list li.item .comment-box .content
+                {
                     line-height: 1.4;
                     opacity: .8;
                 }
 
-            .comment-list li.item img {
+            .comment-list li.item img
+            {
                 float: left;
                 margin-right: 15px;
             }
 
-            .comment-list li.item a.name {
+            .comment-list li.item a.name
+            {
                 font-weight: bold;
                 color: #D86959;
             }
 
-                .comment-list li.item a.name .owner:after {
+                .comment-list li.item a.name .owner:after
+                {
                     content: "Owner";
                     margin-left: 8px;
                     text-transform: uppercase;
@@ -375,23 +414,27 @@
                     border-radius: 2px;
                 }
 
-            .comment-list li.item .time {
+            .comment-list li.item .time
+            {
                 opacity: 0;
                 float: right;
             }
 
-            .comment-list li.item:hover .time {
+            .comment-list li.item:hover .time
+            {
                 opacity: .6;
             }
 
-    .ribbon-wrapper {
+    .ribbon-wrapper
+    {
         position: absolute;
         width: 41px;
         top: -59px;
         right: 0;
     }
 
-    .btn-like {
+    .btn-like
+    {
         background: url(/Images/like-ribbon.png) no-repeat 0 -73px;
         width: 41px;
         height: 66px;
@@ -403,7 +446,8 @@
         transition: opacity linear .5s;
     }
 
-        .btn-like.active {
+        .btn-like.active
+        {
             background: url(/Images/like-ribbon.png) no-repeat 0 0;
             -webkit-transition: opacity linear .5s;
             -moz-transition: opacity linear .5s;
@@ -432,38 +476,38 @@
 </script>
 
 <script type="text/javascript">
- $(document).ready(function() {
+    $(document).ready(function() {
         $.getJSON("/Product/GetProductLike/@Model.ProductId", function (data) {
-            if(data)
-            {
-                $(".btn-like").toggleClass("active");
-            }
-        });
+         if(data)
+         {
+             $(".btn-like").toggleClass("active");
+         }
+     });
 		
-		 var specsJsonData = @Html.Raw(Model.SpecsInJson)
+     var specsJsonData = @Html.Raw(Model.SpecsInJson)
 
 
-        for(var i = 0; i < specsJsonData.length; i++) {
-                $(".specs tbody").append("<tr><th>"+specsJsonData[i].name+"</th><td>"+specsJsonData[i].content+"</td></tr>");
-            };
+    for(var i = 0; i < specsJsonData.length; i++) {
+        $(".specs tbody").append("<tr><th>"+specsJsonData[i].name+"</th><td>"+specsJsonData[i].content+"</td></tr>");
+    };
 
-        });
+ });
 		
-    function CheckContent(value){
-        if(value.length < 1 )
-        {
-            $('#error').text('Comment field is required.');
-            return false;
-        }
-        else
-        {
-            $('#error').text('');
-            return true;
-        }
-    }
-    function GetHTMLContent(text){
+ function CheckContent(value){
+     if(value.length < 1 )
+     {
+         $('#error').text('Comment field is required.');
+         return false;
+     }
+     else
+     {
+         $('#error').text('');
+         return true;
+     }
+ }
+ function GetHTMLContent(text){
      
-        var texthtml = '';
+     var texthtml = '';
         @if (_user != null)
         {
 
@@ -473,10 +517,10 @@
         texthtml = '<li class="item">';
         texthtml +=  '<div class="avatar">';
         texthtml += '<a href="/User/Id/@_user.UserId"><img class="user" src="/Image/@_user.Profile.ProfileImage.ImageId"></a>';
-                texthtml += '</div>';
-                texthtml += '<div class="comment-box">';
-                texthtml += '<div class="header">';
-                texthtml += '<a href="" class="name"> @_user.Profile.DisplayName';
+        texthtml += '</div>';
+        texthtml += '<div class="comment-box">';
+        texthtml += '<div class="header">';
+        texthtml += '<a href="" class="name"> @_user.Profile.DisplayName';
                 if (User_UserName == Owner_UserName)
                 {
                     texthtml +=  ' <span class="owner"></span>';                                                      
@@ -532,15 +576,15 @@
          @if (_user != null)
          {
              <text>
-                var html = "";
-                html ="<li id='user_@_user.UserId'><a href='/User/Id/@_user.UserId'>"
+        var html = "";
+        html ="<li id='user_@_user.UserId'><a href='/User/Id/@_user.UserId'>"
                 html +="<img class='user' src='/Image/@_user.Profile.ProfileImage.ImageId'></a></li>"
-                return html;
+        return html;
             </text>
          }
     }
 
-       $(".btn-like").click(function() {
+    $(".btn-like").click(function() {
       
         var classname= $('.btn-like').attr('class');
         if(classname == 'btn-like active')
@@ -553,11 +597,11 @@
                     num = parseInt(num) -1;
                     $('#TotalLike').text(num);
                     @if (_user != null)
-                     {
+                    {
                          <text>
-                              $("#user_@_user.UserId").remove();
+                    $("#user_@_user.UserId").remove();
                         </text>
-                     }
+                    }
                     
                 }
                 else
@@ -578,9 +622,9 @@
                     @if (_user != null && listlike.Count < 6)
                     {
                         <text>
-                              var html = CreateTextUser();
+                    var html = CreateTextUser();
                             
-                              $('.like-list_member').prepend(html);
+                    $('.like-list_member').prepend(html);
                         </text>
                     }
                     postToFeed();
@@ -591,7 +635,7 @@
                 }
             });
         }
-    })
+       })
 
 
 
