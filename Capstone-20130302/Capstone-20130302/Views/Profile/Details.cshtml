@@ -31,7 +31,7 @@
             <div class="h-people"></div>
             <div class="follow-wrapper">
                  <div class="btn-follow"></div>
-                <div class="stat"><span id="TotalFollow">@listfollow.Count.ToString("##,###,###")</span> people following</div>
+                <div class="stat"><span id="TotalFollow">@listfollow.Count</span> people following</div>
                 <div class="follow-list">
                    <ul id="follow-list_member" class="follow-list_member">
                     @foreach (UserProfile profile in listfollow)
@@ -395,7 +395,7 @@
         var classname = $('.btn-follow').attr('class');
         if (classname == 'btn-follow active') {
             $.getJSON("/Profile/DeleteUserFollow/@Model.ProfileId", function (data) {
-                if (data) {
+                if (data=='true') {
                     $(".btn-follow").toggleClass("active");
                     var num = $('#TotalFollow').text();
                     num = parseInt(num) - 1;
@@ -414,7 +414,7 @@
         }
         else {
             $.getJSON("/Profile/AddUserFollow/@Model.ProfileId", function (data) {
-                if (data) {
+                if (data=='true') {
                     $(".btn-follow").toggleClass("active");
                     var num = $('#TotalFollow').text();
                     num = parseInt(num) + 1;
