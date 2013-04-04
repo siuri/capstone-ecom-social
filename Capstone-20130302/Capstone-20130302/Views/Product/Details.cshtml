@@ -19,7 +19,7 @@
             <div class="btn-like"></div>
         </div>
         <div class="like-wrapper">
-            <div class="stat"><span>@listlike.Count.ToString("###,###,###,0")</span> likes</div>
+            <div class="stat"><span id="TotalLike">@listlike.Count.ToString("###,###,###,0")</span> likes</div>
              <div class="like-list" id="like-list">
                 <ul id="like-list_member" class="like-list_member">
                     @foreach (UserProfile user in listlike)
