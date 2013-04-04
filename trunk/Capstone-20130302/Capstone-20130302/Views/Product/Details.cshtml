@@ -25,7 +25,7 @@
                     @foreach (UserProfile user in listlike)
                     {
                         <li><a href="/User/Id/@user.UserId">
-                            <img class="user" src="/Image/@user.Profile.ProfileImage.ImageId"></a></li>
+                            <img class="user"  title="@user.Profile.DisplayName" src="/Image/@user.Profile.ProfileImage.ImageId"></a></li>
                     }
 
                 </ul>
@@ -49,7 +49,7 @@
                             @foreach (UserProfile user in listbuy)
                             {
                                 <li><a href="/User/Id/@user.UserId">
-                                    <img class="user" src="/Image/@user.Profile.ProfileImage.ImageId"></a></li>
+                                    <img class="user" src="/Image/@user.Profile.ProfileImage.ImageId" title="@user.Profile.DisplayName"></a></li>
                             }
 
                         </ul>
@@ -57,7 +57,7 @@
                 }
                 else
                 {
-                    <div class="stat">Want to be the first one ordering this product?</div>
+                    <div class="stat">Be the first one ordering this product</div>
                 }
                 <a class="btn add-cart" data-pid="@Model.ProductId" data-title="@Model.Name" data-sid="@Model.Store.StoreId" data-store="@Model.Store.StoreName" data-fee="@Model.Store.ShipFee" data-image="/Image/@Model.ProductImages.ElementAt(0).ImageId" data-price="@Model.Price">
                     <span>@Html.DisplayFor(model => model.Price)</span>Add to Cart
@@ -420,6 +420,7 @@
             {
                 $(".btn-like").toggleClass("active");
             }
+        });
         var specsJsonData = @Html.Raw(Model.SpecsInJson)
         for (var i = 0; i < specsJsonData.length; i++) {
             $(".specs tbody").append("<tr><th>"+specsJsonData[i].name+"</th><td>"+specsJsonData[i].content+"</td></tr>");
