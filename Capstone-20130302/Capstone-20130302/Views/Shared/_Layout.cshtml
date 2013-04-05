@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+    <title>@ViewBag.Title - SocialBuy</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
     @Styles.Render("~/Content/css")
@@ -48,7 +48,7 @@
                     </div>
                     <ul class="noti5s">
                         <li id="cart"><a href="#">
-                            <img src="images/icon-cart.png"><span class="badge badge-inverse">3</span></a>
+                            <img src="/Images/icon-cart.png"><span class="badge badge-inverse">3</span></a>
                             <div class="cart-container" style="display: none;">
                                 <div data-bind="style:{display:shops().length==0?'none':'block'}">
                                 <div data-bind="foreach: shops">
@@ -58,7 +58,7 @@
                                     </div>
                                     <div data-bind="foreach: products">
                                         <div class="product">
-                                            <img src="images/product-icon.jpg" data-bind="attr:{src: productImage}">
+                                            <img data-bind="attr:{src: productImage}">
                                             <div class="info">
                                                 <div class="title">
                                                     <a href="#" data-bind="text: productTitle"></a>
