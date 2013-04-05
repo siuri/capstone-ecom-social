@@ -1,24 +1,188 @@
-﻿@{
+﻿@model IEnumerable<Capstone_20130302.Models.Product>
+@{
     ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_FreeLayout.cshtml";
 }
-@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Title.</h1>
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
-            <p>
-                To learn more about ASP.NET MVC visit
-                <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
-                The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET MVC.
-                If you have any questions about ASP.NET MVC visit
-                <a href="http://forums.asp.net/1146.aspx/1?MVC" title="ASP.NET MVC Forum">our forums</a>.
-            </p>
+<section class="reg-motiv">
+    <div class="h-reg"></div>
+    <p>Join the e-marketplace where social network meets traditional shopping.</p>
+    <a href="/Account/Register">Join Now</a> <a href="">Open a Store</a>
+</section>
+<section class="shelf">
+    <div class="middle">
+        <div class="h-picks"></div>
+        <br />
+        <div class="shelf-wrapper product-grid" id="picks">
+            <div class="product">
+                <a href="/Product/Id/2">
+                    <div class="image">
+                        <div class="img" style="background: url(/Image/13)"></div>
+                        <div class="detail">
+                            <div class="price">
+                                $35.7
+                            </div>
+                            <div class="buttons">View details</div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <h4>Sacramentalia</h4>
+                        <p>A 'How-to' Ward off Evil Spiri...</p>
+                    </div>
+                </a>
+            </div>
+            <div class="product">
+                <a href="/Product/Id/2">
+                    <div class="image">
+                        <div class="img" style="background: url(/Image/13)"></div>
+                        <div class="detail">
+                            <div class="price">
+                                $35.7
+                            </div>
+                            <div class="buttons">View details</div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <h4>Sacramentalia</h4>
+                        <p>A 'How-to' Ward off Evil Spiri...</p>
+                    </div>
+                </a>
+            </div>
+            <div class="product">
+                <a href="/Product/Id/2">
+                    <div class="image">
+                        <div class="img" style="background: url(/Image/11)"></div>
+                        <div class="detail">
+                            <div class="price">
+                                $35.7
+                            </div>
+                            <div class="buttons">View details</div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <h4>Sacramentalia</h4>
+                        <p>A 'How-to' Ward off Evil Spiri...</p>
+                    </div>
+                </a>
+            </div>
+            <div class="product">
+                <a href="/Product/Id/2">
+                    <div class="image">
+                        <div class="img" style="background: url(/Image/5)"></div>
+                        <div class="detail">
+                            <div class="price">
+                                $35.7
+                            </div>
+                            <div class="buttons">View details</div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <h4>Sacramentalia</h4>
+                        <p>A 'How-to' Ward off Evil Spiri...</p>
+                    </div>
+                </a>
+            </div>
+            <div class="product">
+                <a href="/Product/Id/2">
+                    <div class="image">
+                        <div class="img" style="background: url(/Image/6)"></div>
+                        <div class="detail">
+                            <div class="price">
+                                $35.7
+                            </div>
+                            <div class="buttons">View details</div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <h4>Sacramentalia</h4>
+                        <p>A 'How-to' Ward off Evil Spiri...</p>
+                    </div>
+                </a>
+            </div>
         </div>
-    </section>
-}
+    </div>
+</section>
+<section class="discover">
+    <h2>Discover</h2>
+    <div class="product-grid" id="discover">
+        @foreach (var item in Model)
+        {
+            <div class="product cate-@item.CategoryId">
+                <a href="/Product/Id/@item.ProductId">
+                    <div class="image">
+                        <img src="/Image/@item.ProductImages.First().ImageId"/>
+                        <div class="detail">
+                            <div class="price">
+                                $@item.Price
+                            </div>
+                            <div class="buttons">View details</div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <h4>@item.Name</h4>
+                        <p>@item.Description.Substring(0, 30)...</p>
+                    </div>
+               </a>
+            </div>
+            <div class="product cate-@item.CategoryId">
+                <a href="/Product/Id/@item.ProductId">
+                    <div class="image">
+                        <img src="/Image/@item.ProductImages.First().ImageId"/>
+                        <div class="detail">
+                            <div class="price">
+                                $@item.Price
+                            </div>
+                            <div class="buttons">View details</div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <h4>@item.Name</h4>
+                        <p>@item.Description.Substring(0, 30)...</p>
+                    </div>
+               </a>
+            </div>
+            <div class="product cate-@item.CategoryId">
+                <a href="/Product/Id/@item.ProductId">
+                    <div class="image">
+                        <img src="/Image/@item.ProductImages.First().ImageId"/>
+                        <div class="detail">
+                            <div class="price">
+                                $@item.Price
+                            </div>
+                            <div class="buttons">View details</div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <h4>@item.Name</h4>
+                        <p>@item.Description.Substring(0, 30)...</p>
+                    </div>
+               </a>
+            </div>
+        }
+    </div>
+</section>
 
-<div id="dropbox">
-	<span class="message">Drop images here to upload.</span>
-</div>
+<script type="text/javascript">
+    $("#discover").isotope({
+        layoutMode: "masonry",
+        masonry: {
+        }
+    });
+    setTimeout(function () {
+        $("#discover").isotope({ filter: "*" });
+    }, 500);
+
+    $(document).ready(function () {
+        var slider = $("#picks").bxSlider({
+            minSlides: 3,
+            maxSlides: 4,
+            slideWidth: 200,
+            slideMargin: 20,
+            pager: false
+        });
+    })
+</script>
+<style>
+    body {
+        background: #F7F6F5;
+    }
+</style>

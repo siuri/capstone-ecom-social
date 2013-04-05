@@ -14,9 +14,8 @@ namespace Capstone_20130302.Controllers
 
         public ActionResult Index()
         {
-            //  return Json(Category_Logic.CateroryCombobox(),JsonRequestBehavior.AllowGet);
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
-            return View();
+            var products = db.Products.ToList();
+            return View(products);
         }
 
         public ActionResult About()
