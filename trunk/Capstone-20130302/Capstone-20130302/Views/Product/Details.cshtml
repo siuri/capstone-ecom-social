@@ -98,6 +98,7 @@
             </div>
             <div class="comment-wrapper">
                 <div class="stat"><span id="countcomment">@listcmt.Count</span> comments</div>
+                <br>
                 <!-- Post box -->
                 @if (User.Identity.IsAuthenticated)
                 {
@@ -132,7 +133,7 @@
                             </div>
                             <div class="comment-box">
                                 <div class="header">
-                                    <a href="" class="name">@cmt.User.Profile.DisplayName   @if (cmt.User.UserName == Model.Store.Owner.UserName)
+                                    <a href="/User/Id/@cmt.User.UserId" class="name">@cmt.User.Profile.DisplayName   @if (cmt.User.UserName == Model.Store.Owner.UserName)
                                                                                             { <span class="owner"></span> } </a>
                                     <span class="time">@cmt.CreateDate.ToString("dd/MM/yyyy hh:mm:ss")</span>
                                 </div>
@@ -144,45 +145,66 @@
                 </ul>
             </div>
         </div>
-       
-    </div>
 
-    <div class="item-wrapper product">
-        <div class="heading"></div>
-        <div class="product-grid isotope" style="position: relative; overflow: hidden; height: 262px;">
-             @foreach (var item in listrecommend)
+    </div>
+    <div class="ease"></div>
+    <section class="shelf">
+        <div class="h-also-like"></div>
+        <br />
+        <div class="shelf-wrapper product-grid" id="picks">
+            @foreach (var item in listrecommend)
             {
                 <div class="product cate-@item.CategoryId">
                     <a href="/Product/Id/@item.ProductId">
                         <div class="image">
-                            <img src="/Image/@item.ProductImages.First().ImageId"/>
+                            <div class="img" style="background: url(/Image/@item.ProductImages.First().ImageId)"></div>
+                            <div class="detail">
+                                <div class="price">
+                                    $@item.Price
+                                </div>
+                                <div class="buttons">View details</div>
+                            </div>
                         </div>
                         <div class="description">
                             <h4>@item.Name</h4>
                             <p>@item.Description.Substring(0, 30)...</p>
                         </div>
-                   </a>
+                    </a>
                 </div>
             }
-
         </div>
-    </div>
-
-    </div>
+</section>
 </div>
 
+
 <style type="text/css">
-    .errorcomment
-    {
+    .h-also-like {
+        background: url(/Images/h-also-like.png);
+        height: 66px;
+        width: 880px;
+        margin: -7px auto 0;
+    }
+    .ease {
+        height: 50px;
+        width: -webkit-calc(100%+80px);
+        border-left: solid 1px #fff;
+        border-right: solid 1px #fff;
+        background: -webkit-linear-gradient(top, #FFF, #E4E4E4);
+        margin: 40px -40px -40px;
+    }
+    .shelf {
+        margin: 40px -40px -40px;
+        border: solid 1px #fff;
+    }
+    .errorcomment {
         margin: 5px 7px;
         float: left;
         color: #E93535;
     }
 
-    #p-product
-    {
+    #p-product {
         border: solid 1px #DBDBEA;
-        background: #fff;
+        background: #fff url(/Images/fx-grad.jpg) top no-repeat;
         margin: 50px auto;
         padding: 40px;
         box-sizing: border-box;
@@ -191,67 +213,57 @@
         box-shadow: 0px 2px 5px #CCC;
     }
 
-        #p-product .header
-        {
+        #p-product .header {
             position: relative;
         }
 
-            #p-product .header h3
-            {
+            #p-product .header h3 {
                 font-family: "Century";
                 font-weight: normal;
                 color: #1F1F2C;
                 font-size: 28px;
             }
 
-    .like-wrapper
-    {
+    .like-wrapper {
         float: right;
         width: 220px;
     }
 
-    .buy-list ul
-    {
+    .buy-list ul {
         margin-top: 10px;
         margin-bottom: 15px;
     }
 
-    .left-side
-    {
+    .left-side {
         padding-top: 30px;
         width: 35%;
         float: left;
     }
 
-        .left-side h4
-        {
+        .left-side h4 {
             margin-top: 20px;
             color: #CA6D63;
         }
 
-        .left-side table tr th
-        {
+        .left-side table tr th {
             padding-left: 0;
             font-weight: normal;
             color: rgba(100, 100, 114, 0.61);
         }
 
         .left-side table tr td,
-        .left-side table tr th
-        {
+        .left-side table tr th {
             padding-top: 3px;
             padding-bottom: 3px;
             border-top: 1px dashed #ccc;
         }
 
         .left-side table tr:first-child td,
-        .left-side table tr:first-child th
-        {
+        .left-side table tr:first-child th {
             border-top: none;
         }
 
-    .add-cart
-    {
+    .add-cart {
         text-transform: uppercase;
         text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.36);
         font-size: 90%;
@@ -259,23 +271,20 @@
         padding: 3px 15px;
     }
 
-        .add-cart span
-        {
+        .add-cart span {
             font-family: "Century";
             margin-right: 10px;
             font-size: 140%;
             font-weight: normal;
         }
 
-    .right-side
-    {
+    .right-side {
         padding-top: 30px;
         width: 60%;
         float: right;
     }
 
-    .carousel .carousel-inner .item
-    {
+    .carousel .carousel-inner .item {
         height: 400px;
         overflow: hidden;
         background-position: center;
@@ -284,26 +293,22 @@
         box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.22);
     }
 
-    .comment-form textarea
-    {
+    .comment-form textarea {
         width: 90%;
         height: 30px;
     }
 
-    .comment-form:focus textarea
-    {
+    .comment-form:focus textarea {
         width: 90%;
         height: 60px;
     }
 
-    .postbox
-    {
+    .postbox {
         position: relative;
         margin: 15px 0;
     }
 
-        .postbox .post-actions
-        {
+        .postbox .post-actions {
             visibility: visible;
             filter: alpha(opacity=100);
             -khtml-opacity: 1;
@@ -311,8 +316,7 @@
             opacity: 1;
         }
 
-        .postbox .post-actions
-        {
+        .postbox .post-actions {
             -webkit-transition: opacity linear .2s;
             -moz-transition: opacity linear .2s;
             -ms-transition: opacity linear .2s;
@@ -322,8 +326,7 @@
             text-align: right;
         }
 
-    .textarea-wrapper
-    {
+    .textarea-wrapper {
         -webkit-transition: all .2s linear;
         -moz-transition: all .2s linear;
         -ms-transition: all .2s linear;
@@ -338,8 +341,7 @@
         border: 1px solid rgba(75, 83, 94, 0.45);
     }
 
-        .textarea-wrapper textarea
-        {
+        .textarea-wrapper textarea {
             border: none;
             margin: 0;
             width: 100%;
@@ -348,19 +350,16 @@
             resize: none;
         }
 
-            .textarea-wrapper textarea:focus
-            {
+            .textarea-wrapper textarea:focus {
                 box-shadow: none;
                 height: 60px;
             }
 
-        .textarea-wrapper:focus .post-actions
-        {
+        .textarea-wrapper:focus .post-actions {
             opacity: 1;
         }
 
-    .post-actions .btn
-    {
+    .post-actions .btn {
         border-radius: 0 0 4px 0;
         border: solid 1px #979797;
         color: #424242;
@@ -373,57 +372,47 @@
         right: -2px;
     }
 
-        .post-actions .btn:hover
-        {
+        .post-actions .btn:hover {
             background: -webkit-linear-gradient(top, #CACACA, #FCFCFC);
         }
 
-        .post-actions .btn:focus
-        {
+        .post-actions .btn:focus {
             background: #CACACA;
         }
 
-    .comment-list
-    {
+    .comment-list {
         list-style: none;
         margin-left: 0;
     }
 
-        .comment-list li.item
-        {
+        .comment-list li.item {
             margin-bottom: 10px;
         }
 
-            .comment-list li.item .avatar
-            {
+            .comment-list li.item .avatar {
                 position: absolute;
             }
 
-            .comment-list li.item .comment-box
-            {
+            .comment-list li.item .comment-box {
                 margin-left: 55px;
             }
 
-                .comment-list li.item .comment-box .content
-                {
+                .comment-list li.item .comment-box .content {
                     line-height: 1.4;
                     opacity: .8;
                 }
 
-            .comment-list li.item img
-            {
+            .comment-list li.item img {
                 float: left;
                 margin-right: 15px;
             }
 
-            .comment-list li.item a.name
-            {
+            .comment-list li.item a.name {
                 font-weight: bold;
                 color: #D86959;
             }
 
-                .comment-list li.item a.name .owner:after
-                {
+                .comment-list li.item a.name .owner:after {
                     content: "Owner";
                     margin-left: 8px;
                     text-transform: uppercase;
@@ -435,27 +424,23 @@
                     border-radius: 2px;
                 }
 
-            .comment-list li.item .time
-            {
+            .comment-list li.item .time {
                 opacity: 0;
                 float: right;
             }
 
-            .comment-list li.item:hover .time
-            {
+            .comment-list li.item:hover .time {
                 opacity: .6;
             }
 
-    .ribbon-wrapper
-    {
+    .ribbon-wrapper {
         position: absolute;
         width: 41px;
         top: -59px;
         right: 0;
     }
 
-    .btn-like
-    {
+    .btn-like {
         background: url(/Images/like-ribbon.png) no-repeat 0 -73px;
         width: 41px;
         height: 66px;
@@ -467,8 +452,7 @@
         transition: opacity linear .5s;
     }
 
-        .btn-like.active
-        {
+        .btn-like.active {
             background: url(/Images/like-ribbon.png) no-repeat 0 0;
             -webkit-transition: opacity linear .5s;
             -moz-transition: opacity linear .5s;
@@ -477,11 +461,12 @@
             transition: opacity linear .5s;
         }
 
-         .item-wrapper.product {
+    .item-wrapper.product {
         width: 100%;
         border-top: solid 1px #fff;
         padding-bottom: 40px;
     }
+
     .product .heading {
         background: url(/Images/h-favorite-products.png) no-repeat;
         height: 64px;
@@ -489,60 +474,72 @@
         top: -4px;
         margin: 0 auto 30px auto;
     }
+
     .item-wrapper {
         box-shadow: inset 0px 10px 70px 1px rgba(155, 155, 140, 0.23);
         padding: 0 40px;
         box-sizing: border-box;
     }
-    .item-wrapper .filter ul {
-        list-style: none;
-        margin: 0;
-    }
-    .item-wrapper .filter ul li {
-        float: left;
-        margin-right: 15px;
-    }
-    .item-wrapper .filter ul li a {
-        color: #646472;
-        padding: 5px 10px;
-    }
-    .item-wrapper .filter ul li a.active {
-        font-weight: bold;
-        border-bottom: solid 4px #B9B9C8;
-    }
-    .item-wrapper .filter ul li a span {
-        opacity: .6;
-        color: #646472;
-        font-weight: normal;
-    }
+
+        .item-wrapper .filter ul {
+            list-style: none;
+            margin: 0;
+        }
+
+            .item-wrapper .filter ul li {
+                float: left;
+                margin-right: 15px;
+            }
+
+                .item-wrapper .filter ul li a {
+                    color: #646472;
+                    padding: 5px 10px;
+                }
+
+                    .item-wrapper .filter ul li a.active {
+                        font-weight: bold;
+                        border-bottom: solid 4px #B9B9C8;
+                    }
+
+                    .item-wrapper .filter ul li a span {
+                        opacity: .6;
+                        color: #646472;
+                        font-weight: normal;
+                    }
+
     .filter {
         margin: 20px 0 40px 0;
         text-shadow: 1px 1px 1px #fff;
     }
+
     .product-grid {
         width: 100%;
-        margin: -10px;
+        padding-left: 35px;
     }
-    .product-grid .product {
-        padding: 0;
-        border: solid 1px white;
-        box-shadow: 1px 2px 6px #B1B1B1;
-        margin: 10px;
-    }
-    .product-grid .product .description {
-        padding: 10px;
-        color: #646472;
-    }
-    .product-grid .product .description h4 {
-        font-size: 120%;
-        margin: 0;
-        font-family: "Century";
-        font-weight: normal;
-    }
-    .product-grid .product .description p {
-        margin-bottom: 0;
-        opacity: .7;
-    }
+
+        .product-grid .product {
+            padding: 0;
+            border: solid 1px white;
+            box-shadow: 1px 2px 6px #B1B1B1;
+            margin: 10px;
+        }
+
+            .product-grid .product .description {
+                padding: 10px;
+                color: #646472;
+            }
+
+                .product-grid .product .description h4 {
+                    font-size: 120%;
+                    margin: 0;
+                    font-family: "Century";
+                    font-weight: normal;
+                }
+
+                .product-grid .product .description p {
+                    margin-bottom: 0;
+                    opacity: .7;
+                }
 </style>
 <script>
     $(document).ready(function() {
@@ -566,55 +563,55 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $.getJSON("/Product/GetProductLike/@Model.ProductId", function (data) {
-         if(data)
-         {
-             $(".btn-like").toggleClass("active");
-         }
-     });
+            if(data)
+            {
+                $(".btn-like").toggleClass("active");
+            }
+        });
 		
-     var specsJsonData = @Html.Raw(Model.SpecsInJson)
+        var specsJsonData = @Html.Raw(Model.SpecsInJson)
 
 
-    for(var i = 0; i < specsJsonData.length; i++) {
-        $(".specs tbody").append("<tr><th>"+specsJsonData[i].name+"</th><td>"+specsJsonData[i].content+"</td></tr>");
-    };
+       for(var i = 0; i < specsJsonData.length; i++) {
+           $(".specs tbody").append("<tr><th>"+specsJsonData[i].name+"</th><td>"+specsJsonData[i].content+"</td></tr>");
+       };
 
- });
+    });
 		
- function CheckContent(value){
-     if(value.length < 1 )
-     {
-         $('#error').text('Comment field is required.');
-         return false;
-     }
-     else
-     {
-         $('#error').text('');
-         return true;
-     }
- }
- function GetHTMLContent(text){
+    function CheckContent(value){
+        if(value.length < 1 )
+        {
+            $('#error').text('Comment field is required.');
+            return false;
+        }
+        else
+        {
+            $('#error').text('');
+            return true;
+        }
+    }
+    function GetHTMLContent(text){
      
-     var texthtml = '';
+        var texthtml = '';
         @if (_user != null)
         {
 
             <text>
-        var User_UserName = '@_user.UserName';
-        var Owner_UserName = '@Model.Store.Owner.UserName';
-        texthtml = '<li class="item">';
-        texthtml +=  '<div class="avatar">';
-        texthtml += '<a href="/User/Id/@_user.UserId"><img class="user" src="/Image/@_user.Profile.ProfileImage.ImageId"></a>';
+     var User_UserName = '@_user.UserName';
+     var Owner_UserName = '@Model.Store.Owner.UserName';
+     texthtml = '<li class="item">';
+     texthtml +=  '<div class="avatar">';
+     texthtml += '<a href="/User/Id/@_user.UserId"><img class="user" src="/Image/@_user.Profile.ProfileImage.ImageId"></a>';
         texthtml += '</div>';
         texthtml += '<div class="comment-box">';
         texthtml += '<div class="header">';
         texthtml += '<a href="" class="name"> @_user.Profile.DisplayName';
-                if (User_UserName == Owner_UserName)
-                {
-                    texthtml +=  ' <span class="owner"></span>';                                                      
-                }
-                texthtml += '</a>';
-                texthtml += '<span class="time">@DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss")</span>';
+        if (User_UserName == Owner_UserName)
+        {
+            texthtml +=  ' <span class="owner"></span>';                                                      
+        }
+        texthtml += '</a>';
+        texthtml += '<span class="time">@DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss")</span>';
                 texthtml +='</div>';
                 texthtml +='<div class="content">' + text + '</div>';
                 texthtml += '</div>';
@@ -622,17 +619,17 @@
              </text>
         }
       
-        return texthtml;
-    }
+     return texthtml;
+ }
 
-    function PostComment(){       
-        var text = document.getElementById('contentcomment');
-        if(text.value.length < 1 )
-        {
-            $('#error').text('Comment field is required.');
-            return false;
-        }
-        var postData = { 'ProductId': @Model.ProductId,'CommentContent' : text.value };
+ function PostComment(){       
+     var text = document.getElementById('contentcomment');
+     if(text.value.length < 1 )
+     {
+         $('#error').text('Comment field is required.');
+         return false;
+     }
+     var postData = { 'ProductId': @Model.ProductId,'CommentContent' : text.value };
         jQuery.ajax({
             url: '../../Product/PostComment',
             traditional: true,
@@ -666,7 +663,7 @@
              <text>
         var html = "";
         html ="<li id='user_@_user.UserId'><a href='/User/Id/@_user.UserId'>"
-                html +="<img class='user' src='/Image/@_user.Profile.ProfileImage.ImageId'></a></li>"
+        html +="<img class='user' src='/Image/@_user.Profile.ProfileImage.ImageId'></a></li>"
         return html;
             </text>
          }
@@ -723,7 +720,7 @@
                 }
             });
         }
-       })
+    })
 
 
 

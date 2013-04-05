@@ -113,6 +113,7 @@ namespace Capstone_20130302.Controllers
             if (profile.Address != null)
             {
                 order.BillingAddress = profile.Address;
+                order.BillingName = profile.DisplayName;
             }
             order.Stores = store;
             order.StatusId = Constant.ORDER_STATUS_PENDING;

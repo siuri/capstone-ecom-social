@@ -753,3 +753,124 @@ em {
 .small {
     font-size: 90%;
 }
+
+
+.product-grid {
+    width: 100%;
+    margin: -10px;
+}
+.product-grid .product {
+    padding: 0;
+    border: solid 1px white;
+    box-shadow: 1px 2px 6px #B1B1B1;
+    margin: 10px;
+}
+.product-grid .product .description {
+    padding: 10px;
+    color: #646472;
+}
+.product-grid .product .description h4 {
+    font-size: 120%;
+    margin: 0;
+    font-family: "Century";
+    font-weight: normal;
+}
+.product-grid .product .description p {
+    margin-bottom: 0;
+    opacity: .7;
+}
+
+
+section.reg-motiv {
+    background: url(/Images/home-bg.jpg);
+    width: 100%;
+    text-align: center;
+    padding: 60px 0;
+    color: #fff;
+    box-shadow: inset 0px 10px 40px 1px rgba(5, 5, 5, 0.67);
+}
+
+.h-reg {
+    background: url(/Images/h-reg.png);
+    width: 600px;
+    height: 55px;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.reg-motiv a {
+    background: url(/Images/btn-bg.png);
+    width: 161px;
+    height: 47px;
+    display: inline-block;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 10px 0 0 0;
+    box-sizing: border-box;
+}
+
+.shelf {
+    border-top: solid 1px #fff;
+    background: url(/Images/grain-bg.jpg);
+    box-shadow: inset 0px 10px 70px 1px rgba(155, 155, 140, 0.67);
+    padding: 0 0 40px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.middle {
+    width: 960px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.shelf .h-picks {
+    background: url(/Images/h-picks.png);
+    width: 880px;
+    height: 63px;
+    margin: -6px auto 12px;
+}
+
+.shelf-wrapper {
+    width: 960px;
+    margin: 0 auto;
+}
+
+.shelf-wrapper .product {
+    margin: 0;
+    width: 198px !important;
+}
+
+.shelf .bx-wrapper {
+    margin: 0 auto;
+}
+
+.shelf .carousel-control {
+  opacity: 1;
+}
+
+div.img {
+    width: 198px;
+    height: 152px;
+    background-size: 100% !important;
+    background-position: center;
+    overflow: hidden;
+}
+
+section.discover {
+    width: 960px;
+    margin: 0 auto;
+}
+
+section.discover h2 {
+    font-family: "Century";
+    font-weight: normal;
+    color: #373745;
+    font-size: 24px;
+    margin-top: 40px;
+}
+
+.discover .product-grid .product {
+    box-shadow: 0px 0px 5px rgb(196, 196, 196);
+    width: 220px;
+}
