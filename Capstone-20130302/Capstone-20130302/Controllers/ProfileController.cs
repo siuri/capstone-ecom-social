@@ -41,7 +41,7 @@ namespace Capstone_20130302.Controllers
             ViewBag.listfollow = listfollow;
 
             // Get user profile
-            UserProfile user = UserProfiles_Logic.GetUserProfileByProfileID(id);
+            UserProfile user = UserProfiles_Logic.GetUserProfileByUserName(User.Identity.Name);
             ViewBag._user = user;
             // Get list store follow
             List<Store> liststore = Account_Logic.GetListStoreFollowByUser(user.UserId);
