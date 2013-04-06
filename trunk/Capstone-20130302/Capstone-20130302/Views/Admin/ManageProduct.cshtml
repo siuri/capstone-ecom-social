@@ -57,6 +57,66 @@
             //alert(status);
             updateProductStatus(productID, status);
         });
+
+        $(".addPick").click(function () {
+            var pid = $(this).data("pid");
+            //alert(productID);
+
+            $.ajax({
+                url: "/Admin/AddEditorPick",
+                type: 'POST',
+                data: { productID: pid },
+                success: function (response) {
+                    if (response == "OK") {
+                        $.pnotify({
+                            title: 'Add Editor Pick Success',
+                            text: 'Added Editor Pick Success.',
+                            type: 'success',
+                            styling: 'bootstrap',
+                            delay: 500
+                        });
+                    }
+                    else {
+                        $.notification(
+					        {
+					            title: "Added Failed",
+					            content: "Please check again.",
+					            error: true
+					        }
+				        );
+                    }
+                }
+            });
+        });
+        $(".minusPick").click(function () {
+            var pid = $(this).data("pid");
+            //alert(productID);
+            $.ajax({
+                url: "/Admin/RemoveEditorPick",
+                type: 'POST',
+                data: { productID: pid },
+                success: function (response) {
+                    if (response == "OK") {
+                        $.pnotify({
+                            title: 'Remove Editor Pick Success',
+                            text: 'Removed Editor Pick Success.',
+                            type: 'success',
+                            styling: 'bootstrap',
+                            delay: 500
+                        });
+                    }
+                    else {
+                        $.notification(
+					        {
+					            title: "Removed Failed",
+					            content: "Please check again.",
+					            error: true
+					        }
+				        );
+                    }
+                }
+            });
+        });
     });
 </script>
 
@@ -97,9 +157,11 @@
                             @Html.DisplayFor(modelItem => item.Status.Name)
                         </td>
                         <td data-pid="@item.ProductId">
-                            @*<a href="Store/Edit/@item.StoreId"><i class="icon-pencil"></i></a>*@
-                            <a href="/Product/Id/@item.ProductId"><i class="icon-search"></i> View</a>
-                            @Html.DropDownList("StatusID", (SelectList)ViewBag.StatusID, "- Update -", new { id = "n-status-" + @item.ProductId, @class = "changeStatus span2", data_pid = @item.ProductId})
+                            <a href="/Product/Id/@item.ProductId"><i class="icon-search"></i>View</a>
+                            Editor Picks
+                            <a href="#" data-pid="@item.ProductId" class="addPick"><i class="addPick"></i>[+]</a>
+                            <a href="#" data-pid="@item.ProductId" class="minusPick"><i class="minusPick"></i>[-]</a>
+                            @Html.DropDownList("StatusID", (SelectList)ViewBag.StatusID, "- Update -", new { id = "n-status-" + @item.ProductId, @class = "changeStatus span2", data_pid = @item.ProductId })
                             @*<a href="Store/Delete/@item.StoreId"><i class="icon-trash"></i></a>*@
                         </td>
                     </tr>
