@@ -23,5 +23,8 @@ namespace Capstone_20130302.Constants
         public const int ORDER_STATUS_SHIPPED = 3;
         public const int ORDER_STATUS_CANCELLED = 4;
         public const int ORDER_STATUS_HOLD = 5;
+
+
+        public const int PAGE_SIZE = 16;
     }
 }

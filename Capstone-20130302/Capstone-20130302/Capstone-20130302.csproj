@@ -47,6 +47,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.15.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -209,6 +212,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Image.cs" />
+    <Compile Include="Models\ProductDisplay.cs" />
     <Compile Include="Models\ProductLike.cs" />
     <Compile Include="Models\ProductOrder.cs" />
     <Compile Include="Models\Profile.cs" />
@@ -306,11 +310,13 @@
     <Content Include="Content\less\product.less" />
     <Content Include="Content\less\store.less" />
     <Content Include="Content\less\user-profile.less" />
+    <Content Include="Images\ajax-loader.gif" />
     <Content Include="Images\avatar-social.jpg" />
     <Content Include="Images\avatar_default.jpg" />
     <Content Include="Images\back_disabled.png" />
     <Content Include="Images\back_enabled.png" />
     <Content Include="Images\back_enabled_hover.png" />
+    <Content Include="Images\big-roller.gif" />
     <Content Include="Images\chain.png" />
     <Content Include="Images\done.png" />
     <Content Include="Images\favicon.ico" />
@@ -327,6 +333,8 @@
     <Content Include="Images\like-gray.png" />
     <Content Include="Images\like-red.png" />
     <Content Include="Images\like-ribbon.png" />
+    <Content Include="Images\loader.gif" />
+    <Content Include="Images\loading14.gif" />
     <Content Include="Images\location-icon.png" />
     <Content Include="Images\logo_small.png" />
     <Content Include="Images\logo_small_gray.jpg" />
@@ -363,6 +371,7 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.maskedinput.min.js" />
+    <Content Include="Scripts\jquery.pagination.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -444,6 +453,7 @@
     <Content Include="Views\Order\SellerManage.cshtml" />
     <Content Include="Views\Order\UserManage.cshtml" />
     <Content Include="Views\Order\Details.cshtml" />
+    <Content Include="Views\Product\Category.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
