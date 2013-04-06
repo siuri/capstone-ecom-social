@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>@ViewBag.Title - Simple Layout</title>
+    <title>@ViewBag.Title - SocialBuy</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
     @Styles.Render("~/Content/css")
@@ -36,12 +36,5 @@
 
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
-    <script>
-        $(document).ready(function() {
-            $('body').tooltip({
-                selector: '[rel=tooltip]'
-            });
-        });
-    </script>
 </body>
 </html>
