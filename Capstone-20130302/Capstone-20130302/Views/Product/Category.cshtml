@@ -1,0 +1,149 @@
+﻿@model IEnumerable<Capstone_20130302.Models.ProductDisplay>
+@{
+    ViewBag.Title = "Category";
+}
+<script src="~/Scripts/jquery.pagination.js"></script>
+<h2>Get Product by Category</h2>
+
+<section class="discover">
+    <h2>@if(Model.Count() ==0 ) { <text>No Product</text> } </h2>
+    <div id="manga-Loading" style="position: absolute; z-index: -1; opacity: 0.7; width: 70%; text-align: center;">
+        <img alt="Loading..." style="position: absolute; top: 48%; left: 35%; vertical-align: middle;
+            display: inline-block; zoom: 1; z-index: 10001;" src="/Images/loading14.gif">
+    </div>
+    
+    <div class="product-grid" id="discover">
+       
+    </div>
+    <div class="directory_footer" style="bottom: -30px; right: 320px;">
+            <div class="pagination-pager next-page">
+    </div>
+</div>
+</section>
+
+<script type="text/javascript">
+    
+    setTimeout(function () {
+        $("#discover").isotope({ filter: "*" });
+    }, 500);
+
+    function CreateHtml(data) {
+        var html = '';
+
+        if (data != null) {
+            for (var key in data) {
+                if (data.hasOwnProperty(key)) {
+                    html+= '<div class="product cate-'+ data[key].ProductID +'">'
+                    html+= '<a href="/Product/Id/'+ data[key].ProductID +'">'
+                    html+= '<div class="image">'
+                    html+= '<img src="/Image/'+ data[key].Images +'"/>'
+                    html+= '<div class="detail">'
+                    html+= '<div class="price">'
+                    html+= '$'+data[key].Price
+                    html+= '</div>'
+                    html+= '<div class="buttons">View details</div>'
+                    html+= '</div>'
+                    html+= '</div>'
+                    html+= '<div class="description">'
+                    html+= '<h4>'+ data[key].Name +'</h4>'
+                    html+= '<p>'+ data[key].Description +'...</p>'
+                    html+= '</div>'
+                    html+= '</a>'
+                    html+= '</div>'
+                }
+            }
+        }
+        return html;
+    }
+
+    var PageIndex = 0;
+    var PageSize = 16;
+    var MaxLength = @ViewBag.TotalRow
+     function pageselectCallback(page_index, jq) {
+       
+         //Nơi thay đổi các thuộc tín của paging khi sort search bằng Post
+         //...
+         $("#manga-Loading").css({ 'z-index': 1 });
+         $("#manga-Loading").css({ 'display': 'block' });
+         $.getJSON('/Product/GetProductPage?ID=@ViewBag.ID&page='+(parseInt(page_index)+1), function (data) {
+             if (data) {
+                 var html = CreateHtml(data);
+                 $("#discover").html(html);
+                 $("#manga-Loading").css({ 'z-index': -1 });
+                 $("#manga-Loading").css({ 'display': 'none' });
+             }
+         });
+         return false;
+     }
+
+    function getOptions() {
+
+        var opt = {
+            items_per_page: PageSize,
+            num_display_entries: 5,
+            current_page: PageIndex,
+            num_edge_entries: 2,
+            link_to: "#",
+            prev_text: "Prev",
+            next_text: "Next",
+            ellipse_text: "...",
+            prev_show_always: true,
+            next_show_always: true,
+            renderer: "defaultRenderer",
+            show_if_single_page: false,
+            load_first_page: true,
+            callback: pageselectCallback
+        };
+        return opt;
+    }
+
+    $(document).ready(function () {
+        var optInit = getOptions();
+        $(".pagination-pager").pagination(MaxLength, optInit);
+        $("#manga-Loading").css({ 'z-index': -1 });
+        $("#manga-Loading").css({ 'display': 'none' });
+    })
+   
+
+</script>
+
+
+
+
+
+
+
+
+<style>
+
+    .pagination {
+            font-size: 90%;
+        }
+        
+.pagination a {
+    text-decoration: none;
+	
+	color: #15B;
+}
+
+.pagination a, .pagination span
+{
+    display: block;
+    float: left;
+    padding: 0em 1em 0em 1em;
+    margin-right: 5px;
+}
+
+.pagination .current {
+    background: #26B;
+    color: #fff;
+	
+}
+
+.pagination .current.prev, .pagination .current.next{
+	color:#999;
+	border-color:#999;
+	background: none;
+}
+
+</style>
