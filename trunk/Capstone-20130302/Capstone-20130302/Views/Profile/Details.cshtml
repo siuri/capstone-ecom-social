@@ -400,10 +400,10 @@
                     var num = $('#TotalFollow').text();
                     num = parseInt(num) - 1;
                     $('#TotalFollow').text(num);
-                     @if (_user != null)
+                    @if (_user != null)
                      {
                          <text>
-                    $("#user_@_user.UserId").remove();
+                             $("#user_@_user.UserId").remove();
                         </text>
                      }
                 }
