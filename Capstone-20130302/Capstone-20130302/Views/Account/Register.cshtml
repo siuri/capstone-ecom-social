@@ -1,37 +1,80 @@
 ﻿@model Capstone_20130302.Models.RegisterModel
 @{
     ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_SimpleLayout.cshtml";
 }
+<br />
+<section id="registerForm">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+        <fieldset>
+            <ul>
+                <li>
+                    @Html.TextBoxFor(m => m.UserName, new { placeholder = "Username" })
+                    <br />
+                    @Html.ValidationMessageFor(m => m.UserName)
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h2>Create a new account.</h2>
-</hgroup>
+                </li>
+                <li>
+                    @Html.PasswordFor(m => m.Password, new { placeholder = "Password" })
+                    <br />
+                    @Html.ValidationMessageFor(m => m.Password)
+                </li>
+                <li>
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "Confirm Password" })
+                    <br />
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                </li>
+                <li>Have an account? @Html.ActionLink("Login", "Login") instead.
+                </li>
+            </ul>
+            <input type="submit" class="btn" value="Register" />
+        </fieldset>
+    }
+    <div>Register with your Facebook account</div>
+    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
+    <br />
+</section>
 
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary()
-
-    <fieldset>
-        <legend>Registration Form</legend>
-        <ol>
-            <li>
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.ConfirmPassword)
-                @Html.PasswordFor(m => m.ConfirmPassword)
-            </li>
-        </ol>
-        <input type="submit" value="Register" />
-    </fieldset>
-}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<style>
+    body.simple-layout {
+        background: #fff url(/Images/float.jpg) no-repeat;
+        background-size: 100%;
+    }
+
+    .simple-wrapper {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        text-align: left;
+        width: 60%;
+        color: #fff;
+        margin: 5% auto 0;
+    }
+
+    .simple-header {
+        display: none;
+    }
+
+    .field-validation-error, .validation-summary-errors {
+        color: #FFF;
+        background: rgba(201, 70, 62, 0.63);
+        padding: 0px 7px;
+        border-radius: 3px;
+        margin-bottom: 6px;
+        display: inline-block;
+        width: 220px;
+    }
+
+    input[type=text],
+    input[type=password] {
+        background: rgba(255, 255, 255, 0.9);
+    }
+</style>

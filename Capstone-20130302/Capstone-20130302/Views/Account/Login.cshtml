@@ -2,47 +2,73 @@
 
 @{
     ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_SimpleLayout.cshtml";
 }
-
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-</hgroup>
-
+<br />
 <section id="loginForm">
-@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-    <fieldset>
-        <legend>Log in Form</legend>
-        <ol>
-            <li>
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName)
-                @Html.ValidationMessageFor(m => m.UserName)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
-                @Html.ValidationMessageFor(m => m.Password)
-            </li>
-            <li>
-                @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
-            </li>
-        </ol>
-        <input type="submit" class="btn" value="Log in" />
-    </fieldset>
-    <p>
-        @Html.ActionLink("Register", "Register") if you don't have an account.
-    </p>
-}
-</section>
+    @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <fieldset>
+            <ul>
+                <li>
+                    @Html.TextBoxFor(m => m.UserName, new { placeholder = "Username" })
+                    <br />
+                    @Html.ValidationMessageFor(m => m.UserName)
 
-<section class="social" id="socialLoginForm">
-    <h2>Use another service to log in.</h2>
+                </li>
+                <li>
+                    @Html.PasswordFor(m => m.Password, new { placeholder = "Password" })
+                    <br />
+                    @Html.ValidationMessageFor(m => m.Password)
+                </li>
+                <li>Haven't got an account? @Html.ActionLink("Register", "Register") instead.
+                </li>
+            </ul>
+            <input type="submit" class="btn" value="Log in" />
+        </fieldset>
+    }
+    <div>Login in with your Facebook account</div>
     @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
 </section>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<style>
+    body.simple-layout {
+        background: #fff url(/Images/float.jpg) no-repeat;
+        background-size: 100%;
+    }
+
+    .simple-wrapper {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        text-align: left;
+        width: 60%;
+        color: #fff;
+        margin: 5% auto 0;
+    }
+
+    .simple-header {
+        display: none;
+    }
+
+    .field-validation-error, .validation-summary-errors {
+        color: #FFF;
+        background: rgba(201, 70, 62, 0.63);
+        padding: 0px 7px;
+        border-radius: 3px;
+        margin-bottom: 6px;
+        display: inline-block;
+        width: 220px;
+    }
+
+    input[type=text],
+    input[type=password] {
+        background: rgba(255, 255, 255, 0.9);
+    }
+</style>
