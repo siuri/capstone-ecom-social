@@ -65,5 +65,54 @@ namespace Capstone_20130302.Controllers
                 return "Fail";
             }
         }
+
+        [Authorize(Roles = Constant.ROLE_ADMIN)]
+        public string AddEditorPick(int productID)
+        {
+            try
+            {
+                EditorPick objEPick = db.EditorPicks.Where(e => e.ProductId == productID).FirstOrDefault();
+                if (objEPick != null)
+                {
+                    return "OK";
+                }
+                else
+                {
+                    objEPick = new EditorPick();
+                    objEPick.ProductId = productID;
+
+                    db.EditorPicks.Add(objEPick);
+                    db.SaveChanges();
+                    return "OK";
+                }
+            }
+            catch (Exception)
+            {
+                return "Fail";
+            }
+        }
+
+        [Authorize(Roles = Constant.ROLE_ADMIN)]
+        public string RemoveEditorPick(int productID, string status)
+        {
+            try
+            {
+                EditorPick objEPick = db.EditorPicks.Where(e => e.ProductId == productID).FirstOrDefault();
+                if (objEPick != null)
+                {
+                    db.EditorPicks.Remove(objEPick);
+                    db.SaveChanges();
+                    return "OK";
+                }
+                else
+                {
+                    return "OK";
+                }
+            }
+            catch (Exception)
+            {
+                return "Fail";
+            }
+        }
     }
 }
