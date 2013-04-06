@@ -59,6 +59,18 @@ namespace Capstone_20130302.Controllers
 
         public ActionResult Category(int ID)
         {
+            if (ID <= 0)
+            {
+                ViewBag.Message = "Sorry, you must provide a valid Category Id.";
+                return View("Error");
+            }
+            Category Category = db.Categories.Find(ID);
+            if (Category == null)
+            {
+            
+                ViewBag.Message = "Sorry, we can't find the category or you're not the owner.";
+                return View("Error");
+            }
             List<ProductDisplay> list= Product_Logic.GetListProdcutByCategoryID(ID,1,Constant.PAGE_SIZE);
             ViewBag.ID = ID;
             ViewBag.TotalRow = Product_Logic.GetTotalRowsProdcutByCategoryID(ID);
