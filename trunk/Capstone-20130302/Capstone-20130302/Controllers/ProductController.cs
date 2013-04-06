@@ -18,7 +18,7 @@ namespace Capstone_20130302.Controllers
     public class ProductController : Controller
     {
         private SocialBuyContext db = new SocialBuyContext();
-
+       
         //
         // GET: /Product/
         [Authorize(Roles = Constant.ROLE_SELLER)]
@@ -55,6 +55,23 @@ namespace Capstone_20130302.Controllers
 
             return View(products.ToList());
         }
+
+
+        public ActionResult Category(int ID)
+        {
+            List<ProductDisplay> list= Product_Logic.GetListProdcutByCategoryID(ID,1,Constant.PAGE_SIZE);
+            ViewBag.ID = ID;
+            ViewBag.TotalRow = Product_Logic.GetTotalRowsProdcutByCategoryID(ID);
+            return View(list);
+        }
+
+
+        public ActionResult GetProductPage(int ID,int page)
+        {
+            List<ProductDisplay> list = Product_Logic.GetListProdcutByCategoryID(ID, page, Constant.PAGE_SIZE);
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
 
         //
         // GET: /Product/Details/5
