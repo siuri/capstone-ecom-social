@@ -1,12 +1,22 @@
 ﻿@model System.Web.Mvc.HandleErrorInfo
 
 @{
-    ViewBag.Title = "503";
+    ViewBag.Title = "Oops!";
     Layout = "~/Views/Shared/_SimpleLayout.cshtml";
 }
 
 <hgroup class="title">
-    <h3>Error</h3>
-    <p class="error">An error occurred while processing your request.</p>
+    <h3 class="error">Your request cannot be completed.</h3>
     <p>@ViewBag.Message</p>
 </hgroup>
+
+<style>
+    .simple-wrapper {
+        width: 440px;
+    }
+
+    .simple-body {
+        width: 80%;
+        margin: 80px auto 160px;
+    }
+</style>

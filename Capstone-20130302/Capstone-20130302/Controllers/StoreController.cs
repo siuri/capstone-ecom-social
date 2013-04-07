@@ -104,7 +104,7 @@ namespace Capstone_20130302.Controllers
         // POST: /Store/Create
 
         [HttpPost]
-        public ActionResult Create(Store store)
+        public ActionResult Create(Store store, Address address)
         {
             Guid guid = new Guid();
             var path = "";
