@@ -169,8 +169,8 @@ a:hover {
     margin-left: -200px;
 }
 
-#login-modal input,
-#register-modal input
+#loginForm input,
+#registerForm input
 {
     width: 220px;
     margin-bottom: 8px;
@@ -184,8 +184,8 @@ input[type=password]:focus
     -webkit-box-shadow: 0 0 4px rgba(241, 49, 49, 0.33);
 }
 
-#login-modal input.btn,
-#register-modal input.btn
+#loginForm input.btn,
+#registerForm input.btn
 {
     width: 234px;
     text-transform: uppercase;

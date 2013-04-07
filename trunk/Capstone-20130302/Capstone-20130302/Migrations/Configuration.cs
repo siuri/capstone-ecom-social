@@ -59,17 +59,13 @@ namespace Capstone_20130302.Migrations
                 new OrderStatus { StatusId = 4, Name = "Cancelled", Description = "The order is cancelled." },
                 new OrderStatus { StatusId = 5, Name = "Hold", Description = "The order is on hold." });
             context.ProductStatuses.AddOrUpdate(
-                new ProductStatus { StatusId = 1, Name = "Pending", Description = "The product is waiting for administrator's approval." },
+                new ProductStatus { StatusId = 1, Name = "Inactive", Description = "The product is currently not public." },
                 new ProductStatus { StatusId = 2, Name = "Active", Description = "The product is currently active and public." },
-                new ProductStatus { StatusId = 3, Name = "Inactive", Description = "The product is currently inactive." },
-                new ProductStatus { StatusId = 4, Name = "Rejected", Description = "The product is rejected and need modification." },
-                new ProductStatus { StatusId = 5, Name = "Banned", Description = "The product is banned due to violation." });
+                new ProductStatus { StatusId = 3, Name = "Banned", Description = "The product is banned by moderators due to violation." });
             context.StoreStatuses.AddOrUpdate(
-                new StoreStatus { StatusId = 1, Name = "Pending", Description = "The store is waiting for administrator's approval." },
+                new StoreStatus { StatusId = 1, Name = "Inactive", Description = "The store is currently not inactive." },
                 new StoreStatus { StatusId = 2, Name = "Active", Description = "The store is currently active and public." },
-                new StoreStatus { StatusId = 3, Name = "Inactive", Description = "The store is currently inactive." },
-                new StoreStatus { StatusId = 4, Name = "Rejected", Description = "The store is rejected and need modification." },
-                new StoreStatus { StatusId = 5, Name = "Banned", Description = "The store is banned due to violation." });
+                new StoreStatus { StatusId = 3, Name = "Banned", Description = "The store is banned by moderators due to violation." });
             // Seed Images
             context.Images.AddOrUpdate(
                 new Image { ImageId = 1, Path = "no_img.jpg" },
