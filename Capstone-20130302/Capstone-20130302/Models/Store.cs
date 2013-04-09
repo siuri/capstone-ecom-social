@@ -15,12 +15,12 @@ namespace Capstone_20130302.Models
         [Required]
         [MaxLength(50)]
         [DisplayName("Store Name")]
-        [StringLength(int.MaxValue, MinimumLength = 20)]
+        [StringLength(int.MaxValue, MinimumLength = 5)]
         public string StoreName { get; set; }
 
         [Required]
         [DataType(DataType.MultilineText)]
-        [StringLength(int.MaxValue, MinimumLength = 50)]
+        [StringLength(int.MaxValue, MinimumLength = 5)]
         public string Description { get; set; }
 
         [Required]

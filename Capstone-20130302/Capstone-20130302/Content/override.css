@@ -200,6 +200,7 @@ input[type=password]:focus
 .validation-summary-errors
 {
     color: #C9463E;
+    display: block;
 }
 
     .validation-summary-errors ul
@@ -849,6 +850,22 @@ section.reg-motiv {
   opacity: 1;
 }
 
+.shelf .bx-wrapper .bx-controls-direction a {
+    opacity: 0.3;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.shelf:hover .bx-wrapper .bx-controls-direction a {
+    opacity: 1;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
 div.img {
     width: 198px;
     height: 152px;
@@ -873,4 +890,20 @@ section.discover h2 {
 .discover .product-grid .product {
     box-shadow: 0px 0px 5px rgb(196, 196, 196);
     width: 220px;
+}
+
+.controls-row input[type=button],
+.controls-row input[type=submit] {
+    box-sizing: content-box;
+}
+
+.guide {
+    opacity: .8;
+}
+
+.guide:before {
+    font-family: "FontAwesome";
+    content: "\f0fd";
+    color: #E93B3B;
+    padding-right: 5px;
 }

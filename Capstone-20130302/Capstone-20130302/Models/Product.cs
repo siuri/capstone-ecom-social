@@ -17,14 +17,14 @@ namespace Capstone_20130302.Models
         
         [DisplayName("Product Name")]
         [Required]
-        [StringLength(int.MaxValue, MinimumLength = 20)]
+        [StringLength(int.MaxValue, MinimumLength = 5)]
         public string Name { get; set; }
 
         
         [DisplayName("Description")]
         [DataType(DataType.MultilineText)]
         [Required]
-        [StringLength(int.MaxValue, MinimumLength = 50)]
+        [StringLength(int.MaxValue, MinimumLength = 5)]
         public string Description { get; set; }
 
         [Required]

@@ -1,7 +1,7 @@
 ﻿@model Capstone_20130302.Models.Order
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Checkout";
     Layout = "~/Views/Shared/_FreeLayout.cshtml";
 }
 <script>
@@ -10,7 +10,7 @@
     $(function () {
         cartmodel.checkout_shippingFees(parseFloat($("#Stores_ShipFee").val()));
         $(".checkout form").bind("submit", function () {
-            var cdata = "[";
+            var cdata = "";
             var shops = cartmodel.shops();
             for (var i = 0; i < shops.length; i++) {
                 var shop = shops[i];
@@ -19,11 +19,10 @@
                     for (var j = 0; j < products.length; j++) {
                         var p = products[j];
                         if (j != 0) cdata += ",";
-                        cdata += "{product_id:" + p.productId + ", quantity:" + p.productQuantity() + "}"
+                        cdata += p.productId + ":" + p.productQuantity();
                     }
                 }
             }
-            cdata += "]"
             $("#cartdata").val(cdata)
             alert($("#cartdata").val());
         })

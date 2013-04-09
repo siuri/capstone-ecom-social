@@ -8,7 +8,7 @@ For <em>@ViewBag.Store.StoreName</em>, under category <em>@ViewBag.Category.Name
 <a href="/Product"><i class='icon icon-circle-arrow-left'></i> Back to Product List</a>
 
 
-@using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "create", data_bind="submit: save", enctype = "multipart/form-data" }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "create", data_bind="submit: save", enctype = "multipart/form-data", id="mainForm" }))
 {
     @Html.ValidationSummary(true)
     <legend>Product Details</legend>
@@ -67,9 +67,12 @@ For <em>@ViewBag.Store.StoreName</em>, under category <em>@ViewBag.Category.Name
     <input type="hidden" name="cid" value="@ViewBag.Category.CategoryId"/>
     <input type="hidden" name="sid" value="@ViewBag.Store.StoreId"/>
     <br>
-    <center>
-        <input class="btn span3" type="submit" value="Create" /> 
-    </center>
+    <div class="controls controls-row">
+        <p class="guide">If you want to create and public now, choose Create & Public. If you want to save for later modifications, choose Save</p>
+        <input type="button" onclick="callSubmit(1)" class="btn btn-default span2" value="Save" />
+        <input type="button" onclick="callSubmit(2)" class="btn span2" value="Create & Public" />
+    </div>
+    <input type="hidden" id="createStatus" name="createStatus">
 }
 
 <div>
@@ -90,7 +93,13 @@ For <em>@ViewBag.Store.StoreName</em>, under category <em>@ViewBag.Category.Name
 <script>
     var uploadWrapper;
     var inputFiles;
-    $(function () {
+
+    var callSubmit = function(createStatus) {
+        $("#createStatus").val(createStatus);
+        $("#mainForm").submit();
+    }
+
+    $(function () {    
         uploadWrapper = $(".upload-wrapper");
         inputFiles = $("#uploadFiles");
 

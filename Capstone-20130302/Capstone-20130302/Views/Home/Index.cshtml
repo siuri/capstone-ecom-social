@@ -1,7 +1,10 @@
 ﻿@model IEnumerable<Capstone_20130302.Models.Product>
+@using Capstone_20130302.Models;
 @{
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_FreeLayout.cshtml";
+    List<EditorPick> EditorPicks = ViewBag.EditorPicks;
+    
 }
 <section class="reg-motiv">
     <div class="h-reg"></div>
@@ -12,91 +15,43 @@
     <div class="h-picks"></div>
     <br />
     <div class="shelf-wrapper product-grid" id="picks">
-        <div class="product">
-            <a href="/Product/Id/2">
-                <div class="image">
-                    <div class="img" style="background: url(/Image/13)"></div>
-                    <div class="detail">
-                        <div class="price">
-                            $35.7
+        @foreach (var pick in EditorPicks)
+        {
+            <div class="product">
+                <a href="/Product/Id/@pick.Product.ProductId">
+                    <div class="image">
+                        <div class="img" style="background: url(/Image/@pick.Product.ProductImages.ElementAt(0).ImageId)"></div>
+                        <div class="detail">
+                            <div class="price">
+                                $@pick.Product.Price
+                            </div>
+                            <div class="buttons">View details</div>
                         </div>
-                        <div class="buttons">View details</div>
                     </div>
-                </div>
-                <div class="description">
-                    <h4>Sacramentalia</h4>
-                    <p>A 'How-to' Ward off Evil Spiri...</p>
-                </div>
-            </a>
-        </div>
-        <div class="product">
-            <a href="/Product/Id/2">
-                <div class="image">
-                    <div class="img" style="background: url(/Image/13)"></div>
-                    <div class="detail">
-                        <div class="price">
-                            $35.7
+                    <div class="description">
+                        <h4>@pick.Product.Name</h4>
+                        <p>@pick.Product.Description.Substring(0, 30)...</p>
+                    </div>
+                </a>
+            </div>
+            <div class="product">
+                <a href="/Product/Id/@pick.Product.ProductId">
+                    <div class="image">
+                        <div class="img" style="background: url(/Image/@pick.Product.ProductImages.ElementAt(0).ImageId)"></div>
+                        <div class="detail">
+                            <div class="price">
+                                $@pick.Product.Price
+                            </div>
+                            <div class="buttons">View details</div>
                         </div>
-                        <div class="buttons">View details</div>
                     </div>
-                </div>
-                <div class="description">
-                    <h4>Sacramentalia</h4>
-                    <p>A 'How-to' Ward off Evil Spiri...</p>
-                </div>
-            </a>
-        </div>
-        <div class="product">
-            <a href="/Product/Id/2">
-                <div class="image">
-                    <div class="img" style="background: url(/Image/11)"></div>
-                    <div class="detail">
-                        <div class="price">
-                            $35.7
-                        </div>
-                        <div class="buttons">View details</div>
+                    <div class="description">
+                        <h4>@pick.Product.Name</h4>
+                        <p>@pick.Product.Description.Substring(0, 30)...</p>
                     </div>
-                </div>
-                <div class="description">
-                    <h4>Sacramentalia</h4>
-                    <p>A 'How-to' Ward off Evil Spiri...</p>
-                </div>
-            </a>
-        </div>
-        <div class="product">
-            <a href="/Product/Id/2">
-                <div class="image">
-                    <div class="img" style="background: url(/Image/5)"></div>
-                    <div class="detail">
-                        <div class="price">
-                            $35.7
-                        </div>
-                        <div class="buttons">View details</div>
-                    </div>
-                </div>
-                <div class="description">
-                    <h4>Sacramentalia</h4>
-                    <p>A 'How-to' Ward off Evil Spiri...</p>
-                </div>
-            </a>
-        </div>
-        <div class="product">
-            <a href="/Product/Id/2">
-                <div class="image">
-                    <div class="img" style="background: url(/Image/6)"></div>
-                    <div class="detail">
-                        <div class="price">
-                            $35.7
-                        </div>
-                        <div class="buttons">View details</div>
-                    </div>
-                </div>
-                <div class="description">
-                    <h4>Sacramentalia</h4>
-                    <p>A 'How-to' Ward off Evil Spiri...</p>
-                </div>
-            </a>
-        </div>
+                </a>
+            </div>
+        }
     </div>
 </section>
 <section class="discover">
@@ -171,7 +126,7 @@
 
     $(document).ready(function () {
         var slider = $("#picks").bxSlider({
-            minSlides: 3,
+            minSlides: 1,
             maxSlides: 4,
             slideWidth: 200,
             slideMargin: 20,
@@ -182,5 +137,13 @@
 <style>
     body {
         background: #F7F6F5;
+    }
+    .shelf-wrapper.product-grid .product .description h4 {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    .bx-viewport {
+        height: 225px !important;
     }
 </style>

@@ -14,6 +14,7 @@ namespace Capstone_20130302.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.EditorPicks = db.EditorPicks.ToList();
             var products = db.Products.ToList();
             return View(products);
         }

@@ -217,9 +217,12 @@ namespace Capstone_20130302.Controllers
 
         //
         // POST: /Product/Create
+        // createStatus 1: Save status as Inactive
+        // createStatus 2: Save status as Active
+
         [Authorize(Roles = Constant.ROLE_SELLER)]
         [HttpPost]
-        public ActionResult Create(Product product, int sid, int cid)
+        public ActionResult Create(Product product, int sid, int cid, int createStatus = 0)
         {
             Guid guid = new Guid();
             var path = "";
@@ -241,6 +244,12 @@ namespace Capstone_20130302.Controllers
                 product.CategoryId = cid;
                 product.StoreId = sid;
                 product.ProductImages = images;
+
+                if (createStatus == 2)
+                    product.StatusId = Constant.STATUS_ACTIVE;
+                else if (createStatus == 1)
+                    product.StatusId = Constant.STATUS_INACTIVE;
+
                 db.Products.Add(product);
                 
                 try
