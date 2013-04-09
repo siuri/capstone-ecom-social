@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Capstone_20130302.Models.ProductDisplay>
+@using Capstone_20130302.Constants;
 @{
     ViewBag.Title = "Category";
 }
@@ -57,7 +58,7 @@
     }
 
     var PageIndex = 0;
-    var PageSize = 16;
+    var PageSize = @Constant.PAGE_SIZE
     var MaxLength = @ViewBag.TotalRow
      function pageselectCallback(page_index, jq) {
        

@@ -28,22 +28,10 @@
                 success: function (response) {
                     if (response == "OK") {
                         $('#status-' + sid).text(stt);
-                        $.pnotify({
-                            title: 'Update Success',
-                            text: 'The status has been updated.',
-                            type: 'success',
-                            styling: 'bootstrap',
-                            delay: 500
-                        });
+                        notify({ title: "Update Success", content: "The status has been updated." });
                     }
                     else {
-                        $.pnotify({
-                            title: 'Update Fail',
-                            text: 'The status fails to update.',
-                            type: 'error',
-                            styling: 'bootstrap',
-                            delay: 500
-                        });
+                        notify({ title: "Request Error", content: "The system fails to process your request, please try again." });
                     }
                 }
             });
@@ -112,3 +100,12 @@ else
 {
     <text>no product.</text>
 }
+
+<style>
+    select {
+        float: right !important;
+    }
+    th, td {
+        vertical-align: middle !important;
+    }
+</style>

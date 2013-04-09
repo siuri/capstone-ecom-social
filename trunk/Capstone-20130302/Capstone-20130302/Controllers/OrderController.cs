@@ -129,14 +129,21 @@ namespace Capstone_20130302.Controllers
         [Authorize]
         public ActionResult Checkout(Order order, String cartdata)
         {
-            order.OrderDate = DateTime.Now;
-            
-            if (ModelState.IsValid)
+            string[] itemsArray = cartdata.Split(',');
+            List<ProductOrder> cartList = new List<ProductOrder>();
+            ProductOrder orderItem = null;
+            foreach (var item in itemsArray)
             {
-                db.Orders.Add(order);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                string[] itemDict = item.Split(':');
+                orderItem = new ProductOrder();
+                orderItem.ProductId = Int32.Parse(itemDict[0]);
+                orderItem.Quantity = Int32.Parse(itemDict[1]);
+                cartList.Add(orderItem);
             }
+            
+            order.OrderDate = DateTime.Now;
+
+            Order_Logic.AddOrder(order, cartList);
 
             return View(order);
         }

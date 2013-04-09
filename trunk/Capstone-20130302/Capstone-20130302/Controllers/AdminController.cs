@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Capstone_20130302.Constants;
 using Capstone_20130302.Models;
+using System.Data.Entity.Validation;
 
 namespace Capstone_20130302.Controllers
 {
@@ -18,7 +19,9 @@ namespace Capstone_20130302.Controllers
         [Authorize(Roles = Constant.ROLE_ADMIN)]
         public ActionResult ManageProduct()
         {
-            ViewBag.StatusID = new SelectList(db.ProductStatuses, "StatusId", "Name");
+            var adminOptions = db.ProductStatuses.Where(s => s.StatusId == Constant.STATUS_ACTIVE || s.StatusId == Constant.STATUS_BANNED);
+            ViewBag.StatusID = new SelectList(adminOptions, "StatusId", "Name");
+            ViewBag.EditorPicks = db.EditorPicks.ToList();
             return View(db.Products.ToList());
             //return View(db.Products.ToList().Where(p => p.StatusId == 1));
         }
@@ -32,11 +35,11 @@ namespace Capstone_20130302.Controllers
                 product.StatusId = db.ProductStatuses.Where(s => s.Name.Trim().ToLower().Equals(status.Trim().ToLower())).FirstOrDefault().StatusId;
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
-                return "OK";
+                return Constant.ST_OK;
             }
             catch (Exception)
             {
-                return "Fail";
+                return Constant.ST_NG;
             }
         }
 
@@ -44,7 +47,8 @@ namespace Capstone_20130302.Controllers
         [Authorize(Roles = Constant.ROLE_ADMIN)]
         public ActionResult ManageStore()
         {
-            ViewBag.StatusID = new SelectList(db.StoreStatuses, "StatusId", "Name");
+            var adminOptions = db.StoreStatuses.Where(s => s.StatusId == Constant.STATUS_ACTIVE || s.StatusId == Constant.STATUS_BANNED);
+            ViewBag.StatusID = new SelectList(adminOptions, "StatusId", "Name");
             return View(db.Stores.ToList());
             //return View(db.Products.ToList().Where(p => p.StatusId == 1));
         }
@@ -58,11 +62,25 @@ namespace Capstone_20130302.Controllers
                 store.StatusId = db.StoreStatuses.Where(s => s.Name.Trim().ToLower().Equals(status.Trim().ToLower())).FirstOrDefault().StatusId;
                 db.Entry(store).State = EntityState.Modified;
                 db.SaveChanges();
-                return "OK";
+                return Constant.ST_OK;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
             }
             catch (Exception)
             {
-                return "Fail";
+                return Constant.ST_NG;
             }
         }
 
@@ -71,24 +89,24 @@ namespace Capstone_20130302.Controllers
         {
             try
             {
-                EditorPick objEPick = db.EditorPicks.Where(e => e.ProductId == productID).FirstOrDefault();
-                if (objEPick != null)
+                EditorPick pick = db.EditorPicks.Where(e => e.ProductId == productID).FirstOrDefault();
+                if (pick != null)
                 {
-                    return "OK";
+                    return Constant.ST_OK;
                 }
                 else
                 {
-                    objEPick = new EditorPick();
-                    objEPick.ProductId = productID;
+                    pick = new EditorPick();
+                    pick.ProductId = productID;
 
-                    db.EditorPicks.Add(objEPick);
+                    db.EditorPicks.Add(pick);
                     db.SaveChanges();
-                    return "OK";
+                    return Constant.ST_OK;
                 }
             }
             catch (Exception)
             {
-                return "Fail";
+                return Constant.ST_NG;
             }
         }
 
@@ -97,21 +115,21 @@ namespace Capstone_20130302.Controllers
         {
             try
             {
-                EditorPick objEPick = db.EditorPicks.Where(e => e.ProductId == productID).FirstOrDefault();
-                if (objEPick != null)
+                EditorPick pick = db.EditorPicks.Where(e => e.ProductId == productID).FirstOrDefault();
+                if (pick != null)
                 {
-                    db.EditorPicks.Remove(objEPick);
+                    db.EditorPicks.Remove(pick);
                     db.SaveChanges();
-                    return "OK";
+                    return Constant.ST_OK;
                 }
                 else
                 {
-                    return "OK";
+                    return Constant.ST_OK;
                 }
             }
             catch (Exception)
             {
-                return "Fail";
+                return Constant.ST_NG;
             }
         }
     }

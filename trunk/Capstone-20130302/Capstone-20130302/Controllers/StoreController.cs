@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Capstone_20130302.Logic;
 using Capstone_20130302.Models;
 using System.IO;
+using Capstone_20130302.Constants;
 
 namespace Capstone_20130302.Controllers
 {
@@ -17,7 +18,7 @@ namespace Capstone_20130302.Controllers
 
         //
         // GET: /Store/
-        
+        [Authorize(Roles = Constant.ROLE_SELLER)]
         public ActionResult Index()
         {
             List<Store> store = db.Stores.ToList();
@@ -95,6 +96,8 @@ namespace Capstone_20130302.Controllers
             return Json("false", JsonRequestBehavior.AllowGet);
 
         }
+
+        [Authorize(Roles = Constant.ROLE_SELLER)]
         public ActionResult Create()
         {
             return View();
@@ -102,12 +105,24 @@ namespace Capstone_20130302.Controllers
 
         //
         // POST: /Store/Create
-
+        // createStatus 1: Save status as Inactive
+        // createStatus 2: Save status as Active
+        [Authorize(Roles = Constant.ROLE_SELLER)]
         [HttpPost]
-        public ActionResult Create(Store store, Address address)
+        public ActionResult Create(Store store, Address address, int createStatus = 0)
         {
+            // Check if there are 2 image files from Request 
+            if (Request.Files.AllKeys.Length != 2)
+            {
+                ViewBag.Message("Cover image and/or store avatar needed.");
+                return View("Error");
+            }
+
             Guid guid = new Guid();
             var path = "";
+            List<Image> images = new List<Image>();
+            
+            // Read each file from Request, create each corresponding Image object and added to Image list
             for (int i = 0; i < Request.Files.AllKeys.Length; i++)
             {
                 HttpPostedFileBase hpf = Request.Files[i] as HttpPostedFileBase;
@@ -116,15 +131,25 @@ namespace Capstone_20130302.Controllers
                     guid = Guid.NewGuid();
                     path = Path.Combine(Server.MapPath("~/App_Data/Images"), guid.ToString());
                     hpf.SaveAs(path);
-                    Image image = new Image { Path = guid.ToString() };
+                    images.Add(new Image { Path = guid.ToString() });
                 }
             }
+            // Set images to Store object
+            store.CoverImage = images.First();
+            store.ProfileImage = images.Last();
+
+            store.TotalFollowers = 0;
+            store.TotalFollowings = 0;
+            store.Address = address;
+            store.CreateDate = DateTime.Now;
+
+            if (createStatus == 2)
+                store.StatusId = Constant.STATUS_ACTIVE;
+            else if (createStatus == 1)
+                store.StatusId = Constant.STATUS_INACTIVE;
+
             if (ModelState.IsValid)
             {
-                store.StatusId = 1;
-                store.TotalFollowers = 0;
-                store.TotalFollowings = 0;
-                store.CreateDate = DateTime.Now;
                 db.Stores.Add(store);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -135,7 +160,7 @@ namespace Capstone_20130302.Controllers
 
         //
         // GET: /Store/Edit/5
-
+        [Authorize(Roles = Constant.ROLE_SELLER)]
         public ActionResult Edit(int id = 0)
         {
             Store store = db.Stores.Find(id);
@@ -148,7 +173,7 @@ namespace Capstone_20130302.Controllers
 
         //
         // POST: /Store/Edit/5
-
+        [Authorize(Roles = Constant.ROLE_SELLER)]
         [HttpPost]
         public ActionResult Edit(Store store)
         {
@@ -163,7 +188,7 @@ namespace Capstone_20130302.Controllers
 
         //
         // GET: /Store/Delete/5
-
+        [Authorize(Roles = Constant.ROLE_SELLER)]
         public ActionResult Delete(int id = 0)
         {
             Store store = db.Stores.Find(id);
@@ -176,7 +201,7 @@ namespace Capstone_20130302.Controllers
 
         //
         // POST: /Store/Delete/5
-
+        [Authorize(Roles = Constant.ROLE_SELLER)]
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {

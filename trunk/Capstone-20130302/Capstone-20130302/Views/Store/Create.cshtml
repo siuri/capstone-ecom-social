@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_MerchantLayout.cshtml";
 }
 <a href="/Store"><i class='icon icon-circle-arrow-left'></i> Back to Product List</a>
-@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data", id = "mainForm" }))
 {
     @Html.ValidationSummary(true)
 
@@ -21,59 +21,73 @@
             </div>
             <input id="cover-image" name="CoverImage" style="display: none;" type="file" accept="image/*" />
         </div>
-        <legend>Store Details</legend>
+        
         <div class="row">
             <div class="span3">
+                <br><br><br>
                 <div class="avatar-wrapper">
                     <div class="image-upload">
                         <div class="image" data-toggle="tooltip" title="Upload your Store avatar">
                         </div>
                     </div>
                 </div>
-                <input type="file" id="file-select" name="StoreAvatar" required="required"/>
+                <input type="file" id="file-select" name="StoreAvatar" required="required" />
             </div>
-            <div class="span8">
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.StoreName)
-                </div>
+            <div class="span6">
+                <legend>About Store</legend>
                 <div class="editor-field">
-                    @Html.TextBoxFor(model => model.StoreName, new { @class = "span5" })
                     @Html.ValidationMessageFor(model => model.StoreName)
+                    @Html.TextBoxFor(model => model.StoreName, new { @class = "span6", placeholder = @Html.DisplayNameFor(model => model.StoreName) })
+                    
                 </div>
 
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.Description)
-                </div>
                 <div class="editor-field">
-                    @Html.TextAreaFor(model => model.Description, new { @class = "span5", cols = "3" })
                     @Html.ValidationMessageFor(model => model.Description)
+                    @Html.TextAreaFor(model => model.Description, new { @class = "span6", cols = "3", placeholder = @Html.DisplayNameFor(model => model.Description) })
+                    
                 </div>
 
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.ContactNumber)
-                </div>
-                <div class="editor-field">
-                    @Html.TextBoxFor(model => model.ContactNumber, new { @class = "span5" })
-                    @Html.ValidationMessageFor(model => model.ContactNumber)
-                </div>
+                
 
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.Slogan)
-                </div>
                 <div class="editor-field">
-                    @Html.TextBoxFor(model => model.Slogan, new { @class = "span5" })
                     @Html.ValidationMessageFor(model => model.Slogan)
+                    @Html.TextBoxFor(model => model.Slogan, new { @class = "span6", placeholder = @Html.DisplayNameFor(model => model.Slogan) })
+                    
                 </div>
 
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.ShipFee)
-                </div>
                 <div class="editor-field">
-                    @Html.TextBoxFor(model => model.ShipFee, new { @class = "span5" })
                     @Html.ValidationMessageFor(model => model.ShipFee)
+                    @Html.TextBoxFor(model => model.ShipFee, new { @class = "span6", placeholder = @Html.DisplayNameFor(model => model.ShipFee) })
+                    
                 </div>
-                <br />
-                <input type="submit" class="btn span3" value="Create" />
+
+                <legend>Contact Details</legend>
+                <div class="editor-field">
+                    @Html.ValidationMessageFor(model => model.ContactNumber)
+                    @Html.TextBoxFor(model => model.ContactNumber, new { @class = "span6", placeholder = @Html.DisplayNameFor(model => model.ContactNumber) })
+                    
+                </div>
+
+                <div class="controls controls-row">
+                    @Html.TextBoxFor(model => model.Address.Number, new { placeholder = @Html.DisplayNameFor(model => model.Address.Number), title = @Html.DisplayNameFor(model => model.Address.Number), @class = "span2" })
+                    @Html.TextBoxFor(model => model.Address.Street, new { placeholder = @Html.DisplayNameFor(model => model.Address.Street), title = @Html.DisplayNameFor(model => model.Address.Street), @class = "span4" })
+                </div>
+                <div class="controls controls-row">
+                    @Html.TextBoxFor(model => model.Address.City, new { placeholder = @Html.DisplayNameFor(model => model.Address.City), title = @Html.DisplayNameFor(model => model.Address.City), @class = "span3" })
+                    @Html.TextBoxFor(model => model.Address.State, new { placeholder = @Html.DisplayNameFor(model => model.Address.State), title = @Html.DisplayNameFor(model => model.Address.State), @class = "span3" })
+                </div>
+                <div class="controls controls-row">
+                    @Html.TextBoxFor(model => model.Address.Zipcode, new { placeholder = @Html.DisplayNameFor(model => model.Address.Zipcode), title = @Html.DisplayNameFor(model => model.Address.Zipcode), @class = "span3" })
+                    @Html.TextBoxFor(model => model.Address.Country, new { placeholder = @Html.DisplayNameFor(model => model.Address.Country), title = @Html.DisplayNameFor(model => model.Address.Country), @class = "span3" })
+                </div>
+
+                <div class="controls controls-row">
+                    <p class="guide">If you want to create and public now, choose Create & Public. If you want to save for later modifications, choose Save</p>
+                    <input type="button" onclick="callSubmit(1)" class="btn btn-default span2" value="Save" />
+                    <input type="button" onclick="callSubmit(2)" class="btn span2" value="Create & Public" />
+                </div>
+
+                <input type="hidden" id="createStatus" name="createStatus">
             </div>
         </div>
     </fieldset>
@@ -120,7 +134,13 @@
     }
 </style>
 <script>
+    var callSubmit = function (createStatus) {
+        $("#createStatus").val(createStatus);
+        $("#mainForm").submit();
+    }
+
     $(function () {
+        $("#ContactNumber").mask("(999) 999-9999*");
 
         $(".upload-wrapper").click(function () {
             $("#cover-image").trigger("click");
