@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Upgrade";
+    Layout = "~/Views/Shared/_FreeLayout.cshtml";
+}
+
+<section class="reg-motiv">
+    <form action="MakeUpgrade" method="post">
+        <div class="h-upgrade"></div>
+        <br />
+        <button type="submit">Upgrade</button>
+    </form>
+    <div class="easing"></div>
+    <div class="mac">
+        <p>Social Buy. <i>Smarter Business.</i></p>
+    </div>
+    
+</section>
+<style>
+    .reg-motiv {
+        min-height: 370px;
+        position: relative;
+        text-align center;
+    }
+    .h-upgrade {
+        background: url(/images/h-upgrade.png);
+        margin: 40px 0 30px 0;
+        width: 402px;
+        height: 133px;
+        display: inline-block;
+    }
+    .mac {
+        background: url(/images/small_mac.png) no-repeat;
+        width: 260px;
+        height: 165px;
+        display: inline-block;
+        background-size: 100%;
+        position: absolute;
+        bottom: -78px;
+        left: 50%;
+        margin-left: -132px;
+        line-height: 29;
+        color: #20202F;
+    }
+    .body {
+        background: url(/Images/grain-bg.jpg);
+    }
+</style>
