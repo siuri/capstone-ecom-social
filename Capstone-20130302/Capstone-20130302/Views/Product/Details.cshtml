@@ -722,17 +722,13 @@
         }
     })
 
-
-
-
-
-
     $(".btn.add-cart").click(function(){
         var $this = $(this)
         var shop = new ShopModel($this.attr("data-store"), parseInt($this.attr("data-sid")));
         var product = new ProductModel($this.attr("data-title"), $this.attr("data-image"), parseFloat($this.attr("data-price")), 1, parseInt($this.attr("data-pid")), shop.shopId);
         cartmodel.checkShop(shop);
         cartmodel.addProduct(product);
+        notify({image: $this.attr("data-image"), content: $this.attr("data-title") + " is added to your cart." , title: "Cart Updated"})
     })
     
     
