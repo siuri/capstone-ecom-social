@@ -9,6 +9,7 @@ using Capstone_20130302.Logic;
 using Capstone_20130302.Models;
 using System.IO;
 using Capstone_20130302.Constants;
+using WebMatrix.WebData;
 
 namespace Capstone_20130302.Controllers
 {
@@ -21,7 +22,7 @@ namespace Capstone_20130302.Controllers
         [Authorize(Roles = Constant.ROLE_SELLER)]
         public ActionResult Index()
         {
-            List<Store> store = db.Stores.ToList();
+            List<Store> store = db.Stores.Where(s => s.OwnerId == WebSecurity.CurrentUserId).ToList();
             return View(store);       
         }
 
@@ -75,8 +76,14 @@ namespace Capstone_20130302.Controllers
             Follow temp = new Follow();
             temp.UserId = user.UserId;
             temp.StoreId = ID;
+
             if(Follow_Logic.AddNewFollow(temp))
             {
+                Store store = db.Stores.Find(ID);
+                ++store.TotalFollowers;
+                db.Entry(store).State = EntityState.Modified;
+                db.SaveChanges();
+
                 return Json("true", JsonRequestBehavior.AllowGet);
             }
             return Json("false", JsonRequestBehavior.AllowGet);
@@ -91,6 +98,11 @@ namespace Capstone_20130302.Controllers
             UserProfile user = UserProfiles_Logic.GetUserProfileByUserName(User.Identity.Name);
             if (Follow_Logic.DeletFollow(user.UserId, ID, 3))
             {
+                Store store = db.Stores.Find(ID);
+                --store.TotalFollowers;
+                db.Entry(store).State = EntityState.Modified;
+                db.SaveChanges();
+
                 return Json("true", JsonRequestBehavior.AllowGet);
             }
             return Json("false", JsonRequestBehavior.AllowGet);

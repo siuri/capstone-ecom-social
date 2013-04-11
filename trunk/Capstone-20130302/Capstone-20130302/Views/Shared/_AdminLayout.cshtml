@@ -77,6 +77,9 @@
         $(".modal").on("show", function () {
             $(".modal").not(this).modal("hide");
         });
+        $("[class*=logo], #logo").click(function () {
+            location.href = "/";
+        });
     </script>
 </body>
 </html>

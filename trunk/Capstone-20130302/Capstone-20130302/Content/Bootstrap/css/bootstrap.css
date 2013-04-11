@@ -3982,10 +3982,12 @@ input[type="submit"].btn.btn-mini {
 .navbar .nav li.dropdown.open > .dropdown-toggle,
 .navbar .nav li.dropdown.active > .dropdown-toggle,
 .navbar .nav li.dropdown.open.active > .dropdown-toggle {
-  background: -webkit-linear-gradient(top, #E5E5E5, #FFF);
-  color: #555;
-  box-shadow: inset 1px 1px 5px #A7A7A7;
+  background: #6B6B6B;
+  border-radius: 30px;
+  color: #FFF;
+  text-shadow: 1px 1px 1px rgba(34, 34, 34, 0.6);
 }
+
 .navbar .nav li.dropdown > .dropdown-toggle .caret {
   border-top-color: #777777;
   border-bottom-color: #777777;

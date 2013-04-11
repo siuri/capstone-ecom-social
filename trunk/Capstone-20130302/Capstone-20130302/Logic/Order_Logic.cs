@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using Capstone_20130302.Models;
+using System.Text;
 
 namespace Capstone_20130302.Logic
 {
@@ -24,24 +25,48 @@ namespace Capstone_20130302.Logic
             try
             {
                 _order.StatusId = 1;
-                db.Orders.Add(_order);
-                db.SaveChanges();
-                
                 int orderid = _order.OrderId;
+                float totalAmount = 0F;
+                OrderDetail orderdetail = null;
+                List<OrderDetail> orderDetails = new List<OrderDetail>();
                 foreach (ProductOrder temp in pro)
                 {
-                    OrderDetail orderdetail = new OrderDetail();
+                    orderdetail = new OrderDetail();
                     orderdetail.OrderId = orderid;
                     orderdetail.ProductId = temp.ProductId;
                     Product product = Product_Logic.GetProductByID(temp.ProductId);
                     orderdetail.SoldPrice = product.Price;
                     orderdetail.Amount = temp.Quantity;
-                    db.OrderDetails.Add(orderdetail);
-                    db.SaveChanges();
+                    totalAmount = totalAmount + (orderdetail.SoldPrice * orderdetail.Amount);
+                    orderDetails.Add(orderdetail);
                 }
+                Store store = db.Stores.Find(_order.StoreId);
+                _order.TotalPayment = totalAmount + store.ShipFee;
+                _order.OrderDetails = orderDetails;
+                db.Orders.Add(_order);
+                db.SaveChanges();
                 return orderid;
             }
-            catch (Exception)
+            catch (DbEntityValidationException ex)
+            {
+                StringBuilder sb = new StringBuilder();
+
+                foreach (var failure in ex.EntityValidationErrors)
+                {
+                    sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
+                    foreach (var error in failure.ValidationErrors)
+                    {
+                        sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
+                        sb.AppendLine();
+                    }
+                }
+
+                throw new DbEntityValidationException(
+                    "Entity Validation Failed - errors follow:\n" +
+                    sb.ToString(), ex
+                ); // Add the original exception as the innerException
+            }
+            catch (Exception ex)
             {
                 return -1;
             }
