@@ -51,9 +51,16 @@
         <tr>
             <th>Shipping Information</th>
             <td>
-                @Model.ShippingName <br />
-                @Model.ShippingAddress.Number @Model.ShippingAddress.Street, @Model.ShippingAddress.City
-                <br /> @Model.ShippingAddress.State, @Model.ShippingAddress.Zipcode, @Model.ShippingAddress.Country
+                @if (Model.IsUsedAsShipping == false)
+                {
+                    @Model.ShippingName <br />
+                    @Model.ShippingAddress.Number @Model.ShippingAddress.Street<text>, </text> @Model.ShippingAddress.City
+                    <br /> @Model.ShippingAddress.State<text>, </text> @Model.ShippingAddress.Zipcode<text>, </text> @Model.ShippingAddress.Country
+                }
+                else
+                {
+                    <p>The same with Billng Address</p>
+                }
             </td>
         </tr>
     </table>

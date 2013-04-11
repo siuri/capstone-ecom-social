@@ -36,7 +36,7 @@ namespace Capstone_20130302.Controllers
             }
             if (User.IsInRole(Constant.ROLE_SELLER))
             {
-                if (order.Stores != null && order.Stores.OwnerId != WebSecurity.CurrentUserId)
+                if (order.Stores != null && order.Stores.OwnerId != WebSecurity.CurrentUserId && order.UserId != WebSecurity.CurrentUserId)
                 {
                     ViewBag.Message = "Sorry, you can only access orders of the stores that you are owning.";
                     return View("Error");
@@ -81,10 +81,6 @@ namespace Capstone_20130302.Controllers
         [Authorize]
         public ActionResult UserManage()
         {
-            if (User.Identity.IsAuthenticated == false)
-            {
-                return RedirectToAction("Login", "Account");
-            }
             var userid = (from _user in db.UserProfiles
                           where _user.UserName == User.Identity.Name
                           select _user.UserId).FirstOrDefault();
@@ -93,7 +89,7 @@ namespace Capstone_20130302.Controllers
             {
                 return HttpNotFound();
             }
-            List<Order> list = Order_Logic.GetListByUserID(userid, 0);
+            List<Order> list = Order_Logic.GetListByUserID(userid, 2);
             return View(list);
         }
         
@@ -116,6 +112,7 @@ namespace Capstone_20130302.Controllers
                 order.BillingName = profile.DisplayName;
             }
             order.Stores = store;
+            order.IsUsedAsShipping = true;
             order.StatusId = Constant.ORDER_STATUS_PENDING;
             order.UserId = WebSecurity.CurrentUserId;
             order.StoreId = sid;
@@ -127,8 +124,17 @@ namespace Capstone_20130302.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult Checkout(Order order, String cartdata)
+        public ActionResult Checkout(Order order, Address BillingAddress, Address ShippingAddress, String cartdata)
         {
+            if (cartdata == null || cartdata.Length == 0)
+            {
+                ViewBag.Message = "You must have at least one item to checkout.";
+                return View("Error");
+            }
+            order.Stores = null;
+            order.BillingAddress = BillingAddress;
+            if (order.IsUsedAsShipping == false)
+                order.ShippingAddress = ShippingAddress;
             string[] itemsArray = cartdata.Split(',');
             List<ProductOrder> cartList = new List<ProductOrder>();
             ProductOrder orderItem = null;

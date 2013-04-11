@@ -24,7 +24,10 @@
                 }
             }
             $("#cartdata").val(cdata)
-            alert($("#cartdata").val());
+            if (cdata == "") {
+                alert("Sorry. You must have at least one item in your cart before checking out.");
+                return false;
+            }
         })
     })
 </script>
@@ -75,7 +78,7 @@
                 <div class="editor-field form-inline">
                     @*@Html.EditorFor(model => model.IsUsedAsShipping)*@
                     <label class="checkbox">
-                        <input class="check-box" data-val="true" data-val-required="The Is used as shipping address field is required." id="IsUsedAsShipping" name="IsUsedAsShipping" type="checkbox" value="true" checked>
+                        @Html.CheckBoxFor(model => model.IsUsedAsShipping)
                         @Html.DisplayNameFor(model => model.IsUsedAsShipping)</label>
                     @Html.ValidationMessageFor(model => model.IsUsedAsShipping)
                 </div>
