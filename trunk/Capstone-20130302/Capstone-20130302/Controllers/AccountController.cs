@@ -26,6 +26,17 @@ namespace Capstone_20130302.Controllers
 
         private SocialBuyContext db = new SocialBuyContext();
 
+        public ActionResult Upgrade()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult MakeUpgrade()
+        {
+            Roles.AddUserToRole(WebSecurity.CurrentUserName, Constant.ROLE_SELLER);
+            return RedirectToAction("Index", "Store");
+        }
 
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
