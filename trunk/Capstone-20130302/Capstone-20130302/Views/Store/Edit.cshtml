@@ -1,68 +1,198 @@
 ﻿@model Capstone_20130302.Models.Store
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Store";
 }
-
-<h2>Edit</h2>
-
-@using (Html.BeginForm()) {
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data", id = "mainForm" }))
+{
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Store</legend>
-
-        @Html.HiddenFor(model => model.StoreId)
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.StoreName)
-        </div>
+        <legend>Store Design</legend>
         <div class="editor-field">
-            @Html.EditorFor(model => model.StoreName)
-            @Html.ValidationMessageFor(model => model.StoreName)
+            <div class="upload-wrapper">
+                 @if (Model.CoverImageId != null)
+                {
+                        <img src='/Image/@Model.CoverImage.ImageId' width='100%' height='100%'/>
+                }
+                else
+                {
+                      <div>
+                    <img style="height: 140px; margin-bottom: 20px;" src="/Images/placeholder.png"><br>
+                    <h4 style="margin: 0">Cover Image</h4>
+                    <p>Tip: Make it unique. Choose it nicely.</p>
+                    </div>
+                 }
+            </div>
+            <input id="cover-image" name="CoverImage" style="display: none;" type="file" accept="image/*" />
         </div>
+        
+        <div class="row">
+            <div class="span3">
+                <br><br><br>
+                <div class="avatar-wrapper">
+                    <div class="image-upload">
+                        <div class="image" data-toggle="tooltip" title="Upload your Store avatar">
+                            @if (Model.ProfileImageId != null)
+                            {
+                                 <img src='/Image/@Model.ProfileImage.ImageId' width='100%' height='100%'/>
+                            }
+                           
+                        </div>
+                    </div>
+                </div>
+                <input type="file" id="file-select" name="StoreAvatar" required="required" />
+            </div>
+            <div class="span6">
+                <legend>About Store</legend>
+                  @Html.HiddenFor(model => model.StoreId)
+                <div class="editor-field">
+                    @Html.ValidationMessageFor(model => model.StoreName)
+                    @Html.TextBoxFor(model => model.StoreName, new { @class = "span6", placeholder = @Html.DisplayNameFor(model => model.StoreName) })
+                    
+                </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Description)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Description)
-            @Html.ValidationMessageFor(model => model.Description)
-        </div>
+                <div class="editor-field">
+                    @Html.ValidationMessageFor(model => model.Description)
+                    @Html.TextAreaFor(model => model.Description, new { @class = "span6", cols = "3", placeholder = @Html.DisplayNameFor(model => model.Description) })
+                    
+                </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ContactNumber)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ContactNumber)
-            @Html.ValidationMessageFor(model => model.ContactNumber)
-        </div>
+                <div class="editor-field">
+                    @Html.ValidationMessageFor(model => model.Slogan)
+                    @Html.TextBoxFor(model => model.Slogan, new { @class = "span6", placeholder = @Html.DisplayNameFor(model => model.Slogan) })
+                    
+                </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Slogan)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Slogan)
-            @Html.ValidationMessageFor(model => model.Slogan)
-        </div>
+                <div class="editor-field">
+                    @Html.ValidationMessageFor(model => model.ShipFee)
+                    @Html.TextBoxFor(model => model.ShipFee, new { @class = "span6", placeholder = @Html.DisplayNameFor(model => model.ShipFee) })
+                    
+                </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ShipFee)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ShipFee)
-            @Html.ValidationMessageFor(model => model.ShipFee)
-        </div>
+                <legend>Contact Details</legend>
+                <div class="editor-field">
+                    @Html.ValidationMessageFor(model => model.ContactNumber)
+                    @Html.TextBoxFor(model => model.ContactNumber, new { @class = "span6", placeholder = @Html.DisplayNameFor(model => model.ContactNumber) })
+                    
+                </div>
 
-        <p>
-            <input type="submit" value="Save" />
-        </p>
+                <div class="controls controls-row">
+                    @Html.TextBoxFor(model => model.Address.Number, new { placeholder = @Html.DisplayNameFor(model => model.Address.Number), title = @Html.DisplayNameFor(model => model.Address.Number), @class = "span2" })
+                    @Html.TextBoxFor(model => model.Address.Street, new { placeholder = @Html.DisplayNameFor(model => model.Address.Street), title = @Html.DisplayNameFor(model => model.Address.Street), @class = "span4" })
+                </div>
+                <div class="controls controls-row">
+                    @Html.TextBoxFor(model => model.Address.City, new { placeholder = @Html.DisplayNameFor(model => model.Address.City), title = @Html.DisplayNameFor(model => model.Address.City), @class = "span3" })
+                    @Html.TextBoxFor(model => model.Address.State, new { placeholder = @Html.DisplayNameFor(model => model.Address.State), title = @Html.DisplayNameFor(model => model.Address.State), @class = "span3" })
+                </div>
+                <div class="controls controls-row">
+                    @Html.TextBoxFor(model => model.Address.Zipcode, new { placeholder = @Html.DisplayNameFor(model => model.Address.Zipcode), title = @Html.DisplayNameFor(model => model.Address.Zipcode), @class = "span3" })
+                    @Html.TextBoxFor(model => model.Address.Country, new { placeholder = @Html.DisplayNameFor(model => model.Address.Country), title = @Html.DisplayNameFor(model => model.Address.Country), @class = "span3" })
+                </div>
+
+                <div class="controls controls-row">
+                    
+                    <input type="button" onclick="callSubmit(2)" class="btn span2" value="Save" />
+                </div>
+
+                <input type="hidden" id="createStatus" name="createStatus">
+                 <input type="hidden" id="editcoverimage" name="editcoverimage" value="false">
+                <input type="hidden" id="editprofileimage" name="editprofileimage" value="false">
+            </div>
+        </div>
     </fieldset>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+<style>
+    .image-upload .image {
+        width: 160px;
+        height: 160px;
+        border: solid 5px #FFF;
+        box-shadow: 1px 1px 4px #C0C0C0;
+        cursor: pointer;
+        text-align: center;
+        background: url(../Images/no-store.jpg) no-repeat;
+        background-size: 100%;
+    }
+
+        .image-upload .image img {
+            width: 100%;
+            height: 100%;
+        }
+
+    #file-select {
+        display: none;
+    }
+
+    .avatar-wrapper {
+        width: 160px;
+    }
+
+    #profile {
+        margin: 0 auto 50px;
+        width: 460px;
+    }
+
+    .simple-wrapper {
+        width: 700px;
+    }
+</style>
+
+
+<script>
+    var callSubmit = function (createStatus) {
+        $("#mainForm").submit();
+    }
+
+    $(function () {
+        $("#ContactNumber").mask("(999) 999-9999*");
+
+        $(".upload-wrapper").click(function () {
+            $("#cover-image").trigger("click");
+        })
+
+        $("#cover-image").change(function () {
+            var f = $("#cover-image")[0].files[0]
+            if (!f.type.match(/image.*/)) {
+                alert("Please select image");
+
+                return
+            }
+            var reader = new FileReader();
+            reader.onload = (function (theFile) {
+                return function (e) {
+                    $(".upload-wrapper").html("<img src='" + e.target.result + "' width='100%' height='100%'/>");
+                    $("#editcoverimage").val('true');
+                }
+            })(f);
+
+            reader.readAsDataURL(f);
+        })
+
+
+        $(".image-upload .image").click(function () {
+            $("#file-select").trigger("click");
+        })
+
+        $("#file-select").change(function () {
+            var f = $("#file-select")[0].files[0]
+            if (!f.type.match(/image.*/)) {
+                alert("Please select image");
+
+                return
+            }
+            var reader = new FileReader();
+            reader.onload = (function (theFile) {
+                return function (e) {
+                    $(".image-upload .image").html("<img src='" + e.target.result + "' width='100%' height='100%'/>");
+                    $("#editprofileimage").val('true');
+                }
+            })(f);
+
+            reader.readAsDataURL(f);
+        })
+    });
+</script>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

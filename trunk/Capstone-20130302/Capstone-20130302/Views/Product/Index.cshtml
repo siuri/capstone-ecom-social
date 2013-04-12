@@ -101,8 +101,8 @@
                             @Html.DisplayFor(modelItem => item.CreateDate)
                         </td>
                         <td>
-                            <a href="Product/Edit/@item.ProductId"><i class="icon-edit"></i> Edit</a>
-                            <a href="Product/Id/@item.ProductId"><i class="icon-search"></i> View</a>
+                            <a href="Edit/@item.ProductId"><i class="icon-edit"></i> Edit</a>
+                            <a href="Id/@item.ProductId"><i class="icon-search"></i> View</a>
                             @*<a href="Product/Delete/@item.ProductId"><i class="icon-trash"></i></a>*@
                             <a 
                                 onclick="postToFeed({

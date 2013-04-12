@@ -1,63 +1,156 @@
 ﻿@model Capstone_20130302.Models.Profile
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Profile";
     Layout = "~/Views/Shared/_SimpleLayout.cshtml";
 }
+<div id="profile-body">
+    <div class="clearfix">
+        <div class="avatar-wrapper">
+            <div class="image-upload">
 
-<h2>Edit</h2>
-
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend>Profile</legend>
-
-        @Html.HiddenFor(model => model.ProfileId)
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DisplayName)
+                <div class="image" data-toggle="tooltip" title="Upload your avatar">
+                    @if (Model.ProfileImageId != null)
+                    {
+                        <img src='/Image/@Model.ProfileImage.ImageId' width='100%' height='100%'/> 
+                    }
+                </div>
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DisplayName)
-            @Html.ValidationMessageFor(model => model.DisplayName)
+        <div id="profile">
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "profile-form", enctype = "multipart/form-data" }))
+            {
+                <input type="file" id="file-select" name="file" required="required" />
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.ProfileId)
+                <div class="validation-summary-errors">
+                    <ul>
+                        <li>@Html.ValidationMessageFor(model => model.DisplayName)</li>
+                        <li>@Html.ValidationMessageFor(model => model.DateOfBirth)</li>
+                        <li>@Html.ValidationMessageFor(model => model.Email)</li>
+                        <li>@Html.ValidationMessageFor(model => model.ContactNumber)</li>
+                        <li>@Html.ValidationMessageFor(model => model.Address.Number)</li>
+                        <li>@Html.ValidationMessageFor(model => model.Address.Street)</li>
+                        <li>@Html.ValidationMessageFor(model => model.Address.City)</li>
+                        <li>@Html.ValidationMessageFor(model => model.Address.State)</li>
+                    </ul>
+                </div>
+                <legend>Personal Information</legend>
+                <div class="controls controls-row">
+                    @Html.TextBoxFor(model => model.DisplayName, new { placeholder = @Html.DisplayNameFor(model => model.DisplayName), title = @Html.DisplayNameFor(model => model.DisplayName), @class = "span4" })
+                    @Html.TextBoxFor(model => model.DateOfBirth, new { placeholder = @Html.DisplayNameFor(model => model.DateOfBirth), title = @Html.DisplayNameFor(model => model.DateOfBirth), @class = "span2" })
+                </div>
+                <div class="controls controls-row">
+                    @Html.TextBoxFor(model => model.Email, new { placeholder = @Html.DisplayNameFor(model => model.Email), title = @Html.DisplayNameFor(model => model.Email), @class = "span4" })
+                    @Html.TextBoxFor(model => model.ContactNumber, new { placeholder = @Html.DisplayNameFor(model => model.ContactNumber), title = @Html.DisplayNameFor(model => model.ContactNumber), @class = "span2" })
+                </div>
+                <legend>Shipping Information</legend>
+                <div class="controls controls-row">
+                    @Html.TextBoxFor(model => model.Address.Number, new { placeholder = @Html.DisplayNameFor(model => model.Address.Number), title = @Html.DisplayNameFor(model => model.Address.Number), @class = "span2" })
+                    @Html.TextBoxFor(model => model.Address.Street, new { placeholder = @Html.DisplayNameFor(model => model.Address.Street), title = @Html.DisplayNameFor(model => model.Address.Street), @class = "span4" })
+                </div>
+                <div class="controls controls-row">
+                    @Html.TextBoxFor(model => model.Address.City, new { placeholder = @Html.DisplayNameFor(model => model.Address.City), title = @Html.DisplayNameFor(model => model.Address.City), @class = "span3" })
+                    @Html.TextBoxFor(model => model.Address.State, new { placeholder = @Html.DisplayNameFor(model => model.Address.State), title = @Html.DisplayNameFor(model => model.Address.State), @class = "span3" })
+                </div>
+                <div class="controls controls-row">
+                    @Html.TextBoxFor(model => model.Address.Zipcode, new { placeholder = @Html.DisplayNameFor(model => model.Address.Zipcode), title = @Html.DisplayNameFor(model => model.Address.Zipcode), @class = "span3" })
+                    @Html.TextBoxFor(model => model.Address.Country, new { placeholder = @Html.DisplayNameFor(model => model.Address.Country), title = @Html.DisplayNameFor(model => model.Address.Country), @class = "span3" })
+                </div>
+                <div class="controls controls-row">
+                    <br />
+                 
+                </div>
+                <div style="width: 372px; margin: 0 auto; height: 40px;">
+                    <button type="submit" class="btn span2">Save</button>
+                </div>
+                 <input type="hidden" id="changeimage" name="changeimage" value="false"/>
+            }
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DateOfBirth)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DateOfBirth)
-            @Html.ValidationMessageFor(model => model.DateOfBirth)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Email)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Email)
-            @Html.ValidationMessageFor(model => model.Email)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ContactNumber)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ContactNumber)
-            @Html.ValidationMessageFor(model => model.ContactNumber)
-        </div>
-
-
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    </div>
 </div>
+
+
+<style>
+    .image-upload .image
+    {
+        width: 140px;
+        height: 140px;
+        border: solid 5px white;
+        box-shadow: 0 0 5px gray;
+        cursor: pointer;
+        border-radius: 500px;
+        text-align: center;
+        background: url(../Images/avatar_default.jpg) no-repeat;
+        background-size: 100%;
+    }
+
+        .image-upload .image img
+        {
+            width: 100%;
+            height: 100%;
+            border-radius: 500px;
+        }
+
+    #file-select
+    {
+        display: none;
+    }
+
+    .avatar-wrapper
+    {
+        margin: 25px auto 20px;
+        width: 140px;
+    }
+
+    #profile
+    {
+        margin: 0 auto 50px;
+        width: 460px;
+    }
+
+    .simple-wrapper
+    {
+        width: 700px;
+    }
+</style>
+<script>
+    $(function () {
+        $(".image-upload .image").click(function () {
+            $("#file-select").trigger("click");
+        })
+
+        $("#file-select").change(function () {
+            var f = $("#file-select")[0].files[0]
+            if (!f.type.match(/image.*/)) {
+                alert("Please select image");
+
+                return
+            }
+            var reader = new FileReader();
+            reader.onload = (function (theFile) {
+                return function (e) {
+                    $(".image-upload .image").html("<img src='" + e.target.result + "' width='100%' height='100%'/>");
+                    $("#changeimage").val('true');
+                }
+            })(f);
+
+            reader.readAsDataURL(f);
+        })
+    })
+</script>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+<script>
+    jQuery(function ($) {
+        $("#ContactNumber").mask("(999) 999-9999*");
+        $("#DateOfBirth").datepicker({
+            minDate: "-100y", maxDate: "-5y", changeMonth: true,
+            changeYear: true, yearRange: '1900:2010'
+        });
+    });
+</script>
+
