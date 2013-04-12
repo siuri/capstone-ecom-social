@@ -1,119 +1,147 @@
 ﻿@model IEnumerable<Capstone_20130302.Models.Product>
+@using Capstone_20130302.Constants;
 @using Capstone_20130302.Models;
 @{
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_FreeLayout.cshtml";
     List<EditorPick> EditorPicks = ViewBag.EditorPicks;
+    int totalrow = ViewBag.totalrow;
+    List<ProductDisplay> list = ViewBag.listpro; 
+                    
     
 }
-<section class="reg-motiv">
-    <div class="h-reg"></div>
-    <p>Join the e-marketplace where social network meets traditional shopping.</p>
-    <a href="/Account/Register">Join Now</a> <a href="/Account/Login">Sign In</a>
-</section>
-<section class="shelf">
-    <div class="h-picks"></div>
-    <br />
-    <div class="shelf-wrapper product-grid" id="picks">
-        @foreach (var pick in EditorPicks)
-        {
-            <div class="product">
-                <a href="/Product/Id/@pick.Product.ProductId">
-                    <div class="image">
-                        <div class="img" style="background: url(/Image/@pick.Product.ProductImages.ElementAt(0).ImageId)"></div>
-                        <div class="detail">
-                            <div class="price">
-                                $@pick.Product.Price
-                            </div>
-                            <div class="buttons">View details</div>
-                        </div>
-                    </div>
-                    <div class="description">
-                        <h4>@pick.Product.Name</h4>
-                        <p>@pick.Product.Description.Substring(0, 30)...</p>
-                    </div>
-                </a>
-            </div>
-            <div class="product">
-                <a href="/Product/Id/@pick.Product.ProductId">
-                    <div class="image">
-                        <div class="img" style="background: url(/Image/@pick.Product.ProductImages.ElementAt(0).ImageId)"></div>
-                        <div class="detail">
-                            <div class="price">
-                                $@pick.Product.Price
-                            </div>
-                            <div class="buttons">View details</div>
-                        </div>
-                    </div>
-                    <div class="description">
-                        <h4>@pick.Product.Name</h4>
-                        <p>@pick.Product.Description.Substring(0, 30)...</p>
-                    </div>
-                </a>
-            </div>
-        }
-    </div>
-</section>
-<section class="discover">
-    <h2>Discover</h2>
-    <div class="product-grid" id="discover">
-        @foreach (var item in Model)
-        {
-            <div class="product cate-@item.CategoryId">
-                <a href="/Product/Id/@item.ProductId">
-                    <div class="image">
-                        <img src="/Image/@item.ProductImages.First().ImageId"/>
-                        <div class="detail">
-                            <div class="price">
-                                $@item.Price
-                            </div>
-                            <div class="buttons">View details</div>
-                        </div>
-                    </div>
-                    <div class="description">
-                        <h4>@item.Name</h4>
-                        <p>@item.Description.Substring(0, 30)...</p>
-                    </div>
-               </a>
-            </div>
-            <div class="product cate-@item.CategoryId">
-                <a href="/Product/Id/@item.ProductId">
-                    <div class="image">
-                        <img src="/Image/@item.ProductImages.First().ImageId"/>
-                        <div class="detail">
-                            <div class="price">
-                                $@item.Price
-                            </div>
-                            <div class="buttons">View details</div>
-                        </div>
-                    </div>
-                    <div class="description">
-                        <h4>@item.Name</h4>
-                        <p>@item.Description.Substring(0, 30)...</p>
-                    </div>
-               </a>
-            </div>
-            <div class="product cate-@item.CategoryId">
-                <a href="/Product/Id/@item.ProductId">
-                    <div class="image">
-                        <img src="/Image/@item.ProductImages.First().ImageId"/>
-                        <div class="detail">
-                            <div class="price">
-                                $@item.Price
-                            </div>
-                            <div class="buttons">View details</div>
-                        </div>
-                    </div>
-                    <div class="description">
-                        <h4>@item.Name</h4>
-                        <p>@item.Description.Substring(0, 30)...</p>
-                    </div>
-               </a>
-            </div>
-        }
-    </div>
-</section>
+<script src="~/Scripts/jquery.pagination.js"></script>
 
+@if (!User.Identity.IsAuthenticated)
+{
+    <section class="reg-motiv">
+     <div class="h-reg"></div>
+     <p>Join the e-marketplace where social network meets traditional shopping.</p>
+     <a href="/Account/Register">Join Now</a> <a href="/Account/Login">Sign In</a>
+    </section>
+}
+@if (totalrow == 0)
+{
+    <section class="shelf">
+        <div class="h-picks"></div>
+        <br />
+        <div class="shelf-wrapper product-grid" id="picks">
+            @foreach (var pick in EditorPicks)
+            {
+                <div class="product">
+                    <a href="/Product/Id/@pick.Product.ProductId">
+                        <div class="image">
+                            <div class="img" style="background: url(/Image/@pick.Product.ProductImages.ElementAt(0).ImageId)"></div>
+                            <div class="detail">
+                                <div class="price">
+                                    $@pick.Product.Price
+                                </div>
+                                <div class="buttons">View details</div>
+                            </div>
+                        </div>
+                        <div class="description">
+                            <h4>@pick.Product.Name</h4>
+                            <p>@pick.Product.Description.Substring(0, 30)...</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="product">
+                    <a href="/Product/Id/@pick.Product.ProductId">
+                        <div class="image">
+                            <div class="img" style="background: url(/Image/@pick.Product.ProductImages.ElementAt(0).ImageId)"></div>
+                            <div class="detail">
+                                <div class="price">
+                                    $@pick.Product.Price
+                                </div>
+                                <div class="buttons">View details</div>
+                            </div>
+                        </div>
+                        <div class="description">
+                            <h4>@pick.Product.Name</h4>
+                            <p>@pick.Product.Description.Substring(0, 30)...</p>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </section>
+    <section class="discover">
+        <h2>Discover</h2>
+        <div class="product-grid" id="discover">
+            @foreach (var item in Model)
+            {
+                <div class="product cate-@item.CategoryId">
+                    <a href="/Product/Id/@item.ProductId">
+                        <div class="image">
+                            <img src="/Image/@item.ProductImages.First().ImageId"/>
+                            <div class="detail">
+                                <div class="price">
+                                    $@item.Price
+                                </div>
+                                <div class="buttons">View details</div>
+                            </div>
+                        </div>
+                        <div class="description">
+                            <h4>@item.Name</h4>
+                            <p>@item.Description.Substring(0, 30)...</p>
+                        </div>
+                   </a>
+                </div>
+                <div class="product cate-@item.CategoryId">
+                    <a href="/Product/Id/@item.ProductId">
+                        <div class="image">
+                            <img src="/Image/@item.ProductImages.First().ImageId"/>
+                            <div class="detail">
+                                <div class="price">
+                                    $@item.Price
+                                </div>
+                                <div class="buttons">View details</div>
+                            </div>
+                        </div>
+                        <div class="description">
+                            <h4>@item.Name</h4>
+                            <p>@item.Description.Substring(0, 30)...</p>
+                        </div>
+                   </a>
+                </div>
+                <div class="product cate-@item.CategoryId">
+                    <a href="/Product/Id/@item.ProductId">
+                        <div class="image">
+                            <img src="/Image/@item.ProductImages.First().ImageId"/>
+                            <div class="detail">
+                                <div class="price">
+                                    $@item.Price
+                                </div>
+                                <div class="buttons">View details</div>
+                            </div>
+                        </div>
+                        <div class="description">
+                            <h4>@item.Name</h4>
+                            <p>@item.Description.Substring(0, 30)...</p>
+                        </div>
+                   </a>
+                </div>
+            }
+        </div>
+    </section>
+}
+else
+{
+    <div id="manga-Loading" style="position: absolute; z-index: -1; opacity: 0.7; width: 70%; text-align: center;">
+        <img alt="Loading..." style="position: absolute; top: 48%; left: 35%; vertical-align: middle;
+            display: inline-block; zoom: 1; z-index: 10001;" src="/Images/loading14.gif">
+    </div>
+    <section class="discover">
+        <h2>Products Followed</h2>
+        <div class="product-grid" id="discover_list">
+            
+        </div>
+         <div class="directory_footer" style="bottom: -30px; right: 320px;">
+            <div class="pagination-pager next-page">
+    </div>
+
+    </section>
+}
 <script type="text/javascript">
     $("#discover").isotope({
         layoutMode: "masonry",
@@ -124,15 +152,7 @@
         $("#discover").isotope({ filter: "*" });
     }, 500);
 
-    $(document).ready(function () {
-        var slider = $("#picks").bxSlider({
-            minSlides: 1,
-            maxSlides: 4,
-            slideWidth: 200,
-            slideMargin: 20,
-            pager: false
-        });
-    })
+   
 </script>
 <style>
     body {
@@ -146,4 +166,143 @@
     .bx-viewport {
         height: 225px !important;
     }
+</style>
+
+<script type="text/javascript">
+    
+    setTimeout(function () {
+        $("#discover").isotope({ filter: "*" });
+    }, 500);
+
+    function CreateHtml(data) {
+        var html = '';
+
+        if (data != null) {
+            for (var key in data) {
+                if (data.hasOwnProperty(key)) {
+                    html+= '<div class="product cate-'+ data[key].ProductID +'">'
+                    html+= '<a href="/Product/Id/'+ data[key].ProductID +'">'
+                    html+= '<div class="image">'
+                    html+= '<img src="/Image/'+ data[key].Images +'"/>'
+                    html+= '<div class="detail">'
+                    html+= '<div class="price">'
+                    html+= '$'+data[key].Price
+                    html+= '</div>'
+                    html+= '<div class="buttons">View details</div>'
+                    html+= '</div>'
+                    html+= '</div>'
+                    html+= '<div class="description">'
+                    html+= '<h4>'+ data[key].Name +'</h4>'
+                    html+= '<p>'+ data[key].Description +'...</p>'
+                    html+= '</div>'
+                    html+= '</a>'
+                    html+= '</div>'
+                }
+            }
+        }
+        return html;
+    }
+
+    var PageIndex = 0;
+    var PageSize = @Constant.PAGE_SIZE
+    var MaxLength = @totalrow
+     function pageselectCallback(page_index, jq) {
+       
+         //Nơi thay đổi các thuộc tín của paging khi sort search bằng Post
+         //...
+
+         $("#manga-Loading").css({ 'z-index': 1 });
+         $("#manga-Loading").css({ 'display': 'block' });
+         $.getJSON('/Home/GetProductPage?page='+(parseInt(page_index)+1), function (data) {
+             if (data) {
+                 var html = CreateHtml(data);
+                 $("#discover_list").html(html);
+                 $("#manga-Loading").css({ 'z-index': -1 });
+                 $("#manga-Loading").css({ 'display': 'none' });
+             }
+         });
+         return false;
+     }
+
+     function getOptions() {
+
+         var opt = {
+             items_per_page: PageSize,
+             num_display_entries: 5,
+             current_page: PageIndex,
+             num_edge_entries: 2,
+             link_to: "#",
+             prev_text: "Prev",
+             next_text: "Next",
+             ellipse_text: "...",
+             prev_show_always: true,
+             next_show_always: true,
+             renderer: "defaultRenderer",
+             show_if_single_page: false,
+             load_first_page: true,
+             callback: pageselectCallback
+         };
+         return opt;
+     }
+     @if(totalrow != 0)
+     {
+         <text>
+                 $(document).ready(function () {
+               
+                 var optInit = getOptions();
+                 $(".pagination-pager").pagination(MaxLength, optInit);
+                 $("#manga-Loading").css({ 'z-index': -1 });
+                 $("#manga-Loading").css({ 'display': 'none' });
+             })
+    </text>
+     }
+    else
+    {
+         <text>
+    $(document).ready(function () {
+        var slider = $("#picks").bxSlider({
+            minSlides: 1,
+            maxSlides: 4,
+            slideWidth: 200,
+            slideMargin: 20,
+            pager: false
+        });
+    })
+    </text>
+     }
+   
+
+</script>
+<style>
+
+    .pagination {
+            font-size: 90%;
+        }
+        
+.pagination a {
+    text-decoration: none;
+	
+	color: #15B;
+}
+
+.pagination a, .pagination span
+{
+    display: block;
+    float: left;
+    padding: 0em 1em 0em 1em;
+    margin-right: 5px;
+}
+
+.pagination .current {
+    background: #26B;
+    color: #fff;
+	
+}
+
+.pagination .current.prev, .pagination .current.next{
+	color:#999;
+	border-color:#999;
+	background: none;
+}
+
 </style>
