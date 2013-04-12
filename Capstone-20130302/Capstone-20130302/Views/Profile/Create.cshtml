@@ -17,7 +17,7 @@
         <div id="profile">
             @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "profile-form", enctype = "multipart/form-data" }))
             {
-                <input type="file" id="file-select" name="file" required="required"/>
+                <input type="file" id="file-select" name="file" required="required" />
                 @Html.ValidationSummary(true)
                 <div class="validation-summary-errors">
                     <ul>
@@ -68,7 +68,8 @@
 
 
 <style>
-    .image-upload .image {
+    .image-upload .image
+    {
         width: 140px;
         height: 140px;
         border: solid 5px white;
@@ -80,27 +81,32 @@
         background-size: 100%;
     }
 
-        .image-upload .image img {
+        .image-upload .image img
+        {
             width: 100%;
             height: 100%;
             border-radius: 500px;
         }
 
-    #file-select {
+    #file-select
+    {
         display: none;
     }
 
-    .avatar-wrapper {
+    .avatar-wrapper
+    {
         margin: 25px auto 20px;
         width: 140px;
     }
 
-    #profile {
+    #profile
+    {
         margin: 0 auto 50px;
         width: 460px;
     }
 
-    .simple-wrapper {
+    .simple-wrapper
+    {
         width: 700px;
     }
 </style>

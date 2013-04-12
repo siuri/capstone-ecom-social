@@ -13,6 +13,8 @@
         <legend>Store Design</legend>
         <div class="editor-field">
             <div class="upload-wrapper">
+
+
                 <div>
                     <img style="height: 140px; margin-bottom: 20px;" src="/Images/placeholder.png"><br>
                     <h4 style="margin: 0">Cover Image</h4>
@@ -88,6 +90,7 @@
                 </div>
 
                 <input type="hidden" id="createStatus" name="createStatus">
+               
             </div>
         </div>
     </fieldset>
@@ -150,14 +153,14 @@
             var f = $("#cover-image")[0].files[0]
             if (!f.type.match(/image.*/)) {
                 alert("Please select image");
-
                 return
             }
             var reader = new FileReader();
             reader.onload = (function (theFile) {
                 return function (e) {
                     $(".upload-wrapper").html("<img src='" + e.target.result + "' width='100%' height='100%'/>");
-                }
+                  
+               }
             })(f);
 
             reader.readAsDataURL(f);
@@ -179,6 +182,7 @@
             reader.onload = (function (theFile) {
                 return function (e) {
                     $(".image-upload .image").html("<img src='" + e.target.result + "' width='100%' height='100%'/>");
+                    $("#editprofileimage").val('true');
                 }
             })(f);
 

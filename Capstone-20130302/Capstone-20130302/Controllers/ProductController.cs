@@ -298,14 +298,64 @@ namespace Capstone_20130302.Controllers
         // POST: /Product/Edit/5
         [Authorize(Roles = Constant.ROLE_SELLER)]
         [HttpPost]
-        public ActionResult Edit(Product product)
+        public ActionResult Edit(Product product, int sid, int cid, string changeimages, int createStatus = 0)
         {
+            Guid guid = new Guid();
+            var path = "";
+            List<Image> images = new List<Image>();
+            for (int i = 0; i < Request.Files.AllKeys.Length; i++)
+            {
+                HttpPostedFileBase hpf = Request.Files[i] as HttpPostedFileBase;
+                if (hpf != null && hpf.ContentLength > 0)
+                {
+                    guid = Guid.NewGuid();
+                    path = Path.Combine(Server.MapPath("~/App_Data/Images"), guid.ToString());
+                    hpf.SaveAs(path);
+                    Image image = new Image { Path = guid.ToString() };
+                    images.Add(image);
+                }
+            }
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                product.CategoryId = cid;
+                product.StoreId = sid;
+                try
+                {
+                    Product temp = db.Products.Find(product.ProductId);
+                    temp.Name = product.Name;
+                    temp.Description = product.Description;
+                    temp.Price = product.Price;
+                    temp.SpecsInJson = product.SpecsInJson;
+                    /// Tieeps......
+                    if (changeimages == "true")
+                    {
+                        temp.ProductImages = images;
+                    }
+                    db.SaveChanges();
+                    return View(temp);
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    StringBuilder sb = new StringBuilder();
+
+                    foreach (var failure in ex.EntityValidationErrors)
+                    {
+                        sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
+                        foreach (var error in failure.ValidationErrors)
+                        {
+                            sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
+                            sb.AppendLine();
+                        }
+                    }
+
+                    throw new DbEntityValidationException(
+                        "Entity Validation Failed - errors follow:\n" +
+                        sb.ToString(), ex
+                    ); // Add the original exception as the innerException
+                }
+              
             }
+
             return View(product);
         }
 

@@ -187,15 +187,57 @@ namespace Capstone_20130302.Controllers
         // POST: /Store/Edit/5
         [Authorize(Roles = Constant.ROLE_SELLER)]
         [HttpPost]
-        public ActionResult Edit(Store store)
+        public ActionResult Edit(Store store, Address address, string editcoverimage, string editprofileimage,int createStatus = 0)
         {
+            // Check if there are 2 image files from Request 
+            if (Request.Files.AllKeys.Length != 2)
+            {
+                ViewBag.Message("Cover image and/or store avatar needed.");
+                return View("Error");
+            }
+
+            Guid guid = new Guid();
+            var path = "";
+            List<Image> images = new List<Image>();
+
+            // Read each file from Request, create each corresponding Image object and added to Image list
+            for (int i = 0; i < Request.Files.AllKeys.Length; i++)
+            {
+                HttpPostedFileBase hpf = Request.Files[i] as HttpPostedFileBase;
+                if (hpf != null && hpf.ContentLength > 0)
+                {
+                    guid = Guid.NewGuid();
+                    path = Path.Combine(Server.MapPath("~/App_Data/Images"), guid.ToString());
+                    hpf.SaveAs(path);
+                    images.Add(new Image { Path = guid.ToString() });
+                }
+            }
+
+            // Set images to Store object
+           
+            store.Address = address;
+         
             if (ModelState.IsValid)
             {
-                db.Entry(store).State = EntityState.Modified;
+                Store temp = db.Stores.Find(store.StoreId);
+                temp.Slogan = store.Slogan;
+                temp.StoreName = store.StoreName;
+                temp.Description = store.Description;
+                temp.ShipFee = store.ShipFee;
+                temp.Address = address;
+                if (editcoverimage == "true")
+                {
+                    temp.CoverImage.Path = images.First().Path;
+                }
+                if (editprofileimage == "true")
+                {
+                    temp.ProfileImage.Path = images.Last().Path;
+                }
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return View(temp);
             }
             return View(store);
+
         }
 
         //

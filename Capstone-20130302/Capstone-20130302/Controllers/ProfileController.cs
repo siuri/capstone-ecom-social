@@ -11,6 +11,8 @@ using System.Text;
 using System.IO;
 using WebMatrix.WebData;
 using Capstone_20130302.Logic;
+using System.Web.Security;
+using Capstone_20130302.Constants;
 
 namespace Capstone_20130302.Controllers
 {
@@ -151,26 +153,85 @@ namespace Capstone_20130302.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            Profile profile = db.Profiles.Find(id);
-            if (profile == null)
+            if (id < 0)
             {
-                return HttpNotFound();
+                ViewBag.Message = "Sorry, profileid not found";
+                return View("Error");
             }
-            return View(profile);
+
+            if (User.Identity.IsAuthenticated == false)
+            {
+                ViewBag.Message = "Sorry, you must login ";
+                return View("Error");
+            }
+            UserProfile user = UserProfiles_Logic.GetUserProfileByUserName(User.Identity.Name);
+            string []roles = Roles.GetRolesForUser(User.Identity.Name);
+            if (roles[0] == Constant.ROLE_ADMIN)
+            {
+                Profile profile = db.Profiles.Find(id);
+                profile.DateOfBirth = profile.DateOfBirth.Date;
+                if (profile == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(profile);
+            }
+            else
+            {
+                if (user.ProfileId != id)
+                {
+                    ViewBag.Message = "Sorry, profileid not found";
+                    return View("Error");
+                }
+                Profile profile = db.Profiles.Find(id);
+                profile.DateOfBirth = profile.DateOfBirth.Date;
+                if (profile == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(profile);
+            }
+           
         }
 
         //
         // POST: /Profile/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Profile profile)
+        public ActionResult Edit(Profile profile, Address address, HttpPostedFileBase file, string changeimage)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(profile).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            // Verify that the user selected a file
+            
+                    
+
+                if (ModelState.IsValid)
+                {
+                    profile.Address = address;
+                    Profile temp = db.Profiles.Find(profile.ProfileId);
+                    temp.DisplayName = profile.DisplayName;
+                    temp.Email = profile.Email;
+                    temp.DateOfBirth = profile.DateOfBirth;
+                    temp.ContactNumber = profile.ContactNumber;
+                    temp.Address = address;
+                    if(changeimage == "true")
+                    {
+                        if (file != null && file.ContentLength > 0)
+                        {
+                            Guid guid = Guid.NewGuid();
+                            // store the file inside ~/App_Data/uploads folder
+                            var path = Path.Combine(Server.MapPath("~/App_Data/Images"), guid.ToString());
+                            file.SaveAs(path);
+                            Image image = new Image { Path = guid.ToString() };
+                            db.Images.Add(image);
+                            temp.ProfileImage.Path = image.Path;
+                        }
+                       
+                    }
+                    db.SaveChanges();
+                    return View(temp);
+                }
+            
+            
             return View(profile);
         }
 
