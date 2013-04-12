@@ -164,7 +164,6 @@ namespace Capstone_20130302.Logic
 
         #endregion
 
-
         #region [Get Total Row List Product By CategoryID]
         /// <summary>
         ///   [Get Total Row List Product By CategoryID]
@@ -183,6 +182,78 @@ namespace Capstone_20130302.Logic
         }
 
         #endregion
+
+        #region [Get  List Product Category User Follows]
+       /// <summary>
+        ///  [Get  List Product Category User Follows]
+       /// </summary>
+       /// <param name="userID">User ID</param>
+       /// <returns></returns>
+        public static List<ProductDisplay> GetListProductCateforyFollow(int userID,int iPage,int iSize)
+        {
+            List<ProductDisplay> listresult = new List<ProductDisplay>();
+
+            var list = (from c in db.Follows
+                        where (c.UserId == userID && c.Category != null)
+                        select c.CategoryId);
+            List<int> listtemp = new List<int>();
+            foreach (var temp in list)
+            {
+                listtemp.Add((int)temp);
+            }
+
+            IPagedList<Product> tmp = (from c in db.Products
+
+                                       where (c.StatusId == 2 && listtemp.Contains((int)c.CategoryId))
+                                       orderby c.CreateDate descending
+                                       select c).Take(100).ToPagedList(iPage, iSize);
+            foreach (var c in tmp)
+            {
+                ProductDisplay temp = new ProductDisplay();
+                temp.Name = c.Name;
+                temp.Price = c.Price;
+                temp.ProductId = c.ProductId;
+                temp.Description = c.Description.Substring(0, 30);
+                temp.CategoryId = (int)c.CategoryId;
+                temp.Images = c.ProductImages.ElementAt(0).ImageId.ToString();
+                listresult.Add(temp);
+
+            }
+            return listresult;
+        }
+
+        #endregion
+
+        #region [Get Total Row List Product Category User Follows]
+        /// <summary>
+        ///  [Get Total Row List Product Category User Follows]
+        /// </summary>
+        /// <param name="userID">User ID</param>
+        /// <returns></returns>
+        public static int GetTotalRowListProductCateforyFollow(int userID)
+        {
+
+            var list = (from c in db.Follows
+                        where (c.UserId == userID && c.Category != null)
+                        select c.CategoryId);
+            int count = 0;
+            List<int> listtemp = new List<int>();
+            foreach (var temp in list)
+            {
+                listtemp.Add((int)temp);
+            }
+
+            count = (from c in db.Products
+
+                     where (c.StatusId == 2 && listtemp.Contains((int)c.CategoryId))
+             orderby c.CreateDate descending
+             select c).Count();
+
+            return count;
+        }
+
+        #endregion
+
 
 
     }
