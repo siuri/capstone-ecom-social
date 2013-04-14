@@ -25,6 +25,15 @@ namespace Capstone_20130302.Logic
                 item.ProductId = productID;
                 item.UserId = userID;
                 db.ProductLikes.Add(item);
+                Product pro = db.Products.Find(productID);
+                if (pro.TotalLikes != null)
+                {
+                    pro.TotalLikes = pro.TotalLikes + 1;
+                }
+                else
+                {
+                    pro.TotalLikes = 1;
+                }
                 db.SaveChanges();
                 return true;
             }
@@ -47,6 +56,15 @@ namespace Capstone_20130302.Logic
             try
             {
                 db.ProductLikes.Add(item);
+                Product pro = db.Products.Find(item.ProductId);
+                if (pro.TotalLikes != null)
+                {
+                    pro.TotalLikes = pro.TotalLikes + 1;
+                }
+                else
+                {
+                    pro.TotalLikes = 1;
+                }
                 db.SaveChanges();
                 return true;
             }
@@ -72,6 +90,11 @@ namespace Capstone_20130302.Logic
                 {
                     db.ProductLikes.Attach(pro);
                     db.ProductLikes.Remove(pro);
+                    Product _pro = db.Products.Find(pro.ProductId);
+                    if (_pro.TotalLikes != null)
+                    {
+                        _pro.TotalLikes = _pro.TotalLikes - 1;
+                    }
                     db.SaveChanges();
                     return true;
                 }
@@ -107,6 +130,11 @@ namespace Capstone_20130302.Logic
                 {
                     db.ProductLikes.Attach(pro);
                     db.ProductLikes.Remove(pro);
+                    Product _pro = db.Products.Find(pro.ProductId);
+                    if (_pro.TotalLikes != null)
+                    {
+                        _pro.TotalLikes = _pro.TotalLikes - 1;
+                    }
                     db.SaveChanges();
                     return true;
                 }
