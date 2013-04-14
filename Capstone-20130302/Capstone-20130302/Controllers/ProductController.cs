@@ -298,7 +298,7 @@ namespace Capstone_20130302.Controllers
         // POST: /Product/Edit/5
         [Authorize(Roles = Constant.ROLE_SELLER)]
         [HttpPost]
-        public ActionResult Edit(Product product, int sid, int cid, string changeimages, int createStatus = 0)
+        public ActionResult Edit(Product product, string changeimage, int createStatus = 0)
         {
             Guid guid = new Guid();
             var path = "";
@@ -317,8 +317,6 @@ namespace Capstone_20130302.Controllers
             }
             if (ModelState.IsValid)
             {
-                product.CategoryId = cid;
-                product.StoreId = sid;
                 try
                 {
                     Product temp = db.Products.Find(product.ProductId);
@@ -326,8 +324,7 @@ namespace Capstone_20130302.Controllers
                     temp.Description = product.Description;
                     temp.Price = product.Price;
                     temp.SpecsInJson = product.SpecsInJson;
-                    /// Tieeps......
-                    if (changeimages == "true")
+                    if (changeimage == "true")
                     {
                         temp.ProductImages = images;
                     }

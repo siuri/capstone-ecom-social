@@ -89,6 +89,12 @@ namespace Capstone_20130302.Controllers
 
         public ActionResult Create()
         {
+            List<Category> categorylist = new List<Category>();
+            categorylist.AddRange((from Category cate in db.Categories
+                                   where cate.ParentId == 1
+                                   select cate).ToList());
+
+            ViewBag.categorylist = categorylist;
             return View();
         }
 

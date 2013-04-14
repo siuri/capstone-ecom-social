@@ -1,35 +1,194 @@
 ﻿@model Capstone_20130302.Models.Category
-
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "New Product";
+    Layout = "~/Views/Shared/_MerchantLayout.cshtml";
 }
 
-<h2>Create</h2>
+<a href="/Product"><i class='icon icon-circle-arrow-left'></i>Back to Product List</a>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "create", data_bind = "submit: save", enctype = "multipart/form-data", id = "mainForm" }))
+{
+              <input type="file" id="file-select" name="file" required="required" />
     @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend>Category</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
+    <legend>Product Details</legend>
+    <div class="editor-field">
+      <div class="avatar-wrapper">
+            <div class="image-upload">
+                <div class="image" data-toggle="tooltip" title="Upload your avatar">
+                </div>
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
+    </div>
+    
+    <div class="row">
+        <div class="span6">
+            <legend>Description</legend>
+            <div class="editor-field">
+                @Html.ValidationMessageFor(model => model.Name)
+                @Html.TextBoxFor(model => model.Name, new { @class = "span5", placeholder = @Html.DisplayNameFor(model => model.Name) })
+            </div>
+             <div class="editor-field">
+                    
+            </div>
+            
         </div>
+        <div class="span5">
+            <legend>Specifications</legend>
+            <div class="editor-field">
+                 <input type="hidden" name="SpecsInJson" id="SpecsInJson" class="SpecsInJson" value=""/>
+                <table class="table table-bordered table-as-form">
+                    <thead>
+                        <tr>
+                            <th colspan="3"><span data-bind='text: specs().length'>&nbsp;</span> specification<span data-bind='visible: specs().length>1'>s</span>
+                                <button type="button" class="btn btn-mini add pull-right" data-bind='click: addSpec'><i class="icon icon-white icon-plus"></i>Add</button></th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind='foreach: specs'>
+                        <tr>
+                            <td>
+                                <input type="text" placeholder="Specification" class='required' data-bind='value: name, uniqueName: true' /></td>
+                            <td>
+                                <input type="text" placeholder="Description" class='required' data-bind='value: content, uniqueName: true' /></td>
+                            <td><a href='' class="rm" data-bind='click: $root.removeSpec'><i class="icon-trash"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
 
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
+
+            </div>
+        </div>
+    </div>
+   
+    <br>
+    <div class="controls controls-row">
+        <input type="button" onclick="callSubmit(2)" class="btn span2" value="Save" />
+    </div>
+    <input type="hidden" id="createStatus" name="createStatus">
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<style>
+     .image-upload .image
+    {
+        width: 140px;
+        height: 140px;
+        border: solid 5px white;
+        box-shadow: 0 0 5px gray;
+        cursor: pointer;
+        border-radius: 500px;
+        text-align: center;
+        background: url(../Images/avatar_default.jpg) no-repeat;
+        background-size: 100%;
+    }
+
+        .image-upload .image img
+        {
+            width: 100%;
+            height: 100%;
+            border-radius: 500px;
+        }
+    .field-validation-error
+    {
+        display: block;
+    }
+     #file-select
+    {
+        display: none;
+    }
+
+    .avatar-wrapper
+    {
+        margin: 25px auto 20px;
+        width: 140px;
+    }
+
+    #profile
+    {
+        margin: 0 auto 50px;
+        width: 460px;
+    }
+
+    .simple-wrapper
+    {
+        width: 700px;
+    }
+</style>
+
+<script src="/Scripts/knockout-2.2.1.js"></script>
+<script>
+    var uploadWrapper;
+    var inputFiles;
+
+    var callSubmit = function(createStatus) {
+        $("#createStatus").val(createStatus);
+        $("#mainForm").submit();
+    }
+
+    $(function () {
+    
+        $("form.create").validate({ submitHandler: function (form) { viewModel.save(); form.submit() } });
+
+        $(".image-upload .image").click(function () {
+            $("#file-select").trigger("click");
+        })
+
+        $("#file-select").change(function () {
+            var f = $("#file-select")[0].files[0]
+            if (!f.type.match(/image.*/)) {
+                alert("Please select image");
+
+                return
+            }
+            var reader = new FileReader();
+            reader.onload = (function (theFile) {
+                return function (e) {
+                    $(".image-upload .image").html("<img src='" + e.target.result + "' width='100%' height='100%'/>");
+                }
+            })(f);
+
+            reader.readAsDataURL(f);
+        })
+
+
+        var specsJsonData = [{ name: '', content: '' }];
+        var SpecModel = function (specs) {
+            var self = this;
+            self.specs = ko.observableArray(specs);
+
+            self.addSpec = function () {
+                self.specs.push({
+                    name: "",
+                    content: ""
+                });
+            };
+
+            self.removeSpec = function (spec) {
+                self.specs.remove(spec);
+            };
+
+            self.save = function (form) {
+                console.log(ko.utils.stringifyJson(self.specs));
+                $("#SpecsInJson").val(ko.utils.stringifyJson(self.specs));
+                return true;
+            };
+        };
+
+        var viewModel = new SpecModel(specsJsonData);
+        ko.applyBindings(viewModel);
+
+        // Activate jQuery Validation
+        $("form.create").validate({ submitHandler: function (form) { viewModel.save(); form.submit() } });
+
+
+    })
+
+
+</script>
+
+

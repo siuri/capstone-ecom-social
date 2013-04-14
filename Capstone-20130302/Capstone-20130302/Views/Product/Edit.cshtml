@@ -1,6 +1,7 @@
 ﻿@model Capstone_20130302.Models.Product
 @{
     ViewBag.Title = "Edit Product";
+    Layout = "~/Views/Shared/_MerchantLayout.cshtml";
 }
 
 <br />
@@ -9,11 +10,16 @@
 {
     @Html.ValidationSummary(true)
     <legend>Product Details</legend>
+      @Html.HiddenFor(model => model.ProductId)
     <div class="editor-field">
         <div class="upload-wrapper">
             <div>
-                <img style="height: 140px; margin-bottom: 20px;" src="/Images/placeholder.png"><br>
-                <span>Choose up to 3 images for your product.</span>
+              
+                @foreach (var image in Model.ProductImages)
+                {
+                     <img class='select' id="@image.ImageId"  src='/Image/@image.ImageId'/>
+                }
+              
             </div>
         </div>
         <input id="uploadFiles" name="uploadFiles[]" style="display: none;" type="file" multiple="" accept="image/*" />
@@ -66,10 +72,10 @@
 
     <br>
     <div class="controls controls-row">
-
         <input type="button" onclick="callSubmit(2)" class="btn span2" value="Save" />
     </div>
     <input type="hidden" id="createStatus" name="createStatus">
+     <input type="hidden" id="changeimage" name="changeimage" value="false">
 }
 
 <div>
@@ -133,6 +139,7 @@
                     // get file content
                     uploadWrapper.append("<img class='select' src='" + e.target.result + "'/>");
                     readFile(index+1);
+                    $("#changeimage").val("true");
                 }
                 reader.readAsDataURL(file);
             }
