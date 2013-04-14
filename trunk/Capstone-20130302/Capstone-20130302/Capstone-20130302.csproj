@@ -382,7 +382,9 @@
     <Content Include="Scripts\knockout-2.2.1.debug.js" />
     <Content Include="Scripts\knockout-2.2.1.js" />
     <Content Include="Scripts\less-1.3.3.min.js" />
+    <Content Include="Scripts\livestamp.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\script.js" />
     <Content Include="Scripts\select2.min.js" />
     <Content Include="Scripts\typeahead.css" />

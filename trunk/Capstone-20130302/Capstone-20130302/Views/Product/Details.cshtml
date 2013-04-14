@@ -13,7 +13,8 @@
     Layout = "~/Views/Shared/_FreeLayout.cshtml";
     
 }
-
+<script src="~/Scripts/moment.js"></script>
+<script src="~/Scripts/livestamp.js"></script>
 <div class="page" id="p-product">
     <div class="header">
         <div class="ribbon-wrapper">
@@ -126,6 +127,10 @@
                 <ul class="comment-list">
                     @foreach (Comment cmt in listcmt)
                     {
+                        DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
+                        DateTime dtNow = cmt.CreateDate;
+                        TimeSpan result = dtNow.Subtract(dt);
+                        int seconds = Convert.ToInt32(result.TotalSeconds);
                         <li class="item">
                             <div class="avatar">
                                 <a href="/User/Id/@cmt.User.UserId">
@@ -135,9 +140,10 @@
                                 <div class="header">
                                     <a href="/User/Id/@cmt.User.UserId" class="name">@cmt.User.Profile.DisplayName   @if (cmt.User.UserName == Model.Store.Owner.UserName)
                                                                                             { <span class="owner"></span> } </a>
-                                    <span class="time">@cmt.CreateDate.ToString("dd/MM/yyyy hh:mm:ss")</span>
+                                     <span  class="time" data-livestamp="1212121212"></span>.
                                 </div>
-                                <div class="content">@cmt.CommentContent</div>
+
+                               <div class="content">@cmt.CommentContent</div>
                             </div>
                         </li>
                     }
@@ -541,24 +547,6 @@
                     opacity: .7;
                 }
 </style>
-<script>
-    $(document).ready(function() {
-
-        $.getJSON("/Product/GetProductLike/@Model.ProductId", function (data) {
-            if(data)
-            {
-                $(".btn-like").toggleClass("active");
-            }
-        });
-        var specsJsonData = @Html.Raw(Model.SpecsInJson)
-        for (var i = 0; i < specsJsonData.length; i++) {
-            $(".specs tbody").append("<tr><th>"+specsJsonData[i].name+"</th><td>"+specsJsonData[i].content+"</td></tr>");
-        };
-    });
-    
-    
-    
-</script>
 
 <script type="text/javascript">
     $(document).ready(function() {

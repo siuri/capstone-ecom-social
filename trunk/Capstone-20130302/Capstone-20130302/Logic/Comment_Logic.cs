@@ -36,6 +36,15 @@ namespace Capstone_20130302.Logic
             try
             {
                 db.Comments.Add(cmt);
+                Product _pro = db.Products.Find(cmt.ProductId);
+                if (_pro.TotalComments != null)
+                {
+                    _pro.TotalComments = _pro.TotalLikes + 1;
+                }
+                else
+                {
+                    _pro.TotalComments = 1;
+                }
                 db.SaveChanges();
                 return cmt.CommentId;
             }
