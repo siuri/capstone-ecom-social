@@ -10,11 +10,43 @@ using Capstone_20130302.Models;
 using System.IO;
 using Capstone_20130302.Constants;
 using WebMatrix.WebData;
+using System.Data.Entity.Validation;
 
 namespace Capstone_20130302.Controllers
 {
     public class StoreController : Controller
     {
+
+        [Authorize(Roles = Constant.ROLE_SELLER)]
+        public string UpdateStoreStatus(int storeID, string status)
+        {
+            Store store = db.Stores.Where(s => s.StoreId == storeID).FirstOrDefault();
+            try
+            {
+                store.StatusId = db.StoreStatuses.Where(s => s.Name.Trim().ToLower().Equals(status.Trim().ToLower())).FirstOrDefault().StatusId;
+                db.Entry(store).State = EntityState.Modified;
+                db.SaveChanges();
+                return Constant.ST_OK;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
+            catch (Exception)
+            {
+                return Constant.ST_NG;
+            }
+        }
         private SocialBuyContext db = new SocialBuyContext();
 
         //
@@ -22,6 +54,9 @@ namespace Capstone_20130302.Controllers
         [Authorize(Roles = Constant.ROLE_SELLER)]
         public ActionResult Index()
         {
+            var sellerop = db.StoreStatuses.Where(s => s.StatusId == Constant.STATUS_ACTIVE || s.StatusId == Constant.STATUS_INACTIVE);
+            ViewBag.StatusID = new SelectList(sellerop, "StatusId", "Name");
+            return View(db.Stores.ToList());
             List<Store> store = db.Stores.Where(s => s.OwnerId == WebSecurity.CurrentUserId).ToList();
             return View(store);       
         }
@@ -271,4 +306,5 @@ namespace Capstone_20130302.Controllers
             base.Dispose(disposing);
         }
     }
+
 }
