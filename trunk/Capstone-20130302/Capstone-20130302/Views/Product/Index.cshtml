@@ -3,32 +3,60 @@
 @{
     ViewBag.Title = "Products";
     Layout = "~/Views/Shared/_MerchantLayout.cshtml";
+    var s = ViewBag.StatusID;
 }
 <script src="~/Scripts/jquery.dataTables.js"></script>
 <script src="~/Scripts/dataTables.bootstrap.js"></script>
 
 
 <script type="text/javascript" charset="utf-8">
-    $(document).ready(function() {
-	    $('#example').dataTable({
-		    "sDom": "<'row spare-down'<'span4'f><'span3'l>r>t<'row'<'span3'i><'span8'p>>",
-		    "sPaginationType": "bootstrap",
-		    "oLanguage": {
-			    "sLengthMenu": "_MENU_ records per page"
-		    }
-	    });
-	    var categories;
-	    $.getJSON("/Category/DropDown", function (data) {
-	        categories = data;
-	    });
-	    $("#categories").select2({
-	        placeholder: "Category",
-	        width: "element",
-	        query: function (query) {
-	            var data = { results: categories };
-	            query.callback(data);
-	        }
-	    });
+    $(document).ready(function () {
+        $('#example').dataTable({
+            "sDom": "<'row spare-down'<'span4'f><'span3'l>r>t<'row'<'span3'i><'span8'p>>",
+            "sPaginationType": "bootstrap",
+            "oLanguage": {
+                "sLengthMenu": "_MENU_ records per page"
+            }
+        });
+        //dung de tao san pham ,phai chon cayegory truoc roi moi tao  san pham sau 
+        var categories;
+        $.getJSON("/Category/DropDown", function (data) {
+            categories = data;
+        });
+        $("#categories").select2({
+            placeholder: "Category",
+            width: "element",
+            query: function (query) {
+                var data = { results: categories };
+                query.callback(data);
+            }
+        });
+        function updateProductStatus(pid, stt) {
+            $.ajax({
+                url: "/Product/UpdateProductStatus",
+                type: 'POST',
+                data: { productID: pid, status: stt },
+                success: function (response) {
+                    if (response == "OK") {
+                        $('#status-' + pid).text(stt);
+                        notify({ title: "Update Success", content: "The status has been updated." });
+                    }
+                    else {
+                        notify({ title: "Fail to Update", content: "The system has fail to update, please try again." });
+                    }
+                }
+            });
+
+            //$('#regisModal').find('input#regis').click();
+        }
+
+        $(".changeStatus").change(function () {
+            var productID = $(this).data("pid");
+            alert(productID);
+            var status = $('#n-status-' + productID + ' option:selected').text();
+            alert(status);
+            updateProductStatus(productID, status);
+        });
     });
 </script>
 
@@ -66,13 +94,12 @@
                         @Html.DisplayNameFor(model => model.TotalLikes)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.TotalComments)
-                    </th>
-                    <th>
                         @Html.DisplayNameFor(model => model.TotalBuy)
                     </th>
                     <th class="center">
                         @Html.DisplayNameFor(model => model.CreateDate)
+                    </th>
+                    <th>Status
                     </th>
                     <th>Action</th>
                 </tr>
@@ -92,17 +119,18 @@
                             @Html.DisplayFor(modelItem => item.TotalLikes)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.TotalComments)
-                        </td>
-                        <td>
                             @Html.DisplayFor(modelItem => item.TotalBuy)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.CreateDate)
                         </td>
-                        <td>
-                            <a href="Edit/@item.ProductId"><i class="icon-edit"></i> Edit</a>
-                            <a href="Id/@item.ProductId"><i class="icon-search"></i> View</a>
+                        <td data-pid="@item.ProductId" id= "status-@item.ProductId">
+                            @Html.DisplayFor(modelItem => item.Status.Name)
+                        </td>
+                        <td data-pid="@item.ProductId">
+                            <a href="Edit/@item.ProductId"><i class="icon-edit"></i>Edit</a>
+                            <a href="Id/@item.ProductId"><i class="icon-search"></i>View</a>
+                            
                             @*<a href="Product/Delete/@item.ProductId"><i class="icon-trash"></i></a>*@
                             <a 
                                 onclick="postToFeed({
@@ -114,8 +142,11 @@
                                     description: '@item.Description'
                                 }); return false;"
                                 href=""
-                                class=""><i class="icon-facebook"></i> Share</a>
+                                class=""><i class="icon-facebook"></i>Share</a>
+                            @*ojbect attribute :cho them nhung du lieu ma minh muon truyen them vao *@
+                            @Html.DropDownListFor(modelItem => item.StatusId, ViewBag.StatusID as SelectList, "- Update -", new { id = "n-status-" + @item.ProductId, @class = "changeStatus span2", data_pid = @item.ProductId })
                         </td>
+
                     </tr>
                 }
             </tbody>
@@ -142,13 +173,21 @@ else
 
 
 <style>
-    #chooseCate {
+    #chooseCate
+    {
         width: 500px;
         margin-left: -200px;
     }
-        #chooseCate .modal-body {
+
+        #chooseCate .modal-body
+        {
             padding: 50px 40px 40px 40px;
         }
+
+    .changeStatus
+    {
+        width: 100px;
+    }
 </style>
 
 <div id='fb-root'></div>
