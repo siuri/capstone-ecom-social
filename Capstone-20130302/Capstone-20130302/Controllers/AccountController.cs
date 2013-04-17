@@ -28,7 +28,11 @@ namespace Capstone_20130302.Controllers
 
         public ActionResult Upgrade()
         {
-            return View();
+            if (User.IsInRole("BUYER"))
+            {
+                return View();
+            }
+            return View("Error");
         }
 
         [HttpPost]
