@@ -29,22 +29,39 @@ namespace Capstone_20130302.Controllers
                 ViewBag.Message = "Sorry, you must provide a valid Store Id.";
                 return View("Error");
             }
+            Store store = db.Stores.Find(sid);
+            if (store != null && store.OwnerId == WebSecurity.CurrentUserId)
+            {
+                ViewBag.sid = sid;
+                var items = db.ProductStatuses.Where(s => s.StatusId == Constant.STATUS_ACTIVE || s.StatusId == Constant.STATUS_INACTIVE);
+
+                ViewBag.StatusID = new SelectList(items, "StatusId", "Name"); // tao ra 1 cai seleclist có chứa 2 stutus Active, banner 
+                return View(db.Products.Where(p => p.StoreId == sid).ToList());
+            }
             else
             {
-                Store store = db.Stores.Find(sid);
-                if (store != null && store.OwnerId == WebSecurity.CurrentUserId)
-                {
-                    ViewBag.sid = sid;
-                    return View(db.Products.Where(p => p.StoreId == sid).ToList());
-                }
-                else
-                {
-                    ViewBag.Message = "Sorry, we can't find the store or you're not the owner.";
-                    return View("Error");
-                }
-
+                ViewBag.Message = "Sorry, we can't find the store or you're not the owner.";
+                return View("Error");
             }
             
+            
+        }
+
+        [Authorize(Roles = Constant.ROLE_SELLER)]
+        public string UpdateProductStatus(int productID, string status)
+        {
+            Product product = db.Products.Find(productID);                //Where(p => p.ProductId == productID).FirstOrDefault();
+            try
+            {
+                product.StatusId = db.ProductStatuses.Where(s => s.Name.Trim().ToLower().Equals(status.Trim().ToLower())).FirstOrDefault().StatusId;
+                db.Entry(product).State = EntityState.Modified;
+                db.SaveChanges();
+                return Constant.ST_OK;
+            }
+            catch (Exception)
+            {
+                return Constant.ST_NG;
+            }
         }
 
         //
@@ -236,6 +253,7 @@ namespace Capstone_20130302.Controllers
                     path = Path.Combine(Server.MapPath("~/App_Data/Images"), guid.ToString());
                     hpf.SaveAs(path);
                     Image image = new Image { Path = guid.ToString() };
+
                     images.Add(image);
                 }
             }
@@ -326,6 +344,14 @@ namespace Capstone_20130302.Controllers
                     temp.SpecsInJson = product.SpecsInJson;
                     if (changeimage == "true")
                     {
+                        List<Image> listImage = db.Products.Find(product.ProductId).ProductImages.ToList();
+                        
+                        foreach (var item in listImage)
+                        {
+                            db.Images.Remove(item);
+                        }
+
+                        db.SaveChanges();
                         temp.ProductImages = images;
                     }
                     db.SaveChanges();
