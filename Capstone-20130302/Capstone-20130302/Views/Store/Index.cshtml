@@ -18,6 +18,32 @@
                 "sLengthMenu": "_MENU_ records per page"
             }
         });
+        function updateStoreStatus(sid, stt) {
+            $.ajax({
+                url: "/Store/UpdateStoreStatus",
+                type: 'POST',
+                data: { storeID: sid, status: stt },
+                success: function (response) {
+                    if (response == "OK") {
+                        $('#status-' + sid).text(stt);
+                        notify({ title: "Update Success", content: "The status has been updated." });
+                    }
+                    else {
+                        notify({ title: "Request Error", content: "The system fails to process your request, please try again." });
+                    }
+                }
+            });
+
+            //$('#regisModal').find('input#regis').click();
+        }
+
+        $(".changeStatus").change(function () {
+            var storeID = $(this).data("sid");
+            //alert(productID);
+            var status = $('#n-status-' + storeID + ' option:selected').text();
+            //alert(status);
+            updateStoreStatus(storeID, status);
+        });
     });
 </script>
 
@@ -61,12 +87,12 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.ContactNumber)
                         </td>
-                        <td>
+                        <td data-sid="@item.StoreId" id= "status-@item.StoreId">
                             @Html.DisplayFor(modelItem => item.Status.Name)
-                        </td>
-                        <td>
+                        <td data-sid="@item.StoreId">
                             <a href="Store/Edit/@item.StoreId"><i class="icon-edit"></i> Edit</a>
                             <a href="Store/Id/@item.StoreId"><i class="icon-search"></i> View</a>
+                             @Html.DropDownList("StatusID", (SelectList)ViewBag.StatusID, "- Update -", new { id = "n-status-" + @item.StoreId, @class = "span2 changeStatus", data_sid = @item.StoreId })
                             @*<a href="Store/Delete/@item.StoreId"><i class="icon-trash"></i></a>*@
                         </td>
                     </tr>
