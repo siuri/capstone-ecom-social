@@ -105,7 +105,7 @@ namespace Capstone_20130302.Controllers
             }
             Store store = db.Stores.Find(sid);
             Order order = new Order();
-            Profile profile = db.Profiles.Find(WebSecurity.CurrentUserId);
+            Profile profile = db.UserProfiles.Find(WebSecurity.CurrentUserId).Profile;
             if (profile.Address != null)
             {
                 order.BillingAddress = profile.Address;
