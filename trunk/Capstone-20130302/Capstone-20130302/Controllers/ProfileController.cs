@@ -33,24 +33,28 @@ namespace Capstone_20130302.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Profile profile = db.Profiles.Find(id);
+            UserProfile user = db.UserProfiles.Find(id);
+            if (user == null)
+            {
+                ViewBag.Message = "User not found.";
+                return View("Error");
+            }
+            Profile profile = user.Profile;
             if (profile == null)
             {
                 return HttpNotFound();
             }
             // Get List Follow 
-            List<UserProfile> listfollow = Follow_Logic.GetListFollow(2, id,5);
+            List<UserProfile> listfollow = Follow_Logic.GetFollowingUsersOfType(2, id,5);
             ViewBag.listfollow = listfollow;
 
-            // Get user profile
-            UserProfile user = UserProfiles_Logic.GetUserProfileByUserName(User.Identity.Name);
             ViewBag._user = user;
             // Get list store follow
-            List<Store> liststore = Account_Logic.GetListStoreFollowByUser(user.UserId);
+            List<Store> liststore = Account_Logic.GetListStoreFollowByUser(id);
             ViewBag.liststore = liststore;
 
             // Get list product like
-            List<Product> listpro = Account_Logic.GetListProductLikeByUser(user.UserId);
+            List<Product> listpro = Account_Logic.GetListProductLikeByUser(id);
             ViewBag.listpro = listpro;
             return View(profile);
         }

@@ -31,8 +31,11 @@
                 <ul id="follow-list_member" class="follow-list_member">
                     @foreach (UserProfile profile in list)
                     {
-                        <li id="user_@profile.UserId"><a href="/User/Id/@profile.UserId">
+                        if (profile != null)
+                        {
+                            <li id="user_@profile.UserId"><a href="/User/Id/@profile.UserId">
                             <img class="user"  title="@profile.Profile.DisplayName" src="/Image/@profile.Profile.ProfileImage.ImageId"></a></li>
+                        }
                     }
                 </ul>
             </div>
@@ -66,7 +69,7 @@
                         </div>
                         <div class="description">
                             <h4>@item.Name</h4>
-                            <p>@item.Description.Substring(0, 30)...</p>
+                            <p>@item.Description</p>
                         </div>
                    </a>
                 </div>

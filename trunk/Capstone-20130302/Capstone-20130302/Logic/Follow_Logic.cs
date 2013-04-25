@@ -13,14 +13,14 @@ namespace Capstone_20130302.Logic
         
         #region [ Get List Follow ]
         /// <summary>
-        /// Get List Follow 
+        /// Get User List Follow 
         /// </summary>
         /// <param name="type"> 1_Categories , 2_Users , 3_Store</param>
         /// <param name="ID">ID with type(Categories,UsersID,StoreID) </param>
         /// <param name="number"> number row ( if -1 all)</param>
         /// <returns>List <UserProfile></returns>
         /// 
-        public static List<UserProfile> GetListFollow(int type, int ID,int number)
+        public static List<UserProfile> GetFollowingUsersOfType(int type, int ID,int number)
         {
             if (number == -1)
             {
@@ -84,6 +84,17 @@ namespace Capstone_20130302.Logic
             }
         }
         #endregion
+
+        public static List<UserProfile> GetFollowedUsers(int currentUserId)
+        {
+            List<Follow> follows = db.Follows.Where(f => f.UserId == currentUserId && f.FollowedUserId != null).ToList();
+            List<UserProfile> followings = new List<UserProfile>();
+            foreach (var follow in follows)
+            {
+                followings.Add(db.UserProfiles.Find(follow.FollowedUserId));
+            }
+            return followings;
+        }
 
         #region [ Add new Follow ]
         /// <summary>

@@ -127,10 +127,10 @@
                 <ul class="comment-list">
                     @foreach (Comment cmt in listcmt)
                     {
-                        DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
-                        DateTime dtNow = cmt.CreateDate;
-                        TimeSpan result = dtNow.Subtract(dt);
-                        int seconds = Convert.ToInt32(result.TotalSeconds);
+                        //DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
+                        //DateTime dtNow = cmt.CreateDate;
+                        //TimeSpan result = dtNow.Subtract(dt);
+                        //int seconds = Convert.ToInt32(result.TotalSeconds);
                         <li class="item">
                             <div class="avatar">
                                 <a href="/User/Id/@cmt.User.UserId">
@@ -140,7 +140,7 @@
                                 <div class="header">
                                     <a href="/User/Id/@cmt.User.UserId" class="name">@cmt.User.Profile.DisplayName   @if (cmt.User.UserName == Model.Store.Owner.UserName)
                                                                                             { <span class="owner"></span> } </a>
-                                     <span  class="time" data-livestamp="1212121212"></span>.
+                                     <span  class="time" data-livestamp="1212121212"></span>
                                 </div>
 
                                <div class="content">@cmt.CommentContent</div>
@@ -173,7 +173,7 @@
                         </div>
                         <div class="description">
                             <h4>@item.Name</h4>
-                            <p>@item.Description.Substring(0, 30)...</p>
+                            <p>@item.Description</p>
                         </div>
                     </a>
                 </div>

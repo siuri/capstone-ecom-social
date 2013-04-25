@@ -1,10 +1,8 @@
 ﻿@model Capstone_20130302.Models.Category
 @{
-    ViewBag.Title = "Edit Product";
+    ViewBag.Title = "Edit Category";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
-<br />
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "edit", data_bind = "submit: save", enctype = "multipart/form-data", id = "mainForm" }))
 {

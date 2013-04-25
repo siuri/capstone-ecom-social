@@ -7,7 +7,6 @@
                 self.shops().forEach(function (shop) {
                     if (shop.shopId == product.shopId) {
                         var checkIfExistProduct = 0;
-                        var pro
                         shop.products().forEach(function (p) {
                             if (product.productId == p.productId) {
                                 checkIfExistProduct++;
@@ -24,6 +23,7 @@
             }
         }
     }
+    
     self.checkShop = function (shop) {
         var i = 0;
         self.shops().forEach(function (sh) {
@@ -74,6 +74,19 @@
         })
     }
 
+    self.totalItems = ko.computed(function () {
+        var total = 0;
+        var shops = self.shops();
+        for (var i = 0; i < shops.length; i++) {
+            var shop = shops[i];
+            var products = shop.products();
+            for (var j = 0; j < products.length; j++) {
+                total += products[j].productQuantity();
+            }
+        }
+        return total;
+    });
+
     self.checkout_totalItem=ko.computed(function(){
         var total = 0;
         var shops = self.shops();
@@ -82,7 +95,7 @@
             if (shop.isCheckoutshop() == true) {
                 var products = shop.products();
                 for (var j = 0; j < products.length; j++) {
-                    total += products[j].productQuantity();
+                    total += parseInt(products[j].productQuantity());
                 }
             }
         }
@@ -112,6 +125,7 @@ function ShopModel(title, shopId) {
     var self = this;
     self.shopId = typeof shopId == "undefined" ? -1 : shopId;
     self.storeTitle = title;
+    self.storeUrl = "/Store/Id/" + self.shopId;
     self.checkoutLink = "/Order/Checkout?sid=" + self.shopId;
     self.products = ko.observableArray([])
     self.isCheckoutshop = ko.computed(function () {
@@ -136,6 +150,7 @@ function ProductModel(title, image, price, quantity, productId, shopId) {
     self.shopId = typeof shopId == "undefined" ? -1 : shopId;
 
     self.productTitle = title;
+    self.productUrl = "/Product/Id/" + self.productId;
     self.productImage = image;
     self.productPrice = price;
     self.productQuantity = ko.observable(quantity);

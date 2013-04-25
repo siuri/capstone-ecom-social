@@ -23,7 +23,7 @@ namespace Capstone_20130302.Constants
         public const int ORDER_STATUS_HOLD = 5;
 
 
-        public const int PAGE_SIZE = 1;
+        public const int PAGE_SIZE = 30;
 
         public const string ST_OK = "OK";
         public const string ST_NG = "NG";

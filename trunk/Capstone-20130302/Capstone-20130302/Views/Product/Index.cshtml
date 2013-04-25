@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<Capstone_20130302.Models.Product>
-
+@using Capstone_20130302.Constants
 @{
     ViewBag.Title = "Products";
     Layout = "~/Views/Shared/_MerchantLayout.cshtml";
@@ -52,9 +52,7 @@
 
         $(".changeStatus").change(function () {
             var productID = $(this).data("pid");
-            alert(productID);
             var status = $('#n-status-' + productID + ' option:selected').text();
-            alert(status);
             updateProductStatus(productID, status);
         });
     });
@@ -96,9 +94,6 @@
                     <th>
                         @Html.DisplayNameFor(model => model.TotalBuy)
                     </th>
-                    <th class="center">
-                        @Html.DisplayNameFor(model => model.CreateDate)
-                    </th>
                     <th>Status
                     </th>
                     <th>Action</th>
@@ -121,15 +116,12 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.TotalBuy)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CreateDate)
-                        </td>
                         <td data-pid="@item.ProductId" id= "status-@item.ProductId">
                             @Html.DisplayFor(modelItem => item.Status.Name)
                         </td>
                         <td data-pid="@item.ProductId">
-                            <a href="Edit/@item.ProductId"><i class="icon-edit"></i>Edit</a>
-                            <a href="Id/@item.ProductId"><i class="icon-search"></i>View</a>
+                            <a href="Product/Edit/@item.ProductId"><i class="icon-edit"></i> Edit</a>
+                            <a href="Product/Id/@item.ProductId"><i class="icon-search"></i> View</a>
                             
                             @*<a href="Product/Delete/@item.ProductId"><i class="icon-trash"></i></a>*@
                             <a 
@@ -142,9 +134,12 @@
                                     description: '@item.Description'
                                 }); return false;"
                                 href=""
-                                class=""><i class="icon-facebook"></i>Share</a>
+                                class=""><i class="icon-facebook"></i> Share</a>
                             @*ojbect attribute :cho them nhung du lieu ma minh muon truyen them vao *@
-                            @Html.DropDownListFor(modelItem => item.StatusId, ViewBag.StatusID as SelectList, "- Update -", new { id = "n-status-" + @item.ProductId, @class = "changeStatus span2", data_pid = @item.ProductId })
+                            @if (item.StatusId != Constant.STATUS_BANNED)
+                            {
+                                @Html.DropDownListFor(modelItem => item.StatusId, ViewBag.StatusID as SelectList, "- Update -", new { id = "n-status-" + @item.ProductId, @class = "changeStatus span2", data_pid = @item.ProductId })
+                            }
                         </td>
 
                     </tr>

@@ -4,7 +4,7 @@
     ViewBag.Title = "Open a Store";
     Layout = "~/Views/Shared/_MerchantLayout.cshtml";
 }
-<a href="/Store"><i class='icon icon-circle-arrow-left'></i> Back to Product List</a>
+<a href="/Store"><i class='icon icon-circle-arrow-left'></i> Back to Store List</a>
 @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data", id = "mainForm" }))
 {
     @Html.ValidationSummary(true)
@@ -21,7 +21,7 @@
                     <p>Tip: Make it unique. Choose it nicely.</p>
                 </div>
             </div>
-            <input id="cover-image" name="CoverImage" style="display: none;" type="file" accept="image/*" />
+            <input id="cover" name="cover" style="display: none;" type="file" accept="image/*" />
         </div>
         
         <div class="row">
@@ -146,11 +146,11 @@
         $("#ContactNumber").mask("(999) 999-9999*");
 
         $(".upload-wrapper").click(function () {
-            $("#cover-image").trigger("click");
+            $("#cover").trigger("click");
         })
 
-        $("#cover-image").change(function () {
-            var f = $("#cover-image")[0].files[0]
+        $("#cover").change(function () {
+            var f = $("#cover")[0].files[0]
             if (!f.type.match(/image.*/)) {
                 alert("Please select image");
                 return

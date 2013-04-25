@@ -1,0 +1,126 @@
+﻿        <header>
+            <div class="inner">
+                <div class="search-box">
+                    <form action="Search" method="GET">
+                        <input type="text" class="span4" id="searchString" name="searchString" placeholder="Search for Products, Stores, and People" onblur="setTimeout(function(){$('#searchresult').hide()}, 200)" onkeyup="search()">
+                        <div id ="searchresult">
+                            <table>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+                <div id="logo"></div>
+                <div id="header-menu">
+                    <div class="user-menu">
+                        @Html.Partial("_LoginPartial")
+                    </div>
+                    <ul class="noti5s">
+                        <li id="cart"><a href="#">
+                            <span class="cart-title">Cart</span> <span class="totalItems" data-bind="text: totalItems"></span></a>
+                            <div class="cart-container" style="display: none;">
+                                <div data-bind="style: { display:shops().length==0? 'none' : 'block'}">
+                                    <div data-bind="foreach: shops">
+                                        <div class="store">
+                                            <a href="#" class="store-title" data-bind="text: storeTitle, attr: { href: storeUrl }"></a>
+                                            <a href="/Order/Checkout" data-bind="attr:{'href': checkoutLink}" class="check-out">CHECK OUT</a>
+                                        </div>
+                                        <div data-bind="foreach: products">
+                                            <div class="product">
+                                                <img data-bind="attr:{src: productImage}">
+                                                <div class="info">
+                                                    <div class="title">
+                                                        <a href="#" data-bind="text: productTitle, attr: { href: productUrl }"></a>
+                                                    </div>
+                                                    <div class="price-quantity">
+                                                        $<span  data-bind="text: productPrice"></span>
+                                                        x&nbsp;<span class="badge" data-bind="text: productQuantity"></span></div>
+                                                    <div class="action"><a href="#" data-bind="click: function(data){$parent.removeProduct(data,$root)}">Remove</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <nav>
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <ul class="nav">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li><a href="/">Just for You</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="/">Home</a></li>
+                        }
+                        <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Discover<b class="caret"></b></a>
+                            <ul id="cateList" class="dropdown-menu">
+                            </ul>
+                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon icon-bell-alt"></i> News <span class="stat-fig">20</span></a>
+                                <ul id="cateList" class="dropdown-menu notif">
+
+                                    <li class="unread">
+                                        <a href="">
+                                            <div class="actor-img">
+                                                <img src="/Image/2" alt="">
+                                            </div>
+                                            <div class="message">
+                                                <div class="title">Caleido is now following you.</div>
+                                                <div class="date">19 mins ago</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <div class="actor-img">
+                                                <img src="/Image/2" alt="">
+                                            </div>
+                                            <div class="message">
+                                                <div class="title">Caleido is now following your store.</div>
+                                                <div class="date">45 mins ago</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <div class="actor-img">
+                                                <img src="/Image/2" alt="">
+                                            </div>
+                                            <div class="message">
+                                                <div class="title">Caleido is now following you.</div>
+                                                <div class="date">Friday 23, 2013 13:16:55</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <div class="actor-img">
+                                                <img src="/Image/2" alt="">
+                                            </div>
+                                            <div class="message">
+                                                <div class="title">Caleido is now following you.</div>
+                                                <div class="date">Friday 23, 2013 20:16:55</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="more">
+                                        <a href="">View All Recent Messages</a>
+                                    </li>
+                                
+                                </ul>
+                            </li>
+                            <li>@Html.ActionLink("Orders", "UserManage", "Order")</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>

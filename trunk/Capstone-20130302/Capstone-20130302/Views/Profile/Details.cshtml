@@ -46,45 +46,21 @@
             </div>
         </div>
         <div class="right-side">
-            <h4>Favorite categories</h4>
+            <h4>Following Stores</h4>
             <div class="chooser-wrapper">
                 <ul>
-                    <li>
-                        <div class="cate-wrapper">
+                    @foreach (var store in liststore)
+                    {
+                        <li>
+                            <div class="cate-wrapper">
 
-                            <div class="cover">
-                                <img class="cate" src="womens.jpg">
+                                <div class="cover">
+                                    <img class="cate" src="/Image/@store.ProfileImageId">
+                                </div>
+                                <div class="caption">@store.StoreName</div>
                             </div>
-                            <div class="caption">Men's</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="cate-wrapper">
-
-                            <div class="cover">
-                                <img class="cate" src="mens.jpg">
-                            </div>
-                            <div class="caption">Women's</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="cate-wrapper">
-
-                            <div class="cover">
-                                <img class="cate" src="necklace.jpg">
-                            </div>
-                            <div class="caption">Food &amp; Beverages</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="cate-wrapper">
-
-                            <div class="cover">
-                                <img class="cate" src="mens.jpg">
-                            </div>
-                            <div class="caption">Women's</div>
-                        </div>
-                    </li>
+                        </li>
+                    }
                 </ul>
             </div>
 
@@ -102,7 +78,7 @@
                         </div>
                         <div class="description">
                             <h4>@item.Name</h4>
-                            <p>@item.Description.Substring(0, 30)...</p>
+                            <p>@item.Description</p>
                         </div>
                    </a>
                 </div>
@@ -372,7 +348,7 @@
 
 
     $(document).ready(function () {
-        $.getJSON("/Profile/GetUserFollow/@Model.ProfileId", function (data) {
+        $.getJSON("/Profile/GetUserFollow/@_user.UserId", function (data) {
             if (data) {
                 $(".btn-follow").toggleClass("active");
             }
@@ -394,18 +370,18 @@
     $(".btn-follow").click(function () {
         var classname = $('.btn-follow').attr('class');
         if (classname == 'btn-follow active') {
-            $.getJSON("/Profile/DeleteUserFollow/@Model.ProfileId", function (data) {
+            $.getJSON("/Profile/DeleteUserFollow/@_user.UserId", function (data) {
                 if (data=='true') {
                     $(".btn-follow").toggleClass("active");
                     var num = $('#TotalFollow').text();
                     num = parseInt(num) - 1;
                     $('#TotalFollow').text(num);
                     @if (_user != null)
-                     {
+                    {
                          <text>
                              $("#user_@_user.UserId").remove();
                         </text>
-                     }
+                    }
                 }
                 else {
                     alert(data);
@@ -413,7 +389,7 @@
             });
         }
         else {
-            $.getJSON("/Profile/AddUserFollow/@Model.ProfileId", function (data) {
+            $.getJSON("/Profile/AddUserFollow/@_user.UserId", function (data) {
                 if (data=='true') {
                     $(".btn-follow").toggleClass("active");
                     var num = $('#TotalFollow').text();

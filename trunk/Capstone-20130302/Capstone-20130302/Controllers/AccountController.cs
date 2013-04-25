@@ -28,7 +28,7 @@ namespace Capstone_20130302.Controllers
 
         public ActionResult Upgrade()
         {
-            if (User.IsInRole("BUYER"))
+            if (!User.IsInRole(Constant.ROLE_ADMIN) && !User.IsInRole(Constant.ROLE_SELLER))
             {
                 return View();
             }
@@ -38,8 +38,19 @@ namespace Capstone_20130302.Controllers
         [HttpPost]
         public ActionResult MakeUpgrade()
         {
+            Roles.RemoveUserFromRole(WebSecurity.CurrentUserName, Constant.ROLE_BUYER);
             Roles.AddUserToRole(WebSecurity.CurrentUserName, Constant.ROLE_SELLER);
             return RedirectToAction("Index", "Store");
+        }
+
+        public ActionResult GetUserProfile(int UserId = 0)
+        {
+            UserProfile user = db.UserProfiles.Find(UserId);
+            if (user == null || (user !=null && user.Profile == null))
+            {
+                return Json("Can't find user", JsonRequestBehavior.AllowGet);
+            }
+            return Json(user.Profile, JsonRequestBehavior.AllowGet);
         }
 
         [AllowAnonymous]

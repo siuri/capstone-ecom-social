@@ -41,24 +41,7 @@
                         </div>
                         <div class="description">
                             <h4>@pick.Product.Name</h4>
-                            <p>@pick.Product.Description.Substring(0, 30)...</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="product">
-                    <a href="/Product/Id/@pick.Product.ProductId">
-                        <div class="image">
-                            <div class="img" style="background: url(/Image/@pick.Product.ProductImages.ElementAt(0).ImageId)"></div>
-                            <div class="detail">
-                                <div class="price">
-                                    $@pick.Product.Price
-                                </div>
-                                <div class="buttons">View details</div>
-                            </div>
-                        </div>
-                        <div class="description">
-                            <h4>@pick.Product.Name</h4>
-                            <p>@pick.Product.Description.Substring(0, 30)...</p>
+                            <p>@pick.Product.Description</p>
                         </div>
                     </a>
                 </div>
@@ -83,10 +66,13 @@
                         </div>
                         <div class="description">
                             <h4>@item.Name</h4>
-                            <p>@item.Description.Substring(0, 30)...</p>
+                            <p>@item.Description</p>
                         </div>
                    </a>
                 </div>
+            }
+            @foreach (var item in Model)
+            {
                 <div class="product cate-@item.CategoryId">
                     <a href="/Product/Id/@item.ProductId">
                         <div class="image">
@@ -100,10 +86,13 @@
                         </div>
                         <div class="description">
                             <h4>@item.Name</h4>
-                            <p>@item.Description.Substring(0, 30)...</p>
+                            <p>@item.Description</p>
                         </div>
                    </a>
                 </div>
+            }
+            @foreach (var item in Model)
+            {
                 <div class="product cate-@item.CategoryId">
                     <a href="/Product/Id/@item.ProductId">
                         <div class="image">
@@ -117,7 +106,67 @@
                         </div>
                         <div class="description">
                             <h4>@item.Name</h4>
-                            <p>@item.Description.Substring(0, 30)...</p>
+                            <p>@item.Description</p>
+                        </div>
+                   </a>
+                </div>
+            }
+            @foreach (var item in Model)
+            {
+                <div class="product cate-@item.CategoryId">
+                    <a href="/Product/Id/@item.ProductId">
+                        <div class="image">
+                            <img src="/Image/@item.ProductImages.First().ImageId"/>
+                            <div class="detail">
+                                <div class="price">
+                                    $@item.Price
+                                </div>
+                                <div class="buttons">View details</div>
+                            </div>
+                        </div>
+                        <div class="description">
+                            <h4>@item.Name</h4>
+                            <p>@item.Description</p>
+                        </div>
+                   </a>
+                </div>
+            }
+            @foreach (var item in Model)
+            {
+                <div class="product cate-@item.CategoryId">
+                    <a href="/Product/Id/@item.ProductId">
+                        <div class="image">
+                            <img src="/Image/@item.ProductImages.First().ImageId"/>
+                            <div class="detail">
+                                <div class="price">
+                                    $@item.Price
+                                </div>
+                                <div class="buttons">View details</div>
+                            </div>
+                        </div>
+                        <div class="description">
+                            <h4>@item.Name</h4>
+                            <p>@item.Description</p>
+                        </div>
+                   </a>
+                </div>
+            }
+            @foreach (var item in Model)
+            {
+                <div class="product cate-@item.CategoryId">
+                    <a href="/Product/Id/@item.ProductId">
+                        <div class="image">
+                            <img src="/Image/@item.ProductImages.First().ImageId"/>
+                            <div class="detail">
+                                <div class="price">
+                                    $@item.Price
+                                </div>
+                                <div class="buttons">View details</div>
+                            </div>
+                        </div>
+                        <div class="description">
+                            <h4>@item.Name</h4>
+                            <p>@item.Description</p>
                         </div>
                    </a>
                 </div>

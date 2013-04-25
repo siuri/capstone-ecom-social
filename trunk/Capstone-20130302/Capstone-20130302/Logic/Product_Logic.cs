@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Capstone_20130302.Models;
 using PagedList;
+using Capstone_20130302.Constants;
 
 namespace Capstone_20130302.Logic
 {
@@ -51,20 +52,63 @@ namespace Capstone_20130302.Logic
         /// <param name="ID">ID Product</param>
         /// <param name="number">Amount row select</param>
         /// <returns>List <UserProfile></returns>
-        public static List<UserProfile> GetListUserProfileRandom(int type, int ID, int number)
+        public static List<UserProfile> GetListUserProfileRandom(int type, int productId, int number, int userId = 0)
         {
             List<UserProfile> listuser = new List<UserProfile>();
+            List<UserProfile> followedUsers = Follow_Logic.GetFollowedUsers(userId);
             switch (type)
             {
                 case 1:
-                    listuser = (from ProductLike pro in db.ProductLikes
-                                where pro.ProductId == ID
-                                select pro.User).Take(number).Take(5).ToList();
+                    if (userId <= 0)
+                    {
+                        // Not login user
+                        listuser = (from ProductLike pro in db.ProductLikes
+                                    where pro.ProductId == productId orderby pro.ProductLikeId descending
+                                    select pro.User).Distinct().Take(number).ToList();
+                    }
+                    else
+                    {
+                        // Login user
+                        
+                        List<UserProfile> likeClickedUsers = (from ProductLike pro in db.ProductLikes
+                                    where pro.ProductId == productId orderby pro.ProductLikeId descending
+                                    select pro.User).Distinct().ToList();
+                        listuser = (from f in followedUsers
+                                    join l in likeClickedUsers on f.UserId equals l.UserId
+                                    select l).ToList();
+                        foreach (var followedUser in followedUsers)
+                        {
+                            likeClickedUsers.RemoveAll(u => u.UserId == followedUser.UserId);
+                        }
+                        listuser.AddRange(likeClickedUsers);
+                    }
+                    
                     break;
                 case 2:
-                    listuser = (from OrderDetail order in db.OrderDetails
-                                where order.ProductId == ID
-                                select order.Order.Users).Take(5).Distinct().ToList();
+                    if (userId <= 0)
+                    {
+                        listuser = (from OrderDetail order in db.OrderDetails
+                                    where order.ProductId == productId
+                                    orderby order.OrderId descending
+                                    select order.Order.Users).Distinct().Take(number).ToList();
+                    }
+                    else
+                    {
+                        // Login user
+                        List<UserProfile> orderedUsers = (from OrderDetail order in db.OrderDetails
+                                                          where order.ProductId == productId
+                                                          orderby order.OrderId descending
+                                                          select order.Order.Users).Distinct().ToList();
+                        listuser = (from f in followedUsers
+                                    join o in orderedUsers on f.UserId equals o.UserId
+                                    select o).ToList();
+                        foreach (var followedUser in followedUsers)
+                        {
+                            orderedUsers.RemoveAll(u => u.UserId == followedUser.UserId);
+                        }
+                        listuser.AddRange(orderedUsers);
+                    }
+                    
                     break;
                 default:
                     break;
@@ -115,13 +159,13 @@ namespace Capstone_20130302.Logic
             if (current != null)
             {
                 list = (from Product pro in db.Products
-                        where pro.CategoryId == current.CategoryId && current.StoreId == pro.StoreId && pro.ProductId != current.ProductId && pro.StatusId == 2
+                        where pro.CategoryId == current.CategoryId && current.StoreId == pro.StoreId && pro.ProductId != current.ProductId && pro.StatusId == Constant.STATUS_ACTIVE
                         select pro ).Take(number).ToList();
             }
             if (list.Count < number)
             {
                 var temp = (from Product pro in db.Products
-                            where pro.CategoryId == current.CategoryId && current.StoreId != pro.StoreId && pro.ProductId != current.ProductId && pro.StatusId == 2
+                            where pro.CategoryId == current.CategoryId && current.StoreId != pro.StoreId && pro.ProductId != current.ProductId && pro.StatusId == Constant.STATUS_ACTIVE
                             select pro).Take(number - list.Count).ToList();
                 list.AddRange(temp);
             }

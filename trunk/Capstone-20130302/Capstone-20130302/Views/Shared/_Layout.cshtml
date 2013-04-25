@@ -28,73 +28,7 @@
 </head>
 <body>
     <div id="content-header">
-        <header>
-            <div class="inner">
-                <div class="search-box">
-                    <form action="Search" method="GET">
-                        <input type="text" class="span4" id="searchString" name="searchString" placeholder="Search for Products, Stores, and People" onblur="setTimeout(function(){$('#searchresult').hide()}, 200)" onkeyup="search()">
-                        @*<input type="text" class="span4" id="searchString" name="searchString" placeholder="Search for Products, Stores, and People" onkeyup="search()">*@
-                        <div id="searchresult">
-                            <table>
-                                <tbody></tbody>
-                            </table>
-                        </div>
-                    </form>
-                </div>
-                <div id="logo"></div>
-                <div id="header-menu">
-                    <div class="user-menu">
-                        @Html.Partial("_LoginPartial")
-                    </div>
-                    <ul class="noti5s">
-                        <li id="cart"><a href="#">
-                            <img src="/Images/icon-cart.png"><span class="badge badge-inverse">3</span></a>
-                            <div class="cart-container" style="display: none;">
-                                <div data-bind="style:{display:shops().length==0?'none':'block'}">
-                                    <div data-bind="foreach: shops">
-                                        <div class="store">
-                                            <a href="#" class="store-title" data-bind="text: storeTitle"></a>
-                                            <a href="#" class="check-out">CHECK OUT</a>
-                                        </div>
-                                        <div data-bind="foreach: products">
-                                            <div class="product">
-                                                <img data-bind="attr:{src: productImage}">
-                                                <div class="info">
-                                                    <div class="title">
-                                                        <a href="#" data-bind="text: productTitle"></a>
-                                                    </div>
-                                                    <div class="price-quantity">
-                                                        $<span data-bind="text: productPrice"></span>
-                                                        x&nbsp;<span class="badge" data-bind="text: productQuantity"></span>
-                                                    </div>
-                                                    <div class="action"><a href="#" data-bind="click: function(data){$parent.removeProduct(data,$root)}">Remove</a></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </header>
-        <nav>
-            <div class="navbar">
-                <div class="navbar-inner">
-                    <ul class="nav">
-                        <li>@Html.ActionLink("Discover", "Discover", "Home")</li>
-                        <li>@Html.ActionLink("Notifications", "Notification", "Home")</li>
-                        <li>@Html.ActionLink("Orders", "UserManage", "Order")</li>
-                        <li><a href="#">Link</a></li>
-                        <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Discover<b class="caret"></b></a>
-                            <ul id="cateList" class="dropdown-menu">
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        @Html.Partial("_Header");
     </div>
     <div class="page">
         <div class="statistic-content-header">
