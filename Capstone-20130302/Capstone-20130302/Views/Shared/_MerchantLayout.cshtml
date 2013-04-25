@@ -51,12 +51,9 @@
             <div class="navbar">
                 <div class="navbar-inner">
                     <ul class="nav">
+                        <li>@Html.ActionLink("Main Site", "Index", "Home")</li>
                         <li>@Html.ActionLink("Store Management", "Index", "Store")</li>
-                        <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Switch to Store<b class="caret"></b></a><ul class="dropdown-menu">
-                            <li><a href="#">Sub menu1</a></li>
-                            <li><a href="#">Sub menu1</a></li>
-                        </ul>
-                        </li>
+                        <li>@Html.ActionLink("Order Management", "SellerManage", "Order")</li>
                     </ul>
                 </div>
             </div>

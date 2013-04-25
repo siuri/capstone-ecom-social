@@ -56,7 +56,6 @@ namespace Capstone_20130302.Controllers
         {
             var sellerop = db.StoreStatuses.Where(s => s.StatusId == Constant.STATUS_ACTIVE || s.StatusId == Constant.STATUS_INACTIVE);
             ViewBag.StatusID = new SelectList(sellerop, "StatusId", "Name");
-            return View(db.Stores.ToList());
             List<Store> store = db.Stores.Where(s => s.OwnerId == WebSecurity.CurrentUserId).ToList();
             return View(store);       
         }
@@ -71,6 +70,11 @@ namespace Capstone_20130302.Controllers
             {
                 return HttpNotFound();
             }
+            if (store.StatusId == Constant.STATUS_BANNED || store.StatusId == Constant.STATUS_INACTIVE)
+            {
+                ViewBag.Message = "Sorry, this store is not available.";
+                return View("Error");
+            }
             if (User.Identity.IsAuthenticated != false)
             {
                 UserProfile user = UserProfiles_Logic.GetUserProfileByUserName(User.Identity.Name);
@@ -81,7 +85,7 @@ namespace Capstone_20130302.Controllers
                 ViewBag.detailuser = null;
             }
             List<UserProfile> listprofile = new List<UserProfile>();
-            listprofile = Follow_Logic.GetListFollow(3, id,5);
+            listprofile = Follow_Logic.GetFollowingUsersOfType(3, id,5);
             ViewBag.listprofile = listprofile;
             return View(store);
         }
@@ -168,7 +172,7 @@ namespace Capstone_20130302.Controllers
             Guid guid = new Guid();
             var path = "";
             List<Image> images = new List<Image>();
-            
+            Image img = null;
             // Read each file from Request, create each corresponding Image object and added to Image list
             for (int i = 0; i < Request.Files.AllKeys.Length; i++)
             {
@@ -178,18 +182,12 @@ namespace Capstone_20130302.Controllers
                     guid = Guid.NewGuid();
                     path = Path.Combine(Server.MapPath("~/App_Data/Images"), guid.ToString());
                     hpf.SaveAs(path);
-                    images.Add(new Image { Path = guid.ToString() });
+                    img = new Image { Path = guid.ToString() };
+                    images.Add(img);
                 }
             }
-            // Set images to Store object
-            store.CoverImage = images.First();
-            store.ProfileImage = images.Last();
-
-            store.TotalFollowers = 0;
-            store.TotalFollowings = 0;
-            store.Address = address;
-            store.CreateDate = DateTime.Now;
-
+            db.SaveChanges();
+            
             if (createStatus == 2)
                 store.StatusId = Constant.STATUS_ACTIVE;
             else if (createStatus == 1)
@@ -197,6 +195,16 @@ namespace Capstone_20130302.Controllers
 
             if (ModelState.IsValid)
             {
+                // Set images to Store object
+                store.CoverImage = images.First();
+                store.ProfileImage = images.Last();
+
+                store.TotalFollowers = 0;
+                store.TotalFollowings = 0;
+                store.Address = address;
+                store.CreateDate = DateTime.Now;
+                store.OwnerId = WebSecurity.CurrentUserId;
+
                 db.Stores.Add(store);
                 db.SaveChanges();
                 return RedirectToAction("Index");

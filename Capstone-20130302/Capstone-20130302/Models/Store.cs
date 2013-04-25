@@ -42,6 +42,7 @@ namespace Capstone_20130302.Models
         public float ShipFee { get; set; }
 
         [ScaffoldColumn(false)]
+        [DisplayName("Followers")]
         public int TotalFollowers { get; set; }
 
         [ScaffoldColumn(false)]

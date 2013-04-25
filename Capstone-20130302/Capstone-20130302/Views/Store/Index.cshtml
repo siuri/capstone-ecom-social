@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<Capstone_20130302.Models.Store>
-
+@using Capstone_20130302.Constants
 @{
     ViewBag.Title = "Stores";
     Layout = "~/Views/Shared/_MerchantLayout.cshtml";
@@ -62,9 +62,7 @@
                         @Html.DisplayNameFor(model => model.StoreName)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.CreateDate)
-                    </th>
-                    <th>Open Order
+                        @Html.DisplayNameFor(model => model.TotalFollowers)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Status)
@@ -82,17 +80,18 @@
                             @Html.DisplayFor(modelItem => item.StoreName)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.CreateDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ContactNumber)
+                            @Html.DisplayFor(modelItem => item.TotalFollowers)
                         </td>
                         <td data-sid="@item.StoreId" id= "status-@item.StoreId">
                             @Html.DisplayFor(modelItem => item.Status.Name)
                         <td data-sid="@item.StoreId">
-                            <a href="Store/Edit/@item.StoreId"><i class="icon-edit"></i> Edit</a>
+                            <a href="Product?sid=@item.StoreId"><i class="icon-edit"></i> Browse</a>
                             <a href="Store/Id/@item.StoreId"><i class="icon-search"></i> View</a>
-                             @Html.DropDownList("StatusID", (SelectList)ViewBag.StatusID, "- Update -", new { id = "n-status-" + @item.StoreId, @class = "span2 changeStatus", data_sid = @item.StoreId })
+                            <a href="Store/Edit/@item.StoreId"><i class="icon-edit"></i> Edit</a>
+                            @if (item.StatusId != Constant.STATUS_BANNED)
+                            {
+                                @Html.DropDownList("StatusID", (SelectList)ViewBag.StatusID, "- Update -", new { id = "n-status-" + @item.StoreId, @class = "span2 changeStatus", data_sid = @item.StoreId })
+                            }
                             @*<a href="Store/Delete/@item.StoreId"><i class="icon-trash"></i></a>*@
                         </td>
                     </tr>
@@ -106,7 +105,7 @@ else
 {
     <div class="dl-message">
         <div class="head">
-            <h4>No Store Available</h4>
+            <h4>Let your Business started</h4>
         </div>
         <div class="body">
             You haven't create any store. To start your great business with SocialBuy, please open a new one.

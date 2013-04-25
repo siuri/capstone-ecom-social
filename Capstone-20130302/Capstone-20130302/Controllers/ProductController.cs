@@ -113,6 +113,11 @@ namespace Capstone_20130302.Controllers
             {
                 return HttpNotFound();
             }
+            if (product.StatusId == Constant.STATUS_BANNED || product.StatusId == Constant.STATUS_INACTIVE)
+            {
+                ViewBag.Message = "Sorry, this product is not available.";
+                return View("Error");
+            }
             if (User.Identity.IsAuthenticated != false)
             {
                 UserProfile user = UserProfiles_Logic.GetUserProfileByUserName(User.Identity.Name);
@@ -127,10 +132,10 @@ namespace Capstone_20130302.Controllers
             List<Product> listrecommend = Product_Logic.GetListProdcutRecommend(id, 4);
             ViewBag.listrecommend = listrecommend;
             // List user like product
-            List<UserProfile> listlike = Product_Logic.GetListUserProfileRandom(1, id, 5);
+            List<UserProfile> listlike = Product_Logic.GetListUserProfileRandom(1, id, 5, WebSecurity.IsAuthenticated ? WebSecurity.CurrentUserId : 0);
             ViewBag.listlike = listlike;
             // List user buy product
-            List<UserProfile> listbuy = Product_Logic.GetListUserProfileRandom(2, id, 5);
+            List<UserProfile> listbuy = Product_Logic.GetListUserProfileRandom(2, id, 5, WebSecurity.IsAuthenticated ? WebSecurity.CurrentUserId : 0);
             ViewBag.listbuy = listbuy;
             // List comment product
             List<Comment> listcmt = Comment_Logic.GetListCommentByProductID(id);
@@ -293,7 +298,7 @@ namespace Capstone_20130302.Controllers
                         sb.ToString(), ex
                     ); // Add the original exception as the innerException
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { sid = sid });
             }
 
             return View(product);

@@ -60,7 +60,7 @@ body {
   width: auto;
 }
 #content-header > header > .inner #header-menu ul.noti5s {
-  float: left;
+  float: right;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -68,53 +68,45 @@ body {
 #content-header > header > .inner #header-menu ul.noti5s li {
   float: left;
   height: 50px;
-  width: 59px;
-  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #d26852), color-stop(1, #ffffff));
-  background: -ms-linear-gradient(bottom, #d26852, #ffffff);
-  background: -moz-linear-gradient(center bottom, #d26852 0%, #ffffff 100%);
-  background: -o-linear-gradient(#ffffff, #d26852);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#d26852', GradientType=0);
-  background: #b84c3f;
-  /* Old browsers */
-
-  background: -moz-linear-gradient(top, #b84c3f 0%, #d26852 100%);
-  /* FF3.6+ */
-
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #b84c3f), color-stop(100%, #d26852));
-  /* Chrome,Safari4+ */
-
-  background: -webkit-linear-gradient(top, #b84c3f 0%, #d26852 100%);
-  /* Chrome10+,Safari5.1+ */
-
-  background: -o-linear-gradient(top, #b84c3f 0%, #d26852 100%);
-  /* Opera 11.10+ */
-
-  background: -ms-linear-gradient(top, #b84c3f 0%, #d26852 100%);
-  /* IE10+ */
-
-  background: linear-gradient(to bottom, #b84c3f 0%, #d26852 100%);
-  /* W3C */
-
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@from', endColorstr='@to', GradientType=0);
-  /* IE6-9 */
-
-  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+  width: 75px;
+  border-left: solid 1px #CCC;
   display: block;
   position: relative;
 }
 #content-header > header > .inner #header-menu ul.noti5s #cart > a {
-  height: 50px;
-  width: 59px;
+  
   display: block;
-  position: absolute;
 }
+#content-header > header > .inner #header-menu ul.noti5s #cart > a span.totalItems {
+  height: 18px;
+  width: 18px;
+  position: absolute;
+  right: 7px;
+  top: 12px;
+  border: solid 3px #FFCFCF;
+  display: block;
+  text-align: center;
+  font-size: 10px;
+  line-height: 1.9;
+  background: #D26752;
+  color: #FFF;
+  border-radius: 300px;
+}
+
+#content-header > header > .inner #header-menu ul.noti5s #cart > a span.cart-title {
+  position: absolute;
+  left: 11px;
+  top: 12px;
+  color: #777;
+}
+
 #content-header > header > .inner #header-menu ul.noti5s #cart > a img {
   position: absolute;
   left: 13px;
-  top: 13px;
+  top: 17px;
   border: none;
+  width: 25px;
+
 }
 #content-header > header > .inner #header-menu ul.noti5s #cart > a .badge {
   position: absolute;
@@ -126,21 +118,21 @@ body {
   display: none;
   width: 300px;
   padding-top: 15px;
-  background: #CC664B;
+  background-image: linear-gradient(to bottom, #58586F, #353550);
   position: absolute;
   right: 0;
   top: 50px;
-  color: white;
+  color: rgba(255, 255, 255, 0.63);
 }
 #content-header > header > .inner #header-menu ul.noti5s #cart .cart-container a {
   color: white;
 }
 #content-header > header > .inner #header-menu ul.noti5s #cart .cart-container .store {
-  background: #9E4136;
+  background-image: linear-gradient(to bottom, #27273C, #252538);
   width: 100%;
   height: 35px;
   line-height: 35px;
-  font-size: 16px;
+  font-size: 14px;
   -ms-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -158,7 +150,7 @@ body {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  border-bottom: 1px solid #DC9683;
+  border-bottom: 1px solid #7A7AA5;
 }
 #content-header > header > .inner #header-menu ul.noti5s #cart .cart-container .product:last-child {
   border: none;
@@ -193,10 +185,10 @@ body {
 }
 #content-header > header > .inner #header-menu ul.noti5s #cart .cart-container .product .info .price-quantity span.badge {
   background: white;
-  color: #9C4333;
+  color: #353550;
 }
 #content-header > header > .inner #header-menu ul.noti5s #cart .cart-container .product .info .action {
-  float: left;
+  float: right;
 }
 #content-header > header > .inner #header-menu ul.noti5s #cart .cart-container .product .info .action a {
   opacity: 0.4;
@@ -205,8 +197,11 @@ body {
   opacity: 1;
 }
 #content-header > header > .inner #header-menu .user-menu {
-  height: 60px;
-  float: left;
+  margin-top: 8px;
+  position: absolute;
+  right: 90px;
+  text-align: right;
+  height: 40px;
 }
 #content-header > header > .inner #header-menu .user-menu .btn-group {
   margin-top: 10px;
