@@ -136,7 +136,7 @@
                                 href=""
                                 class=""><i class="icon-facebook"></i> Share</a>
                             @*ojbect attribute :cho them nhung du lieu ma minh muon truyen them vao *@
-                            @if (item.StatusId != Constant.STATUS_BANNED)
+                            @if (item.StatusId != Constant.STATUS_BANNED && item.Store.StatusId != Constant.STATUS_PENDING && item.Store.StatusId != Constant.STATUS_INACTIVE)
                             {
                                 @Html.DropDownListFor(modelItem => item.StatusId, ViewBag.StatusID as SelectList, "- Update -", new { id = "n-status-" + @item.ProductId, @class = "changeStatus span2", data_pid = @item.ProductId })
                             }
