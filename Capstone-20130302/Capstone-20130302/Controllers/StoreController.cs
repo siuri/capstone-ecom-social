@@ -196,7 +196,7 @@ namespace Capstone_20130302.Controllers
             db.SaveChanges();
             
             if (createStatus == 2)
-                store.StatusId = Constant.STATUS_ACTIVE;
+                store.StatusId = Constant.STATUS_PENDING;
             else if (createStatus == 1)
                 store.StatusId = Constant.STATUS_INACTIVE;
 
