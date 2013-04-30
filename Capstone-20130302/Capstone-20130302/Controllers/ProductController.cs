@@ -119,6 +119,11 @@ namespace Capstone_20130302.Controllers
                 ViewBag.Message = "Sorry, this product is not available.";
                 return View("Error");
             }
+            if (store.StatusId == Constant.STATUS_PENDING)
+            {
+                ViewBag.Message = "Sorry, The store of product is pending.";
+                return View("Error");
+            }
             if (User.Identity.IsAuthenticated != false)
             {
                 UserProfile user = UserProfiles_Logic.GetUserProfileByUserName(User.Identity.Name);
