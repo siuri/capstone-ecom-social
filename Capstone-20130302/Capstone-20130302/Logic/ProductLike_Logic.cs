@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Capstone_20130302.Models;
+using Capstone_20130302.Constants;
 
 namespace Capstone_20130302.Logic
 {
@@ -26,6 +27,7 @@ namespace Capstone_20130302.Logic
                 item.UserId = userID;
                 db.ProductLikes.Add(item);
                 Product pro = db.Products.Find(productID);
+
                 if (pro.TotalLikes != null)
                 {
                     pro.TotalLikes = pro.TotalLikes + 1;
@@ -35,6 +37,12 @@ namespace Capstone_20130302.Logic
                     pro.TotalLikes = 1;
                 }
                 db.SaveChanges();
+
+                // Publish Message
+                bool pubResult = Message_Logic.PublishMessage(
+                    userID, Constant.PRONOUN_TYPE_USER,
+                    productID, Constant.PRONOUN_TYPE_PRODUCT,
+                    Constant.MESSAGE_TYPE_LIKE);
                 return true;
             }
             catch (Exception)
@@ -128,9 +136,10 @@ namespace Capstone_20130302.Logic
                                     select item).FirstOrDefault();
                 if (pro != null)
                 {
+                    Product _pro = db.Products.Find(pro.ProductId);
                     db.ProductLikes.Attach(pro);
                     db.ProductLikes.Remove(pro);
-                    Product _pro = db.Products.Find(pro.ProductId);
+                    
                     if (_pro.TotalLikes != null)
                     {
                         _pro.TotalLikes = _pro.TotalLikes - 1;

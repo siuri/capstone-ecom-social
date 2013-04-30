@@ -28,9 +28,10 @@ namespace Capstone_20130302.Controllers
                 ViewBag.listpro = null;
             }
             ViewBag.EditorPicks = db.EditorPicks.ToList();
-            var products = db.Products.ToList();
+            var products = db.Products.OrderByDescending(p => p.CreateDate).ToList();
             return View(products);
         }
+
         public ActionResult GetProductPage(int page)
         {
             if (User.Identity.IsAuthenticated)

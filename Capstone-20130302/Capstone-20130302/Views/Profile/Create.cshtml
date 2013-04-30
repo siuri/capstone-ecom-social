@@ -33,6 +33,10 @@
                 </div>
                 <legend>Personal Information</legend>
                 <div class="controls controls-row">
+                    <label for="" class="span4">Display Name</label>
+                    <label for="" class="span4">Birthday</label>
+                </div>
+                <div class="controls controls-row">
                     @Html.TextBoxFor(model => model.DisplayName, new { placeholder = @Html.DisplayNameFor(model => model.DisplayName), title = @Html.DisplayNameFor(model => model.DisplayName), @class = "span4" })
                     @Html.TextBoxFor(model => model.DateOfBirth, new { placeholder = @Html.DisplayNameFor(model => model.DateOfBirth), title = @Html.DisplayNameFor(model => model.DateOfBirth), @class = "span2" })
                 </div>

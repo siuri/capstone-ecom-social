@@ -37,6 +37,7 @@ namespace Capstone_20130302.Models
         public DbSet<ProductLike> ProductLikes { get; set; }
         public DbSet<EditorPick> EditorPicks { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<MessageRecipient> MessageRecipients { get; set; }
         public DbSet<MessageType> MessageTypes { get; set; }
         public DbSet<PronounsType> PronounsTypes { get; set; }
 
