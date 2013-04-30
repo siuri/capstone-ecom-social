@@ -88,7 +88,7 @@
                             <a href="Product?sid=@item.StoreId"><i class="icon-edit"></i> Browse</a>
                             <a href="Store/Id/@item.StoreId"><i class="icon-search"></i> View</a>
                             <a href="Store/Edit/@item.StoreId"><i class="icon-edit"></i> Edit</a>
-                            @if (item.StatusId != Constant.STATUS_BANNED)
+                            @if (item.StatusId != Constant.STATUS_BANNED && item.StatusId != Constant.STATUS_PENDING)
                             {
                                 @Html.DropDownList("StatusID", (SelectList)ViewBag.StatusID, "- Update -", new { id = "n-status-" + @item.StoreId, @class = "span2 changeStatus", data_sid = @item.StoreId })
                             }
