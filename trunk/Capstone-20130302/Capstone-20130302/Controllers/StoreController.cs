@@ -123,6 +123,8 @@ namespace Capstone_20130302.Controllers
                 db.Entry(store).State = EntityState.Modified;
                 db.SaveChanges();
 
+                // Publish Message
+                Message_Logic.PublishMessage(WebSecurity.CurrentUserId, Constant.PRONOUN_TYPE_USER, ID, Constant.PRONOUN_TYPE_STORE, Constant.MESSAGE_TYPE_FOLLOW);
                 return Json("true", JsonRequestBehavior.AllowGet);
             }
             return Json("false", JsonRequestBehavior.AllowGet);

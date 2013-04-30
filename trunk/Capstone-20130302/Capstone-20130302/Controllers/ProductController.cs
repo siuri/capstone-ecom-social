@@ -89,7 +89,7 @@ namespace Capstone_20130302.Controllers
                 return View("Error");
             }
             List<ProductDisplay> list= Product_Logic.GetListProdcutByCategoryID(ID,1,Constant.PAGE_SIZE);
-            ViewBag.ID = ID;
+            ViewBag.Category = Category;
             ViewBag.TotalRow = Product_Logic.GetTotalRowsProdcutByCategoryID(ID);
             return View(list);
         }
@@ -113,7 +113,8 @@ namespace Capstone_20130302.Controllers
             {
                 return HttpNotFound();
             }
-            if (product.StatusId == Constant.STATUS_BANNED || product.StatusId == Constant.STATUS_INACTIVE)
+            Store store = product.Store;
+            if (product.StatusId == Constant.STATUS_BANNED || product.StatusId == Constant.STATUS_INACTIVE || store.StatusId == Constant.STATUS_BANNED || store.StatusId == Constant.STATUS_INACTIVE)
             {
                 ViewBag.Message = "Sorry, this product is not available.";
                 return View("Error");
@@ -187,7 +188,15 @@ namespace Capstone_20130302.Controllers
                 return Json("You must login to comment");
             }
             cmt.CreateDate = DateTime.Now;
-            cmt.UserId = UserProfiles_Logic.GetUserProfileByUserName(User.Identity.Name).UserId;
+            cmt.UserId = WebSecurity.CurrentUserId;
+
+            // publish message to subscribers
+            UserProfile productOwner = db.Products.Find(cmt.ProductId).Store.Owner;
+            bool pubResult = Message_Logic.PublishMessage(
+                productOwner.UserId, Constant.PRONOUN_TYPE_USER,
+                cmt.ProductId.HasValue ? cmt.ProductId.Value : 1, Constant.PRONOUN_TYPE_PRODUCT, 
+                Constant.MESSAGE_TYPE_COMMENT);
+
             if (Comment_Logic.AddNewComment(cmt) > 0)
             {
                 return Json("true");   
@@ -267,6 +276,7 @@ namespace Capstone_20130302.Controllers
                 product.CategoryId = cid;
                 product.StoreId = sid;
                 product.ProductImages = images;
+                product.CreateDate = DateTime.Now;
 
                 if (createStatus == 2)
                     product.StatusId = Constant.STATUS_ACTIVE;

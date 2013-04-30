@@ -27,5 +27,16 @@ namespace Capstone_20130302.Constants
 
         public const string ST_OK = "OK";
         public const string ST_NG = "NG";
+
+        public const int MESSAGE_TYPE_FOLLOW = 1;
+        public const int MESSAGE_TYPE_COMMENT = 2;
+        public const int MESSAGE_TYPE_LIKE = 3;
+        public const int MESSAGE_TYPE_ORDER = 4;
+        public const int MESSAGE_TYPE_NEW_PRODUCT = 5;
+
+        public const int PRONOUN_TYPE_USER = 1;
+        public const int PRONOUN_TYPE_CATEGORY = 2;
+        public const int PRONOUN_TYPE_STORE = 3;
+        public const int PRONOUN_TYPE_PRODUCT = 4;
     }
 }

@@ -197,7 +197,7 @@ namespace Capstone_20130302.Logic
                 temp.Name = c.Name;
                 temp.Price = c.Price;
                 temp.ProductId = c.ProductId;
-                temp.Description = c.Description.Substring(0,30);
+                temp.Description = c.Description;
                 temp.CategoryId = (int)c.CategoryId;
                 temp.Images = c.ProductImages.ElementAt(0).ImageId.ToString();
                 list.Add(temp);

@@ -51,76 +51,88 @@
             <div class="navbar">
                 <div class="navbar-inner">
                     <ul class="nav">
+                        <li><a href="/">Home</a></li>
+                        
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li><a href="/">Just for You</a></li>
-                        }
-                        else
-                        {
-                            <li><a href="/">Home</a></li>
-                        }
-                        <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Discover<b class="caret"></b></a>
-                            <ul id="cateList" class="dropdown-menu">
-                            </ul>
-                        </li>
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon icon-bell-alt"></i> News <span class="stat-fig">20</span></a>
-                                <ul id="cateList" class="dropdown-menu notif">
-
-                                    <li class="unread">
-                                        <a href="">
-                                            <div class="actor-img">
-                                                <img src="/Image/2" alt="">
-                                            </div>
-                                            <div class="message">
-                                                <div class="title">Caleido is now following you.</div>
-                                                <div class="date">19 mins ago</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="">
-                                            <div class="actor-img">
-                                                <img src="/Image/2" alt="">
-                                            </div>
-                                            <div class="message">
-                                                <div class="title">Caleido is now following your store.</div>
-                                                <div class="date">45 mins ago</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="">
-                                            <div class="actor-img">
-                                                <img src="/Image/2" alt="">
-                                            </div>
-                                            <div class="message">
-                                                <div class="title">Caleido is now following you.</div>
-                                                <div class="date">Friday 23, 2013 13:16:55</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="">
-                                            <div class="actor-img">
-                                                <img src="/Image/2" alt="">
-                                            </div>
-                                            <div class="message">
-                                                <div class="title">Caleido is now following you.</div>
-                                                <div class="date">Friday 23, 2013 20:16:55</div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="more">
+                            <li><a href="/User/Id/@WebSecurity.CurrentUserId">My Profile</a></li>
+                            <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Inbox <span class="stat-fig" id="fig"></span></a>
+                                <ul id="notifList" class="dropdown-menu notif">
+                                    <li class="more" data-mid="0">
                                         <a href="">View All Recent Messages</a>
                                     </li>
-                                
                                 </ul>
                             </li>
                             <li>@Html.ActionLink("Orders", "UserManage", "Order")</li>
                         }
+                        <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Browse<b class="caret"></b></a>
+                            <ul id="cateList" class="dropdown-menu">
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
+        <script src="/Scripts/moment.min.js"></script>
+        <script>
+            var notifLength = 0;
+            $("document").ready(function() {
+                var notifListDom = $("#notifList");
+                
+                var getNewsFeed = function() {
+                    var mid = $("#notifList li")[0].dataset.mid;
+                    
+                    $.getJSON(
+                        "/Message/GetNewsFeed?LastMessageId="+mid,
+                        function(data) {
+                            var displayName = $("span.username").text();
+                            $.each(data, function (key, val) {
+                                var unread = val.IsRead == false ? "unread" : "";
+                                if (val.IsRead == false) {
+                                    ++notifLength;
+                                };
+                                var objName = val.Obj.Name == displayName ? "you" : val.Obj.Name;
+
+                                notifListDom.prepend('<li class="'+unread+'" data-mid="'+val.MessageId+'">'+
+                                    '<a href="javascript:markAsRead('+val.MessageId+')" title="Click on message to mark as Read">'
+                                        +'<div class="actor-img">'+
+                                            '<img src="/Image/'+val.Subj.ImageId+'">'
+                                        +'</div>'
+                                        +'<div class="message">'
+                                            +'<div class="title">'+val.Subj.Name+val.Verb+objName+'.</div>'
+                                            +'<div class="date">'+moment(parseInt(val.CreateDate.replace(/^\D+/g, '').split(")/")[0])).fromNow()+'</div>'
+                                        +'</div>'+
+                                    '</a></li>');
+                            });
+                            if (notifLength > 0) {
+                                $("#fig").addClass("new");    
+                            } else {
+                                $("#fig").removeClass("new");    
+                            }
+                            $("#fig").text(notifLength);
+                        }
+                    )
+                    setTimeout(function() {getNewsFeed();}, 15000);
+                }
+                getNewsFeed();
+
+                
+            });
+            var markAsRead = function(MessageId) {
+                $.getJSON("/Message/MarkAsRead?MessageId="+MessageId, function(data) {
+                    if (data == "true") {
+                        $("li[data-mid="+MessageId+"]").removeClass("unread");
+                        --notifLength;
+                        if (notifLength > 0) {
+                            $("#fig").addClass("new");    
+                        } else {
+                            $("#fig").removeClass("new");    
+                        }
+                        $("#fig").text(notifLength);
+                    } else {
+                        alert("Sorry. The Operation failed. Please try again");
+                    }
+                });
+                return false;
+            }
+        </script>

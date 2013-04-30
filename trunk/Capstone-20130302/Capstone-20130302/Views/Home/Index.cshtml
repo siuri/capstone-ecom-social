@@ -20,8 +20,7 @@
      <a href="/Account/Register">Join Now</a> <a href="/Account/Login">Sign In</a>
     </section>
 }
-@if (totalrow == 0)
-{
+
     <section class="shelf">
         <div class="h-picks"></div>
         <br />
@@ -48,6 +47,8 @@
             }
         </div>
     </section>
+@if (totalrow == 0)
+{
     <section class="discover">
         <h2>Discover</h2>
         <div class="product-grid" id="discover">
@@ -66,106 +67,7 @@
                         </div>
                         <div class="description">
                             <h4>@item.Name</h4>
-                            <p>@item.Description</p>
-                        </div>
-                   </a>
-                </div>
-            }
-            @foreach (var item in Model)
-            {
-                <div class="product cate-@item.CategoryId">
-                    <a href="/Product/Id/@item.ProductId">
-                        <div class="image">
-                            <img src="/Image/@item.ProductImages.First().ImageId"/>
-                            <div class="detail">
-                                <div class="price">
-                                    $@item.Price
-                                </div>
-                                <div class="buttons">View details</div>
-                            </div>
-                        </div>
-                        <div class="description">
-                            <h4>@item.Name</h4>
-                            <p>@item.Description</p>
-                        </div>
-                   </a>
-                </div>
-            }
-            @foreach (var item in Model)
-            {
-                <div class="product cate-@item.CategoryId">
-                    <a href="/Product/Id/@item.ProductId">
-                        <div class="image">
-                            <img src="/Image/@item.ProductImages.First().ImageId"/>
-                            <div class="detail">
-                                <div class="price">
-                                    $@item.Price
-                                </div>
-                                <div class="buttons">View details</div>
-                            </div>
-                        </div>
-                        <div class="description">
-                            <h4>@item.Name</h4>
-                            <p>@item.Description</p>
-                        </div>
-                   </a>
-                </div>
-            }
-            @foreach (var item in Model)
-            {
-                <div class="product cate-@item.CategoryId">
-                    <a href="/Product/Id/@item.ProductId">
-                        <div class="image">
-                            <img src="/Image/@item.ProductImages.First().ImageId"/>
-                            <div class="detail">
-                                <div class="price">
-                                    $@item.Price
-                                </div>
-                                <div class="buttons">View details</div>
-                            </div>
-                        </div>
-                        <div class="description">
-                            <h4>@item.Name</h4>
-                            <p>@item.Description</p>
-                        </div>
-                   </a>
-                </div>
-            }
-            @foreach (var item in Model)
-            {
-                <div class="product cate-@item.CategoryId">
-                    <a href="/Product/Id/@item.ProductId">
-                        <div class="image">
-                            <img src="/Image/@item.ProductImages.First().ImageId"/>
-                            <div class="detail">
-                                <div class="price">
-                                    $@item.Price
-                                </div>
-                                <div class="buttons">View details</div>
-                            </div>
-                        </div>
-                        <div class="description">
-                            <h4>@item.Name</h4>
-                            <p>@item.Description</p>
-                        </div>
-                   </a>
-                </div>
-            }
-            @foreach (var item in Model)
-            {
-                <div class="product cate-@item.CategoryId">
-                    <a href="/Product/Id/@item.ProductId">
-                        <div class="image">
-                            <img src="/Image/@item.ProductImages.First().ImageId"/>
-                            <div class="detail">
-                                <div class="price">
-                                    $@item.Price
-                                </div>
-                                <div class="buttons">View details</div>
-                            </div>
-                        </div>
-                        <div class="description">
-                            <h4>@item.Name</h4>
+                            <i class="icon icon-flag"></i> @item.Store.StoreName · <i class="icon icon-bookmark"></i> @item.Category.Name
                             <p>@item.Description</p>
                         </div>
                    </a>
@@ -181,13 +83,13 @@ else
             display: inline-block; zoom: 1; z-index: 10001;" src="/Images/loading14.gif">
     </div>
     <section class="discover">
-        <h2>Products Followed</h2>
+        <h2>Discover from your Connections</h2>
         <div class="product-grid" id="discover_list">
             
         </div>
          <div class="directory_footer" style="bottom: -30px; right: 320px;">
-            <div class="pagination-pager next-page">
-    </div>
+            <div class="pagination-pager next-page"></div>
+        </div>
 
     </section>
 }
@@ -229,8 +131,8 @@ else
         if (data != null) {
             for (var key in data) {
                 if (data.hasOwnProperty(key)) {
-                    html+= '<div class="product cate-'+ data[key].ProductID +'">'
-                    html+= '<a href="/Product/Id/'+ data[key].ProductID +'">'
+                    html+= '<div class="product cate-'+ data[key].ProductId +'">'
+                    html+= '<a href="/Product/Id/'+ data[key].ProductId +'">'
                     html+= '<div class="image">'
                     html+= '<img src="/Image/'+ data[key].Images +'"/>'
                     html+= '<div class="detail">'
@@ -255,7 +157,7 @@ else
     var PageIndex = 0;
     var PageSize = @Constant.PAGE_SIZE
     var MaxLength = @totalrow
-     function pageselectCallback(page_index, jq) {
+    function pageselectCallback(page_index, jq) {
        
          //Nơi thay đổi các thuộc tín của paging khi sort search bằng Post
          //...
@@ -266,8 +168,12 @@ else
              if (data) {
                  var html = CreateHtml(data);
                  $("#discover_list").html(html);
+                 $("#discover_list").isotope();
                  $("#manga-Loading").css({ 'z-index': -1 });
                  $("#manga-Loading").css({ 'display': 'none' });
+                 setTimeout(function () {
+                     $("#discover_list").isotope({ filter: "*" });
+                 }, 500);
              }
          });
          return false;
@@ -296,18 +202,16 @@ else
      @if(totalrow != 0)
      {
          <text>
-                 $(document).ready(function () {
+        $(document).ready(function () {
                
-                 var optInit = getOptions();
-                 $(".pagination-pager").pagination(MaxLength, optInit);
-                 $("#manga-Loading").css({ 'z-index': -1 });
-                 $("#manga-Loading").css({ 'display': 'none' });
-             })
-    </text>
-     }
-    else
-    {
-         <text>
+            var optInit = getOptions();
+            $(".pagination-pager").pagination(MaxLength, optInit);
+            $("#manga-Loading").css({ 'z-index': -1 });
+            $("#manga-Loading").css({ 'display': 'none' });
+        })
+        
+        </text>
+    }
     $(document).ready(function () {
         var slider = $("#picks").bxSlider({
             minSlides: 1,
@@ -317,9 +221,6 @@ else
             pager: false
         });
     })
-    </text>
-     }
-   
 
 </script>
 <style>

@@ -766,6 +766,9 @@ em {
     box-shadow: 1px 2px 6px #B1B1B1;
     margin: 10px;
 }
+.product-grid .product .icon {
+    opacity: .4;
+}
 .product-grid .product .description {
     padding: 10px;
     color: #646472;
@@ -955,17 +958,22 @@ section.discover h2 {
 
 .stat-fig {
     color: #FFF;
-    border-radius: 3px;
+    border-radius: 30px;
     width: 14px;
-    display: inline-block;
+    display: none;
     text-align: center;
-    background: #D26752;
+    background: #CECECE;
     text-shadow: 1px 1px 1px rgba(34, 34, 34, 0.6);
     position: relative;
     top: -2px;
     font-size: 70%;
     line-height: 1.8;
     padding: 0 2px;
+}
+
+.stat-fig.new {
+    background: #D26752;
+    display: inline-block;
 }
 
 ul.notif li {
@@ -997,6 +1005,8 @@ ul.notif li.more a {
     font-size: 90%;
     opacity: .6;
     text-align: center;
+    background: -webkit-linear-gradient(top, #FFF,#ECECEC);
+    border-bottom: solid 1px #CCC;
 }
 
 ul.notif li.more a:hover {

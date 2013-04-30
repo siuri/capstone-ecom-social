@@ -78,13 +78,14 @@ namespace Capstone_20130302.Controllers
             {
                 return Json("You must login to Like", JsonRequestBehavior.AllowGet);
             }
-            UserProfile user = UserProfiles_Logic.GetUserProfileByUserName(User.Identity.Name);
             Follow temp = new Follow();
-            temp.UserId = user.UserId;
+            temp.UserId = WebSecurity.CurrentUserId;
             temp.FollowedUserId = ID;
             if(Follow_Logic.AddNewFollow(temp))
             {
-                 return Json("true", JsonRequestBehavior.AllowGet);
+                // Publish Message
+                Message_Logic.PublishMessage(WebSecurity.CurrentUserId, Constant.PRONOUN_TYPE_USER, ID, Constant.PRONOUN_TYPE_USER, Constant.MESSAGE_TYPE_FOLLOW);
+                return Json("true", JsonRequestBehavior.AllowGet);
             }
             return Json("false", JsonRequestBehavior.AllowGet);
         }

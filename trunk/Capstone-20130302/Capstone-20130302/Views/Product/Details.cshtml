@@ -34,8 +34,8 @@
             </div>
         </div>
         <h3>@Html.DisplayFor(model => model.Name)</h3>
-        <a class="store " href="/Store/Id/@Html.DisplayFor(model => model.Store.StoreId)">@Html.DisplayFor(model => model.Store.StoreName)</a>
-
+        by <a class="store " href="/Store/Id/@Html.DisplayFor(model => model.Store.StoreId)">@Html.DisplayFor(model => model.Store.StoreName)</a>
+        in <a href="/Product/Category?id=@Model.CategoryId">@Model.Category.Name</a> collection
     </div>
     <div class="clearfix">
         <div class="left-side">

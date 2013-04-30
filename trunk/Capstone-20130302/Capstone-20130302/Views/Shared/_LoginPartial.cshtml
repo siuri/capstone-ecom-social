@@ -32,10 +32,12 @@
             
         }
         <script>
+            var displayName = "";
             $(document).ready(function () {
                 $.getJSON("/Account/GetUserProfile?UserId=@WebSecurity.CurrentUserId", function (data) {
                     $(".profile-img").attr("src", "/Image/"+data.ProfileImage.ImageId);
                     $("span.username").text(data.DisplayName);
+                    displayName = data.DisplayName;
                 });
             });
         </script>
