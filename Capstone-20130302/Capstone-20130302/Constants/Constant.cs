@@ -15,6 +15,7 @@ namespace Capstone_20130302.Constants
         public const int STATUS_INACTIVE = 1;
         public const int STATUS_ACTIVE = 2;
         public const int STATUS_BANNED = 3;
+        public const int STATUS_PENDING= 6;
 
         public const int ORDER_STATUS_PENDING = 1;
         public const int ORDER_STATUS_READY = 2;
