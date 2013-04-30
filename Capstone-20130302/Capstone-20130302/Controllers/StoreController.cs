@@ -75,6 +75,11 @@ namespace Capstone_20130302.Controllers
                 ViewBag.Message = "Sorry, this store is not available.";
                 return View("Error");
             }
+            if (store.StatusId == Constant.STATUS_PENDING)
+            {
+                ViewBag.Message = "Sorry, this store is waiting arropve by admin";
+                return View("Error");
+            }
             if (User.Identity.IsAuthenticated != false)
             {
                 UserProfile user = UserProfiles_Logic.GetUserProfileByUserName(User.Identity.Name);
